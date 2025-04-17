@@ -1,0 +1,555 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		D53ACB662DB18B9000CE4D45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D53ACB4E2DB18B8F00CE4D45 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D53ACB552DB18B8F00CE4D45;
+			remoteInfo = "Ogonek Swift";
+		};
+		D53ACB702DB18B9000CE4D45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D53ACB4E2DB18B8F00CE4D45 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D53ACB552DB18B8F00CE4D45;
+			remoteInfo = "Ogonek Swift";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D53ACB562DB18B8F00CE4D45 /* Ogonek Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ogonek Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D53ACB652DB18B9000CE4D45 /* Ogonek SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ogonek SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D53ACB6F2DB18B9000CE4D45 /* Ogonek SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ogonek SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D53ACB582DB18B8F00CE4D45 /* Ogonek Swift */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Ogonek Swift";
+			sourceTree = "<group>";
+		};
+		D53ACB682DB18B9000CE4D45 /* Ogonek SwiftTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Ogonek SwiftTests";
+			sourceTree = "<group>";
+		};
+		D53ACB722DB18B9000CE4D45 /* Ogonek SwiftUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Ogonek SwiftUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D53ACB532DB18B8F00CE4D45 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D53ACB622DB18B9000CE4D45 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D53ACB6C2DB18B9000CE4D45 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D53ACB4D2DB18B8F00CE4D45 = {
+			isa = PBXGroup;
+			children = (
+				D53ACB582DB18B8F00CE4D45 /* Ogonek Swift */,
+				D53ACB682DB18B9000CE4D45 /* Ogonek SwiftTests */,
+				D53ACB722DB18B9000CE4D45 /* Ogonek SwiftUITests */,
+				D53ACB572DB18B8F00CE4D45 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D53ACB572DB18B8F00CE4D45 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D53ACB562DB18B8F00CE4D45 /* Ogonek Swift.app */,
+				D53ACB652DB18B9000CE4D45 /* Ogonek SwiftTests.xctest */,
+				D53ACB6F2DB18B9000CE4D45 /* Ogonek SwiftUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D53ACB552DB18B8F00CE4D45 /* Ogonek Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D53ACB792DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek Swift" */;
+			buildPhases = (
+				D53ACB522DB18B8F00CE4D45 /* Sources */,
+				D53ACB532DB18B8F00CE4D45 /* Frameworks */,
+				D53ACB542DB18B8F00CE4D45 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D53ACB582DB18B8F00CE4D45 /* Ogonek Swift */,
+			);
+			name = "Ogonek Swift";
+			packageProductDependencies = (
+			);
+			productName = "Ogonek Swift";
+			productReference = D53ACB562DB18B8F00CE4D45 /* Ogonek Swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D53ACB642DB18B9000CE4D45 /* Ogonek SwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D53ACB7C2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek SwiftTests" */;
+			buildPhases = (
+				D53ACB612DB18B9000CE4D45 /* Sources */,
+				D53ACB622DB18B9000CE4D45 /* Frameworks */,
+				D53ACB632DB18B9000CE4D45 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D53ACB672DB18B9000CE4D45 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D53ACB682DB18B9000CE4D45 /* Ogonek SwiftTests */,
+			);
+			name = "Ogonek SwiftTests";
+			packageProductDependencies = (
+			);
+			productName = "Ogonek SwiftTests";
+			productReference = D53ACB652DB18B9000CE4D45 /* Ogonek SwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D53ACB6E2DB18B9000CE4D45 /* Ogonek SwiftUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D53ACB7F2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek SwiftUITests" */;
+			buildPhases = (
+				D53ACB6B2DB18B9000CE4D45 /* Sources */,
+				D53ACB6C2DB18B9000CE4D45 /* Frameworks */,
+				D53ACB6D2DB18B9000CE4D45 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D53ACB712DB18B9000CE4D45 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D53ACB722DB18B9000CE4D45 /* Ogonek SwiftUITests */,
+			);
+			name = "Ogonek SwiftUITests";
+			packageProductDependencies = (
+			);
+			productName = "Ogonek SwiftUITests";
+			productReference = D53ACB6F2DB18B9000CE4D45 /* Ogonek SwiftUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D53ACB4E2DB18B8F00CE4D45 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					D53ACB552DB18B8F00CE4D45 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					D53ACB642DB18B9000CE4D45 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = D53ACB552DB18B8F00CE4D45;
+					};
+					D53ACB6E2DB18B9000CE4D45 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = D53ACB552DB18B8F00CE4D45;
+					};
+				};
+			};
+			buildConfigurationList = D53ACB512DB18B8F00CE4D45 /* Build configuration list for PBXProject "Ogonek Swift" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D53ACB4D2DB18B8F00CE4D45;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D53ACB572DB18B8F00CE4D45 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D53ACB552DB18B8F00CE4D45 /* Ogonek Swift */,
+				D53ACB642DB18B9000CE4D45 /* Ogonek SwiftTests */,
+				D53ACB6E2DB18B9000CE4D45 /* Ogonek SwiftUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D53ACB542DB18B8F00CE4D45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D53ACB632DB18B9000CE4D45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D53ACB6D2DB18B9000CE4D45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D53ACB522DB18B8F00CE4D45 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D53ACB612DB18B9000CE4D45 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D53ACB6B2DB18B9000CE4D45 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D53ACB672DB18B9000CE4D45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D53ACB552DB18B8F00CE4D45 /* Ogonek Swift */;
+			targetProxy = D53ACB662DB18B9000CE4D45 /* PBXContainerItemProxy */;
+		};
+		D53ACB712DB18B9000CE4D45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D53ACB552DB18B8F00CE4D45 /* Ogonek Swift */;
+			targetProxy = D53ACB702DB18B9000CE4D45 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D53ACB772DB18B9000CE4D45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D53ACB782DB18B9000CE4D45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D53ACB7A2DB18B9000CE4D45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D53ACB7B2DB18B9000CE4D45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D53ACB7D2DB18B9000CE4D45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-SwiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ogonek Swift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ogonek Swift";
+			};
+			name = Debug;
+		};
+		D53ACB7E2DB18B9000CE4D45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-SwiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ogonek Swift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ogonek Swift";
+			};
+			name = Release;
+		};
+		D53ACB802DB18B9000CE4D45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-SwiftUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Ogonek Swift";
+			};
+			name = Debug;
+		};
+		D53ACB812DB18B9000CE4D45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-SwiftUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Ogonek Swift";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D53ACB512DB18B8F00CE4D45 /* Build configuration list for PBXProject "Ogonek Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D53ACB772DB18B9000CE4D45 /* Debug */,
+				D53ACB782DB18B9000CE4D45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D53ACB792DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D53ACB7A2DB18B9000CE4D45 /* Debug */,
+				D53ACB7B2DB18B9000CE4D45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D53ACB7C2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek SwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D53ACB7D2DB18B9000CE4D45 /* Debug */,
+				D53ACB7E2DB18B9000CE4D45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D53ACB7F2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek SwiftUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D53ACB802DB18B9000CE4D45 /* Debug */,
+				D53ACB812DB18B9000CE4D45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D53ACB4E2DB18B8F00CE4D45 /* Project object */;
+}
