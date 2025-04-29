@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class Ogonek_SwiftUITestsLaunchTests: XCTestCase {
+final class OgonekUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

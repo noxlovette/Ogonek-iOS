@@ -24,25 +24,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D53ACB562DB18B8F00CE4D45 /* Ogonek Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ogonek Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D53ACB652DB18B9000CE4D45 /* Ogonek SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ogonek SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D53ACB6F2DB18B9000CE4D45 /* Ogonek SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ogonek SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D53ACB562DB18B8F00CE4D45 /* Ogonek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ogonek.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D53ACB652DB18B9000CE4D45 /* OgonekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OgonekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D53ACB6F2DB18B9000CE4D45 /* OgonekUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OgonekUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D5A4B61E2DC0DE2300520DD1 /* Exceptions for "Ogonek" folder in "OgonekTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				PreviewContent/TestData.swift,
+			);
+			target = D53ACB642DB18B9000CE4D45 /* OgonekTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		D53ACB582DB18B8F00CE4D45 /* Ogonek Swift */ = {
+		D53ACB582DB18B8F00CE4D45 /* Ogonek */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Ogonek Swift";
+			exceptions = (
+				D5A4B61E2DC0DE2300520DD1 /* Exceptions for "Ogonek" folder in "OgonekTests" target */,
+			);
+			path = Ogonek;
 			sourceTree = "<group>";
 		};
-		D53ACB682DB18B9000CE4D45 /* Ogonek SwiftTests */ = {
+		D53ACB682DB18B9000CE4D45 /* OgonekTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Ogonek SwiftTests";
+			path = OgonekTests;
 			sourceTree = "<group>";
 		};
-		D53ACB722DB18B9000CE4D45 /* Ogonek SwiftUITests */ = {
+		D53ACB722DB18B9000CE4D45 /* OgonekUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Ogonek SwiftUITests";
+			path = OgonekUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,9 +88,9 @@
 		D53ACB4D2DB18B8F00CE4D45 = {
 			isa = PBXGroup;
 			children = (
-				D53ACB582DB18B8F00CE4D45 /* Ogonek Swift */,
-				D53ACB682DB18B9000CE4D45 /* Ogonek SwiftTests */,
-				D53ACB722DB18B9000CE4D45 /* Ogonek SwiftUITests */,
+				D53ACB582DB18B8F00CE4D45 /* Ogonek */,
+				D53ACB682DB18B9000CE4D45 /* OgonekTests */,
+				D53ACB722DB18B9000CE4D45 /* OgonekUITests */,
 				D53ACB572DB18B8F00CE4D45 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,9 +98,9 @@
 		D53ACB572DB18B8F00CE4D45 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D53ACB562DB18B8F00CE4D45 /* Ogonek Swift.app */,
-				D53ACB652DB18B9000CE4D45 /* Ogonek SwiftTests.xctest */,
-				D53ACB6F2DB18B9000CE4D45 /* Ogonek SwiftUITests.xctest */,
+				D53ACB562DB18B8F00CE4D45 /* Ogonek.app */,
+				D53ACB652DB18B9000CE4D45 /* OgonekTests.xctest */,
+				D53ACB6F2DB18B9000CE4D45 /* OgonekUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +108,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D53ACB552DB18B8F00CE4D45 /* Ogonek Swift */ = {
+		D53ACB552DB18B8F00CE4D45 /* Ogonek */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D53ACB792DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek Swift" */;
+			buildConfigurationList = D53ACB792DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek" */;
 			buildPhases = (
 				D53ACB522DB18B8F00CE4D45 /* Sources */,
 				D53ACB532DB18B8F00CE4D45 /* Frameworks */,
@@ -108,18 +121,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				D53ACB582DB18B8F00CE4D45 /* Ogonek Swift */,
+				D53ACB582DB18B8F00CE4D45 /* Ogonek */,
 			);
-			name = "Ogonek Swift";
+			name = Ogonek;
 			packageProductDependencies = (
 			);
 			productName = "Ogonek Swift";
-			productReference = D53ACB562DB18B8F00CE4D45 /* Ogonek Swift.app */;
+			productReference = D53ACB562DB18B8F00CE4D45 /* Ogonek.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D53ACB642DB18B9000CE4D45 /* Ogonek SwiftTests */ = {
+		D53ACB642DB18B9000CE4D45 /* OgonekTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D53ACB7C2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek SwiftTests" */;
+			buildConfigurationList = D53ACB7C2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "OgonekTests" */;
 			buildPhases = (
 				D53ACB612DB18B9000CE4D45 /* Sources */,
 				D53ACB622DB18B9000CE4D45 /* Frameworks */,
@@ -131,18 +144,18 @@
 				D53ACB672DB18B9000CE4D45 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				D53ACB682DB18B9000CE4D45 /* Ogonek SwiftTests */,
+				D53ACB682DB18B9000CE4D45 /* OgonekTests */,
 			);
-			name = "Ogonek SwiftTests";
+			name = OgonekTests;
 			packageProductDependencies = (
 			);
 			productName = "Ogonek SwiftTests";
-			productReference = D53ACB652DB18B9000CE4D45 /* Ogonek SwiftTests.xctest */;
+			productReference = D53ACB652DB18B9000CE4D45 /* OgonekTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D53ACB6E2DB18B9000CE4D45 /* Ogonek SwiftUITests */ = {
+		D53ACB6E2DB18B9000CE4D45 /* OgonekUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D53ACB7F2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek SwiftUITests" */;
+			buildConfigurationList = D53ACB7F2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "OgonekUITests" */;
 			buildPhases = (
 				D53ACB6B2DB18B9000CE4D45 /* Sources */,
 				D53ACB6C2DB18B9000CE4D45 /* Frameworks */,
@@ -154,13 +167,13 @@
 				D53ACB712DB18B9000CE4D45 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				D53ACB722DB18B9000CE4D45 /* Ogonek SwiftUITests */,
+				D53ACB722DB18B9000CE4D45 /* OgonekUITests */,
 			);
-			name = "Ogonek SwiftUITests";
+			name = OgonekUITests;
 			packageProductDependencies = (
 			);
 			productName = "Ogonek SwiftUITests";
-			productReference = D53ACB6F2DB18B9000CE4D45 /* Ogonek SwiftUITests.xctest */;
+			productReference = D53ACB6F2DB18B9000CE4D45 /* OgonekUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +199,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D53ACB512DB18B8F00CE4D45 /* Build configuration list for PBXProject "Ogonek Swift" */;
+			buildConfigurationList = D53ACB512DB18B8F00CE4D45 /* Build configuration list for PBXProject "Ogonek" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -200,9 +213,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D53ACB552DB18B8F00CE4D45 /* Ogonek Swift */,
-				D53ACB642DB18B9000CE4D45 /* Ogonek SwiftTests */,
-				D53ACB6E2DB18B9000CE4D45 /* Ogonek SwiftUITests */,
+				D53ACB552DB18B8F00CE4D45 /* Ogonek */,
+				D53ACB642DB18B9000CE4D45 /* OgonekTests */,
+				D53ACB6E2DB18B9000CE4D45 /* OgonekUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,12 +271,12 @@
 /* Begin PBXTargetDependency section */
 		D53ACB672DB18B9000CE4D45 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D53ACB552DB18B8F00CE4D45 /* Ogonek Swift */;
+			target = D53ACB552DB18B8F00CE4D45 /* Ogonek */;
 			targetProxy = D53ACB662DB18B9000CE4D45 /* PBXContainerItemProxy */;
 		};
 		D53ACB712DB18B9000CE4D45 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D53ACB552DB18B8F00CE4D45 /* Ogonek Swift */;
+			target = D53ACB552DB18B8F00CE4D45 /* Ogonek */;
 			targetProxy = D53ACB702DB18B9000CE4D45 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -456,7 +469,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ogonek Swift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ogonek Swift";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ogonek.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ogonek";
 			};
 			name = Debug;
 		};
@@ -474,7 +487,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ogonek Swift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ogonek Swift";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ogonek.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ogonek";
 			};
 			name = Release;
 		};
@@ -513,7 +526,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D53ACB512DB18B8F00CE4D45 /* Build configuration list for PBXProject "Ogonek Swift" */ = {
+		D53ACB512DB18B8F00CE4D45 /* Build configuration list for PBXProject "Ogonek" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D53ACB772DB18B9000CE4D45 /* Debug */,
@@ -522,7 +535,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D53ACB792DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek Swift" */ = {
+		D53ACB792DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D53ACB7A2DB18B9000CE4D45 /* Debug */,
@@ -531,7 +544,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D53ACB7C2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek SwiftTests" */ = {
+		D53ACB7C2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "OgonekTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D53ACB7D2DB18B9000CE4D45 /* Debug */,
@@ -540,7 +553,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D53ACB7F2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek SwiftUITests" */ = {
+		D53ACB7F2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "OgonekUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D53ACB802DB18B9000CE4D45 /* Debug */,
