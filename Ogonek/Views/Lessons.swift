@@ -47,7 +47,7 @@ struct Lessons: View {
 extension Lessons {
     var title: String {
         if selectMode.isActive || selection.isEmpty {
-            return "Earthquakes"
+            return "Lessons"
         } else {
             return "\(selection.count) Selected"
         }
