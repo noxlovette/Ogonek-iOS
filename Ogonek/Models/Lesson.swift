@@ -7,26 +7,48 @@
 
 import Foundation
 
+
+// MARK: Core
 struct Lesson: Identifiable, Decodable {
     let id: String
     let title: String
     let topic: String
     let markdown: String
-    let assignee: String
-    let createdBy: String
     let createdAt: Date
     let updatedAt: Date
-    let assigneeName: String
 
     private enum CodingKeys: String, CodingKey {
         case id
         case title
         case topic
         case markdown
-        case assignee
-        case createdBy
         case createdAt
         case updatedAt
-        case assigneeName
+    }
+}
+
+
+// MARK: Error
+
+extension LessonError: AppError {
+    var shouldRetry: Bool {
+        switch self {
+        case .core(.networkUnavailable): return true
+        case .lessonNotFound: return false
+        default: return false
+        }
+    }
+
+    var userFacingMessage: String {
+        switch self {
+        case .missingRequiredFields:
+            return "This lesson has missing information"
+        case .lessonNotFound:
+            return "Lesson not found"
+        default:
+            return "Internal Error Occured" // TODO: could be better!
+        }
+
+
     }
 }

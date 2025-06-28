@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-struct Lessons: View {
+struct LessonListView: View {
     @AppStorage("lastUpdated")
     var lastUpdated = Date.distantFuture.timeIntervalSince1970
 
@@ -27,7 +27,6 @@ struct Lessons: View {
                 ForEach(provider.lessons) { lesson in
                     LessonRow(lesson: lesson)
                 }
-                .onDelete(perform: deleteLessons)
             }
             .listStyle(.inset)
             .navigationTitle(title)
@@ -38,13 +37,14 @@ struct Lessons: View {
             }
             .alert(isPresented: $hasError, error: error) {}
         }
+        
         .task {
             await fetchLessons()
         }
     }
 }
 
-extension Lessons {
+extension LessonListView {
     var title: String {
         if selectMode.isActive || selection.isEmpty {
             return "Lessons"
@@ -53,27 +53,15 @@ extension Lessons {
         }
     }
 
-    func deleteLessons(at offsets: IndexSet) {
-        provider.deleteLessons(atOffsets: offsets)
-    }
-    func deleteLessons(for ids: Set<String>) {
-        var offsetsToDelete: IndexSet = []
-        for (index, element) in provider.lessons.enumerated() {
-            if ids.contains(element.id) {
-                offsetsToDelete.insert(index)
-            }
-        }
-        deleteLessons(at: offsetsToDelete)
-        selection.removeAll()
-    }
-    func fetchLessons() async {
+       func fetchLessons() async {
+        logger.info("Fetching Lessons underway")
         isLoading = true
         do {
             try await provider.fetchLessons()
             lastUpdated = Date().timeIntervalSince1970
             
         } catch {
-            self.error = error as? LessonError ?? .unexpectedError(error: error)
+            self.error = error as? LessonError ?? .core(.unexpectedError(error))
             self.hasError = true
         }
         isLoading = false
@@ -81,7 +69,7 @@ extension Lessons {
 }
 
 #Preview {
-    Lessons()
+    LessonListView()
         .environment(
             LessonsProvider(client:
                           LessonClient(downloader: TestDownloader()))

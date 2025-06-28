@@ -13,7 +13,7 @@ struct Ogonek: App {
     var body: some Scene {
         @State var lessonsProvider = LessonsProvider()
         WindowGroup {
-            Lessons()
+            LessonListView()
         }
         .environment(lessonsProvider)
     }

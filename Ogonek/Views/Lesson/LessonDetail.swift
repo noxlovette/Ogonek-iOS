@@ -15,11 +15,11 @@ struct LessonDetail: View {
             
         
         VStack(alignment: .leading, spacing: 16) {
-            Text(lesson.title)
+            Text(lesson.topic)
                 .font(.title)
                 .bold()
 
-            Text("Created on \(lesson.createdAt.formatted(date: .abbreviated, time: .omitted))")
+            Text("\(lesson.createdAt.formatted(date: .abbreviated, time: .omitted))")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
 

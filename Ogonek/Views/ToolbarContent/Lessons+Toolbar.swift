@@ -7,7 +7,7 @@ The toolbar for the Quakes view.
 
 import SwiftUI
 
-extension Lessons {
+extension LessonListView {
 
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
@@ -42,12 +42,7 @@ extension Lessons {
                 lessonsCount: provider.lessons.count
             )
             Spacer()
-            if editMode == .active {
-                DeleteButton {
-                    deleteLessons(for: selection)
-                }
-                .disabled(isLoading || selection.isEmpty)
-            }
+           
         }
     }
 }

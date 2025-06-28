@@ -17,7 +17,9 @@ class LessonsProvider {
     let client: LessonClient
     
     func fetchLessons() async throws {
+        print("Reached logging point")
         let latestLessons = try await client.lessons
+        print("latest lessons fetch successful")
         self.lessons = latestLessons
     }
     
