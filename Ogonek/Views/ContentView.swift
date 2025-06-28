@@ -1,5 +1,5 @@
 //
-//  TabBar.swift
+//  Home.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 28.06.2025.
@@ -7,34 +7,34 @@
 
 import SwiftUI
 
-struct TabBar: View {
+struct ContentView: View {
     @State private var selectedTab = 0
     var body: some View {
         TabView(selection: $selectedTab) {
             HomeView()
                 .tabItem {
-                    Image(systemName: "house")
-                    Text("Home")
+                    Label("Home", systemImage: "house")
                 }.tag(0)
             LessonListView()
                 .tabItem {
-                    Image(systemName: "book")
-                    Text("Lessons")
+                    Label("Lessons", systemImage: "book.pages")
                 }.tag(1)
             TaskListView()
                 .tabItem {
-                    Image(systemName: "square.and.arrow.up")
-                    Text("Tasks")
+                    Label("Tasks", systemImage: "checklist")
                 }.tag(2)
             DeckListView()
                 .tabItem {
-                    Image(systemName: "folder")
-                    Text("Decks")
-                }.tag(3)
+                    Label("Learn", systemImage: "graduationcap")
+                }.tag(3).badge(5)
         }
-    } 
+    }
 }
 
 #Preview {
-    TabBar()
+    ContentView()
+        .environment(
+            LessonsProvider(client:
+                                LessonClient(downloader: TestDownloader()))
+        )
 }

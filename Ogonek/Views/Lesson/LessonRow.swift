@@ -11,15 +11,17 @@ struct LessonRow: View {
     var lesson: Lesson
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(lesson.topic)
-                    .font(.title3)
-                Text("\(lesson.createdAt.formatted(.relative(presentation: .named)))")
-                    .foregroundStyle(.secondary)
+        NavigationLink(value: lesson) {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(lesson.topic)
+                        .font(.title3)
+                    Text("\(lesson.createdAt.formatted(.relative(presentation: .named)))")
+                        .foregroundStyle(.secondary)
+                }
             }
+            .padding(.vertical, 8)
         }
-        .padding(.vertical, 8)
     }
 }
 

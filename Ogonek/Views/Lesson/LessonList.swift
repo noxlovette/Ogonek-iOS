@@ -22,7 +22,7 @@ struct LessonListView: View {
     @State private var hasError = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List(selection: $selection) {
                 ForEach(provider.lessons) { lesson in
                     LessonRow(lesson: lesson)
@@ -30,10 +30,11 @@ struct LessonListView: View {
             }
             .listStyle(.inset)
             .navigationTitle(title)
-            .toolbar(content: toolbarContent)
             .environment(\.editMode, $editMode)
             .refreshable {
                 await fetchLessons()
+            }.navigationDestination(for: Lesson.self) { lesson in
+                LessonDetail(lesson: lesson)
             }
             .alert(isPresented: $hasError, error: error) {}
         }
@@ -46,10 +47,10 @@ struct LessonListView: View {
 
 extension LessonListView {
     var title: String {
-        if selectMode.isActive || selection.isEmpty {
-            return "Lessons"
-        } else {
+        if editMode == .active && !selection.isEmpty {
             return "\(selection.count) Selected"
+        } else {
+            return "Lessons"
         }
     }
 

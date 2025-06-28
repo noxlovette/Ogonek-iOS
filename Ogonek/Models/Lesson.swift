@@ -9,7 +9,7 @@ import Foundation
 
 
 // MARK: Core
-struct Lesson: Identifiable, Decodable {
+struct Lesson: Identifiable, Decodable, Hashable {
     let id: String
     let title: String
     let topic: String
@@ -25,11 +25,15 @@ struct Lesson: Identifiable, Decodable {
         case createdAt
         case updatedAt
     }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 
 
-// MARK: Error
 
+// MARK: Error
 extension LessonError: AppError {
     var shouldRetry: Bool {
         switch self {

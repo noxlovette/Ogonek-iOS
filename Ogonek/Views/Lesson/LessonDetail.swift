@@ -12,27 +12,14 @@ struct LessonDetail: View {
 
     var body: some View {
         ScrollView {
-            
-        
-        VStack(alignment: .leading, spacing: 16) {
-            Text(lesson.topic)
-                .font(.title)
-                .bold()
-
-            Text("\(lesson.createdAt.formatted(date: .abbreviated, time: .omitted))")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-
-            Divider()
-
+        VStack() {
             Markdown(lesson.markdown)
                 .padding(.top, 8)
 
             Spacer()
         }
         .padding()
-        .navigationTitle("Lesson")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(lesson.topic)
     }
     }
 }
