@@ -1,18 +1,20 @@
 //
-//  Lesson.swift
+//  Assignment.swift
 //  Ogonek Swift
 //
-//  Created by Danila Volkov on 29.04.2025.
+//  Created by Danila Volkov on 28.06.2025.
 //
 
 import Foundation
 
 // MARK: Core
 
-struct Lesson: Identifiable, Decodable, Hashable {
+struct Assignment: Identifiable, Decodable, Hashable {
     let id: String
     let title: String
-    let topic: String
+    let priority: UInt16
+    let completed: Bool
+    let dueDate: Date?
     let markdown: String
     let createdAt: Date
     let updatedAt: Date
@@ -20,7 +22,9 @@ struct Lesson: Identifiable, Decodable, Hashable {
     private enum CodingKeys: String, CodingKey {
         case id
         case title
-        case topic
+        case priority
+        case completed
+        case dueDate
         case markdown
         case createdAt
         case updatedAt
@@ -33,11 +37,11 @@ struct Lesson: Identifiable, Decodable, Hashable {
 
 // MARK: Error
 
-extension LessonError: AppError {
+extension AssignmentError: AppError {
     var shouldRetry: Bool {
         switch self {
         case .core(.networkUnavailable): return true
-        case .lessonNotFound: return false
+        case .taskNotFound: return false
         default: return false
         }
     }
@@ -45,9 +49,9 @@ extension LessonError: AppError {
     var userFacingMessage: String {
         switch self {
         case .missingRequiredFields:
-            return "This lesson has missing information"
-        case .lessonNotFound:
-            return "Lesson not found"
+            return "This Task has missing information"
+        case .taskNotFound:
+            return "Task not found"
         default:
             return "Internal Error Occured" // TODO: could be better!
         }

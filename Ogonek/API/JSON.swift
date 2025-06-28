@@ -1,5 +1,5 @@
 //
-//  LessonJSON.swift
+//  JSON.swift
 //  Ogonek Swift
 //
 //  Created by Danila Volkov on 29.04.2025.
@@ -22,15 +22,15 @@ struct PaginatedResponse<T: Decodable>: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.data = try container.decode([T].self, forKey: .data)
-        self.total = try container.decode(Int.self, forKey: .total)
-        self.page = try container.decode(Int.self, forKey: .page)
-        self.perPage = try container.decode(Int.self, forKey: .perPage)
+        data = try container.decode([T].self, forKey: .data)
+        total = try container.decode(Int.self, forKey: .total)
+        page = try container.decode(Int.self, forKey: .page)
+        perPage = try container.decode(Int.self, forKey: .perPage)
     }
 }
 
 typealias LessonResponse = PaginatedResponse<Lesson>
-// typealias TaskResponse = PaginatedResponse<Task>
+typealias TaskResponse = PaginatedResponse<Assignment>
 // typealias UserResponse = PaginatedResponse<User>
 
 // TODO: include the single lesson case

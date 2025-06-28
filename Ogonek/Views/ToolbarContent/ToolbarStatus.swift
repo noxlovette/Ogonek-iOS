@@ -1,6 +1,6 @@
 /*
-See LICENSE folder for this sample’s licensing information.
-*/
+ See LICENSE folder for this sample’s licensing information.
+ */
 
 import SwiftUI
 
@@ -39,18 +39,18 @@ struct ToolbarStatus: View {
     ToolbarStatus(
         isLoading: false,
         lastUpdated: Date.distantFuture.timeIntervalSince1970,
-        lessonsCount: 10_000
+        lessonsCount: 10000
     )
 
     ToolbarStatus(
         isLoading: false,
         lastUpdated: Date.now.timeIntervalSince1970,
-        lessonsCount: 10_000
+        lessonsCount: 10000
     )
 
     ToolbarStatus(
         isLoading: false,
         lastUpdated: Date.distantPast.timeIntervalSince1970,
-        lessonsCount: 10_000
+        lessonsCount: 10000
     )
 }

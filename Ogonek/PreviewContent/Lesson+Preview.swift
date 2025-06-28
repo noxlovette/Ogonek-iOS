@@ -1,5 +1,5 @@
 //
-//  Quake+Preview.swift
+//  Lesson+Preview.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 29.04.2025.

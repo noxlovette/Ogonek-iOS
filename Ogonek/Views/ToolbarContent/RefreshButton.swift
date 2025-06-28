@@ -1,9 +1,9 @@
 /*
-See LICENSE folder for this sample’s licensing information.
+ See LICENSE folder for this sample’s licensing information.
 
-Abstract:
-The refresh button of the app.
-*/
+ Abstract:
+ The refresh button of the app.
+ */
 
 import SwiftUI
 

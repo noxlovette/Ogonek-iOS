@@ -1,5 +1,5 @@
 //
-//  Ogonek_SwiftUITests.swift
+//  OgonekUITests.swift
 //  Ogonek SwiftUITests
 //
 //  Created by Nox Lovette on 17.04.2025.
@@ -8,7 +8,6 @@
 import XCTest
 
 final class OgonekUITests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 

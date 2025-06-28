@@ -1,14 +1,13 @@
 /*
-See LICENSE folder for this sample’s licensing information.
+ See LICENSE folder for this sample’s licensing information.
 
-Abstract:
-The toolbar for the Quakes view.
-*/
+ Abstract:
+ The toolbar for the Quakes view.
+ */
 
 import SwiftUI
 
 extension LessonListView {
-
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -42,7 +41,6 @@ extension LessonListView {
                 lessonsCount: provider.lessons.count
             )
             Spacer()
-           
         }
     }
 }

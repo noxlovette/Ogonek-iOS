@@ -7,25 +7,25 @@
 import MarkdownUI
 import SwiftUI
 
-struct LessonDetail: View {
-    let lesson: Lesson
+struct TaskDetail: View {
+    let task: Assignment
 
     var body: some View {
         ScrollView {
             VStack {
-                Markdown(lesson.markdown)
+                Markdown(task.markdown)
                     .padding(.top, 8)
 
                 Spacer()
             }
             .padding()
-            .navigationTitle(lesson.topic)
+            .navigationTitle(task.title)
         }
     }
 }
 
 #Preview {
     NavigationView {
-        LessonDetail(lesson: Lesson.preview)
+        TaskDetail(task: Assignment.preview)
     }
 }

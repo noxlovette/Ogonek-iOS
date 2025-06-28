@@ -1,5 +1,5 @@
 //
-//  Ogonek_SwiftUITestsLaunchTests.swift
+//  OgonekUITestsLaunchTests.swift
 //  Ogonek SwiftUITests
 //
 //  Created by Nox Lovette on 17.04.2025.
@@ -8,7 +8,6 @@
 import XCTest
 
 final class OgonekUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

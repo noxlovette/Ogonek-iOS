@@ -1,9 +1,9 @@
 /*
-See LICENSE folder for this sample’s licensing information.
+ See LICENSE folder for this sample’s licensing information.
 
-Abstract:
-The select button of the app which toggles between selection and deselection.
-*/
+ Abstract:
+ The select button of the app which toggles between selection and deselection.
+ */
 
 import SwiftUI
 

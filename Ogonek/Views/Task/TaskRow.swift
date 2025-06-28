@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct LessonRow: View {
-    var lesson: Lesson
+struct TaskRow: View {
+    var task: Assignment
 
     var body: some View {
-        NavigationLink(value: lesson) {
+        NavigationLink(value: task) {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(lesson.topic)
+                    Text(task.title)
                         .font(.title3)
-                    Text("\(lesson.createdAt.formatted(.relative(presentation: .named)))")
+                    Text("\(task.createdAt.formatted(.relative(presentation: .named)))")
                         .foregroundStyle(.secondary)
                 }
             }
@@ -26,5 +26,5 @@ struct LessonRow: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    LessonRow(lesson: Lesson.preview)
+    TaskRow(task: Assignment.preview)
 }

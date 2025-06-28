@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 // Core network/system errors
 
 enum CoreError: Error {
@@ -21,7 +22,13 @@ enum LessonError: Error {
     case missingRequiredFields
     case lessonNotFound
     case invalidLessonType
-    case core(CoreError)  // Wrap core errors
+    case core(CoreError) // Wrap core errors
+}
+
+enum AssignmentError: Error {
+    case missingRequiredFields
+    case taskNotFound
+    case core(CoreError) // Wrap core errors
 }
 
 enum ProfileError: Error {

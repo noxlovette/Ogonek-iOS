@@ -1,13 +1,12 @@
 import Foundation
 
-final class JSONDecoderFactory {
+enum JSONDecoderFactory {
     static func defaultDecoder() -> JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
         return decoder
     }
 }
-
 
 extension Date.ISO8601FormatStyle {
     static let iso8601withFractionalSeconds: Self = .init(includingFractionalSeconds: true)
@@ -22,7 +21,6 @@ extension FormatStyle where Self == Date.ISO8601FormatStyle {
 }
 
 extension Date {
-
     init(iso8601withFractionalSeconds parseInput: ParseStrategy.ParseInput) throws {
         try self.init(parseInput, strategy: .iso8601withFractionalSeconds)
     }
@@ -32,21 +30,17 @@ extension Date {
     }
 }
 
-
 extension String {
     func iso8601withFractionalSeconds() throws -> Date {
         try .init(iso8601withFractionalSeconds: self)
     }
 }
 
-
 extension JSONDecoder.DateDecodingStrategy {
     static let iso8601withFractionalSeconds = custom {
         try .init(iso8601withFractionalSeconds: $0.singleValueContainer().decode(String.self))
     }
 }
-
-
 
 extension JSONEncoder.DateEncodingStrategy {
     static let iso8601withFractionalSeconds = custom {

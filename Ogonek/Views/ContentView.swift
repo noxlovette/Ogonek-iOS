@@ -1,5 +1,5 @@
 //
-//  Home.swift
+//  ContentView.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 28.06.2025.
@@ -35,6 +35,8 @@ struct ContentView: View {
     ContentView()
         .environment(
             LessonsProvider(client:
-                                LessonClient(downloader: TestDownloader()))
-        )
+                LessonClient(downloader: TestDownloader()))
+
+        ).environment(TasksProvider(client:
+                                        TaskClient(downloader: TestDownloader())))
 }

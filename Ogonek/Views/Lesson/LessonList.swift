@@ -1,5 +1,5 @@
 //
-//  Lessons.swift
+//  LessonList.swift
 //  Ogonek Swift
 //
 //  Created by Danila Volkov on 29.04.2025.
@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-
 
 struct LessonListView: View {
     @AppStorage("lastUpdated")
@@ -38,7 +37,7 @@ struct LessonListView: View {
             }
             .alert(isPresented: $hasError, error: error) {}
         }
-        
+
         .task {
             await fetchLessons()
         }
@@ -54,16 +53,16 @@ extension LessonListView {
         }
     }
 
-       func fetchLessons() async {
+    func fetchLessons() async {
         logger.info("Fetching Lessons underway")
         isLoading = true
         do {
             try await provider.fetchLessons()
             lastUpdated = Date().timeIntervalSince1970
-            
+
         } catch {
             self.error = error as? LessonError ?? .core(.unexpectedError(error))
-            self.hasError = true
+            hasError = true
         }
         isLoading = false
     }
@@ -73,6 +72,6 @@ extension LessonListView {
     LessonListView()
         .environment(
             LessonsProvider(client:
-                          LessonClient(downloader: TestDownloader()))
+                LessonClient(downloader: TestDownloader()))
         )
 }

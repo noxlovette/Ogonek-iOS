@@ -41,3 +41,133 @@ let testLessonsData: Data = #"""
 }
 
 """#.data(using: .utf8)!
+
+let testTasksData: Data = #"""
+{
+  "data": [
+    {
+      "id": "1A2B3C",
+      "title": "Math Homework",
+      "priority": 3,
+      "completed": false,
+      "dueDate": "2025-07-01T14:00:00.000Z",
+      "markdown": "Review chapter 5 and solve problems 1-10.",
+      "createdAt": "2025-06-20T09:00:00.000Z",
+      "updatedAt": "2025-06-25T10:00:00.000Z"
+    },
+    {
+      "id": "4D5E6F",
+      "title": "Science Project",
+      "priority": 5,
+      "completed": false,
+      "dueDate": "2025-07-10T17:00:00.000Z",
+      "markdown": "Build a model volcano.",
+      "createdAt": "2025-06-18T13:30:00.000Z",
+      "updatedAt": "2025-06-23T16:00:00.000Z"
+    },
+    {
+      "id": "7G8H9I",
+      "title": "History Essay",
+      "priority": 2,
+      "completed": true,
+      "dueDate": "2025-06-27T12:00:00.000Z",
+      "markdown": "Discuss causes of WWI.",
+      "createdAt": "2025-06-10T10:45:00.000Z",
+      "updatedAt": "2025-06-24T11:30:00.000Z"
+    },
+    {
+      "id": "J1K2L3",
+      "title": "Biology Quiz Prep",
+      "priority": 1,
+      "completed": false,
+      "dueDate": null,
+      "markdown": "",
+      "createdAt": "2025-06-15T08:15:00.000Z",
+      "updatedAt": "2025-06-21T09:20:00.000Z"
+    },
+    {
+      "id": "M4N5O6",
+      "title": "Chemistry Lab Report",
+      "priority": 4,
+      "completed": false,
+      "dueDate": "2025-07-03T09:00:00.000Z",
+      "markdown": "Document findings on chemical reactions.",
+      "createdAt": "2025-06-22T10:00:00.000Z",
+      "updatedAt": "2025-06-26T15:00:00.000Z"
+    },
+    {
+      "id": "P7Q8R9",
+      "title": "English Presentation",
+      "priority": 2,
+      "completed": false,
+      "dueDate": "2025-07-05T11:00:00.000Z",
+      "markdown": "Topic: Shakespeare's influence on modern literature.",
+      "createdAt": "2025-06-19T14:00:00.000Z",
+      "updatedAt": "2025-06-25T14:30:00.000Z"
+    },
+    {
+      "id": "S0T1U2",
+      "title": "Computer Science Coding Task",
+      "priority": 5,
+      "completed": true,
+      "dueDate": "2025-06-28T23:59:59.000Z",
+      "markdown": "Implement a basic to-do list app in Swift.",
+      "createdAt": "2025-06-17T13:00:00.000Z",
+      "updatedAt": "2025-06-27T20:00:00.000Z"
+    },
+    {
+      "id": "V3W4X5",
+      "title": "Geography Map Drawing",
+      "priority": 1,
+      "completed": false,
+      "dueDate": null,
+      "markdown": "Draw political map of Europe.",
+      "createdAt": "2025-06-20T12:00:00.000Z",
+      "updatedAt": "2025-06-24T12:45:00.000Z"
+    },
+    {
+      "id": "Y6Z7A8",
+      "title": "Philosophy Reading",
+      "priority": 2,
+      "completed": false,
+      "dueDate": "2025-07-07T18:00:00.000Z",
+      "markdown": "Read and summarize Descartes' *Meditations*.",
+      "createdAt": "2025-06-21T09:45:00.000Z",
+      "updatedAt": "2025-06-27T10:30:00.000Z"
+    },
+    {
+      "id": "B9C0D1",
+      "title": "Art Sketchbook",
+      "priority": 3,
+      "completed": false,
+      "dueDate": "2025-07-02T10:00:00.000Z",
+      "markdown": "Sketch 3 still-life compositions.",
+      "createdAt": "2025-06-23T11:15:00.000Z",
+      "updatedAt": "2025-06-26T11:45:00.000Z"
+    },
+    {
+      "id": "E2F3G4",
+      "title": "PE Reflection Log",
+      "priority": 1,
+      "completed": true,
+      "dueDate": null,
+      "markdown": "Write weekly reflections on physical activity.",
+      "createdAt": "2025-06-14T08:00:00.000Z",
+      "updatedAt": "2025-06-20T09:30:00.000Z"
+    },
+    {
+      "id": "H5I6J7",
+      "title": "Economics Research",
+      "priority": 4,
+      "completed": false,
+      "dueDate": "2025-07-08T16:00:00.000Z",
+      "markdown": "Analyze impact of inflation on savings.",
+      "createdAt": "2025-06-24T14:20:00.000Z",
+      "updatedAt": "2025-06-27T13:00:00.000Z"
+    }
+  ],
+  "total": 12,
+  "page": 1,
+  "perPage": 20
+}
+"""#.data(using: .utf8)!
