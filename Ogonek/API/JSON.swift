@@ -31,6 +31,5 @@ struct PaginatedResponse<T: Decodable>: Decodable {
 
 typealias LessonResponse = PaginatedResponse<Lesson>
 typealias TaskResponse = PaginatedResponse<Assignment>
-// typealias UserResponse = PaginatedResponse<User>
 
 // TODO: include the single lesson case

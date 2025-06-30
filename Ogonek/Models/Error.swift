@@ -17,24 +17,29 @@ enum CoreError: Error {
     case unexpectedError(Error)
 }
 
-// Domain-specific errors that compose CoreError
 enum LessonError: Error {
     case missingRequiredFields
     case lessonNotFound
     case invalidLessonType
-    case core(CoreError) // Wrap core errors
+    case core(CoreError)
 }
 
 enum AssignmentError: Error {
     case missingRequiredFields
     case taskNotFound
-    case core(CoreError) // Wrap core errors
+    case core(CoreError)
 }
 
 enum ProfileError: Error {
     case invalidEmail
     case passwordTooWeak
     case profileNotFound
+    case core(CoreError)
+}
+
+enum DeckError: Error {
+    case missingRequiredFields
+    case deckNotFound
     case core(CoreError)
 }
 

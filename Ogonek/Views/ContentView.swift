@@ -38,5 +38,5 @@ struct ContentView: View {
                 LessonClient(downloader: TestDownloader()))
 
         ).environment(TasksProvider(client:
-                                        TaskClient(downloader: TestDownloader())))
+            TaskClient(downloader: TestDownloader())))
 }

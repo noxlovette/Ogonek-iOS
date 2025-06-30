@@ -16,7 +16,7 @@ class LessonsProvider {
 
     func fetchLessons() async throws {
         print("Reached logging point")
-        let latestLessons = try await client.lessons
+        let latestLessons = try await client.getLessons()
         print("latest lessons fetch successful")
         lessons = latestLessons
     }
@@ -33,7 +33,7 @@ class TasksProvider {
     let client: TaskClient
 
     func fetchTasks() async throws {
-        let latestTasks = try await client.tasks
+        let latestTasks = try await client.getTasks()
         tasks = latestTasks
     }
 

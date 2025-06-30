@@ -1,0 +1,57 @@
+//
+//  Flashcards.swift
+//  Ogonek Swift
+//
+//  Created by Danila Volkov on 28.06.2025.
+//
+
+import Foundation
+
+// MARK: Core
+
+struct Deck: Identifiable, Decodable, Hashable {
+    let id: String
+    let title: String
+    let description: String
+    let visibility: String
+    let count: Int
+    let isSubscribed: Bool
+    let createdAt: Date
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case description
+        case visibility
+        case count
+        case isSubscribed
+        case createdAt
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+// MARK: Error
+
+extension DeckError: AppError {
+    var shouldRetry: Bool {
+        switch self {
+        case .core(.networkUnavailable): return true
+        case .deckNotFound: return false
+        default: return false
+        }
+    }
+
+    var userFacingMessage: String {
+        switch self {
+        case .missingRequiredFields:
+            return "This Task has missing information"
+        case .deckNotFound:
+            return "Task not found"
+        default:
+            return "Internal Error Occured" // TODO: could be better!
+        }
+    }
+}

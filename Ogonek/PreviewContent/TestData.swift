@@ -171,3 +171,54 @@ let testTasksData: Data = #"""
   "perPage": 20
 }
 """#.data(using: .utf8)!
+
+let testDeckData: Data = #"""
+[
+    {
+        "id": "k5YPQxlPcKxBoGoEMLvzt",
+        "name": "New Deck",
+        "description": "Your New Deck",
+        "visibility": "assigned",
+        "isSubscribed": false,
+"count": 12,
+        "createdAt": "2025-06-23T17:19:13.101881Z"
+
+    },
+    {
+        "id": "8Wlaz7zU9_z0pGo183xnm",
+        "name": "New Deck",
+        "description": "New deck",
+        "visibility": "assigned",
+        "isSubscribed": false,
+"count": 12,
+        "createdAt": "2025-06-23T12:01:38.64811Z"
+    },
+    {
+        "id": "Z50aPlw7Ld2iuklYoOb8H",
+        "name": "Telegram?",
+        "description": "Your New Deck",
+        "visibility": "assigned",
+        "isSubscribed": false,
+"count": 12,
+        "createdAt": "2025-06-23T11:49:37.210261Z"
+    },
+    {
+        "id": "nqtS_Z8qaTVhlULchAlSl",
+        "name": "New Deck",
+        "description": "Your New Deck",
+        "visibility": "private",
+        "isSubscribed": false,
+"count": 12,
+        "createdAt": "2025-05-30T15:08:08.378475Z"
+    },
+    {
+        "id": "hz5yi0cmxa0DjoSi14hP9",
+        "name": "New Deck",
+        "description": "Your New Deck",
+        "visibility": "assigned",
+        "isSubscribed": true,
+"count": 12,
+        "createdAt": "2025-05-29T07:59:03.119631Z"
+    }
+]
+"""#.data(using: .utf8)!
