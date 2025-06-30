@@ -9,7 +9,7 @@ import Foundation
 import Observation
 
 @Observable
-class LessonsProvider {
+class LessonProvider {
     var lessons: [Lesson] = []
 
     let client: LessonClient
@@ -27,7 +27,7 @@ class LessonsProvider {
 }
 
 @Observable
-class TasksProvider {
+class TaskProvider {
     var tasks: [Assignment] = []
 
     let client: TaskClient
@@ -38,6 +38,22 @@ class TasksProvider {
     }
 
     init(client: TaskClient = TaskClient()) {
+        self.client = client
+    }
+}
+
+@Observable
+class DeckProvider {
+    var decks: [Deck] = []
+
+    let client: DeckClient
+
+    func fetchDecks() async throws {
+        let latestDecks = try await client.getDecks()
+        decks = latestDecks
+    }
+
+    init(client: DeckClient = DeckClient()) {
         self.client = client
     }
 }

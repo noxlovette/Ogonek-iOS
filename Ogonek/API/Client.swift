@@ -77,7 +77,7 @@ struct DeckClient {
 
     private let feedURL = URL(string: "http://localhost:3000/deck")!
 
-    init(downloader: any HTTPDataDownloader) {
+    init(downloader: any HTTPDataDownloader = URLSession.shared) {
         apiClient = APIClient(downloader: downloader)
     }
 

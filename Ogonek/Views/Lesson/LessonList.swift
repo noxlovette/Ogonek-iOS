@@ -12,7 +12,7 @@ struct LessonListView: View {
     @AppStorage("lastUpdated")
     var lastUpdated = Date.distantFuture.timeIntervalSince1970
 
-    @Environment(LessonsProvider.self) var provider
+    @Environment(LessonProvider.self) var provider
     @State var editMode: EditMode = .inactive
     @State var selectMode: SelectMode = .inactive
     @State var isLoading = false
@@ -71,7 +71,7 @@ extension LessonListView {
 #Preview {
     LessonListView()
         .environment(
-            LessonsProvider(client:
+            LessonProvider(client:
                 LessonClient(downloader: TestDownloader()))
         )
 }

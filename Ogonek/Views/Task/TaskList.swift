@@ -11,7 +11,7 @@ struct TaskListView: View {
     @AppStorage("lastUpdated")
     var lastUpdated = Date.distantFuture.timeIntervalSince1970
 
-    @Environment(TasksProvider.self) var provider
+    @Environment(TaskProvider.self) var provider
     @State var isLoading = false
     @State private var error: AssignmentError?
     @State private var hasError = false
@@ -59,5 +59,5 @@ extension TaskListView {
 #Preview {
     TaskListView()
         .environment(
-            TasksProvider(client: TaskClient(downloader: TestDownloader())))
+            TaskProvider(client: TaskClient(downloader: TestDownloader())))
 }

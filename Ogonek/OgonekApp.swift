@@ -10,10 +10,10 @@ import SwiftUI
 @main
 struct Ogonek: App {
     var body: some Scene {
-        @State var lessonsProvider = LessonsProvider()
+        @State var lessonProvider = LessonProvider()
         WindowGroup {
             HomeView()
         }
-        .environment(lessonsProvider)
+        .environment(lessonProvider)
     }
 }

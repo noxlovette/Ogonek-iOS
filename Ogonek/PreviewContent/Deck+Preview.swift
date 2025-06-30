@@ -10,7 +10,7 @@ import Foundation
 extension Deck {
     static var preview: Deck {
         let deck = Deck(
-            id: "wzozO4mi3TfRit5aQbrGp", title: "Task 1", description: "Meow; Meow2; Meow?", visibility: "public", count: 12, isSubscribed: true, createdAt: Date.distantPast
+            id: "wzozO4mi3TfRit5aQbrGp", name: "Task 1", description: "Meow; Meow2; Meow?", visibility: "public", count: 12, isSubscribed: true, createdAt: Date.distantPast
         )
 
         return deck

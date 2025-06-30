@@ -11,7 +11,7 @@ import Foundation
 
 struct Deck: Identifiable, Decodable, Hashable {
     let id: String
-    let title: String
+    let name: String
     let description: String
     let visibility: String
     let count: Int
@@ -20,7 +20,7 @@ struct Deck: Identifiable, Decodable, Hashable {
 
     private enum CodingKeys: String, CodingKey {
         case id
-        case title
+        case name
         case description
         case visibility
         case count

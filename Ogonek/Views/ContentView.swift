@@ -34,9 +34,9 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environment(
-            LessonsProvider(client:
+            LessonProvider(client:
                 LessonClient(downloader: TestDownloader()))
 
-        ).environment(TasksProvider(client:
+        ).environment(TaskProvider(client:
             TaskClient(downloader: TestDownloader())))
 }
