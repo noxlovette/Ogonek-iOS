@@ -1,10 +1,3 @@
-/*
- See LICENSE folder for this sample’s licensing information.
-
- Abstract:
- The list item view which displays details of a given earthquake.
- */
-
 import SwiftUI
 
 struct LessonRow: View {

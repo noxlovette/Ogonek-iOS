@@ -1,5 +1,5 @@
 //
-//  Providers.swift
+//  Provider.swift
 //  Earthquakes
 //
 //  Created by Danila Volkov on 28.04.2025.

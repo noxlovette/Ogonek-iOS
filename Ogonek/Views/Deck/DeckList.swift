@@ -8,31 +8,40 @@
 import SwiftUI
 
 struct DeckListView: View {
-
     @Environment(DeckProvider.self) var provider
     @State var isLoading = false
     @State private var error: DeckError?
     @State private var hasError: Bool = false
     @State var selection: Set<String> = []
 
+    private let columns = [
+        GridItem(.flexible(), spacing: 8),
+        GridItem(.flexible(), spacing: 8),
+    ]
+
     var body: some View {
         NavigationStack {
-            List(provider.decks) { deck in
-                Text(deck.name)
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 12) {
+                    ForEach(provider.decks) { deck in
+                        DeckCard(deck: deck)
+                    }
+                }
+                .padding(.horizontal, 16)
             }
-            .listStyle(.inset)
             .navigationTitle("Flashcards")
             .refreshable {
-                await fetchDecks()}
-            .alert(isPresented: $hasError, error: error) {}
-            }
-
-            .task {
                 await fetchDecks()
             }
+            .alert(isPresented: $hasError, error: error) {}
+            .navigationDestination(for: Deck.self) { deck in DeckDetail(deck: deck) }
+        }
+
+        .task {
+            await fetchDecks()
         }
     }
-
+}
 
 extension DeckListView {
     func fetchDecks() async {
@@ -52,6 +61,6 @@ extension DeckListView {
 #Preview {
     DeckListView()
         .environment(
-            DeckProvider(client:DeckClient(downloader: TestDownloader()))
+            DeckProvider(client: DeckClient(downloader: TestDownloader()))
         )
 }
