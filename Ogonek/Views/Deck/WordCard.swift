@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct WordCard: View {
+    var card: Card
+
+    @State private var selectedSide = 0
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Picker("Card Side", selection: $selectedSide) {
+                Text("Front").tag(0)
+                Text("Back").tag(1)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+        }
+        Spacer()
+
+        Text(selectedSide == 0 ? card.front : card.back).font(.title).padding()
+
+        Spacer()
     }
 }
 
 #Preview {
-    WordCard()
+    WordCard(card: Card.preview)
 }

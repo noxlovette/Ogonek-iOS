@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: Core
+// MARK: Deck
 
 struct Deck: Identifiable, Decodable, Hashable {
     let id: String
@@ -33,7 +33,31 @@ struct Deck: Identifiable, Decodable, Hashable {
     }
 }
 
-// MARK: Error
+// MARK: Card
+
+struct Card: Identifiable, Decodable, Hashable {
+    let id: String
+    let front: String
+    let back: String
+    let mediaUrl: String?
+    let deckId: String
+    let createdAt: Date
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case front
+        case back
+        case mediaUrl
+        case deckId
+        case createdAt
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+// MARK: Errors
 
 extension DeckError: AppError {
     var shouldRetry: Bool {

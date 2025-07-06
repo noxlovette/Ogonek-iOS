@@ -34,7 +34,7 @@ struct DeckListView: View {
                 await fetchDecks()
             }
             .alert(isPresented: $hasError, error: error) {}
-            .navigationDestination(for: Deck.self) { deck in DeckDetail(deck: deck) }
+            .navigationDestination(for: Deck.self) { deck in DeckDetail(deck: deck, cards: Card.previewSet) }
         }
 
         .task {
