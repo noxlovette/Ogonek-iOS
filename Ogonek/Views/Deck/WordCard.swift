@@ -29,6 +29,6 @@ struct WordCard: View {
     }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     WordCard(card: Card.preview)
 }
