@@ -33,7 +33,7 @@ struct LessonListView: View {
             .refreshable {
                 await fetchLessons()
             }.navigationDestination(for: Lesson.self) { lesson in
-                LessonDetail(lesson: lesson)
+                LessonDetailView(lesson: lesson)
             }
             .alert(isPresented: $hasError, error: error) {}
         }

@@ -19,7 +19,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Lessons", systemImage: "book.pages")
                 }.tag(1)
-            TaskListView()
+            TaskGridView()
                 .tabItem {
                     Label("Tasks", systemImage: "checklist")
                 }.tag(2)

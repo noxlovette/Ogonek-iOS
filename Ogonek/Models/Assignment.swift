@@ -13,7 +13,7 @@ struct Assignment: Identifiable, Decodable, Hashable {
     let id: String
     let title: String
     let priority: UInt16
-    let completed: Bool
+    var completed: Bool
     let dueDate: Date?
     let markdown: String
     let createdAt: Date

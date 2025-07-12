@@ -60,7 +60,7 @@ extension Deck {
                 isSubscribed: false,
                 createdAt: Calendar.current.date(byAdding: .year, value: -1, to: Date())!
             ),
-            Deck.preview
+            Deck.preview,
         ]
     }
 }

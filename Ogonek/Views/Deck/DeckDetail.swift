@@ -1,6 +1,7 @@
 import SwiftUI
 
-    // MARK: - Tag Badge Component
+// MARK: - Tag Badge Component
+
 struct TagBadge: View {
     let text: String
 
@@ -17,7 +18,8 @@ struct TagBadge: View {
     }
 }
 
-    // MARK: - Main Deck Detail View
+// MARK: - Main Deck Detail View
+
 struct DeckDetailView: View {
     let deck: Deck
     let cards: [Card]
@@ -27,20 +29,19 @@ struct DeckDetailView: View {
 
     private let columns = [
         GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible()),
     ]
 
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 24) {
-                    // Header section
+                // Header section
                 headerSection
 
-                    // Main content
+                // Main content
                 HStack(alignment: .top, spacing: 24) {
-                        // Cards grid
+                    // Cards grid
                     cardsSection
-
                 }
                 .padding(.horizontal)
             }
@@ -51,7 +52,7 @@ struct DeckDetailView: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 if UIDevice.current.userInterfaceIdiom != .pad {
                     Button {
-                            // Navigate to edit
+                        // Navigate to edit
                     } label: {
                         Image(systemName: "pencil")
                     }
@@ -68,11 +69,12 @@ struct DeckDetailView: View {
             ShareSheet(items: ["Check out this deck: \(deck.name)"])
         }
         .onAppear {
-                // Load subscription status from API
+            // Load subscription status from API
         }
     }
 
-        // MARK: - Header Section
+    // MARK: - Header Section
+
     private var headerSection: some View {
         VStack(spacing: 16) {
             HStack {
@@ -87,9 +89,9 @@ struct DeckDetailView: View {
             }
             .padding(.horizontal)
 
-                // Action buttons
+            // Action buttons
             HStack(spacing: 12) {
-                    // Share button
+                // Share button
                 Button {
                     showingShareSheet.toggle()
                 } label: {
@@ -104,9 +106,9 @@ struct DeckDetailView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
 
-                    // Edit button (if owner)
+                // Edit button (if owner)
                 Button {
-                        // Navigate to edit
+                    // Navigate to edit
                 } label: {
                     HStack {
                         Image(systemName: "pencil")
@@ -119,10 +121,10 @@ struct DeckDetailView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
 
-                    // Subscribe button
+                // Subscribe button
                 Button {
                     isSubscribed.toggle()
-                        // Handle subscription API call
+                    // Handle subscription API call
                 } label: {
                     HStack {
                         Image(systemName: isSubscribed ? "person.badge.minus" : "person.badge.plus")
@@ -139,11 +141,12 @@ struct DeckDetailView: View {
         }
     }
 
-        // MARK: - Cards Section
+    // MARK: - Cards Section
+
     private var cardsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             if cards.isEmpty {
-                    // Empty state
+                // Empty state
                 VStack(spacing: 16) {
                     Image(systemName: "rectangle.stack.badge.plus")
                         .font(.system(size: 48))
@@ -160,7 +163,7 @@ struct DeckDetailView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 60)
             } else {
-                    // Cards grid
+                // Cards grid
                 LazyVGrid(columns: columns, spacing: 16) {
                     ForEach(cards) { card in
                         WordCard(
@@ -175,9 +178,8 @@ struct DeckDetailView: View {
         .frame(maxWidth: .infinity)
     }
 
+    // MARK: - Helper Methods
 
-
-        // MARK: - Helper Methods
     private func toggleCard(_ cardId: String) {
         withAnimation(.easeInOut(duration: 0.3)) {
             if flippedCards.contains(cardId) {
@@ -189,18 +191,20 @@ struct DeckDetailView: View {
     }
 }
 
-    // MARK: - Share Sheet Helper
+// MARK: - Share Sheet Helper
+
 struct ShareSheet: UIViewControllerRepresentable {
     let items: [Any]
 
-    func makeUIViewController(context: Context) -> UIActivityViewController {
+    func makeUIViewController(context _: Context) -> UIActivityViewController {
         UIActivityViewController(activityItems: items, applicationActivities: nil)
     }
 
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+    func updateUIViewController(_: UIActivityViewController, context _: Context) {}
 }
 
-    // MARK: - Preview
+// MARK: - Preview
+
 struct DeckDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

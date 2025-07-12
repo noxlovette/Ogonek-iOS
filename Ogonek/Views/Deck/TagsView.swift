@@ -1,5 +1,5 @@
 //
-//  Tag.swift
+//  TagsView.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 05.07.2025.
@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-    // MARK: - Tags View Component
+// MARK: - Tags View Component
+
 struct TagsView: View {
     let tags: [String]
 

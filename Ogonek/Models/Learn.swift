@@ -31,4 +31,3 @@ struct CardProgress: Identifiable, Codable {
         case interval, mediaUrl = "media_url"
     }
 }
-

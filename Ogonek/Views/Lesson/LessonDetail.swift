@@ -1,31 +1,49 @@
-//
-//  LessonDetail.swift
-//  Ogonek
-//
-//  Created by Danila Volkov on 29.04.2025.
-//
 import MarkdownUI
 import SwiftUI
 
-struct LessonDetail: View {
+// MARK: - Main View
+
+struct LessonDetailView: View {
     let lesson: Lesson
+
+    @State private var showingTableOfContents = false
 
     var body: some View {
         ScrollView {
-            VStack {
-                Markdown(lesson.markdown)
-                    .padding(.top, 8)
+            VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(lesson.topic)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.primary)
+                    }
 
-                Spacer()
+                    .padding(.horizontal, 16)
+                    .padding(.top, 8)
+                }
+
+                Divider()
+                    .padding(.vertical, 16)
+
+                HStack(alignment: .top, spacing: 16) {
+                    Markdown(lesson.markdown)
+                }
+                .padding(.horizontal, 16)
             }
-            .padding()
-            .navigationTitle(lesson.topic)
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-#Preview {
-    NavigationView {
-        LessonDetail(lesson: Lesson.preview)
+// MARK: - Preview
+
+struct LessonDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            LessonDetailView(
+                lesson: Lesson.preview,
+            )
+        }
     }
 }

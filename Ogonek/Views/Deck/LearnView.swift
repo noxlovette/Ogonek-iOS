@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 /// The button that the user clicks
 struct QualityButton: Identifiable {
     let id = UUID()
@@ -38,29 +37,29 @@ class LearnViewModel: ObservableObject {
         QualityButton(key: 1, quality: 0, color: .red, label: "Again"),
         QualityButton(key: 2, quality: 1, color: .orange, label: "Hard"),
         QualityButton(key: 3, quality: 2, color: .blue, label: "Good"),
-        QualityButton(key: 4, quality: 3, color: .green, label: "Easy")
+        QualityButton(key: 4, quality: 3, color: .green, label: "Easy"),
     ]
 
     func loadCards() async {
         isLoading = true
-            // Simulate API call - replace with actual networking
+        // Simulate API call - replace with actual networking
         do {
-                // let cards = try await APIService.shared.fetchDueCards()
-                // self.cards = cards
-            self.isComplete = cards.isEmpty
+            // let cards = try await APIService.shared.fetchDueCards()
+            // self.cards = cards
+            isComplete = cards.isEmpty
         } catch {
             print("Failed to load cards: \(error)")
         }
         isLoading = false
     }
 
-    func submitQuality(_ quality: Int) async {
+    func submitQuality(_: Int) async {
         guard let card = currentCard else { return }
 
         isLoading = true
 
         do {
-                // await APIService.shared.updateCardProgress(cardId: card.id, quality: quality)
+            // await APIService.shared.updateCardProgress(cardId: card.id, quality: quality)
             await nextCard()
         } catch {
             print("Failed to submit quality: \(error)")
@@ -76,7 +75,7 @@ class LearnViewModel: ObservableObject {
             currentIndex += 1
             showAnswer = false
         } else if currentIndex == cards.count - 1 && cards.count > 1 {
-                // Reload cards and reset
+            // Reload cards and reset
             await loadCards()
             currentIndex = 0
             showAnswer = false
@@ -90,7 +89,8 @@ class LearnViewModel: ObservableObject {
     }
 }
 
-    // MARK: - Main View
+// MARK: - Main View
+
 struct LearnView: View {
     @StateObject private var viewModel = LearnViewModel()
     @Environment(\.dismiss) private var dismiss
@@ -98,7 +98,7 @@ struct LearnView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                    // Background gradient
+                // Background gradient
                 LinearGradient(
                     colors: [Color(.systemGray6), Color(.systemBackground)],
                     startPoint: .top,
@@ -122,12 +122,13 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Completion View
+    // MARK: - Completion View
+
     private var completionView: some View {
         VStack(spacing: 24) {
             Spacer()
 
-                // Success icon
+            // Success icon
             ZStack {
                 Circle()
                     .fill(Color.brown.opacity(0.1))
@@ -167,16 +168,17 @@ struct LearnView: View {
         .transition(.opacity.combined(with: .scale))
     }
 
-        // MARK: - Card View
+    // MARK: - Card View
+
     private func cardView(card: CardProgress) -> some View {
         VStack(spacing: 24) {
-                // Header with progress
+            // Header with progress
             headerView
 
-                // Progress bar
+            // Progress bar
             progressBar
 
-                // Card content
+            // Card content
             cardContent(card: card)
                 .transition(.asymmetric(
                     insertion: .move(edge: .trailing).combined(with: .opacity),
@@ -187,7 +189,8 @@ struct LearnView: View {
         .animation(.easeInOut(duration: 0.3), value: viewModel.currentIndex)
     }
 
-        // MARK: - Header View
+    // MARK: - Header View
+
     private var headerView: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -205,7 +208,8 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Progress Bar
+    // MARK: - Progress Bar
+
     private var progressBar: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
@@ -222,12 +226,13 @@ struct LearnView: View {
         .frame(height: 8)
     }
 
-        // MARK: - Card Content
+    // MARK: - Card Content
+
     private func cardContent(card: CardProgress) -> some View {
         VStack(spacing: 16) {
-                // Main card
+            // Main card
             VStack(spacing: 0) {
-                    // Front side
+                // Front side
                 VStack(alignment: .leading, spacing: 16) {
                     HStack {
                         Text("Front")
@@ -253,7 +258,7 @@ struct LearnView: View {
                     Divider()
                         .padding(.horizontal, 20)
 
-                        // Back side
+                    // Back side
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
                             Text("Back")
@@ -277,12 +282,13 @@ struct LearnView: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
 
-                // Action buttons
+            // Action buttons
             actionButtons
         }
     }
 
-        // MARK: - Cloze Input
+    // MARK: - Cloze Input
+
     private func clozeInput(front: String) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(front)
@@ -297,7 +303,8 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Action Buttons
+    // MARK: - Action Buttons
+
     private var actionButtons: some View {
         Group {
             if !viewModel.showAnswer {
@@ -323,7 +330,8 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Quality Buttons
+    // MARK: - Quality Buttons
+
     private var qualityButtonsView: some View {
         HStack(spacing: 12) {
             ForEach(viewModel.qualityButtons) { button in
@@ -355,7 +363,8 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Loading View
+    // MARK: - Loading View
+
     private var loadingView: some View {
         VStack(spacing: 16) {
             ProgressView()
@@ -367,7 +376,8 @@ struct LearnView: View {
     }
 }
 
-    // MARK: - Preview
+// MARK: - Preview
+
 #Preview {
     LearnView()
 }

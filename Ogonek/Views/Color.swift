@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Color {
-        // Stone colors (greys)
+    // Stone colors (greys)
     static let stone50 = Color(red: 0.98, green: 0.98, blue: 0.98)
     static let stone100 = Color(red: 0.96, green: 0.96, blue: 0.96)
     static let stone200 = Color(red: 0.93, green: 0.93, blue: 0.93)
@@ -20,7 +20,7 @@ extension Color {
     static let stone800 = Color(red: 0.16, green: 0.16, blue: 0.16)
     static let stone900 = Color(red: 0.09, green: 0.09, blue: 0.09)
 
-        // Cocoa colors (your accent colors)
+    // Cocoa colors (your accent colors)
     static let cocoa50 = Color(red: 0.98, green: 0.95, blue: 0.93)
     static let cocoa100 = Color(red: 0.95, green: 0.89, blue: 0.83)
     static let cocoa200 = Color(red: 0.90, green: 0.78, blue: 0.65)

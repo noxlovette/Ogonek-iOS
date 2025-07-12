@@ -1,5 +1,5 @@
 //
-//  DeckList.swift
+//  DeckView.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 28.06.2025.
@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-    // MARK: - Usage Example
+// MARK: - Usage Example
+
 struct DeckGridView: View {
     let decks: [Deck]
 
@@ -19,7 +20,7 @@ struct DeckGridView: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                        // Header similar to your HeaderEmbellish
+                    // Header similar to your HeaderEmbellish
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Flashcards")
@@ -34,16 +35,16 @@ struct DeckGridView: View {
                         Spacer()
 
                         Button("New Deck") {
-                                // Handle new deck creation
+                            // Handle new deck creation
                         }
                         .buttonStyle(.borderedProminent)
                         .tint(.cocoa500)
                     }
                     .padding(.horizontal)
 
-                        // Deck grid
+                    // Deck grid
                     if decks.isEmpty {
-                            // Empty state
+                        // Empty state
                         VStack(spacing: 12) {
                             Image(systemName: "folder")
                                 .font(.system(size: 32))
@@ -59,7 +60,7 @@ struct DeckGridView: View {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(decks) { deck in
                                 DeckCard(deck: deck) {
-                                        // Handle deck tap - navigate to deck detail
+                                    // Handle deck tap - navigate to deck detail
                                     print("Tapped deck: \(deck.name)")
                                 }
                             }
@@ -74,23 +75,23 @@ struct DeckGridView: View {
     }
 }
 
-    // MARK: - Preview
-struct ContentView_Previews: PreviewProvider {
+// MARK: - Preview
 
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-                // Single card preview
+            // Single card preview
             DeckCard(deck: Deck.previewSet[0]) {
                 print("Deck tapped!")
             }
             .padding()
             .previewDisplayName("Single Card")
 
-                // Grid view preview
+            // Grid view preview
             DeckGridView(decks: Deck.previewSet)
                 .previewDisplayName("Grid View")
 
-                // Empty state preview
+            // Empty state preview
             DeckGridView(decks: [])
                 .previewDisplayName("Empty State")
         }

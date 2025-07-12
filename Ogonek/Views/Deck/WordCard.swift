@@ -1,4 +1,4 @@
-    // MARK: - WordCard Component
+// MARK: - WordCard Component
 
 import SwiftUI
 
@@ -16,7 +16,7 @@ struct WordCard: View {
             onTap(card.id)
         } label: {
             ZStack {
-                    // Card container
+                // Card container
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color(.systemBackground))
                     .overlay(
@@ -26,7 +26,7 @@ struct WordCard: View {
                     .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
 
                 VStack(spacing: 16) {
-                        // Front/Back content
+                    // Front/Back content
                     VStack(alignment: .leading, spacing: 8) {
                         Text(isFlipped ? "Answer" : "Question")
                             .font(.caption)
@@ -41,7 +41,7 @@ struct WordCard: View {
                             .lineLimit(4)
                     }
 
-                        // Media image if available
+                    // Media image if available
                     if let mediaUrl = card.mediaUrl, isFlipped {
                         AsyncImage(url: URL(string: mediaUrl)) { image in
                             image
@@ -61,7 +61,7 @@ struct WordCard: View {
 
                     Spacer()
 
-                        // Flip indicator
+                    // Flip indicator
                     if !isFlipped {
                         HStack {
                             Spacer()
