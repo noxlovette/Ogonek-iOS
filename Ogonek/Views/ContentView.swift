@@ -23,7 +23,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Tasks", systemImage: "checklist")
                 }.tag(2)
-            DeckListView()
+            DeckGridView(decks: Deck.previewSet)
                 .tabItem {
                     Label("Learn", systemImage: "graduationcap")
                 }.tag(3).badge(5)

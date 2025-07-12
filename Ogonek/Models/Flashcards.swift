@@ -12,7 +12,7 @@ import Foundation
 struct Deck: Identifiable, Decodable, Hashable {
     let id: String
     let name: String
-    let description: String
+    let description: String?
     let visibility: String
     let count: Int
     let isSubscribed: Bool
