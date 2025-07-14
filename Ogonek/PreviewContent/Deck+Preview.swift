@@ -1,9 +1,9 @@
-//
-//  Deck+Preview.swift
-//  Ogonek
-//
-//  Created by Danila Volkov on 28.06.2025.
-//
+    //
+    //  Deck+Preview.swift
+    //  Ogonek
+    //
+    //  Created by Danila Volkov on 28.06.2025.
+    //
 
 import Foundation
 
@@ -14,9 +14,9 @@ extension Deck {
             name: "Deck 1",
             description: "Meow; Meow2; Meow?",
             visibility: "public",
-            count: 12,
-            isSubscribed: true,
-            createdAt: Date.distantPast
+            seen: true,
+            assigneeName: "Alice",
+            isSubscribed: true
         )
 
         return deck
@@ -29,36 +29,36 @@ extension Deck {
                 name: "Swift Basics",
                 description: "Variables; Constants; Control Flow",
                 visibility: "public",
-                count: 20,
-                isSubscribed: true,
-                createdAt: Date()
+                seen: true,
+                assigneeName: "Bob",
+                isSubscribed: true
             ),
             Deck(
                 id: "deck002",
                 name: "iOS Architecture",
                 description: "MVC; MVVM; VIPER",
                 visibility: "private",
-                count: 15,
-                isSubscribed: false,
-                createdAt: Calendar.current.date(byAdding: .day, value: -10, to: Date())!
+                seen: false,
+                assigneeName: "Carol",
+                isSubscribed: false
             ),
             Deck(
                 id: "deck003",
                 name: "Design Patterns",
                 description: "Singleton; Observer; Factory",
                 visibility: "public",
-                count: 18,
-                isSubscribed: true,
-                createdAt: Calendar.current.date(byAdding: .month, value: -2, to: Date())!
+                seen: nil,
+                assigneeName: nil,
+                isSubscribed: true
             ),
             Deck(
                 id: "deck004",
                 name: "Algorithms",
                 description: "Sorting; Searching; Graphs",
                 visibility: "unlisted",
-                count: 30,
-                isSubscribed: false,
-                createdAt: Calendar.current.date(byAdding: .year, value: -1, to: Date())!
+                seen: false,
+                assigneeName: "Dave",
+                isSubscribed: false
             ),
             Deck.preview,
         ]

@@ -34,9 +34,10 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environment(
-            LessonProvider(client:
-                LessonClient(downloader: TestDownloader()))
-
-        ).environment(TaskProvider(client:
-            TaskClient(downloader: TestDownloader())))
+            AppState(
+                lessonRepo: APILessonRepository(apiService: APIService()),
+                taskRepo: APITaskRepository(apiService: APIService()),
+                deckRepo: APIDeckRepository(apiService: APIService())
+            )
+        )
 }

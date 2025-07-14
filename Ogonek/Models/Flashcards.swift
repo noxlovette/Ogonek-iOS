@@ -8,24 +8,23 @@
 import Foundation
 
 // MARK: Deck
-
 struct Deck: Identifiable, Decodable, Hashable {
     let id: String
     let name: String
     let description: String?
     let visibility: String
-    let count: Int
+    let seen: Bool?
+    let assigneeName: String?
     let isSubscribed: Bool
-    let createdAt: Date
 
     private enum CodingKeys: String, CodingKey {
         case id
         case name
         case description
         case visibility
-        case count
+        case seen
+        case assigneeName
         case isSubscribed
-        case createdAt
     }
 
     func hash(into hasher: inout Hasher) {
@@ -34,7 +33,6 @@ struct Deck: Identifiable, Decodable, Hashable {
 }
 
 // MARK: Card
-
 struct Card: Identifiable, Decodable, Hashable {
     let id: String
     let front: String
