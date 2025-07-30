@@ -662,7 +662,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedResponse_TaskFull'
+                $ref: '#/components/schemas/PaginatedResponse_TaskSmall'
         '401':
           description: Unauthorized
       security:
@@ -1790,7 +1790,7 @@ components:
         total:
           type: integer
           format: int64
-    PaginatedResponse_TaskFull:
+    PaginatedResponse_TaskSmall:
       type: object
       description: Generic response that stores paginated data
       required:
@@ -1806,26 +1806,14 @@ components:
             required:
             - id
             - title
-            - markdown
             - priority
             - completed
-            - createdAt
-            - updatedAt
-            - createdBy
-            - assignee
             - assigneeName
             properties:
-              assignee:
-                type: string
               assigneeName:
                 type: string
               completed:
                 type: boolean
-              createdAt:
-                type: string
-                format: date-time
-              createdBy:
-                type: string
               dueDate:
                 type:
                 - string
@@ -1833,16 +1821,15 @@ components:
                 format: date-time
               id:
                 type: string
-              markdown:
-                type: string
               priority:
                 type: integer
                 format: int32
+              seen:
+                type:
+                - boolean
+                - 'null'
               title:
                 type: string
-              updatedAt:
-                type: string
-                format: date-time
         page:
           type: integer
           format: int64

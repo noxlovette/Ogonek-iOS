@@ -33,11 +33,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environment(
-            AppState(
-                lessonRepo: APILessonRepository(apiService: APIService()),
-                taskRepo: APITaskRepository(apiService: APIService()),
-                deckRepo: APIDeckRepository(apiService: APIService())
-            )
-        )
+       
 }

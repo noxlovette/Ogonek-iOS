@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct Ogonek: App {
-    let appState: AppState
 
     init() {
             // MARK: Set up Sentry
@@ -29,24 +28,11 @@ struct Ogonek: App {
             options.attachScreenshot = true // This adds a screenshot to the error events
             options.attachViewHierarchy = true // This adds the view hierarchy to the error events
         }
-
-            // MARK: Set up the App State
-        let apiService = APIService()
-        let lessonRepo = APILessonRepository(apiService: apiService)
-        let taskRepo = APITaskRepository(apiService: apiService)
-        let deckRepo = APIDeckRepository(apiService: apiService)
-
-        self.appState = AppState(
-            lessonRepo: lessonRepo,
-            taskRepo: taskRepo,
-            deckRepo: deckRepo
-        )
-    }
+   }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(appState)
         }
     }
 }

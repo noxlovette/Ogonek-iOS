@@ -141,7 +141,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D53ACB792DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek" */;
 			buildPhases = (
-				D5451D1A2E3A9C0F00A810A2 /* Generate Types */,
 				D53ACB522DB18B8F00CE4D45 /* Sources */,
 				D53ACB532DB18B8F00CE4D45 /* Frameworks */,
 				D53ACB542DB18B8F00CE4D45 /* Resources */,
@@ -300,33 +299,6 @@
 				"echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"",
 				"fi",
 				"",
-				"",
-			);
-		};
-		D5451D1A2E3A9C0F00A810A2 /* Generate Types */ = {
-			isa = PBXShellScriptBuildPhase;
-			name = "Generate Types";
-			shellPath = /bin/zsh;
-			shellScript = (
-				"set -e",
-				"",
-				"echo \"🦀 Generating OpenAPI types from Rust backend...\"",
-				"",
-				"# Change to your Rust project directory",
-				"cd ~/Development/ogonek/axum",
-				"",
-				"# Run your Rust binary to generate the OpenAPI spec",
-				"cargo run --bin generate-types",
-				"",
-				"# Copy the generated spec to your Swift project",
-				"cp openapi.yaml ~/Development/ogonek-swift/openapi.yaml",
-				"",
-				"echo \"✅ OpenAPI spec updated successfully\"",
-				"",
-				"# Optional: Also run your Swift code generation here if you have a tool",
-				"# For example, if you're using OpenAPIGenerator:",
-				"# cd ~/Development/ogonek-swift",
-				"# openapi-generator generate -i openapi.yaml -g swift5 -o Generated/",
 				"",
 			);
 		};

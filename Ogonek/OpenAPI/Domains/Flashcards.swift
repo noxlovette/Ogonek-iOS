@@ -1,7 +1,7 @@
 import Foundation
 
 extension OpenAPIClient {
-    func fetchDecks() async throws -> PaginatedDecks {
+    func listDecks() async throws -> PaginatedDecks {
 
         let response = try await self.client.listDecks()
 
@@ -52,7 +52,7 @@ extension OpenAPIClient {
         _ = try await client.deleteDeck(path: input)
     }
 
-    func fetchDeck(id: String) async throws -> Deck {
+    func fetchDeck(id: String) async throws -> DeckWithCards {
 
         let input = Operations.FetchDeck.Input.Path(
             id: id

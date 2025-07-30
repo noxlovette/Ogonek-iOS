@@ -7,16 +7,86 @@ extension Card {
 
     static var previewSet: [Card] {
         [
-            Card(id: "1", front: "Hello", back: "Привет", mediaUrl: "", deckId: "preview", createdAt: Date()),
-            Card(id: "2", front: "Goodbye", back: "До свидания", mediaUrl: nil, deckId: "preview", createdAt: Date()),
-            Card(id: "3", front: "Please", back: "Пожалуйста", mediaUrl: nil, deckId: "preview", createdAt: Date()),
-            Card(id: "4", front: "Thank you", back: "Спасибо", mediaUrl: nil, deckId: "preview", createdAt: Date()),
-            Card(id: "5", front: "Yes", back: "Да", mediaUrl: nil, deckId: "preview", createdAt: Date()),
-            Card(id: "6", front: "No", back: "Нет", mediaUrl: nil, deckId: "preview", createdAt: Date()),
-            Card(id: "7", front: "How are you?", back: "Как дела?", mediaUrl: nil, deckId: "preview", createdAt: Date()),
-            Card(id: "8", front: "I’m fine", back: "Я в порядке", mediaUrl: nil, deckId: "preview", createdAt: Date()),
-            Card(id: "9", front: "Excuse me", back: "Извините", mediaUrl: nil, deckId: "preview", createdAt: Date()),
-            Card(id: "10", front: "What’s your name?", back: "Как тебя зовут?", mediaUrl: nil, deckId: "preview", createdAt: Date()),
+            Card(
+                back: "Привет",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "Hello",
+                id: "1",
+                mediaUrl: nil
+            ),
+            Card(
+                back: "До свидания",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "Goodbye",
+                id: "2",
+                mediaUrl: nil
+            ),
+            Card(
+                back: "Пожалуйста",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "Please",
+                id: "3",
+                mediaUrl: nil
+            ),
+            Card(
+                back: "Спасибо",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "Thank you",
+                id: "4",
+                mediaUrl: nil
+            ),
+            Card(
+                back: "Да",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "Yes",
+                id: "5",
+                mediaUrl: nil
+            ),
+            Card(
+                back: "Нет",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "No",
+                id: "6",
+                mediaUrl: nil
+            ),
+            Card(
+                back: "Как дела?",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "How are you?",
+                id: "7",
+                mediaUrl: nil
+            ),
+            Card(
+                back: "Я в порядке",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "I'm fine",
+                id: "8",
+                mediaUrl: nil
+            ),
+            Card(
+                back: "Извините",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "Excuse me",
+                id: "9",
+                mediaUrl: nil
+            ),
+            Card(
+                back: "Как тебя зовут?",
+                createdAt: Date(),
+                deckId: "preview",
+                front: "What's your name?",
+                id: "10",
+                mediaUrl: nil
+            )
         ]
     }
 }

@@ -10,7 +10,6 @@ import SwiftUI
 
 struct LessonListView: View {
     // MARK: - Dependencies
-    @Environment(AppState.self) private var appState
 
     @AppStorage("lastUpdated") var lastUpdated = Date.distantPast.timeIntervalSince1970
 
@@ -102,7 +101,6 @@ extension LessonListView {
         var selectMode: SelectMode = .inactive
         var isLoading = false
         var selection: Set<String> = []
-        var error: LessonError?
         var hasError = false
     }
 }
@@ -110,17 +108,4 @@ extension LessonListView {
 // MARK: - Preview
 #Preview {
     LessonListView()
-        .environment(
-            AppState(
-                lessonRepo: APILessonRepository(
-                    apiService: APIService(downloader: TestDownloader())
-                ),
-                taskRepo: APITaskRepository(
-                    apiService: APIService(downloader: TestDownloader())
-                ),
-                deckRepo: APIDeckRepository(
-                    apiService: APIService(downloader: TestDownloader())
-                )
-            )
-        )
 }

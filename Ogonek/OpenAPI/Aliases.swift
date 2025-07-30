@@ -17,12 +17,15 @@ typealias LessonUpdate = Components.Schemas.LessonUpdate
 typealias Task = Components.Schemas.TaskWithFilesResponse
 typealias TaskSmall = Components.Schemas.TaskSmall
 typealias TaskUpdate = Components.Schemas.TaskUpdate
+typealias File = Components.Schemas.FileSmall
 
     // 3. DECKS
     // From your schema: DeckFull, DeckSmall, DeckPublic
-typealias Deck = Components.Schemas.DeckWithCardsAndSubscription
+typealias DeckWithCards = Components.Schemas.DeckWithCardsAndSubscription
+typealias Deck = Components.Schemas.DeckFull
 typealias DeckSmall = Components.Schemas.DeckSmall
 typealias DeckPublic = Components.Schemas.DeckPublic
+typealias Card = Components.Schemas.Card
 
     // 4. USERS & AUTH
 typealias User = Components.Schemas.User
@@ -31,8 +34,8 @@ typealias TokenPair = Components.Schemas.TokenPair
 typealias RefreshTokenPayload = Components.Schemas.RefreshTokenPayload
 
     // 5. RESPONSES (Paginated)
-typealias PaginatedLessons = Components.Schemas.PaginatedResponseLessonFull
-typealias PaginatedTasks = Components.Schemas.PaginatedResponseTaskFull
+typealias PaginatedLessons = Components.Schemas.PaginatedResponseLessonSmall
+typealias PaginatedTasks = Components.Schemas.PaginatedResponseTaskSmall
 typealias PaginatedDecks = [Components.Schemas.DeckSmall]
 
     // 6. DASHBOARD DATA

@@ -16,6 +16,10 @@ extension OpenAPIClient {
         notImplemented()
     }
 
+    func refresh(_ input: Operations.Refresh.Input) async throws -> Operations.Refresh.Output {
+        notImplemented()
+    }
+
     func bindStudentToTeacher(_ input: Operations.BindStudentToTeacher.Input) async throws -> Operations.BindStudentToTeacher.Output {
         notImplemented()
     }

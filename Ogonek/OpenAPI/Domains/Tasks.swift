@@ -94,4 +94,8 @@ extension OpenAPIClient {
 
         return response
    }
+
+    func toggleTask(_ input: Operations.ToggleTask.Input) async throws -> Operations.ToggleTask.Output {
+        notImplemented()
+    }
 }
