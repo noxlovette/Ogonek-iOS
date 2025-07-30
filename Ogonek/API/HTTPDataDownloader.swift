@@ -18,7 +18,7 @@ extension URLSession: HTTPDataDownloader {
         guard let (data, response) = try await self.data(from: url, delegate: nil) as? (Data, HTTPURLResponse),
               validStatus.contains(response.statusCode)
         else {
-            throw LessonError.core(.networkUnavailable) // change to core
+            fatalError() // TODO: change to appError
         }
         return data
     }

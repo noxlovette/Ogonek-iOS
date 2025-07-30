@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: LESSONS
 let testLessonsData: Data = #"""
 {
     "data": [
@@ -42,6 +43,7 @@ let testLessonsData: Data = #"""
 
 """#.data(using: .utf8)!
 
+// MARK: TASKS
 let testTasksData: Data = #"""
 {
   "data": [
@@ -172,6 +174,7 @@ let testTasksData: Data = #"""
 }
 """#.data(using: .utf8)!
 
+// MARK: DECKS
 let testDeckData: Data = #"""
 [
     {
@@ -180,9 +183,8 @@ let testDeckData: Data = #"""
         "description": "Your New Deck",
         "visibility": "assigned",
         "isSubscribed": false,
-"count": 12,
-        "createdAt": "2025-06-23T17:19:13.101881Z"
-
+        "seen": true,
+        "assigneeName": "Alice"
     },
     {
         "id": "8Wlaz7zU9_z0pGo183xnm",
@@ -190,8 +192,8 @@ let testDeckData: Data = #"""
         "description": "New deck",
         "visibility": "assigned",
         "isSubscribed": false,
-"count": 12,
-        "createdAt": "2025-06-23T12:01:38.64811Z"
+        "seen": false,
+        "assigneeName": "Bob"
     },
     {
         "id": "Z50aPlw7Ld2iuklYoOb8H",
@@ -199,17 +201,15 @@ let testDeckData: Data = #"""
         "description": "Your New Deck",
         "visibility": "assigned",
         "isSubscribed": false,
-"count": 12,
-        "createdAt": "2025-06-23T11:49:37.210261Z"
+        "seen": null,
+        "assigneeName": null
     },
     {
         "id": "nqtS_Z8qaTVhlULchAlSl",
         "name": "New Deck",
         "description": "Your New Deck",
         "visibility": "private",
-        "isSubscribed": false,
-"count": 12,
-        "createdAt": "2025-05-30T15:08:08.378475Z"
+        "isSubscribed": false
     },
     {
         "id": "hz5yi0cmxa0DjoSi14hP9",
@@ -217,8 +217,8 @@ let testDeckData: Data = #"""
         "description": "Your New Deck",
         "visibility": "assigned",
         "isSubscribed": true,
-"count": 12,
-        "createdAt": "2025-05-29T07:59:03.119631Z"
+        "seen": true,
+        "assigneeName": "Charlie"
     }
 ]
 """#.data(using: .utf8)!

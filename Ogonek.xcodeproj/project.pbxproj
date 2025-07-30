@@ -3,11 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3FF9C9736A73404B91138ABF /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 8057D3D7E81148768B568F9D /* Sentry */; };
+		D5056BD72E3A048700398086 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5056BD52E3A048700398086 /* openapi.yaml */; };
+		D5056BD82E3A048700398086 /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5056BD62E3A048700398086 /* openapi-generator-config.yaml */; };
+		D5056C152E3A060900398086 /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = D5056C142E3A060900398086 /* OpenAPIRuntime */; };
+		D5056C182E3A062200398086 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = D5056C172E3A062200398086 /* OpenAPIURLSession */; };
 		D53CD02C2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D53CD02D2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D59C2FA02DC15848000610EE /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D59C2F9F2DC15848000610EE /* MarkdownUI */; };
@@ -31,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D5056BD52E3A048700398086 /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
+		D5056BD62E3A048700398086 /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		D53ACB562DB18B8F00CE4D45 /* Ogonek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ogonek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D53ACB652DB18B9000CE4D45 /* OgonekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OgonekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D53ACB6F2DB18B9000CE4D45 /* OgonekUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OgonekUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,28 +76,24 @@
 /* Begin PBXFrameworksBuildPhase section */
 		D53ACB532DB18B8F00CE4D45 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
+				D5056C182E3A062200398086 /* OpenAPIURLSession in Frameworks */,
 				D59C2FA02DC15848000610EE /* MarkdownUI in Frameworks */,
+				D5056C152E3A060900398086 /* OpenAPIRuntime in Frameworks */,
 				3FF9C9736A73404B91138ABF /* Sentry in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D53ACB622DB18B9000CE4D45 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				D53CD02C2E24E56000A56DAB /* (null) in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D53ACB6C2DB18B9000CE4D45 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				D53CD02D2E24E56000A56DAB /* (null) in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -104,6 +106,8 @@
 				D53ACB722DB18B9000CE4D45 /* OgonekUITests */,
 				D59C2F9E2DC15848000610EE /* Frameworks */,
 				D53ACB572DB18B8F00CE4D45 /* Products */,
+				D5056BD52E3A048700398086 /* openapi.yaml */,
+				D5056BD62E3A048700398086 /* openapi-generator-config.yaml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +143,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D5056C0E2E3A04FB00398086 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				D53ACB582DB18B8F00CE4D45 /* Ogonek */,
@@ -147,6 +152,8 @@
 			packageProductDependencies = (
 				D59C2F9F2DC15848000610EE /* MarkdownUI */,
 				8057D3D7E81148768B568F9D /* Sentry */,
+				D5056C142E3A060900398086 /* OpenAPIRuntime */,
+				D5056C172E3A062200398086 /* OpenAPIURLSession */,
 			);
 			productName = "Ogonek Swift";
 			productReference = D53ACB562DB18B8F00CE4D45 /* Ogonek.app */;
@@ -169,8 +176,6 @@
 				D53ACB682DB18B9000CE4D45 /* OgonekTests */,
 			);
 			name = OgonekTests;
-			packageProductDependencies = (
-			);
 			productName = "Ogonek SwiftTests";
 			productReference = D53ACB652DB18B9000CE4D45 /* OgonekTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -192,8 +197,6 @@
 				D53ACB722DB18B9000CE4D45 /* OgonekUITests */,
 			);
 			name = OgonekUITests;
-			packageProductDependencies = (
-			);
 			productName = "Ogonek SwiftUITests";
 			productReference = D53ACB6F2DB18B9000CE4D45 /* OgonekUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -233,8 +236,11 @@
 			packageReferences = (
 				D5A4B6482DC155A700520DD1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				3E08019C3C354FB0A4397C32 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+				D510ACD42E37C4E700BD3C54 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */,
+				D5056C132E3A060900398086 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */,
+				D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */,
 			);
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = D53ACB572DB18B8F00CE4D45 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -249,70 +255,71 @@
 /* Begin PBXResourcesBuildPhase section */
 		D53ACB542DB18B8F00CE4D45 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
+				D5056BD72E3A048700398086 /* openapi.yaml in Resources */,
+				D5056BD82E3A048700398086 /* openapi-generator-config.yaml in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D53ACB632DB18B9000CE4D45 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D53ACB6D2DB18B9000CE4D45 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		4A98125C60444DE2AEEF5C41 /* Upload Debug Symbols to Sentry */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputPaths = (
 				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 			);
 			name = "Upload Debug Symbols to Sentry";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script is responsible for uploading debug symbols and source context for Sentry.\nif which sentry-cli >/dev/null; then\nexport SENTRY_ORG=danila-volkov\nexport SENTRY_PROJECT=ogonek\nERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)\nif [ ! $? -eq 0 ]; then\necho \"warning: sentry-cli - $ERROR\"\nfi\nelse\necho \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"\nfi\n";
+			shellScript = (
+				"# This script is responsible for uploading debug symbols and source context for Sentry.",
+				"if which sentry-cli >/dev/null; then",
+				"export SENTRY_ORG=danila-volkov",
+				"export SENTRY_PROJECT=ogonek",
+				"ERROR=$(sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" 2>&1 >/dev/null)",
+				"if [ ! $? -eq 0 ]; then",
+				"echo \"warning: sentry-cli - $ERROR\"",
+				"fi",
+				"else",
+				"echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"",
+				"fi",
+				"",
+			);
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D53ACB522DB18B8F00CE4D45 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D53ACB612DB18B9000CE4D45 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D53ACB6B2DB18B9000CE4D45 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D5056C0E2E3A04FB00398086 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D5056C0D2E3A04FB00398086 /* OpenAPIGenerator */;
+		};
 		D53ACB672DB18B9000CE4D45 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D53ACB552DB18B8F00CE4D45 /* Ogonek */;
@@ -326,7 +333,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		D53ACB772DB18B9000CE4D45 /* Debug */ = {
+		D53ACB772DB18B9000CE4D45 /* Debug configuration for PBXProject "Ogonek" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -389,7 +396,7 @@
 			};
 			name = Debug;
 		};
-		D53ACB782DB18B9000CE4D45 /* Release */ = {
+		D53ACB782DB18B9000CE4D45 /* Release configuration for PBXProject "Ogonek" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -445,7 +452,7 @@
 			};
 			name = Release;
 		};
-		D53ACB7A2DB18B9000CE4D45 /* Debug */ = {
+		D53ACB7A2DB18B9000CE4D45 /* Debug configuration for PBXNativeTarget "Ogonek" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -457,11 +464,13 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -475,7 +484,7 @@
 			};
 			name = Debug;
 		};
-		D53ACB7B2DB18B9000CE4D45 /* Release */ = {
+		D53ACB7B2DB18B9000CE4D45 /* Release configuration for PBXNativeTarget "Ogonek" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -487,11 +496,13 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,7 +516,7 @@
 			};
 			name = Release;
 		};
-		D53ACB7D2DB18B9000CE4D45 /* Debug */ = {
+		D53ACB7D2DB18B9000CE4D45 /* Debug configuration for PBXNativeTarget "OgonekTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -523,7 +534,7 @@
 			};
 			name = Debug;
 		};
-		D53ACB7E2DB18B9000CE4D45 /* Release */ = {
+		D53ACB7E2DB18B9000CE4D45 /* Release configuration for PBXNativeTarget "OgonekTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -541,7 +552,7 @@
 			};
 			name = Release;
 		};
-		D53ACB802DB18B9000CE4D45 /* Debug */ = {
+		D53ACB802DB18B9000CE4D45 /* Debug configuration for PBXNativeTarget "OgonekUITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -557,7 +568,7 @@
 			};
 			name = Debug;
 		};
-		D53ACB812DB18B9000CE4D45 /* Release */ = {
+		D53ACB812DB18B9000CE4D45 /* Release configuration for PBXNativeTarget "OgonekUITests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -579,37 +590,33 @@
 		D53ACB512DB18B8F00CE4D45 /* Build configuration list for PBXProject "Ogonek" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D53ACB772DB18B9000CE4D45 /* Debug */,
-				D53ACB782DB18B9000CE4D45 /* Release */,
+				D53ACB772DB18B9000CE4D45 /* Debug configuration for PBXProject "Ogonek" */,
+				D53ACB782DB18B9000CE4D45 /* Release configuration for PBXProject "Ogonek" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		D53ACB792DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D53ACB7A2DB18B9000CE4D45 /* Debug */,
-				D53ACB7B2DB18B9000CE4D45 /* Release */,
+				D53ACB7A2DB18B9000CE4D45 /* Debug configuration for PBXNativeTarget "Ogonek" */,
+				D53ACB7B2DB18B9000CE4D45 /* Release configuration for PBXNativeTarget "Ogonek" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		D53ACB7C2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "OgonekTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D53ACB7D2DB18B9000CE4D45 /* Debug */,
-				D53ACB7E2DB18B9000CE4D45 /* Release */,
+				D53ACB7D2DB18B9000CE4D45 /* Debug configuration for PBXNativeTarget "OgonekTests" */,
+				D53ACB7E2DB18B9000CE4D45 /* Release configuration for PBXNativeTarget "OgonekTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		D53ACB7F2DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "OgonekUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D53ACB802DB18B9000CE4D45 /* Debug */,
-				D53ACB812DB18B9000CE4D45 /* Release */,
+				D53ACB802DB18B9000CE4D45 /* Debug configuration for PBXNativeTarget "OgonekUITests" */,
+				D53ACB812DB18B9000CE4D45 /* Release configuration for PBXNativeTarget "OgonekUITests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
@@ -621,6 +628,30 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.0.0;
+			};
+		};
+		D5056C132E3A060900398086 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-runtime";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
+		D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-urlsession";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+		D510ACD42E37C4E700BD3C54 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-generator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.10.1;
 			};
 		};
 		D5A4B6482DC155A700520DD1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
@@ -638,6 +669,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3E08019C3C354FB0A4397C32 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = Sentry;
+		};
+		D5056C0D2E3A04FB00398086 /* OpenAPIGenerator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D510ACD42E37C4E700BD3C54 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */;
+			productName = "plugin:OpenAPIGenerator";
+		};
+		D5056C142E3A060900398086 /* OpenAPIRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5056C132E3A060900398086 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */;
+			productName = OpenAPIRuntime;
+		};
+		D5056C172E3A062200398086 /* OpenAPIURLSession */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
+			productName = OpenAPIURLSession;
 		};
 		D59C2F9F2DC15848000610EE /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

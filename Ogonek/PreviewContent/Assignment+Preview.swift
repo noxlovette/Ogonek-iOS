@@ -1,5 +1,5 @@
 //
-//  Assignment+Preview.swift
+//  Task+Preview.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 28.06.2025.
@@ -7,65 +7,57 @@
 
 import Foundation
 
-extension Assignment {
-    static var preview: Assignment {
-        let task = Assignment(
-            id: "wzozO4mi3TfRit5aQbrGp",
-            title: "Task 1",
-            priority: 3,
+extension Task {
+    static var preview: Task {
+        let task = Task(
+            assignee: "wzozO4mi3TfRit5aQbrGp",
+            assigneeName: "Dmitry",
             completed: false,
-            dueDate: Date.distantFuture,
-            markdown: "# Just a test \n[link](https://google.com)",
-            createdAt: Date.distantPast,
-            updatedAt: Date.now
+            createdAt: Date.distantFuture,
+            createdBy: "user001",
+            dueDate:Date.now,
+            id: "task001",
+            markdown:
+            "# Just a test \n[link](https://google.com)",
+            priority: 2,
+            title: "Fix the date",
+            updatedAt: Date.distantPast,
         )
 
         return task
     }
 
-    static var previewSet: [Assignment] {
+    static var previewSet: [TaskSmall] {
         [
-            Assignment(
-                id: "task001",
-                title: "Read Swift Documentation",
-                priority: 2,
-                completed: false,
-                dueDate: Calendar.current.date(byAdding: .day, value: 2, to: Date())!,
-                markdown: "## Reading Plan\n- Variables\n- Optionals\n- Closures",
-                createdAt: Calendar.current.date(byAdding: .day, value: -1, to: Date())!,
-                updatedAt: Date.now
+            TaskSmall(
+                assigneeName: "Dmitry",
+                completed: false, dueDate: Calendar.current
+                    .date(byAdding: .day, value: 2, to: Date())!, id: "task001",
+                priority: 2, title: "Read Swift Documentation",
             ),
-            Assignment(
-                id: "task002",
-                title: "Fix Login Bug",
-                priority: 1,
+            TaskSmall(
+                assigneeName: "Alexandra",
                 completed: true,
                 dueDate: Calendar.current.date(byAdding: .day, value: -5, to: Date())!,
-                markdown: "**Resolved:** Issue with `AuthManager` initialization.",
-                createdAt: Calendar.current.date(byAdding: .day, value: -10, to: Date())!,
-                updatedAt: Calendar.current.date(byAdding: .day, value: -4, to: Date())!
+                id: "task002",
+                priority: 1,
+                title: "Fix Login Bug",
             ),
-            Assignment(
-                id: "task003",
-                title: "Prepare App Store Screenshots",
-                priority: 3,
-                completed: false,
+            TaskSmall(
+                assigneeName: "Alexandra",
+                completed: true,
                 dueDate: Calendar.current.date(byAdding: .day, value: 7, to: Date())!,
-                markdown: "- Use latest build\n- Include dark mode shots\n- Update captions",
-                createdAt: Calendar.current.date(byAdding: .day, value: -2, to: Date())!,
-                updatedAt: Date.now
-            ),
-            Assignment(
-                id: "task004",
-                title: "Refactor ViewModel Layer",
-                priority: 2,
-                completed: false,
+                id: "task003",
+                priority: 1,
+                title: "Fix Login Bug",
+            ),  TaskSmall(
+                assigneeName: "Alexandra",
+                completed: true,
                 dueDate: Calendar.current.date(byAdding: .day, value: 14, to: Date())!,
-                markdown: "### Goals\n- Reduce boilerplate\n- Improve testability",
-                createdAt: Date(),
-                updatedAt: Date()
+                id: "task004",
+                priority: 2,
+                title: "Hallo Bug",
             ),
-            Assignment.preview,
         ]
     }
 }
