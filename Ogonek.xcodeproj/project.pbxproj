@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		3FF9C9736A73404B91138ABF /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 8057D3D7E81148768B568F9D /* Sentry */; };
-		D5056BD72E3A048700398086 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5056BD52E3A048700398086 /* openapi.yaml */; };
 		D5056BD82E3A048700398086 /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5056BD62E3A048700398086 /* openapi-generator-config.yaml */; };
 		D5056C152E3A060900398086 /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = D5056C142E3A060900398086 /* OpenAPIRuntime */; };
 		D5056C182E3A062200398086 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = D5056C172E3A062200398086 /* OpenAPIURLSession */; };
 		D53CD02C2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D53CD02D2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		D5451D252E3A9D9600A810A2 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5451D242E3A9D9600A810A2 /* openapi.yaml */; };
 		D59C2FA02DC15848000610EE /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D59C2F9F2DC15848000610EE /* MarkdownUI */; };
 /* End PBXBuildFile section */
 
@@ -35,11 +35,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D5056BD52E3A048700398086 /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
 		D5056BD62E3A048700398086 /* openapi-generator-config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		D53ACB562DB18B8F00CE4D45 /* Ogonek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ogonek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D53ACB652DB18B9000CE4D45 /* OgonekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OgonekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D53ACB6F2DB18B9000CE4D45 /* OgonekUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OgonekUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5451D242E3A9D9600A810A2 /* openapi.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -69,6 +69,11 @@
 		D53ACB722DB18B9000CE4D45 /* OgonekUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = OgonekUITests;
+			sourceTree = "<group>";
+		};
+		D5451CF52E3A985400A810A2 /* GenerateOpenApi */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GenerateOpenApi;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -104,10 +109,11 @@
 				D53ACB582DB18B8F00CE4D45 /* Ogonek */,
 				D53ACB682DB18B9000CE4D45 /* OgonekTests */,
 				D53ACB722DB18B9000CE4D45 /* OgonekUITests */,
+				D5451CF52E3A985400A810A2 /* GenerateOpenApi */,
 				D59C2F9E2DC15848000610EE /* Frameworks */,
 				D53ACB572DB18B8F00CE4D45 /* Products */,
-				D5056BD52E3A048700398086 /* openapi.yaml */,
 				D5056BD62E3A048700398086 /* openapi-generator-config.yaml */,
+				D5451D242E3A9D9600A810A2 /* openapi.yaml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,6 +141,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D53ACB792DB18B9000CE4D45 /* Build configuration list for PBXNativeTarget "Ogonek" */;
 			buildPhases = (
+				D5451D1A2E3A9C0F00A810A2 /* Generate Types */,
 				D53ACB522DB18B8F00CE4D45 /* Sources */,
 				D53ACB532DB18B8F00CE4D45 /* Frameworks */,
 				D53ACB542DB18B8F00CE4D45 /* Resources */,
@@ -208,7 +215,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1630;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					D53ACB552DB18B8F00CE4D45 = {
@@ -256,8 +263,8 @@
 		D53ACB542DB18B8F00CE4D45 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
-				D5056BD72E3A048700398086 /* openapi.yaml in Resources */,
 				D5056BD82E3A048700398086 /* openapi-generator-config.yaml in Resources */,
+				D5451D252E3A9D9600A810A2 /* openapi.yaml in Resources */,
 			);
 		};
 		D53ACB632DB18B9000CE4D45 /* Resources */ = {
@@ -292,6 +299,34 @@
 				"else",
 				"echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"",
 				"fi",
+				"",
+				"",
+			);
+		};
+		D5451D1A2E3A9C0F00A810A2 /* Generate Types */ = {
+			isa = PBXShellScriptBuildPhase;
+			name = "Generate Types";
+			shellPath = /bin/zsh;
+			shellScript = (
+				"set -e",
+				"",
+				"echo \"🦀 Generating OpenAPI types from Rust backend...\"",
+				"",
+				"# Change to your Rust project directory",
+				"cd ~/Development/ogonek/axum",
+				"",
+				"# Run your Rust binary to generate the OpenAPI spec",
+				"cargo run --bin generate-types",
+				"",
+				"# Copy the generated spec to your Swift project",
+				"cp openapi.yaml ~/Development/ogonek-swift/openapi.yaml",
+				"",
+				"echo \"✅ OpenAPI spec updated successfully\"",
+				"",
+				"# Optional: Also run your Swift code generation here if you have a tool",
+				"# For example, if you're using OpenAPIGenerator:",
+				"# cd ~/Development/ogonek-swift",
+				"# openapi-generator generate -i openapi.yaml -g swift5 -o Generated/",
 				"",
 			);
 		};

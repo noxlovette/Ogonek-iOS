@@ -9,8 +9,10 @@ info:
     name: ''
   version: 1.6.0
 servers:
-- url: http://127.0.0.1:3000
-  description: Localhost
+- url: https://api.ogonek.app
+  description: Production server
+- url: http://localhost:3000
+  description: Local development server
 paths:
   /api/v1/auth/bind:
     post:
@@ -121,14 +123,18 @@ paths:
       tags:
       - Deck
       summary: Decks the user has access to
-      operationId: fetch_deck_list
+      operationId: list_decks
       responses:
         '200':
           description: User decks retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeckSmall'
         '401':
           description: Unauthorized
-        '404':
-          description: Deck not found
       security:
       - api_key: []
     post:
@@ -154,7 +160,7 @@ paths:
       tags:
       - Deck
       summary: Only public decks
-      operationId: fetch_deck_list_public
+      operationId: list_decks_public
       responses:
         '200':
           description: Public decks retrieved
@@ -166,8 +172,6 @@ paths:
                   $ref: '#/components/schemas/DeckPublic'
         '401':
           description: Unauthorized
-        '404':
-          description: Deck not found
       security:
       - api_key: []
   /api/v1/decks/{id}:
@@ -186,6 +190,10 @@ paths:
       responses:
         '200':
           description: Deck retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeckWithCardsAndSubscription'
         '401':
           description: Unauthorized
         '404':
@@ -1187,6 +1195,30 @@ components:
           type: string
         studentId:
           type: string
+    Card:
+      type: object
+      required:
+      - id
+      - front
+      - back
+      - deckId
+      - createdAt
+      properties:
+        back:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        deckId:
+          type: string
+        front:
+          type: string
+        id:
+          type: string
+        mediaUrl:
+          type:
+          - string
+          - 'null'
     CardProgressWithFields:
       type: object
       required:
@@ -1440,6 +1472,21 @@ components:
           type:
           - string
           - 'null'
+    DeckWithCardsAndSubscription:
+      type: object
+      required:
+      - deck
+      - cards
+      - isSubscribed
+      properties:
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Card'
+        deck:
+          $ref: '#/components/schemas/DeckFull'
+        isSubscribed:
+          type: boolean
     DeckWithCardsUpdate:
       type: object
       required:
