@@ -9,7 +9,7 @@ import Foundation
 import CoreDataStack
 import MastodonSDK
 
-public struct MastodonAuthentication: Codable, Hashable, UserIdentifier {
+public struct OgonekAuthentication: Codable, Hashable, UserIdentifier {
 
     public static let fallbackCharactersReservedPerURL = 23
 

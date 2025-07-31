@@ -8,12 +8,12 @@
 import Foundation
 
 public protocol AuthContextProvider {
-    var authenticationBox: MastodonAuthenticationBox { get }
+    var authenticationBox: OgonekAuthenticationBox { get }
 }
 
-public struct MastodonAuthenticationBox: UserIdentifier {
-    public let authentication: MastodonAuthentication
-    public var domain: String { authentication.domain }
+public struct OgonekAuthenticationBox: UserIdentifier {
+    public let authentication: OgonekAuthentication
+    public var role: String { authentication.role }
     public var userID: String { authentication.userID }
     public var appAuthorization: Mastodon.API.OAuth.Authorization {
         Mastodon.API.OAuth.Authorization(accessToken: authentication.appAccessToken)
@@ -22,7 +22,7 @@ public struct MastodonAuthenticationBox: UserIdentifier {
         Mastodon.API.OAuth.Authorization(accessToken: authentication.userAccessToken)
     }
 
-    public init(authentication: MastodonAuthentication) {
+    public init(authentication: OgonekAuthentication) {
         self.authentication = authentication
     }
 

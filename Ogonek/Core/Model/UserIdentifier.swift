@@ -8,31 +8,31 @@
 import Foundation
 
 public protocol UserIdentifier {
-    var domain: String { get }
-    var userID: Mastodon.Entity.Account.ID { get }
+    var role: String { get }
+    var userID: Ogonek.Entity.User.ID { get }
 }
 
 public extension UserIdentifier {
     var globallyUniqueUserIdentifier: String {
-        "\(userID)@\(domain)"
+        "\(userID)@\(role)"
     }
 }
 
-public struct MastodonUserIdentifier: UserIdentifier {
-    public let domain: String
+public struct OgonekUserIdentifier: UserIdentifier {
+    public let role: String
     public var userID: Mastodon.Entity.Account.ID
 
 
     public init(
-        domain: String,
+        role: String,
         userID: Mastodon.Entity.Account.ID
     ) {
-        self.domain = domain
+        self.role = role
         self.userID = userID
     }
 
-    public init(authenticationBox: MastodonAuthenticationBox) {
-        self.domain = authenticationBox.domain
+    public init(authenticationBox: OgonekAuthenticationBox) {
+        self.role = authenticationBox.role
         self.userID = authenticationBox.userID
     }
 }
