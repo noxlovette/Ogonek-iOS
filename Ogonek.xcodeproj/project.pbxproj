@@ -15,6 +15,7 @@
 		D53CD02D2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D5451D252E3A9D9600A810A2 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5451D242E3A9D9600A810A2 /* openapi.yaml */; };
 		D59C2FA02DC15848000610EE /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D59C2F9F2DC15848000610EE /* MarkdownUI */; };
+		D5E6128D2E3B85440050C3EC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = D5E6128C2E3B85440050C3EC /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,7 @@
 		D5A4B61E2DC0DE2300520DD1 /* Exceptions for "Ogonek" folder in "OgonekTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				PreviewContent/TestData.swift,
+				MockData/TestData.swift,
 			);
 			target = D53ACB642DB18B9000CE4D45 /* OgonekTests */;
 		};
@@ -71,11 +72,6 @@
 			path = OgonekUITests;
 			sourceTree = "<group>";
 		};
-		D5451CF52E3A985400A810A2 /* GenerateOpenApi */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = GenerateOpenApi;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +82,7 @@
 				D59C2FA02DC15848000610EE /* MarkdownUI in Frameworks */,
 				D5056C152E3A060900398086 /* OpenAPIRuntime in Frameworks */,
 				3FF9C9736A73404B91138ABF /* Sentry in Frameworks */,
+				D5E6128D2E3B85440050C3EC /* KeychainAccess in Frameworks */,
 			);
 		};
 		D53ACB622DB18B9000CE4D45 /* Frameworks */ = {
@@ -109,7 +106,6 @@
 				D53ACB582DB18B8F00CE4D45 /* Ogonek */,
 				D53ACB682DB18B9000CE4D45 /* OgonekTests */,
 				D53ACB722DB18B9000CE4D45 /* OgonekUITests */,
-				D5451CF52E3A985400A810A2 /* GenerateOpenApi */,
 				D59C2F9E2DC15848000610EE /* Frameworks */,
 				D53ACB572DB18B8F00CE4D45 /* Products */,
 				D5056BD62E3A048700398086 /* openapi-generator-config.yaml */,
@@ -160,6 +156,7 @@
 				8057D3D7E81148768B568F9D /* Sentry */,
 				D5056C142E3A060900398086 /* OpenAPIRuntime */,
 				D5056C172E3A062200398086 /* OpenAPIURLSession */,
+				D5E6128C2E3B85440050C3EC /* KeychainAccess */,
 			);
 			productName = "Ogonek Swift";
 			productReference = D53ACB562DB18B8F00CE4D45 /* Ogonek.app */;
@@ -245,6 +242,7 @@
 				D510ACD42E37C4E700BD3C54 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */,
 				D5056C132E3A060900398086 /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */,
 				D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */,
+				D5E6128B2E3B85440050C3EC /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = D53ACB572DB18B8F00CE4D45 /* Products */;
@@ -298,6 +296,9 @@
 				"else",
 				"echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"",
 				"fi",
+				"",
+				"",
+				"",
 				"",
 				"",
 				"",
@@ -670,6 +671,14 @@
 				minimumVersion = 2.4.1;
 			};
 		};
+		D5E6128B2E3B85440050C3EC /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -697,6 +706,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D5A4B6482DC155A700520DD1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
+		};
+		D5E6128C2E3B85440050C3EC /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5E6128B2E3B85440050C3EC /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

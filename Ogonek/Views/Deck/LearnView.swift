@@ -74,7 +74,7 @@ class LearnViewModel: ObservableObject {
         if currentIndex < cards.count - 1 {
             currentIndex += 1
             showAnswer = false
-        } else if currentIndex == cards.count - 1 && cards.count > 1 {
+        } else if currentIndex == cards.count - 1, cards.count > 1 {
             // Reload cards and reset
             await loadCards()
             currentIndex = 0

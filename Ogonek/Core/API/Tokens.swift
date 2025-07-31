@@ -13,7 +13,7 @@ class TokenStorage {
     private static let tokenExpiryKey = "auth_token_expiry"
     private static let refreshTokenExpiryKey = "refresh_token_expiry"
 
-        // Store TokenWithExpiry objects
+    // Store TokenWithExpiry objects
     static func store(token: Components.Schemas.TokenWithExpiry, refreshToken: Components.Schemas.TokenWithExpiry? = nil) {
         UserDefaults.standard.set(token.token, forKey: tokenKey)
         UserDefaults.standard.set(token.expiresAt, forKey: tokenExpiryKey)
@@ -24,7 +24,7 @@ class TokenStorage {
         }
     }
 
-        // Get the actual token string
+    // Get the actual token string
     static func getStoredToken() -> String? {
         return UserDefaults.standard.string(forKey: tokenKey)
     }
@@ -33,7 +33,7 @@ class TokenStorage {
         return UserDefaults.standard.string(forKey: refreshTokenKey)
     }
 
-        // Get expiry timestamps
+    // Get expiry timestamps
     static func getTokenExpiry() -> Int64? {
         let expiry = UserDefaults.standard.object(forKey: tokenExpiryKey) as? Int64
         return expiry == 0 ? nil : expiry
@@ -44,7 +44,7 @@ class TokenStorage {
         return expiry == 0 ? nil : expiry
     }
 
-        // Check if token is expired (with 5 minute buffer)
+    // Check if token is expired (with 5 minute buffer)
     static func isTokenExpired() -> Bool {
         guard let expiry = getTokenExpiry() else { return true }
         let currentTime = Int64(Date().timeIntervalSince1970)

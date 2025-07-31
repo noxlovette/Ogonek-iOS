@@ -15,10 +15,9 @@ struct LessonListView: View {
 
     @State private var viewState = ViewState()
 
-
     var body: some View {
         NavigationStack {
-                lessonsList(lessons: appState.lessons)
+            lessonsList(lessons: appState.lessons)
         }
         .navigationTitle(title)
         .environment(\.editMode, $viewState.editMode)
@@ -28,6 +27,7 @@ struct LessonListView: View {
     }
 
     // MARK: - Private Views
+
     private func lessonsList(lessons: [Lesson]) -> some View {
         List(selection: $viewState.selection) {
             ForEach(lessons) { lesson in
@@ -71,7 +71,6 @@ extension LessonListView {
         }
     }
 
-
     private func deleteLessons(offsets _: IndexSet) {
         withAnimation {
             // Implement deletion logic here if needed
@@ -93,6 +92,7 @@ extension LessonListView {
 }
 
 // MARK: - Preview
+
 #Preview {
     LessonListView()
 }

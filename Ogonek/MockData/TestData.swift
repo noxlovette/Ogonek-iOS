@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: LESSONS
+
 let testLessonsData: Data = #"""
 {
     "data": [
@@ -44,6 +45,7 @@ let testLessonsData: Data = #"""
 """#.data(using: .utf8)!
 
 // MARK: TASKS
+
 let testTasksData: Data = #"""
 {
   "data": [
@@ -175,6 +177,7 @@ let testTasksData: Data = #"""
 """#.data(using: .utf8)!
 
 // MARK: DECKS
+
 let testDeckData: Data = #"""
 [
     {
