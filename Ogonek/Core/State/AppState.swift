@@ -11,6 +11,7 @@ import Observation
 @Observable
 class AppState {
     // MARK: - Properties
+
     var lessons: [LessonSmall] = []
     var isLoading = false
     var errorMessage: String?

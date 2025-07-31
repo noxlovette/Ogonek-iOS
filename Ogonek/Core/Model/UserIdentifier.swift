@@ -22,7 +22,6 @@ public struct OgonekUserIdentifier: UserIdentifier {
     public let role: String
     public var userID: Mastodon.Entity.Account.ID
 
-
     public init(
         role: String,
         userID: Mastodon.Entity.Account.ID
@@ -32,7 +31,7 @@ public struct OgonekUserIdentifier: UserIdentifier {
     }
 
     public init(authenticationBox: OgonekAuthenticationBox) {
-        self.role = authenticationBox.role
-        self.userID = authenticationBox.userID
+        role = authenticationBox.role
+        userID = authenticationBox.userID
     }
 }

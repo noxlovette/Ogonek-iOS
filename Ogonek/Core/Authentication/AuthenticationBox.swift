@@ -18,6 +18,7 @@ public struct OgonekAuthenticationBox: UserIdentifier {
     public var appAuthorization: Mastodon.API.OAuth.Authorization {
         Mastodon.API.OAuth.Authorization(accessToken: authentication.appAccessToken)
     }
+
     public var userAuthorization: Mastodon.API.OAuth.Authorization {
         Mastodon.API.OAuth.Authorization(accessToken: authentication.userAccessToken)
     }

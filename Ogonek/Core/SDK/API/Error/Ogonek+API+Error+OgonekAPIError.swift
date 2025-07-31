@@ -1,7 +1,7 @@
 import Foundation
 
-extension Ogonek.API.Error {
-    public enum OgonekError: Swift.Error {
+public extension Ogonek.API.Error {
+    enum OgonekError: Swift.Error {
         case generic(error: Ogonek.Entity.Error)
 
         init(error: Ogonek.Entity.Error) {
@@ -11,19 +11,17 @@ extension Ogonek.API.Error {
 }
 
 extension Ogonek.API.Error.OgonekError: LocalizedError {
-
     public var errorDescription: String? {
         switch self {
-        case .generic(let error):
+        case let .generic(error):
             return error.error
         }
     }
-    
+
     public var failureReason: String? {
         switch self {
-        case .generic(let error):
+        case let .generic(error):
             return error.errorDescription
         }
     }
-    
 }

@@ -1,8 +1,7 @@
 import Foundation
 
-extension Ogonek.API {
-    public struct Error: Swift.Error {
-        
+public extension Ogonek.API {
+    struct Error: Swift.Error {
         public var httpResponseStatus: HTTPResponseStatus
         public var ogonekError: OgonekError?
 
@@ -13,7 +12,7 @@ extension Ogonek.API {
             self.httpResponseStatus = httpResponseStatus
             self.ogonekError = ogonekError
         }
-        
+
         init(
             httpResponseStatus: HTTPResponseStatus,
             error: Ogonek.Entity.Error
@@ -23,6 +22,5 @@ extension Ogonek.API {
                 ogonekError: OgonekError(error: error)
             )
         }
-        
     }
 }

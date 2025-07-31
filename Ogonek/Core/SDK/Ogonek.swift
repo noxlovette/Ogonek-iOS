@@ -8,19 +8,11 @@
 import Foundation
 
 public enum Ogonek {
-    public enum API {
+    public enum API {}
 
-    }
+    public enum Entity {}
 
-    public enum Entity {
+    public enum Request {}
 
-    }
-
-    public enum Request {
-
-    }
-
-    public enum Response {
-
-    }
+    public enum Response {}
 }

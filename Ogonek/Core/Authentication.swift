@@ -5,12 +5,11 @@
 //  Created by Danila Volkov on 31.07.2025.
 //
 
-import Foundation
 import CoreDataStack
+import Foundation
 import MastodonSDK
 
 public struct OgonekAuthentication: Codable, Hashable, UserIdentifier {
-
     public static let fallbackCharactersReservedPerURL = 23
 
     public enum InstanceConfiguration: Codable, Hashable {
@@ -19,50 +18,50 @@ public struct OgonekAuthentication: Codable, Hashable, UserIdentifier {
 
         public func canTranslateFrom(_ sourceLocale: String, to targetLanguage: String) -> Bool {
             switch self {
-                case .v1:
-                    return false
-                case let .v2(instance, translationLanguages):
-                    guard instance.configuration?.translation?.enabled == true else { return false }
-                    return translationLanguages[sourceLocale]?.contains(targetLanguage) == true
+            case .v1:
+                return false
+            case let .v2(instance, translationLanguages):
+                guard instance.configuration?.translation?.enabled == true else { return false }
+                return translationLanguages[sourceLocale]?.contains(targetLanguage) == true
             }
         }
 
         public var instanceConfigLimitingProperties: InstanceConfigLimitingPropertyContaining? {
             switch self {
-                case let .v1(instance):
-                    return instance.configuration
-                case let .v2(instance, _):
-                    return instance.configuration
+            case let .v1(instance):
+                return instance.configuration
+            case let .v2(instance, _):
+                return instance.configuration
             }
         }
 
         public var canFollowTags: Bool {
             let version: String?
             switch self {
-                case let .v1(instance):
-                    version = instance.version
-                case let .v2(instance, _):
-                    version = instance.version
+            case let .v1(instance):
+                version = instance.version
+            case let .v2(instance, _):
+                version = instance.version
             }
             return version?.majorServerVersion(greaterThanOrEquals: 4) ?? false // following Tags is support beginning with Mastodon v4.0.0
         }
 
         public var canGroupNotifications: Bool {
             switch self {
-                case let .v1(_):
-                    return false
-                case let .v2(instance, _):
-                    guard let apiVersion = instance.apiVersions?["mastodon"] else { return false }
-                    return apiVersion >= 2
+            case .v1:
+                return false
+            case let .v2(instance, _):
+                guard let apiVersion = instance.apiVersions?["mastodon"] else { return false }
+                return apiVersion >= 2
             }
         }
 
         public var charactersReservedPerURL: Int {
             switch self {
-                case let .v1(instance):
-                    return instance.configuration?.statuses?.charactersReservedPerURL ?? fallbackCharactersReservedPerURL
-                case let .v2(instance, _):
-                    return instance.configuration?.statuses?.charactersReservedPerURL ?? fallbackCharactersReservedPerURL
+            case let .v1(instance):
+                return instance.configuration?.statuses?.charactersReservedPerURL ?? fallbackCharactersReservedPerURL
+            case let .v2(instance, _):
+                return instance.configuration?.statuses?.charactersReservedPerURL ?? fallbackCharactersReservedPerURL
             }
         }
     }
@@ -181,13 +180,13 @@ public struct OgonekAuthentication: Codable, Hashable, UserIdentifier {
 
     @MainActor
     func updating(translationLanguages: TranslationLanguages) -> Self {
-        switch self.instanceConfiguration {
-            case .v1(let instance):
-                return copy(instanceConfiguration: .v1(instance))
-            case .v2(let instance, _):
-                return copy(instanceConfiguration: .v2(instance, translationLanguages))
-            case .none:
-                return self
+        switch instanceConfiguration {
+        case let .v1(instance):
+            return copy(instanceConfiguration: .v1(instance))
+        case let .v2(instance, _):
+            return copy(instanceConfiguration: .v2(instance, translationLanguages))
+        case .none:
+            return self
         }
     }
 

@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  Ogonek+Entity+User.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 31.07.2025.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-extension Ogonek.Entity.User {
-        public typealias ID = String
+public extension Ogonek.Entity.User {
+    typealias ID = String
 }
 
-extension Ogonek.Entity.User {
-    public final class Role: Codable, Sendable {
+public extension Ogonek.Entity.User {
+    final class Role: Codable, Sendable {
         public let id: String
         public let name: String
         public let color: String

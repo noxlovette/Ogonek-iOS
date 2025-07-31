@@ -8,23 +8,23 @@
 import Foundation
 
 extension OpenAPIClient {
-    func fetchDueCards(_: Operations.FetchDueCards.Input) async throws -> Operations.FetchDueCards.Output {
+    func fetchDueCards() async throws -> [Card] {
         notImplemented()
     }
 
-    func updateCardProgress(_: Operations.UpdateCardProgress.Input) async throws -> Operations.UpdateCardProgress.Output {
+    func updateCardProgress() async throws -> Operations.UpdateCardProgress.Output {
         notImplemented()
     }
 
-    func resetDeckProgress(_: Operations.ResetDeckProgress.Input) async throws -> Operations.ResetDeckProgress.Output {
+    func resetDeckProgress() async throws -> Operations.ResetDeckProgress.Output {
         notImplemented()
     }
 
-    func subscribeToDeck(_: Operations.SubscribeToDeck.Input) async throws -> Operations.SubscribeToDeck.Output {
+    func subscribeToDeck() async throws -> Operations.SubscribeToDeck.Output {
         notImplemented()
     }
 
-    func unsubscribeFromDeck(_: Operations.UnsubscribeFromDeck.Input) async throws -> Operations.UnsubscribeFromDeck.Output {
+    func unsubscribeFromDeck() async throws -> Operations.UnsubscribeFromDeck.Output {
         notImplemented()
     }
 }
