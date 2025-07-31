@@ -8,8 +8,34 @@
 import Foundation
 
 extension OpenAPIClient {
-    func signin(_ input: Operations.Signin.Input) async throws -> Operations.Signin.Output {
-        notImplemented()
+    func signIn(username: String, pass: String) async throws {
+        let input = Operations.Signin.Input(
+            body: .json(.init(pass: pass, username: username))
+        )
+
+        let response = try await self.client.signin(input)
+
+        switch response {
+            case .ok(let okResponse):
+                switch okResponse.body {
+                    case .json(let tokenPair):
+                        TokenStorage
+                            .store(
+                                token: tokenPair.accessToken,
+                                refreshToken: tokenPair
+                                    .refreshToken)
+                        self.setAuthToken(tokenPair.accessToken.token)
+                }
+            case .unauthorized:
+                throw APIError.unauthorized
+            case .undocumented(statusCode: let statusCode, _):
+                throw APIError.serverError(statusCode: statusCode)
+        }
+    }
+
+    func logout() {
+        TokenStorage.clearTokens()
+        self.clearAuth()
     }
 
     func signup(_ input: Operations.Signup.Input) async throws -> Operations.Signup.Output {

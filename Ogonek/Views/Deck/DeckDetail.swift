@@ -21,8 +21,7 @@ struct TagBadge: View {
 // MARK: - Main Deck Detail View
 
 struct DeckDetailView: View {
-    let deck: Deck
-    let cards: [Card]
+    let deck: DeckWithCards
     @State private var flippedCards: Set<String> = []
     @State private var isSubscribed: Bool = false
     @State private var showingShareSheet = false
@@ -46,7 +45,7 @@ struct DeckDetailView: View {
                 .padding(.horizontal)
             }
         }
-        .navigationTitle(deck.name)
+        .navigationTitle(deck.deck.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -66,7 +65,7 @@ struct DeckDetailView: View {
             }
         }
         .sheet(isPresented: $showingShareSheet) {
-            ShareSheet(items: ["Check out this deck: \(deck.name)"])
+            ShareSheet(items: ["Check out this deck: \(deck.deck.name)"])
         }
         .onAppear {
             // Load subscription status from API
@@ -79,7 +78,7 @@ struct DeckDetailView: View {
         VStack(spacing: 16) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(deck.name)
+                    Text(deck.deck.name)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
@@ -145,7 +144,7 @@ struct DeckDetailView: View {
 
     private var cardsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if cards.isEmpty {
+            if deck.cards.isEmpty {
                 // Empty state
                 VStack(spacing: 16) {
                     Image(systemName: "rectangle.stack.badge.plus")
@@ -165,7 +164,7 @@ struct DeckDetailView: View {
             } else {
                 // Cards grid
                 LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(cards) { card in
+                    ForEach(deck.cards) { card in
                         WordCard(
                             card: card,
                             flippedCards: $flippedCards,
@@ -209,8 +208,7 @@ struct DeckDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             DeckDetailView(
-                deck: Deck.preview,
-                cards: Card.previewSet
+                deck: DeckWithCards.preview,
             )
         }
     }

@@ -38,7 +38,11 @@ struct DeckCard: View {
     }
 
     var body: some View {
-        NavigationLink(destination: DeckDetailView(deck: Deck.preview, cards: Card.previewSet)) {
+        NavigationLink(
+            destination: DeckDetailView(
+                deck: DeckWithCards.preview
+            )
+        ) {
             GenericCardView(
                 backgroundColor: Color(.systemBackground),
                 cornerRadius: 12,

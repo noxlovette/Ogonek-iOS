@@ -18,23 +18,10 @@ struct LessonListView: View {
 
     var body: some View {
         NavigationStack {
-            if appState.isLoadingLessons {
-                ProgressView()
-            } else if let error = appState.lessonError {
-                ErrorView(error: error) {
-                    Task { await appState.loadLessons() }
-                }
-            } else {
-                lessonsList(lessons: appState.lessons) // Now this works
-            }
+                lessonsList(lessons: appState.lessons)
         }
         .navigationTitle(title)
         .environment(\.editMode, $viewState.editMode)
-        .alert(isPresented: $viewState.hasError, error: viewState.error) {
-            Button("Retry") {
-                Task { await appState.loadLessons() }
-            }
-        }
         .task {
             await appState.loadLessons()
         }

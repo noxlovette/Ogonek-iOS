@@ -402,7 +402,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedResponse_LessonFull'
+                $ref: '#/components/schemas/PaginatedResponse_LessonSmall'
         '401':
           description: Unauthorized
       security:
@@ -1691,60 +1691,6 @@ components:
           type: string
         uploadId:
           type: string
-    PaginatedResponse_LessonFull:
-      type: object
-      description: Generic response that stores paginated data
-      required:
-      - data
-      - total
-      - page
-      - per_page
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            description: Grown-up lesson
-            required:
-            - id
-            - title
-            - topic
-            - markdown
-            - assignee
-            - createdBy
-            - createdAt
-            - updatedAt
-            - assigneeName
-            properties:
-              assignee:
-                type: string
-              assigneeName:
-                type: string
-              createdAt:
-                type: string
-                format: date-time
-              createdBy:
-                type: string
-              id:
-                type: string
-              markdown:
-                type: string
-              title:
-                type: string
-              topic:
-                type: string
-              updatedAt:
-                type: string
-                format: date-time
-        page:
-          type: integer
-          format: int64
-        per_page:
-          type: integer
-          format: int64
-        total:
-          type: integer
-          format: int64
     PaginatedResponse_LessonSmall:
       type: object
       description: Generic response that stores paginated data

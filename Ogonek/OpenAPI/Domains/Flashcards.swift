@@ -1,6 +1,15 @@
 import Foundation
 
 extension OpenAPIClient {
+
+    func listDecks(_ input: Operations.ListDecks.Input) async throws -> Operations.ListDecks.Output {
+        notImplemented()
+    }
+
+   func createDeck(_ input: Operations.CreateDeck.Input) async throws -> Operations.CreateDeck.Output {
+        notImplemented()
+    }
+    
     func listDecks() async throws -> PaginatedDecks {
 
         let response = try await self.client.listDecks()

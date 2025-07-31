@@ -11,7 +11,7 @@ extension TaskSmall {
     static var preview: PaginatedTasks {
         PaginatedTasks(
             data: [
-                TaskSmall(
+                PaginatedTaskItem(
                     assigneeName: "Charlie Student",
                     completed: false,
                     dueDate: ISO8601DateFormatter().date(from: "2025-07-25T08:27:14.462723Z"),
@@ -20,7 +20,7 @@ extension TaskSmall {
                     seen: true,
                     title: "Complete Ownership Exercise"
                 ),
-                TaskSmall(
+                PaginatedTaskItem(
                     assigneeName: "Diana Learner",
                     completed: false,
                     dueDate: ISO8601DateFormatter().date(from: "2025-07-30T23:59:59Z"),
@@ -29,7 +29,7 @@ extension TaskSmall {
                     seen: true,
                     title: "Default Title"
                 ),
-                TaskSmall(
+                PaginatedTaskItem(
                     assigneeName: "Diana Learner",
                     completed: false,
                     dueDate: ISO8601DateFormatter().date(from: "2025-08-01T08:27:14.462723Z"),
@@ -38,7 +38,7 @@ extension TaskSmall {
                     seen: true,
                     title: "Build Async Web Scraper"
                 ),
-                TaskSmall(
+                PaginatedTaskItem(
                     assigneeName: "Alice Teacher",
                     completed: false,
                     dueDate: nil,
@@ -47,7 +47,7 @@ extension TaskSmall {
                     seen: true,
                     title: "Default Title"
                 ),
-                TaskSmall(
+                PaginatedTaskItem(
                     assigneeName: "Alice Teacher",
                     completed: false,
                     dueDate: nil,
@@ -56,7 +56,7 @@ extension TaskSmall {
                     seen: true,
                     title: "Default Title"
                 ),
-                TaskSmall(
+                PaginatedTaskItem(
                     assigneeName: "Alice Teacher",
                     completed: false,
                     dueDate: nil,
@@ -65,7 +65,7 @@ extension TaskSmall {
                     seen: true,
                     title: "Default Title"
                 ),
-                TaskSmall(
+                PaginatedTaskItem(
                     assigneeName: "Alice Teacher",
                     completed: false,
                     dueDate: nil,
@@ -74,7 +74,7 @@ extension TaskSmall {
                     seen: true,
                     title: "New TaskSmall"
                 ),
-                TaskSmall(
+                PaginatedTaskItem(
                     assigneeName: "Alice Teacher",
                     completed: false,
                     dueDate: nil,
