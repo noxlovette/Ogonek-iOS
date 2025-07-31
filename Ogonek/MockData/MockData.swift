@@ -16,10 +16,10 @@ enum MockData {
         createdAt: Date(timeIntervalSinceNow: -1000),
         createdBy: "Svatko 22.12.2024",
         id: "lesson1",
-        markdown: "# Performance\n## Strengths\n- urgently - good vocabulary\n- the purpose PDF - that was perfect\n- great vocabulary work with extreme adjectives\n- workplace - even though you said 'jobplaces', it's great that you attempt to mix words! this is very English\n## Weaknesses\n- please do not use language models or translators to do **all** your writing work. it's a good idea to translate or ask them to translate **some** fixed expressions, though\n\n---\n# Input\n## Pronunciation\n- urgently\n- read in the past\n## Grammar\n- I don't know where her pictures are\n- you cannot use continuous tenses with frequencies\n- -self - the object is the same as the subject \n## Vocabulary\n- something stops working\n- are you agree - doesn't exist. 'agree' is not an adjective! it's a verb!",
+        markdown: "# Performance\n## Strengths\n- urgently - good vocabulary\n- the purpose PDF - that was perfecis not an adjective! it's a verb!",
         title: "1234567890",
         topic: "Weak",
-        updatedAt: Date()
+        updatedAt: Date(),
     )
 
     static let paginatedLessons = PaginatedLessons(
@@ -30,7 +30,7 @@ enum MockData {
                 id: "etxAsCsyVpJF-_fpW5bDB",
                 seen: true,
                 title: "Default Title",
-                topic: "Default Topicfefefe"
+                topic: "Default Topicfefefe",
             ),
             LessonSmall(
                 assigneeName: "Alice Teacher",
@@ -38,7 +38,7 @@ enum MockData {
                 id: "b5wVIcYGFmgow6blH_T0j",
                 seen: true,
                 title: "Default Title",
-                topic: "Default Topic"
+                topic: "Default Topic",
             ),
             LessonSmall(
                 assigneeName: "Alice Teacher",
@@ -46,7 +46,7 @@ enum MockData {
                 id: "TOtmT_eHWsHYXnpDlaqUI",
                 seen: true,
                 title: "Changed",
-                topic: "Default Topic"
+                topic: "Default Topic",
             ),
             LessonSmall(
                 assigneeName: "Charlie Student",
@@ -54,12 +54,12 @@ enum MockData {
                 id: "vWSUUOKC4sxE8xKYjHngj",
                 seen: true,
                 title: "Rust Basics",
-                topic: "Ownership and Borrowing"
+                topic: "Ownership and Borrowing",
             ),
         ],
         page: 1,
         perPage: 50,
-        total: 4
+        total: 4,
     )
 
     // MARK: Deck Data
@@ -72,7 +72,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "distant memory",
                 id: "yPPHMaNa385TFg2nRVINz",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "a memory that stays with you for a long time",
@@ -80,7 +80,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "lasting memory",
                 id: "8E58QbmXUcIqQgSIBrThL",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "a memory that causes emotional pain or distress",
@@ -88,7 +88,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "painful memory",
                 id: "7wYXkSlqG7PTV61FwmGKh",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "the ability to remember images or information in great detail",
@@ -96,7 +96,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "photographic memory",
                 id: "YLCs4XgFs0dky5idGT6Cm",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "a memory that is unclear or not detailed",
@@ -104,7 +104,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "vague memory",
                 id: "FYtk1EFQU82YFNuvCpKJS",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "a memory that is very clear and detailed",
@@ -112,7 +112,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "vivid memory",
                 id: "R5_wf24AkmNmUN70aOq_q",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "to try to remember something from the past",
@@ -120,7 +120,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "cast your mind back to",
                 id: "T6UOaXiGCg1qOZnlncw3s",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "to suddenly think of something",
@@ -128,7 +128,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "come to mind",
                 id: "axZXs2_lnqWChbZsKaCCq",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "to help yourself or someone else remember something",
@@ -136,7 +136,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "refresh your memory",
                 id: "vYCO5_QoGh_N5Gl-CW6yT",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "to forget something unintentionally",
@@ -144,7 +144,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "slip your mind",
                 id: "Ousj8n7i2NPR4LgwRkuaA",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "to value and hold a memory dear",
@@ -152,7 +152,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "treasure the memory of",
                 id: "_smCQcx991eAkpvme4V5P",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "to cause someone to remember something suddenly",
@@ -160,7 +160,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "trigger a memory",
                 id: "gvhkT-ONf35maFfYrnL1F",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
             Card(
                 back: "to remember something in a not very clear or detailed way",
@@ -168,7 +168,7 @@ enum MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "vaguely remember",
                 id: "uRWN22HuPFCSYrKciu6Dg",
-                mediaUrl: nil
+                mediaUrl: nil,
             ),
         ],
         deck: Deck(
@@ -179,9 +179,9 @@ enum MockData {
             id: "0mNE0QOytmJAc0GsFJq6E",
             isSubscribed: true,
             name: "Advanced Rust Patterns",
-            visibility: "assigned"
+            visibility: "assigned",
         ),
-        isSubscribed: true
+        isSubscribed: true,
     )
 
     static let decks = {
@@ -193,7 +193,7 @@ enum MockData {
                 isSubscribed: false,
                 name: "Default Deck",
                 seen: true,
-                visibility: "private"
+                visibility: "private",
             ),
             DeckSmall(
                 assigneeName: "Diana Learner",
@@ -202,7 +202,7 @@ enum MockData {
                 isSubscribed: true,
                 name: "Advanced Rust Patterns",
                 seen: true,
-                visibility: "assigned"
+                visibility: "assigned",
             ),
             DeckSmall(
                 assigneeName: "Charlie Student",
@@ -211,12 +211,29 @@ enum MockData {
                 isSubscribed: false,
                 name: "Rust Vocabulary",
                 seen: true,
-                visibility: "private"
+                visibility: "private",
             ),
         ]
     }
 
     // MARK: Task Data
+    static let taskWithFiles = TaskWithFiles(
+        files: [],
+        task: TaskFull(
+            assignee: "dev_teacher1_sDkwvkSa",
+            assigneeName: "Alice Teacher",
+            completed: false,
+            createdAt: ISO8601DateFormatter().date(from: "2025-07-24T13:16:40.109426Z")!,
+            createdBy: "dev_teacher1_sDkwvkSa",
+            dueDate: nil,
+            id: "Bzgbqk11luSf32OB48pQA",
+            markdown: "# Default markdown",
+            priority: 3,
+            title: "Default Title",
+            updatedAt: ISO8601DateFormatter().date(from: "2025-07-24T13:17:00.773708Z")!
+        )
+    )
+
 
     static let tasks = PaginatedTasks(
         data: [
@@ -227,7 +244,7 @@ enum MockData {
                 id: "KdqQcCb9jDz-AxQPBMJBo",
                 priority: 1,
                 seen: true,
-                title: "Complete Ownership Exercise"
+                title: "Complete Ownership Exercise",
             ),
             TaskSmall(
                 assigneeName: "Diana Learner",
@@ -236,7 +253,7 @@ enum MockData {
                 id: "5NjIP6emp6-HTQLacYTgw",
                 priority: 2,
                 seen: true,
-                title: "Default Title"
+                title: "Default Title",
             ),
             TaskSmall(
                 assigneeName: "Diana Learner",
@@ -245,7 +262,7 @@ enum MockData {
                 id: "Z4sKrZiUDloYVbIcAiapb",
                 priority: 1,
                 seen: true,
-                title: "Build Async Web Scraper"
+                title: "Build Async Web Scraper",
             ),
             TaskSmall(
                 assigneeName: "Alice Teacher",
@@ -254,7 +271,7 @@ enum MockData {
                 id: "H5rYRaTVohG9u1AoBIo1y",
                 priority: 1,
                 seen: true,
-                title: "Default Title"
+                title: "Default Title",
             ),
             TaskSmall(
                 assigneeName: "Alice Teacher",
@@ -263,7 +280,7 @@ enum MockData {
                 id: "Bzgbqk11luSf32OB48pQA",
                 priority: 3,
                 seen: true,
-                title: "Default Title"
+                title: "Default Title",
             ),
             TaskSmall(
                 assigneeName: "Alice Teacher",
@@ -272,7 +289,7 @@ enum MockData {
                 id: "MwcjD6dZLJo0BpCDwqTrK",
                 priority: 1,
                 seen: true,
-                title: "Default Title"
+                title: "Default Title",
             ),
             TaskSmall(
                 assigneeName: "Alice Teacher",
@@ -281,7 +298,7 @@ enum MockData {
                 id: "70f7EBo2fPAk13a2PT4-I",
                 priority: 1,
                 seen: true,
-                title: "New TaskSmall"
+                title: "New TaskSmall",
             ),
             TaskSmall(
                 assigneeName: "Alice Teacher",
@@ -290,11 +307,11 @@ enum MockData {
                 id: "x9xi83u9FYhvSc40FtoIj",
                 priority: 1,
                 seen: false,
-                title: "Testing File Deletion"
+                title: "Testing File Deletion",
             ),
         ],
         page: 1,
         perPage: 20,
-        total: 9
+        total: 9,
     )
 }

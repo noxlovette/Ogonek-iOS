@@ -30,11 +30,11 @@ struct Ogonek: App {
         }
     }
 
-    private let state = AppState()
+    @StateObject var apiService = APIService()
 
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(state)
+            ContentView()
         }
     }
 }

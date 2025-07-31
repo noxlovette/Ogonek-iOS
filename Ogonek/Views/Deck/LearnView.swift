@@ -102,7 +102,7 @@ struct LearnView: View {
                 LinearGradient(
                     colors: [Color(.systemGray6), Color(.systemBackground)],
                     startPoint: .top,
-                    endPoint: .bottom
+                    endPoint: .bottom,
                 )
                 .ignoresSafeArea()
 
@@ -182,7 +182,7 @@ struct LearnView: View {
             cardContent(card: card)
                 .transition(.asymmetric(
                     insertion: .move(edge: .trailing).combined(with: .opacity),
-                    removal: .move(edge: .leading).combined(with: .opacity)
+                    removal: .move(edge: .leading).combined(with: .opacity),
                 ))
         }
         .padding(.horizontal, 20)

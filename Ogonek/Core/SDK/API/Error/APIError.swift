@@ -13,22 +13,25 @@ enum APIError: Error, LocalizedError {
     case networkError(Error)
     case decodingError(Error)
     case serverError(statusCode: Int)
+    case badRequest
     case unknownError
 
     var errorDescription: String? {
         switch self {
         case .unauthorized:
-            return "Authentication required"
+            "Authentication required"
         case let .networkError(error):
-            return "Network error: \(error.localizedDescription)"
+            "Network error: \(error.localizedDescription)"
         case let .decodingError(error):
-            return "Data parsing error: \(error.localizedDescription)"
+            "Data parsing error: \(error.localizedDescription)"
         case let .serverError(statusCode):
-            return "Server error (status: \(statusCode))"
+            "Server error (status: \(statusCode))"
+        case .badRequest:
+            "Bad request"
         case .unknownError:
-            return "An unknown error occurred"
+            "An unknown error occurred"
         case .notFound:
-            return "Resource not found"
+            "Resource not found"
         }
     }
 }

@@ -21,7 +21,7 @@ struct WordCard: View {
                     .fill(Color(.systemBackground))
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color(.systemGray5), lineWidth: 1)
+                            .stroke(Color(.systemGray5), lineWidth: 1),
                     )
                     .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 2)
 
@@ -54,7 +54,7 @@ struct WordCard: View {
                                 .fill(Color(.systemGray6))
                                 .frame(maxHeight: 120)
                                 .overlay(
-                                    ProgressView()
+                                    ProgressView(),
                                 )
                         }
                     }

@@ -12,7 +12,7 @@ public class OpenAPIClient {
         do {
             client = try Client(
                 serverURL: Servers.Server1.url(),
-                transport: URLSessionTransport()
+                transport: URLSessionTransport(),
             )
         } catch {
             fatalError("Failed to initialize OpenAPI client: \(error)")
@@ -26,7 +26,7 @@ public class OpenAPIClient {
             client = try Client(
                 serverURL: Servers.Server1.url(),
                 transport: URLSessionTransport(),
-                middlewares: [authMiddleware]
+                middlewares: [authMiddleware],
             )
             self.authMiddleware = authMiddleware
         } catch {
@@ -39,7 +39,7 @@ public class OpenAPIClient {
         do {
             client = try Client(
                 serverURL: Servers.Server1.url(),
-                transport: URLSessionTransport()
+                transport: URLSessionTransport(),
             )
             authMiddleware = nil
         } catch {
@@ -49,6 +49,6 @@ public class OpenAPIClient {
 
     /// Check if client is authenticated
     var isAuthenticated: Bool {
-        return authMiddleware != nil
+        authMiddleware != nil
     }
 }

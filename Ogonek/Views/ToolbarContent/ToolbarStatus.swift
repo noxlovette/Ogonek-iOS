@@ -33,24 +33,24 @@ struct ToolbarStatus: View {
     ToolbarStatus(
         isLoading: true,
         lastUpdated: Date.distantPast.timeIntervalSince1970,
-        lessonsCount: 125
+        lessonsCount: 125,
     )
 
     ToolbarStatus(
         isLoading: false,
         lastUpdated: Date.distantFuture.timeIntervalSince1970,
-        lessonsCount: 10000
+        lessonsCount: 10000,
     )
 
     ToolbarStatus(
         isLoading: false,
         lastUpdated: Date.now.timeIntervalSince1970,
-        lessonsCount: 10000
+        lessonsCount: 10000,
     )
 
     ToolbarStatus(
         isLoading: false,
         lastUpdated: Date.distantPast.timeIntervalSince1970,
-        lessonsCount: 10000
+        lessonsCount: 10000,
     )
 }

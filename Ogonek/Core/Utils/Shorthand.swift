@@ -10,3 +10,9 @@ import Foundation
 func notImplemented() -> Never {
     fatalError("Not Implemented")
 }
+
+extension String? {
+    var isNil: Bool {
+        self == nil
+    }
+}

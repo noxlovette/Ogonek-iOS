@@ -24,7 +24,7 @@ struct TagsView: View {
                         .padding(.vertical, 4)
                         .background(
                             Capsule()
-                                .fill(Color.cocoa100)
+                                .fill(Color.cocoa100),
                         )
                 }
 
@@ -36,7 +36,7 @@ struct TagsView: View {
                         .padding(.vertical, 4)
                         .background(
                             Capsule()
-                                .fill(Color.stone100)
+                                .fill(Color.stone100),
                         )
                 }
             }

@@ -51,17 +51,16 @@ extension AuthenticationMiddleware: ClientMiddleware {
         body: HTTPBody?,
         baseURL: URL,
         operationID _: String,
-        next: (HTTPRequest, HTTPBody?, URL) async throws -> (HTTPResponse, HTTPBody?)
+        next: (HTTPRequest, HTTPBody?, URL) async throws -> (HTTPResponse, HTTPBody?),
     ) async throws -> (HTTPResponse, HTTPBody?) {
         var mutableRequest = request
 
         // Get the authorization header value based on strategy
-        let authValue: String
-        switch strategy {
+        let authValue: String = switch strategy {
         case let .bearer(value):
-            authValue = value
+            value
         case let .provider(provider):
-            authValue = try await provider()
+            try await provider()
         }
 
         // Set the authorization header

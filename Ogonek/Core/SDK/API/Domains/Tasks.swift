@@ -9,7 +9,7 @@ extension OpenAPIClient {
                 search: search,
                 assignee: assignee,
                 completed: false,
-            )
+            ),
         )
 
         let response = try await client.listTasks(input)
@@ -54,15 +54,15 @@ extension OpenAPIClient {
 
     func deleteTask(id: String) async throws {
         let input = Operations.DeleteTask.Input.Path(
-            id: id
+            id: id,
         )
 
         _ = try await client.deleteTask(path: input)
     }
 
-    func fetchTask(id: String) async throws -> Task {
+    func fetchTask(id: String) async throws -> TaskWithFiles {
         let input = Operations.FetchTask.Input.Path(
-            id: id
+            id: id,
         )
 
         let response = try await client.fetchTask(path: input)

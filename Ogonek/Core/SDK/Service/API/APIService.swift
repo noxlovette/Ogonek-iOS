@@ -8,18 +8,13 @@
 import Combine
 import Foundation
 
-@MainActor
-public final class APIService {
+public final class APIService: ObservableObject {
     @MainActor
-    public static let shared = APIService()
-
     var disposeBag = Set<AnyCancellable>()
 
     let openAPIClient: OpenAPIClient
 
-    public let error = PassthroughSubject<APIError, Never>()
-
-    private init() {
+    init() {
         // Initialize OpenAPI client
         openAPIClient = OpenAPIClient()
 
@@ -30,15 +25,11 @@ public final class APIService {
         restoreAuthenticationIfAvailable()
     }
 
-    public static func isolatedService() -> APIService {
-        return APIService()
-    }
-
     // MARK: - OpenAPI Client Access
 
     /// Access to the OpenAPI client for making authenticated/unauthenticated requests
     public var client: OpenAPIClient {
-        return openAPIClient
+        openAPIClient
     }
 }
 

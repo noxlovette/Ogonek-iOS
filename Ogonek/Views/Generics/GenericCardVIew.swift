@@ -25,7 +25,7 @@ struct GenericCardView<Content: View>: View {
         borderColor: Color = Color(.systemGray4),
         borderWidth: CGFloat = 1,
         action _: @escaping () -> Void,
-        @ViewBuilder content: () -> Content
+        @ViewBuilder content: () -> Content,
     ) {
         self.backgroundColor = backgroundColor
         self.cornerRadius = cornerRadius
@@ -43,7 +43,7 @@ struct GenericCardView<Content: View>: View {
             .background(backgroundColor)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(borderColor, lineWidth: borderWidth)
+                    .stroke(borderColor, lineWidth: borderWidth),
             )
             .cornerRadius(cornerRadius)
             .shadow(color: Color.black.opacity(0.1), radius: shadowRadius, x: 0, y: 1)

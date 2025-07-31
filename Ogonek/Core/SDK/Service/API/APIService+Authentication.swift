@@ -20,13 +20,13 @@ public extension APIService {
 
     /// Check if the service is authenticated
     var isAuthenticated: Bool {
-        return openAPIClient.isAuthenticated
+        openAPIClient.isAuthenticated
     }
 
     /// Restore authentication from stored tokens on app launch
-    private func restoreAuthenticationIfAvailable() {
+    func restoreAuthenticationIfAvailable() {
         if let storedToken = TokenStorage.getAccessToken() {
-            setAuthToken(storedToken.token)
+            setAuthToken(storedToken)
         }
     }
 

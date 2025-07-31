@@ -51,7 +51,7 @@ extension OpenAPIClient {
 
     func deleteDeck(id: String) async throws {
         let input = Operations.DeleteDeck.Input.Path(
-            id: id
+            id: id,
         )
 
         _ = try await client.deleteDeck(path: input)
@@ -59,7 +59,7 @@ extension OpenAPIClient {
 
     func fetchDeck(id: String) async throws -> DeckWithCards {
         let input = Operations.FetchDeck.Input.Path(
-            id: id
+            id: id,
         )
 
         let response = try await client.fetchDeck(path: input)
@@ -69,8 +69,8 @@ extension OpenAPIClient {
             let body = okResponse.body
 
             switch body {
-            case let .json(Deck):
-                return Deck
+            case let .json(deck):
+                return deck
             }
         case .notFound:
             throw APIError.notFound

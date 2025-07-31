@@ -7,15 +7,15 @@
 
 import Foundation
 
-public extension APIService {
+extension APIService {
     /// Fetch flashcards
 
     func listDecks() async throws -> [DeckSmall] {
-        return try await openAPIClient.listDecks()
+        try await openAPIClient.listDecks()
     }
 
     /// Fetch a specific task by ID
-    func fetchDeck(id: String) async throws -> Task {
-        return try await openAPIClient.fetchDeck(id: id)
+    func fetchDeck(id: String) async throws -> DeckWithCards {
+        try await openAPIClient.fetchDeck(id: id)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension APIService {
+extension APIService {
     func subscribeToDeck() async throws {
         try await openAPIClient.subscribeToDeck()
     }
@@ -17,7 +17,7 @@ public extension APIService {
     }
 
     func fetchDueCards() async throws -> [Card] {
-        return try await openAPIClient.fetchDueCards()
+        try await openAPIClient.fetchDueCards()
     }
 
     func updateProgress() async throws {

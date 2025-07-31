@@ -145,7 +145,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D55BCD402E3B99A60021896D /* PBXTargetDependency */,
 				D5056C0E2E3A04FB00398086 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
@@ -341,10 +340,6 @@
 			isa = PBXTargetDependency;
 			target = D53ACB552DB18B8F00CE4D45 /* Ogonek */;
 			targetProxy = D53ACB702DB18B9000CE4D45 /* PBXContainerItemProxy */;
-		};
-		D55BCD402E3B99A60021896D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = D55BCD3F2E3B99A60021896D /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
@@ -716,11 +711,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
 			productName = OpenAPIURLSession;
-		};
-		D55BCD3F2E3B99A60021896D /* SwiftLintBuildToolPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D55BCD3E2E3B999E0021896D /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
-			productName = "plugin:SwiftLintBuildToolPlugin";
 		};
 		D59C2F9F2DC15848000610EE /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

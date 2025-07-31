@@ -12,19 +12,19 @@ extension OpenAPIClient {
         notImplemented()
     }
 
-    func updateCardProgress() async throws -> Operations.UpdateCardProgress.Output {
+    func updateCardProgress() async throws {
         notImplemented()
     }
 
-    func resetDeckProgress() async throws -> Operations.ResetDeckProgress.Output {
+    func resetDeckProgress() async throws {
         notImplemented()
     }
 
-    func subscribeToDeck() async throws -> Operations.SubscribeToDeck.Output {
+    func subscribeToDeck() async throws {
         notImplemented()
     }
 
-    func unsubscribeFromDeck() async throws -> Operations.UnsubscribeFromDeck.Output {
+    func unsubscribeFromDeck() async throws {
         notImplemented()
     }
 }

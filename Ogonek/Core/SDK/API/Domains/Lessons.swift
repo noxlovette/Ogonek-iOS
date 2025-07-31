@@ -7,8 +7,8 @@ extension OpenAPIClient {
                 page: page,
                 perPage: perPage,
                 search: search,
-                assignee: assignee
-            )
+                assignee: assignee,
+            ),
         )
 
         let response = try await client.listLessons(input)
@@ -53,7 +53,7 @@ extension OpenAPIClient {
 
     func deleteLesson(id: String) async throws {
         let input = Operations.DeleteLesson.Input.Path(
-            id: id
+            id: id,
         )
 
         _ = try await client.deleteLesson(path: input)
@@ -61,7 +61,7 @@ extension OpenAPIClient {
 
     func fetchLesson(id: String) async throws -> Lesson {
         let input = Operations.FetchLesson.Input.Path(
-            id: id
+            id: id,
         )
 
         let response = try await client.fetchLesson(path: input)

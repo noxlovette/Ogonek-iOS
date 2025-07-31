@@ -71,15 +71,15 @@ private struct TaskEmptyStateView: View {
 // MARK: - Main Tasks View
 
 struct TaskGridView: View {
-    @State private var tasks: [Assignment] = []
+    @State private var tasks: [TaskSmall] = []
     @State private var showCompleted: Bool = false
     @State private var isLoading: Bool = false
 
-    private var filteredTasks: [Assignment] {
+    private var filteredTasks: [TaskSmall] {
         if showCompleted {
-            return tasks
+            tasks
         } else {
-            return tasks.filter { !$0.completed }
+            tasks.filter { !$0.completed }
         }
     }
 
@@ -130,7 +130,7 @@ struct TaskGridView: View {
                         .font(.headline)
                         .foregroundColor(.secondary)
                     Spacer()
-                } else if filteredTasks.isEmpty && !showCompleted {
+                } else if filteredTasks.isEmpty, !showCompleted {
                     // Empty state for student role
                     TaskEmptyStateView {
                         requestMoreTasks()
@@ -159,8 +159,7 @@ struct TaskGridView: View {
                             GridItem(.flexible(), spacing: 16),
                         ], spacing: 16) {
                             ForEach(filteredTasks, id: \.id) { task in
-                                TaskCardView(task: task)
-                                    .transition(.opacity.combined(with: .scale))
+                                Text(task.title)
                             }
                         }
                         .padding(.horizontal)
@@ -184,8 +183,8 @@ struct TaskGridView: View {
 
         // Simulate API call delay
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.tasks = Assignment.previewSet
-            self.isLoading = false
+            tasks = MockData.tasks.data
+            isLoading = false
         }
     }
 

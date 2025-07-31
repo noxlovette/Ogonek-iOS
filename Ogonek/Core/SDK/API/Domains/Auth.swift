@@ -10,7 +10,7 @@ import Foundation
 extension OpenAPIClient {
     func signIn(username: String, pass: String) async throws {
         let input = Operations.Signin.Input(
-            body: .json(.init(pass: pass, username: username))
+            body: .json(.init(pass: pass, username: username)),
         )
 
         let response = try await client.signin(input)
@@ -21,9 +21,9 @@ extension OpenAPIClient {
             case let .json(tokenPair):
                 TokenStorage
                     .store(
-                        token: tokenPair.accessToken,
+                        token: tokenPair.accessToken.token,
                         refreshToken: tokenPair
-                            .refreshToken
+                            .refreshToken.token,
                     )
                 setAuthToken(tokenPair.accessToken.token)
             }

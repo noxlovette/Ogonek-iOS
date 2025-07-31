@@ -16,7 +16,7 @@ struct TaskFile: Codable, Identifiable {
 }
 
 struct TaskDetailResponse {
-    let task: Assignment
+    let task: TaskWithFiles
     let files: [TaskFile]
     let rendered: String
 }
@@ -24,8 +24,8 @@ struct TaskDetailResponse {
 // MARK: - Task Detail View
 
 struct TaskDetailView: View {
-    let task: Assignment
-    let files: [TaskFile]
+    let task: TaskFull
+    let files: [File]
 
     @State private var showingDeleteAlert = false
     @State private var showingFileUpload: Bool = false
@@ -48,7 +48,7 @@ struct TaskDetailView: View {
 
     // MARK: - Content Views
 
-    private func taskContentView(task: Assignment) -> some View {
+    private func taskContentView(task: TaskFull) -> some View {
         ScrollView {
             LazyVStack(spacing: 20) {
                 // Header Card
@@ -69,7 +69,7 @@ struct TaskDetailView: View {
         }
     }
 
-    private func taskHeaderCard(task: Assignment) -> some View {
+    private func taskHeaderCard(task: TaskFull) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(task.title)
@@ -100,7 +100,7 @@ struct TaskDetailView: View {
                     .padding(.vertical, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(task.completed ? Color.green : Color.blue)
+                            .fill(task.completed ? Color.green : Color.blue),
                     )
                 }
                 .buttonStyle(.plain)
@@ -112,14 +112,13 @@ struct TaskDetailView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(.systemBackground))
-                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 2)
+                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 2),
         )
         .padding(.horizontal)
     }
 
     private var filesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            if files.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Attached Files")
                         .font(.headline.weight(.semibold))
@@ -129,13 +128,7 @@ struct TaskDetailView: View {
                         FileTaskCard(file: file)
                     }
                 }
-            } else {
-                EmptyStateView(
-                    title: "No files attached",
-                    systemImage: "doc.text",
-                    description: "This task doesn't have any attached files"
-                )
-            }
+
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("Upload your HW here")
@@ -155,7 +148,7 @@ struct TaskDetailView: View {
                     .padding(.vertical, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.blue)
+                            .fill(Color.blue),
                     )
                 }
                 .buttonStyle(.plain)
@@ -165,7 +158,7 @@ struct TaskDetailView: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.secondarySystemGroupedBackground))
+                .fill(Color(.secondarySystemGroupedBackground)),
         )
     }
 
@@ -183,7 +176,7 @@ struct TaskDetailView: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.secondarySystemGroupedBackground))
+                .fill(Color(.secondarySystemGroupedBackground)),
         )
     }
 
@@ -214,15 +207,11 @@ struct TaskDetailView: View {
 // MARK: - Supporting Views
 
 struct FileTaskCard: View {
-    let file: TaskFile
+    let file: File
 
     var body: some View {
         HStack(spacing: 12) {
-            // File icon based on type
-            Image(systemName: fileIcon)
-                .font(.title2)
-                .foregroundColor(.blue)
-                .frame(width: 24, height: 24)
+
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(file.name)
@@ -235,37 +224,14 @@ struct FileTaskCard: View {
                     .foregroundColor(.secondary)
             }
 
-            Spacer()
 
-            Button(action: {
-                openFile()
-            }) {
-                Image(systemName: "arrow.down.circle")
-                    .font(.title2)
-                    .foregroundColor(.blue)
-            }
-            .buttonStyle(.plain)
+
         }
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color(.tertiarySystemGroupedBackground))
+                .fill(Color(.tertiarySystemGroupedBackground)),
         )
-    }
-
-    private var fileIcon: String {
-        switch file.mimeType.lowercased() {
-        case let type where type.contains("image"):
-            return "photo"
-        case let type where type.contains("pdf"):
-            return "doc.richtext"
-        case let type where type.contains("video"):
-            return "video"
-        case let type where type.contains("audio"):
-            return "music.note"
-        default:
-            return "doc.text"
-        }
     }
 
     private func formatFileSize(_ bytes: Int64) -> String {
@@ -275,52 +241,10 @@ struct FileTaskCard: View {
         return formatter.string(fromByteCount: bytes)
     }
 
-    private func openFile() {
-        guard let url = URL(string: file.url) else { return }
-        UIApplication.shared.open(url)
-    }
-}
-
-private struct EmptyStateView: View {
-    let title: String
-    let systemImage: String
-    let description: String?
-
-    init(title: String, systemImage: String, description: String? = nil) {
-        self.title = title
-        self.systemImage = systemImage
-        self.description = description
-    }
-
-    var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: systemImage)
-                .font(.system(size: 32))
-                .foregroundColor(.secondary)
-
-            Text(title)
-                .font(.headline)
-                .foregroundColor(.primary)
-
-            if let description = description {
-                Text(description)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-            }
-        }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(.separator), lineWidth: 1)
-                .fill(Color(.tertiarySystemGroupedBackground))
-        )
-    }
 }
 
 struct FileUploadView: View {
-    let task: Assignment
+    let task: TaskFull
 
     var body: some View {
         NavigationView {
@@ -335,6 +259,6 @@ struct FileUploadView: View {
 
 struct TaskDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskDetailView(task: Assignment.preview, files: TaskFile.previewSet)
+        TaskDetailView(task: MockData.taskWithFiles.task, files: MockData.taskWithFiles.files)
     }
 }

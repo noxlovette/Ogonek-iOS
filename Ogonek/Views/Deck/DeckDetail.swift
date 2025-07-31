@@ -12,7 +12,7 @@ struct TagBadge: View {
             .padding(.vertical, 4)
             .background(
                 RoundedRectangle(cornerRadius: 6)
-                    .fill(Color.brown.opacity(0.1))
+                    .fill(Color.brown.opacity(0.1)),
             )
             .foregroundColor(.brown)
     }
@@ -168,7 +168,7 @@ struct DeckDetailView: View {
                         WordCard(
                             card: card,
                             flippedCards: $flippedCards,
-                            onTap: toggleCard
+                            onTap: toggleCard,
                         )
                     }
                 }
@@ -208,7 +208,7 @@ struct DeckDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             DeckDetailView(
-                deck: DeckWithCards.preview,
+                deck: MockData.deck,
             )
         }
     }
