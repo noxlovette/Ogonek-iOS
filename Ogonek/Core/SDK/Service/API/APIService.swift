@@ -14,7 +14,11 @@ public final class APIService: ObservableObject {
 
     let openAPIClient: OpenAPIClient
 
-    init() {
+    static var shared: APIService {
+        APIService()
+    }
+
+    private init() {
         // Initialize OpenAPI client
         openAPIClient = OpenAPIClient()
 

@@ -52,7 +52,23 @@ extension OpenAPIClient {
         notImplemented()
     }
 
-    func fetchDashboard(_: Operations.FetchDashboard.Input) async throws -> Operations.FetchDashboard.Output {
-        notImplemented()
+    func fetchDashboard() async throws -> DashboardData {
+        let response = try await client.fetchDashboard()
+
+        switch response {
+            case let .ok(okResponse):
+                let body = okResponse.body
+
+                switch body {
+                    case let .json(data):
+                        return data
+                }
+
+            case .unauthorized:
+                throw APIError.unauthorized
+
+            case let .undocumented(statusCode: statuscode, _):
+                throw APIError.serverError(statusCode: statuscode)
+        }
     }
 }

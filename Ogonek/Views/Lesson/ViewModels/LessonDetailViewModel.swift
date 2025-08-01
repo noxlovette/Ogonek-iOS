@@ -13,7 +13,7 @@ class LessonDetailViewModel {
     @MainActor var isLoading = false
     @MainActor var errorMessage: String?
 
-    private let apiService = APIService()
+    private let apiService = APIService.shared
 
     /// Fetch a specific lesson by ID
     @MainActor

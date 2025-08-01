@@ -8,7 +8,7 @@
 import Foundation
 
 typealias Lesson = Components.Schemas.LessonFull
-typealias LessonSmall = Components.Schemas.PaginatedResponseLessonSmall.DataPayloadPayload
+typealias LessonSmall = Components.Schemas.LessonSmall
 
 extension Lesson: Identifiable {}
 extension LessonSmall: Identifiable {}

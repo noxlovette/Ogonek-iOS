@@ -17,7 +17,7 @@ class LessonListViewModel {
     @MainActor var hasMorePages = true
     @MainActor var searchText = ""
 
-    private let apiService = APIService()
+    private let apiService = APIService.shared
 
     /// Load lessons from the API
     @MainActor

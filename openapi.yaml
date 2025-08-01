@@ -326,12 +326,6 @@ paths:
       responses:
         '204':
           description: Card progress updated successfully
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CardProgressWithFields'
         '401':
           description: Unauthorized
       security:
@@ -402,7 +396,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedResponse_LessonSmall'
+                $ref: '#/components/schemas/PaginatedLessons'
         '401':
           description: Unauthorized
       security:
@@ -662,7 +656,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedResponse_TaskSmall'
+                $ref: '#/components/schemas/PaginatedTasks'
         '401':
           description: Unauthorized
       security:
@@ -1066,9 +1060,8 @@ components:
           type: string
         username:
           type: string
-    BadgeWrapper_DeckSmall:
+    BadgeWrapperDecks:
       type: object
-      description: Generic wrapper with the badge count in it
       required:
       - data
       - count
@@ -1079,37 +1072,9 @@ components:
         data:
           type: array
           items:
-            type: object
-            required:
-            - id
-            - name
-            - visibility
-            properties:
-              assigneeName:
-                type:
-                - string
-                - 'null'
-              description:
-                type:
-                - string
-                - 'null'
-              id:
-                type: string
-              isSubscribed:
-                type:
-                - boolean
-                - 'null'
-              name:
-                type: string
-              seen:
-                type:
-                - boolean
-                - 'null'
-              visibility:
-                type: string
-    BadgeWrapper_LessonSmall:
+            $ref: '#/components/schemas/DeckSmall'
+    BadgeWrapperLessons:
       type: object
-      description: Generic wrapper with the badge count in it
       required:
       - data
       - count
@@ -1120,33 +1085,9 @@ components:
         data:
           type: array
           items:
-            type: object
-            description: Mini-lesson
-            required:
-            - id
-            - title
-            - topic
-            - assigneeName
-            - createdAt
-            properties:
-              assigneeName:
-                type: string
-              createdAt:
-                type: string
-                format: date-time
-              id:
-                type: string
-              seen:
-                type:
-                - boolean
-                - 'null'
-              title:
-                type: string
-              topic:
-                type: string
-    BadgeWrapper_TaskSmall:
+            $ref: '#/components/schemas/LessonSmall'
+    BadgeWrapperTasks:
       type: object
-      description: Generic wrapper with the badge count in it
       required:
       - data
       - count
@@ -1157,34 +1098,7 @@ components:
         data:
           type: array
           items:
-            type: object
-            required:
-            - id
-            - title
-            - priority
-            - completed
-            - assigneeName
-            properties:
-              assigneeName:
-                type: string
-              completed:
-                type: boolean
-              dueDate:
-                type:
-                - string
-                - 'null'
-                format: date-time
-              id:
-                type: string
-              priority:
-                type: integer
-                format: int32
-              seen:
-                type:
-                - boolean
-                - 'null'
-              title:
-                type: string
+            $ref: '#/components/schemas/TaskSmall'
     BindPayload:
       type: object
       required:
@@ -1361,11 +1275,11 @@ components:
           items:
             $ref: '#/components/schemas/ActivityLog'
         decks:
-          $ref: '#/components/schemas/BadgeWrapper_DeckSmall'
+          $ref: '#/components/schemas/BadgeWrapperDecks'
         learn:
           $ref: '#/components/schemas/LearnDataDashboard'
         lessons:
-          $ref: '#/components/schemas/BadgeWrapper_LessonSmall'
+          $ref: '#/components/schemas/BadgeWrapperLessons'
         preferences:
           $ref: '#/components/schemas/UserPreferences'
         profile:
@@ -1375,7 +1289,7 @@ components:
           items:
             $ref: '#/components/schemas/Student'
         tasks:
-          $ref: '#/components/schemas/BadgeWrapper_TaskSmall'
+          $ref: '#/components/schemas/BadgeWrapperTasks'
         user:
           $ref: '#/components/schemas/User'
     DeckFull:
@@ -1691,9 +1605,8 @@ components:
           type: string
         uploadId:
           type: string
-    PaginatedResponse_LessonSmall:
+    PaginatedLessons:
       type: object
-      description: Generic response that stores paginated data
       required:
       - data
       - total
@@ -1703,30 +1616,7 @@ components:
         data:
           type: array
           items:
-            type: object
-            description: Mini-lesson
-            required:
-            - id
-            - title
-            - topic
-            - assigneeName
-            - createdAt
-            properties:
-              assigneeName:
-                type: string
-              createdAt:
-                type: string
-                format: date-time
-              id:
-                type: string
-              seen:
-                type:
-                - boolean
-                - 'null'
-              title:
-                type: string
-              topic:
-                type: string
+            $ref: '#/components/schemas/LessonSmall'
         page:
           type: integer
           format: int64
@@ -1736,9 +1626,8 @@ components:
         total:
           type: integer
           format: int64
-    PaginatedResponse_TaskSmall:
+    PaginatedTasks:
       type: object
-      description: Generic response that stores paginated data
       required:
       - data
       - total
@@ -1748,34 +1637,7 @@ components:
         data:
           type: array
           items:
-            type: object
-            required:
-            - id
-            - title
-            - priority
-            - completed
-            - assigneeName
-            properties:
-              assigneeName:
-                type: string
-              completed:
-                type: boolean
-              dueDate:
-                type:
-                - string
-                - 'null'
-                format: date-time
-              id:
-                type: string
-              priority:
-                type: integer
-                format: int32
-              seen:
-                type:
-                - boolean
-                - 'null'
-              title:
-                type: string
+            $ref: '#/components/schemas/TaskSmall'
         page:
           type: integer
           format: int64

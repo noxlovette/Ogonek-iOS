@@ -14,7 +14,6 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 20) {
-                    // Quick Actions Card
                     QuickActionsCard(dueCardsCount: viewModel.dueCardsCount)
 
                     // Due Tasks Section
@@ -29,11 +28,6 @@ struct HomeView: View {
                         isLoading: viewModel.isLoading,
                     )
 
-                    // Recent Activity Section
-                    RecentActivitySection(
-                        activities: viewModel.recentActivities,
-                        isLoading: viewModel.isLoading,
-                    )
                 }
                 .padding()
             }
@@ -205,35 +199,6 @@ struct RecentLessonsSection: View {
     }
 }
 
-// MARK: - Recent Activity Section
-
-struct RecentActivitySection: View {
-    let activities: [ActivityItem]
-    let isLoading: Bool
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Recent Activity")
-
-            if isLoading, activities.isEmpty {
-                SkeletonActivityRows()
-            } else if activities.isEmpty {
-                EmptyStateView(
-                    icon: "clock",
-                    title: "No recent activity",
-                    subtitle: "Start learning to see your progress",
-                )
-            } else {
-                LazyVStack(spacing: 8) {
-                    ForEach(activities.prefix(5), id: \.id) { activity in
-                        ActivityRowView(activity: activity)
-                    }
-                }
-            }
-        }
-    }
-}
-
 // MARK: - Supporting Views
 
 struct SectionHeader: View {
@@ -303,32 +268,6 @@ struct TaskRowView: View {
         .padding(.horizontal, 12)
         .background(Color.stoneLight)
         .cornerRadius(8)
-    }
-}
-
-struct ActivityRowView: View {
-    let activity: ActivityItem
-
-    var body: some View {
-        HStack {
-            Image(systemName: activity.icon)
-                .foregroundColor(.cocoaAccent)
-                .frame(width: 24, height: 24)
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text(activity.title)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .lineLimit(2)
-
-                Text(activity.timestamp, style: .relative)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-
-            Spacer()
-        }
-        .padding(.vertical, 8)
     }
 }
 
@@ -427,33 +366,6 @@ struct SkeletonRow: View {
             .cornerRadius(8)
             .redacted(reason: .placeholder)
     }
-}
-
-// MARK: - Data Models
-
-struct ActivityItem: Identifiable {
-    let id: String
-    let title: String
-    let type: ActivityType
-    let timestamp: Date
-
-    var icon: String {
-        switch type {
-        case .taskAdded: "plus.circle.fill"
-        case .taskCompleted: "checkmark.circle.fill"
-        case .lessonAdded: "book.fill"
-        case .deckAdded: "rectangle.stack.fill"
-        case .cardReviewed: "brain.head.profile"
-        }
-    }
-}
-
-enum ActivityType {
-    case taskAdded
-    case taskCompleted
-    case lessonAdded
-    case deckAdded
-    case cardReviewed
 }
 
 // MARK: - Color Extensions

@@ -30,7 +30,7 @@ struct Ogonek: App {
         }
     }
 
-    @StateObject var apiService = APIService()
+    @StateObject var apiService = APIService.shared
 
     var body: some Scene {
         WindowGroup {
