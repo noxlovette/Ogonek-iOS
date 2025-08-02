@@ -82,6 +82,9 @@ final class TokenManager: ObservableObject  {
 
         do {
             try await apiService.refresh(refreshToken: refreshToken)
+            print("👍 Refreshed access token")
+            let accessToken = TokenStorage.getAccessToken()!
+            print(accessToken)
             isAuthenticated = true
             return true
         } catch {
@@ -109,7 +112,12 @@ final class TokenManager: ObservableObject  {
         }
     }
 
-
+    func logout() {
+        apiService.logout()
+        TokenStorage.clearTokens()
+        isAuthenticated = false
+        currentUser = nil
+    }
 }
 
 enum TokenRefreshError: Error, LocalizedError {

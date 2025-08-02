@@ -26,6 +26,7 @@ public extension APIService {
     /// Restore authentication from stored tokens on app launch
     func restoreAuthenticationIfAvailable() {
         if let storedToken = TokenStorage.getAccessToken() {
+            print("restoring access token")
             setAuthToken(storedToken)
         }
     }

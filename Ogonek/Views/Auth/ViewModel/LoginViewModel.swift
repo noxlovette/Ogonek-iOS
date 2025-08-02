@@ -40,6 +40,8 @@ class LoginViewModel {
             try await apiService.signIn(username: trimmedUsername, password: password)
                 // Success - the APIService handles token storage and authentication state
                 // The app's authentication state should update automatically
+
+            TokenManager.shared.isAuthenticated = true
             print("Login successful")
         } catch {
                 // Handle different types of errors

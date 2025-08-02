@@ -1,50 +1,70 @@
-//
-//  ContentView.swift
-//  Ogonek
-//
-//  Created by Danila Volkov on 28.06.2025.
-//
+    //
+    //  ContentView.swift
+    //  Ogonek
+    //
+    //  Created by Danila Volkov on 28.06.2025.
+    //
 
 import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var apiService: APIService
+    @StateObject private var tokenManager = TokenManager.shared
     @State private var selectedTab = 0
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-                .tag(0)
-
-            LessonListView()
-                .tabItem {
-                    Label("Lessons", systemImage: "book.pages")
-                }
-                .tag(1)
-
-            TaskGridView()
-                .tabItem {
-                    Label("Tasks", systemImage: "checklist")
-                }
-                .tag(2)
-
-            DeckGridView()
-                .tabItem {
-                    Label("Learn", systemImage: "graduationcap")
-                }
-                .tag(3)
+        Group {
+            if tokenManager.isAuthenticated {
+                authenticatedView
+            } else {
+                LoginView()
+            }
         }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Menu {
-                    Button("Sign Out", role: .destructive) {
-                        apiService.logout()
+        .onAppear {
+                // Try to restore authentication on app launch
+            apiService.restoreAuthenticationIfAvailable()
+
+                // Update token manager state based on stored tokens
+            tokenManager.isAuthenticated = TokenStorage.hasValidTokens()
+        }
+    }
+
+    private var authenticatedView: some View {
+        NavigationView {
+            TabView(selection: $selectedTab) {
+                HomeView()
+                    .tabItem {
+                        Label("Home", systemImage: "house")
                     }
-                } label: {
-                    Image(systemName: "person.circle")
+                    .tag(0)
+
+                LessonListView()
+                    .tabItem {
+                        Label("Lessons", systemImage: "book.pages")
+                    }
+                    .tag(1)
+
+                TaskGridView()
+                    .tabItem {
+                        Label("Tasks", systemImage: "checklist")
+                    }
+                    .tag(2)
+
+                DeckGridView()
+                    .tabItem {
+                        Label("Learn", systemImage: "graduationcap")
+                    }
+                    .tag(3)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Button("Sign Out", role: .destructive) {
+                            tokenManager.logout()
+                        }
+                    } label: {
+                        Image(systemName: "person.circle")
+                    }
                 }
             }
         }
@@ -53,4 +73,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(APIService.shared)
 }
