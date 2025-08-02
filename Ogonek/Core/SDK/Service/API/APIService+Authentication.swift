@@ -41,4 +41,8 @@ public extension APIService {
     func logout() {
         openAPIClient.logout()
     }
+
+    func refresh(refreshToken: String) async throws {
+        try await openAPIClient.refresh(refreshToken: refreshToken)
+    }
 }

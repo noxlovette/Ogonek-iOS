@@ -7,6 +7,7 @@ public class OpenAPIClient {
     var client: Client
     private var authMiddleware: AuthenticationMiddleware?
     private var apiKeyMiddleware: APIKeyMiddleware
+    private var tokenRefreshMiddleware: TokenRefreshMiddleware?
 
     /// Initialize with no authentication (for login/signup)
     init() {
@@ -28,12 +29,19 @@ public class OpenAPIClient {
     func setAuthToken(_ token: String) {
         do {
             let authMiddleware = AuthenticationMiddleware(bearerToken: token)
+            let tokenRefreshMiddleware = TokenRefreshMiddleware()
             client = try Client(
                 serverURL: Servers.Server2.url(),
                 transport: URLSessionTransport(),
-                middlewares: [apiKeyMiddleware, authMiddleware],
+                middlewares: [
+                    apiKeyMiddleware,
+                    authMiddleware,
+                    tokenRefreshMiddleware
+                ],
             )
             self.authMiddleware = authMiddleware
+            self.tokenRefreshMiddleware = tokenRefreshMiddleware
+
         } catch {
             print("Failed to update client with auth token: \(error)")
         }

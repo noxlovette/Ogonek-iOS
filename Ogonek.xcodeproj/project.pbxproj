@@ -11,6 +11,7 @@
 		D5056BD82E3A048700398086 /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5056BD62E3A048700398086 /* openapi-generator-config.yaml */; };
 		D5056C152E3A060900398086 /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = D5056C142E3A060900398086 /* OpenAPIRuntime */; };
 		D5056C182E3A062200398086 /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = D5056C172E3A062200398086 /* OpenAPIURLSession */; };
+		D51499A12E3E743800E1B2E4 /* SwiftJWT in Frameworks */ = {isa = PBXBuildFile; productRef = D51499A02E3E743800E1B2E4 /* SwiftJWT */; };
 		D53CD02C2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D53CD02D2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D5451D252E3A9D9600A810A2 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5451D242E3A9D9600A810A2 /* openapi.yaml */; };
@@ -80,6 +81,7 @@
 			files = (
 				D5056C182E3A062200398086 /* OpenAPIURLSession in Frameworks */,
 				D59C2FA02DC15848000610EE /* MarkdownUI in Frameworks */,
+				D51499A12E3E743800E1B2E4 /* SwiftJWT in Frameworks */,
 				D5056C152E3A060900398086 /* OpenAPIRuntime in Frameworks */,
 				3FF9C9736A73404B91138ABF /* Sentry in Frameworks */,
 				D5E6128D2E3B85440050C3EC /* KeychainAccess in Frameworks */,
@@ -157,6 +159,7 @@
 				D5056C142E3A060900398086 /* OpenAPIRuntime */,
 				D5056C172E3A062200398086 /* OpenAPIURLSession */,
 				D5E6128C2E3B85440050C3EC /* KeychainAccess */,
+				D51499A02E3E743800E1B2E4 /* SwiftJWT */,
 			);
 			productName = "Ogonek Swift";
 			productReference = D53ACB562DB18B8F00CE4D45 /* Ogonek.app */;
@@ -244,6 +247,7 @@
 				D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */,
 				D5E6128B2E3B85440050C3EC /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				D55BCD3E2E3B999E0021896D /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+				D514999F2E3E743800E1B2E4 /* XCRemoteSwiftPackageReference "Swift-JWT" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = D53ACB572DB18B8F00CE4D45 /* Products */;
@@ -297,6 +301,7 @@
 				"else",
 				"echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"",
 				"fi",
+				"",
 				"",
 				"",
 				"",
@@ -667,6 +672,14 @@
 				minimumVersion = 1.10.1;
 			};
 		};
+		D514999F2E3E743800E1B2E4 /* XCRemoteSwiftPackageReference "Swift-JWT" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kitura/Swift-JWT";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.2;
+			};
+		};
 		D55BCD3E2E3B999E0021896D /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
@@ -713,6 +726,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
 			productName = OpenAPIURLSession;
+		};
+		D51499A02E3E743800E1B2E4 /* SwiftJWT */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D514999F2E3E743800E1B2E4 /* XCRemoteSwiftPackageReference "Swift-JWT" */;
+			productName = SwiftJWT;
 		};
 		D59C2F9F2DC15848000610EE /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

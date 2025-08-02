@@ -28,9 +28,11 @@ class HomeViewModel {
     func loadDashboardData() async {
         isLoading = true
         errorMessage = nil
+        print("loading dashboard data...")
 
         do {
             let dashboardData = try await apiService.fetchDashboard()
+            print(dashboardData)
             dueTasks = dashboardData.tasks.data
             recentLessons = dashboardData.lessons.data
             recentDecks = dashboardData.decks.data

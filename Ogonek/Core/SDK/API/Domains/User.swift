@@ -55,9 +55,14 @@ extension OpenAPIClient {
     func fetchDashboard() async throws -> DashboardData {
         let response = try await client.fetchDashboard()
 
+        print(response)
+
         switch response {
             case let .ok(okResponse):
+                print("ok response")
                 let body = okResponse.body
+
+                print(body)
 
                 switch body {
                     case let .json(data):
