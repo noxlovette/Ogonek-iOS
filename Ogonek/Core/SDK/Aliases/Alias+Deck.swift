@@ -13,3 +13,5 @@ typealias DeckSmall = Components.Schemas.DeckSmall
 // typealias DeckPublic = Components.Schemas.DeckPublic
 typealias Card = Components.Schemas.Card
 extension Card: Identifiable {}
+
+extension DeckSmall: Identifiable {}

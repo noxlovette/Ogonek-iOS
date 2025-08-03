@@ -21,7 +21,9 @@ struct TagBadge: View {
 // MARK: - Main Deck Detail View
 
 struct DeckDetailView: View {
-    let deck: DeckWithCards
+    let deckId: String
+
+    @State private var viewModel = DeckDetailViewModel()
     @State private var flippedCards: Set<String> = []
     @State private var isSubscribed: Bool = false
     @State private var showingShareSheet = false
@@ -32,26 +34,59 @@ struct DeckDetailView: View {
     ]
 
     var body: some View {
+        Group {
+            if let deck = viewModel.deck {
+                deckContent(deckWithCards: deck)
+            } else if viewModel.isLoading {
+                ProgressView()
+            } else if viewModel.errorMessage != nil {
+                Text("Error")
+            } else {
+                Text("Nothing here")
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await viewModel.fetchDeck(id: deckId)
+        }
+        .alert("Error", isPresented: .constant(!viewModel.errorMessage.isNil)) {
+            Button("Retry") {
+                Task {
+                    await viewModel.fetchDeck(id: deckId)
+                }
+            }
+            Button("Cancel", role: .cancel) {
+                viewModel.errorMessage = nil
+            }
+        } message: {
+            if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+            }
+        }
+
+    }
+
+    private func deckContent(deckWithCards: DeckWithCards) -> some View {
         ScrollView {
             LazyVStack(spacing: 24) {
-                // Header section
-                headerSection
+                    // Header section
+                headerSection(deck: deckWithCards.deck)
 
-                // Main content
+                    // Main content
                 HStack(alignment: .top, spacing: 24) {
-                    // Cards grid
-                    cardsSection
+                        // Cards grid
+                    cardsSection(cards: deckWithCards.cards)
                 }
                 .padding(.horizontal)
             }
         }
-        .navigationTitle(deck.deck.name)
+        .navigationTitle(deckWithCards.deck.name)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 if UIDevice.current.userInterfaceIdiom != .pad {
                     Button {
-                        // Navigate to edit
+                            // Navigate to edit
                     } label: {
                         Image(systemName: "pencil")
                     }
@@ -65,20 +100,15 @@ struct DeckDetailView: View {
             }
         }
         .sheet(isPresented: $showingShareSheet) {
-            ShareSheet(items: ["Check out this deck: \(deck.deck.name)"])
-        }
-        .onAppear {
-            // Load subscription status from API
+            ShareSheet(items: ["Check out this deck: \(deckWithCards.deck.name)"])
         }
     }
 
-    // MARK: - Header Section
-
-    private var headerSection: some View {
+    private func headerSection(deck: Deck) -> some View {
         VStack(spacing: 16) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(deck.deck.name)
+                    Text(deck.name)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.primary)
@@ -140,11 +170,10 @@ struct DeckDetailView: View {
         }
     }
 
-    // MARK: - Cards Section
 
-    private var cardsSection: some View {
+    private func cardsSection(cards: [Card]) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            if deck.cards.isEmpty {
+            if cards.isEmpty {
                 // Empty state
                 VStack(spacing: 16) {
                     Image(systemName: "rectangle.stack.badge.plus")
@@ -164,7 +193,7 @@ struct DeckDetailView: View {
             } else {
                 // Cards grid
                 LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(deck.cards) { card in
+                    ForEach(cards) { card in
                         WordCard(
                             card: card,
                             flippedCards: $flippedCards,
@@ -207,9 +236,7 @@ struct ShareSheet: UIViewControllerRepresentable {
 struct DeckDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DeckDetailView(
-                deck: MockData.deck,
-            )
+            DeckDetailView(deckId: "mock")
         }
     }
 }

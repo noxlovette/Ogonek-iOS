@@ -241,7 +241,7 @@ enum MockData {
             assignee: "dev_teacher1_sDkwvkSa",
             assigneeName: "Alice Teacher",
             completed: false,
-            createdAt: ISO8601DateFormatter().date(from: "2025-07-24T13:16:40.109426Z")!,
+            createdAt: Date(timeIntervalSinceNow: -1000),
             createdBy: "dev_teacher1_sDkwvkSa",
             dueDate: nil,
             id: "Bzgbqk11luSf32OB48pQA",
@@ -267,7 +267,7 @@ enum MockData {
                     """,
             priority: 3,
             title: "Default Title",
-            updatedAt: ISO8601DateFormatter().date(from: "2025-07-24T13:17:00.773708Z")!,
+            updatedAt:  Date(timeIntervalSinceNow: -1000),
         ),
     )
 

@@ -23,21 +23,28 @@ class DashboardViewModel {
 
     /// Load all dashboard data
     @MainActor
-    func loadDashboardData() async {
+    func loadDashboardData(mock: Bool = true) async {
         isLoading = true
         errorMessage = nil
-        print("loading dashboard data...")
 
         do {
-            let dashboardData = try await apiService.fetchDashboard()
-            dueTasks = dashboardData.tasks.data
-            recentLessons = dashboardData.lessons.data
-            recentDecks = dashboardData.decks.data
-            if let dueCards = dashboardData.learn.dueCards {
-                dueCardsCount = dueCards
-            }
+            if mock {
+                dueTasks = MockData.tasks.data
+                recentLessons = MockData.paginatedLessons.data
+                recentDecks = []
+                dueCardsCount = 0
+                recentActivities = []
+            } else {
+                let dashboardData = try await apiService.fetchDashboard()
+                dueTasks = dashboardData.tasks.data
+                recentLessons = dashboardData.lessons.data
+                recentDecks = dashboardData.decks.data
+                if let dueCards = dashboardData.learn.dueCards {
+                    dueCardsCount = dueCards
+                }
 
             recentActivities = dashboardData.activity
+        }
         } catch {
             errorMessage = error.localizedDescription
             logger.error("Error loading dashboard data: \(error)")

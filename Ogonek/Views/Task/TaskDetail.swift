@@ -268,6 +268,6 @@ struct FileUploadView: View {
 
 #Preview{
     NavigationStack {
-        TaskDetailView(taskId: "etxAsCsyVpJF-_fpW5bDB" )
+        TaskDetailView(taskId: "mock" )
     }
 }
