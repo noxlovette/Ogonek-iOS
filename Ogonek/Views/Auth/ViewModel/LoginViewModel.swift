@@ -1,32 +1,32 @@
-    //
-    //  LoginViewModel.swift
-    //  Ogonek
-    //
-    //  Created by Danila Volkov on 01.08.2025.
-    //
+//
+//  LoginViewModel.swift
+//  Ogonek
+//
+//  Created by Danila Volkov on 01.08.2025.
+//
 
 import Foundation
 
 @Observable
 class LoginViewModel {
-        // Form fields
+    // Form fields
     @MainActor var username: String = "dev_teacher1"
     @MainActor var password: String = "!7!N6x$#62j0fE3zdGnS"
 
-        // Loading states
+    // Loading states
     @MainActor var isLoading = false
     @MainActor var errorMessage: String?
 
-        // Computed properties
+    // Computed properties
     @MainActor var canSignIn: Bool {
         !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        !password.isEmpty &&
-        !isLoading
+            !password.isEmpty &&
+            !isLoading
     }
 
     private let apiService = APIService.shared
 
-        /// Sign in the user with username and password
+    /// Sign in the user with username and password
     @MainActor
     func signIn() async {
         guard canSignIn else { return }
@@ -38,20 +38,20 @@ class LoginViewModel {
 
         do {
             try await apiService.signIn(username: trimmedUsername, password: password)
-                // Success - the APIService handles token storage and authentication state
-                // The app's authentication state should update automatically
+            // Success - the APIService handles token storage and authentication state
+            // The app's authentication state should update automatically
 
             TokenManager.shared.isAuthenticated = true
             print("Login successful")
         } catch {
-                // Handle different types of errors
+            // Handle different types of errors
             switch error {
-                case APIError.unauthorized:
-                    errorMessage = "Invalid username or password"
-                case APIError.serverError(let statusCode):
-                    errorMessage = "Server error (\(statusCode)). Please try again."
-                default:
-                    errorMessage = "Login failed. Please check your connection and try again."
+            case APIError.unauthorized:
+                errorMessage = "Invalid username or password"
+            case let APIError.serverError(statusCode):
+                errorMessage = "Server error (\(statusCode)). Please try again."
+            default:
+                errorMessage = "Login failed. Please check your connection and try again."
             }
             print("Login error: \(error)")
         }
@@ -59,7 +59,7 @@ class LoginViewModel {
         isLoading = false
     }
 
-        /// Clear form fields
+    /// Clear form fields
     @MainActor
     func clearForm() {
         username = ""
@@ -67,7 +67,7 @@ class LoginViewModel {
         errorMessage = nil
     }
 
-        /// Reset error state
+    /// Reset error state
     @MainActor
     func clearError() {
         errorMessage = nil

@@ -12,13 +12,13 @@ public class OpenAPIClient {
     /// Initialize with no authentication (for login/signup)
     init() {
         let apiKey = ProcessInfo.processInfo.environment["API_KEY"]
-        self.apiKeyMiddleware = APIKeyMiddleware(apiKey: apiKey!)
+        apiKeyMiddleware = APIKeyMiddleware(apiKey: apiKey!)
 
         do {
             client = try Client(
                 serverURL: Servers.Server2.url(),
                 transport: URLSessionTransport(),
-                middlewares: [apiKeyMiddleware]
+                middlewares: [apiKeyMiddleware],
             )
         } catch {
             fatalError("Failed to initialize OpenAPI client: \(error)")
@@ -26,9 +26,14 @@ public class OpenAPIClient {
     }
 
     /// Add authentication after successful login
-    func setAuthToken(_ token: String) {
+    func setAuthToken(_: String) {
         do {
-            let authMiddleware = AuthenticationMiddleware(bearerToken: token)
+            let authMiddleware = AuthenticationMiddleware(tokenProvider: {
+                guard let token = TokenStorage.getAccessToken() else {
+                    throw TokenRefreshError.noRefreshToken
+                }
+                return token
+            })
             let tokenRefreshMiddleware = TokenRefreshMiddleware()
             client = try Client(
                 serverURL: Servers.Server2.url(),
@@ -36,7 +41,7 @@ public class OpenAPIClient {
                 middlewares: [
                     apiKeyMiddleware,
                     authMiddleware,
-                    tokenRefreshMiddleware
+                    tokenRefreshMiddleware,
                 ],
             )
             self.authMiddleware = authMiddleware
@@ -64,5 +69,4 @@ public class OpenAPIClient {
     var isAuthenticated: Bool {
         authMiddleware != nil
     }
-
 }

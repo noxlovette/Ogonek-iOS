@@ -55,5 +55,4 @@ class HomeViewModel {
         await loadDashboardData()
         isRefreshing = false
     }
-
 }

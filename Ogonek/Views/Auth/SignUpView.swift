@@ -1,9 +1,9 @@
-    //
-    //  SignUpView.swift
-    //  Ogonek
-    //
-    //  Created by Danila Volkov on 01.08.2025.
-    //
+//
+//  SignUpView.swift
+//  Ogonek
+//
+//  Created by Danila Volkov on 01.08.2025.
+//
 
 import SwiftUI
 

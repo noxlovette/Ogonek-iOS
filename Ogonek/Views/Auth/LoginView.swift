@@ -1,9 +1,9 @@
-    //
-    //  LoginView.swift
-    //  Ogonek
-    //
-    //  Created by Danila Volkov on 01.08.2025.
-    //
+//
+//  LoginView.swift
+//  Ogonek
+//
+//  Created by Danila Volkov on 01.08.2025.
+//
 
 import SwiftUI
 
@@ -18,16 +18,16 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 24) {
-                    // Header
+                // Header
                 headerSection
 
-                    // Login Form
+                // Login Form
                 loginForm
 
-                    // Login Button
+                // Login Button
                 loginButton
 
-                    // Sign Up Navigation
+                // Sign Up Navigation
                 signUpSection
 
                 Spacer()
@@ -57,7 +57,7 @@ struct LoginView: View {
         }
     }
 
-        // MARK: - Header Section
+    // MARK: - Header Section
 
     private var headerSection: some View {
         VStack(spacing: 16) {
@@ -79,11 +79,11 @@ struct LoginView: View {
         }
     }
 
-        // MARK: - Login Form
+    // MARK: - Login Form
 
     private var loginForm: some View {
         VStack(spacing: 16) {
-                // Username Field
+            // Username Field
             VStack(alignment: .leading, spacing: 8) {
                 Text("Username")
                     .font(.subheadline)
@@ -101,7 +101,7 @@ struct LoginView: View {
                     }
             }
 
-                // Password Field
+            // Password Field
             VStack(alignment: .leading, spacing: 8) {
                 Text("Password")
                     .font(.subheadline)
@@ -122,7 +122,7 @@ struct LoginView: View {
         .padding(.top, 20)
     }
 
-        // MARK: - Login Button
+    // MARK: - Login Button
 
     private var loginButton: some View {
         Button {
@@ -149,7 +149,7 @@ struct LoginView: View {
             .frame(maxWidth: .infinity)
             .frame(height: 50)
             .background(
-                viewModel.canSignIn ? Color.cocoaAccent : Color.gray.opacity(0.5)
+                viewModel.canSignIn ? Color.cocoaAccent : Color.gray.opacity(0.5),
             )
             .cornerRadius(12)
         }
@@ -157,7 +157,7 @@ struct LoginView: View {
         .animation(.easeInOut(duration: 0.2), value: viewModel.canSignIn)
     }
 
-        // MARK: - Sign Up Section
+    // MARK: - Sign Up Section
 
     private var signUpSection: some View {
         HStack {
@@ -166,7 +166,7 @@ struct LoginView: View {
                 .foregroundColor(.secondary)
 
             NavigationLink {
-                    // Navigate to sign up view
+                // Navigate to sign up view
                 SignUpView()
             } label: {
                 Text("Sign Up")
@@ -179,7 +179,7 @@ struct LoginView: View {
     }
 }
 
-    // MARK: - Custom Text Field Style
+// MARK: - Custom Text Field Style
 
 struct CustomTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
@@ -190,12 +190,12 @@ struct CustomTextFieldStyle: TextFieldStyle {
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 1),
             )
     }
 }
 
-    // MARK: - Preview
+// MARK: - Preview
 
 #Preview {
     LoginView()

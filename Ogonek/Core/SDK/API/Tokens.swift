@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /// Handles only token storage
 class TokenStorage {
     private static let accessTokenKey = "access_token"
@@ -18,8 +17,7 @@ class TokenStorage {
         UserDefaults.standard.set(refreshToken, forKey: refreshTokenKey)
     }
 
-    static func refresh(token: String)
-    {
+    static func refresh(token: String) {
         UserDefaults.standard.set(token, forKey: accessTokenKey)
     }
 
@@ -41,12 +39,12 @@ class TokenStorage {
     }
 }
 
-    /// Token manager that integrates with OpenAPI Service
+/// Token manager that integrates with OpenAPI Service
 @MainActor
-final class TokenManager: ObservableObject  {
+final class TokenManager: ObservableObject {
     static let shared = TokenManager()
 
-    init(){
+    init() {
         isAuthenticated = TokenStorage.hasValidTokens()
         apiService = .shared
     }
@@ -58,14 +56,14 @@ final class TokenManager: ObservableObject  {
     private let refreshQueue = DispatchQueue(label: "tokenRefresh", qos: .userInitiated)
     private var apiService: APIService
 
-        // MARK: - Token Refresh Logic
+    // MARK: - Token Refresh Logic
 
-        /// Attempt to refresh the access token
-        /// Returns true if refresh was successful, false otherwise
+    /// Attempt to refresh the access token
+    /// Returns true if refresh was successful, false otherwise
     func attemptTokenRefresh() async -> Bool {
-            // Prevent concurrent refresh attempts
+        // Prevent concurrent refresh attempts
         guard !refreshInProgress else {
-                // Wait and return current state
+            // Wait and return current state
             try? await Task.sleep(nanoseconds: 200_000_000) // 0.2 seconds
             return isAuthenticated
         }
@@ -97,17 +95,17 @@ final class TokenManager: ObservableObject  {
     private func performTokenRefresh() async -> Bool {
         guard let refreshToken = TokenStorage.getRefreshToken() else {
             print("❌ No refresh token available")
-                apiService.logout()
+            apiService.logout()
             return false
         }
 
         do {
             try await apiService.refresh(refreshToken: refreshToken)
-                self.isAuthenticated = true
+            isAuthenticated = true
             return true
         } catch {
             print("❌ Token refresh error: \(error)")
-                self.isAuthenticated = false
+            isAuthenticated = false
             return false
         }
     }
@@ -127,13 +125,12 @@ enum TokenRefreshError: Error, LocalizedError {
 
     var errorDescription: String? {
         switch self {
-            case .maxRetriesExceeded:
-                return "Maximum token refresh retries exceeded"
-            case .noRefreshToken:
-                return "No refresh token available"
-            case .refreshFailed:
-                return "Token refresh failed"
+        case .maxRetriesExceeded:
+            "Maximum token refresh retries exceeded"
+        case .noRefreshToken:
+            "No refresh token available"
+        case .refreshFailed:
+            "Token refresh failed"
         }
     }
 }
-

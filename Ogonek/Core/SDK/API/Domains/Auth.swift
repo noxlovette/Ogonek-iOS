@@ -16,21 +16,21 @@ extension OpenAPIClient {
         let response = try await client.signin(input)
 
         switch response {
-            case let .ok(okResponse):
-                switch okResponse.body {
-                    case let .json(tokenPair):
-                        TokenStorage
-                            .store(
-                                token: tokenPair.accessToken.token,
-                                refreshToken: tokenPair
-                                    .refreshToken.token,
-                            )
-                        setAuthToken(tokenPair.accessToken.token)
-                }
-            case .unauthorized:
-                throw APIError.unauthorized
-            case let .undocumented(statusCode: statusCode, _):
-                throw APIError.serverError(statusCode: statusCode)
+        case let .ok(okResponse):
+            switch okResponse.body {
+            case let .json(tokenPair):
+                TokenStorage
+                    .store(
+                        token: tokenPair.accessToken.token,
+                        refreshToken: tokenPair
+                            .refreshToken.token,
+                    )
+                setAuthToken(tokenPair.accessToken.token)
+            }
+        case .unauthorized:
+            throw APIError.unauthorized
+        case let .undocumented(statusCode: statusCode, _):
+            throw APIError.serverError(statusCode: statusCode)
         }
     }
 
@@ -43,25 +43,24 @@ extension OpenAPIClient {
         notImplemented()
     }
 
-    func refresh(refreshToken: String) async throws  {
-
+    func refresh(refreshToken: String) async throws {
         let input = Operations.Refresh.Input(body: .json(.init(refreshToken: refreshToken)))
 
         let response = try await client.refresh(input)
         switch response {
-            case let .ok(okResponse):
-                switch okResponse.body {
-                    case let .json(tokenPair):
-                        TokenStorage
-                            .refresh(
-                                token: tokenPair.accessToken.token
-                            )
-                        setAuthToken(tokenPair.accessToken.token)
-                }
-            case .unauthorized:
-                throw APIError.unauthorized
-            case let .undocumented(statusCode: statusCode, _):
-                throw APIError.serverError(statusCode: statusCode)
+        case let .ok(okResponse):
+            switch okResponse.body {
+            case let .json(tokenPair):
+                TokenStorage
+                    .refresh(
+                        token: tokenPair.accessToken.token,
+                    )
+                setAuthToken(tokenPair.accessToken.token)
+            }
+        case .unauthorized:
+            throw APIError.unauthorized
+        case let .undocumented(statusCode: statusCode, _):
+            throw APIError.serverError(statusCode: statusCode)
         }
 
         func bindStudentToTeacher(_: Operations.BindStudentToTeacher.Input) async throws -> Operations.BindStudentToTeacher.Output {

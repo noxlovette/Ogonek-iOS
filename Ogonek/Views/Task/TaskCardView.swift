@@ -9,7 +9,7 @@ struct TaskCardView: View {
         NavigationLink(
             destination: TaskDetailView(
                 task: MockData.taskWithFiles.task,
-                files: MockData.taskWithFiles.files
+                files: MockData.taskWithFiles.files,
             ),
         ) {
             GenericCardView(

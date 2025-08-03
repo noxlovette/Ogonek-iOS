@@ -58,22 +58,22 @@ extension OpenAPIClient {
         print(response)
 
         switch response {
-            case let .ok(okResponse):
-                print("ok response")
-                let body = okResponse.body
+        case let .ok(okResponse):
+            print("ok response")
+            let body = okResponse.body
 
-                print(body)
+            print(body)
 
-                switch body {
-                    case let .json(data):
-                        return data
-                }
+            switch body {
+            case let .json(data):
+                return data
+            }
 
-            case .unauthorized:
-                throw APIError.unauthorized
+        case .unauthorized:
+            throw APIError.unauthorized
 
-            case let .undocumented(statusCode: statuscode, _):
-                throw APIError.serverError(statusCode: statuscode)
+        case let .undocumented(statusCode: statuscode, _):
+            throw APIError.serverError(statusCode: statuscode)
         }
     }
 }

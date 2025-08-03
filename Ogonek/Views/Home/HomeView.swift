@@ -27,7 +27,6 @@ struct HomeView: View {
                         lessons: viewModel.recentLessons,
                         isLoading: viewModel.isLoading,
                     )
-
                 }
                 .padding()
             }
@@ -136,7 +135,7 @@ struct DueTasksSection: View {
                 )
             } else {
                 LazyVStack(spacing: 8) {
-                    ForEach(tasks, id: \.id) { task in
+                    ForEach(tasks, id: \.id) { _ in
                         Text("PLACE THE LINK HERE")
                     }
                 }

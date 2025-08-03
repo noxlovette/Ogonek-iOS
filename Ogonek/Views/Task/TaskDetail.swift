@@ -119,16 +119,15 @@ struct TaskDetailView: View {
 
     private var filesSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Attached Files")
-                        .font(.headline.weight(.semibold))
-                        .foregroundColor(.primary)
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Attached Files")
+                    .font(.headline.weight(.semibold))
+                    .foregroundColor(.primary)
 
-                    ForEach(files) { file in
-                        FileTaskCard(file: file)
-                    }
+                ForEach(files) { file in
+                    FileTaskCard(file: file)
                 }
-
+            }
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("Upload your HW here")
@@ -211,8 +210,6 @@ struct FileTaskCard: View {
 
     var body: some View {
         HStack(spacing: 12) {
-
-
             VStack(alignment: .leading, spacing: 2) {
                 Text(file.name)
                     .font(.headline)
@@ -223,9 +220,6 @@ struct FileTaskCard: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
-
-
-
         }
         .padding(12)
         .background(
@@ -240,7 +234,6 @@ struct FileTaskCard: View {
         formatter.countStyle = .file
         return formatter.string(fromByteCount: bytes)
     }
-
 }
 
 struct FileUploadView: View {

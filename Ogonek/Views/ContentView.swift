@@ -1,9 +1,9 @@
-    //
-    //  ContentView.swift
-    //  Ogonek
-    //
-    //  Created by Danila Volkov on 28.06.2025.
-    //
+//
+//  ContentView.swift
+//  Ogonek
+//
+//  Created by Danila Volkov on 28.06.2025.
+//
 
 import SwiftUI
 
@@ -21,10 +21,10 @@ struct ContentView: View {
             }
         }
         .onAppear {
-                // Try to restore authentication on app launch
+            // Try to restore authentication on app launch
             apiService.restoreAuthenticationIfAvailable()
 
-                // Update token manager state based on stored tokens
+            // Update token manager state based on stored tokens
             tokenManager.isAuthenticated = TokenStorage.hasValidTokens()
         }
     }

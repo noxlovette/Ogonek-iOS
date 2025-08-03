@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct DeckGridView: View {
-
     let columns = [
         GridItem(.adaptive(minimum: 160)),
     ]

@@ -217,6 +217,7 @@ enum MockData {
     }
 
     // MARK: Task Data
+
     static let taskWithFiles = TaskWithFiles(
         files: [],
         task: TaskFull(
@@ -230,10 +231,9 @@ enum MockData {
             markdown: "# Default markdown",
             priority: 3,
             title: "Default Title",
-            updatedAt: ISO8601DateFormatter().date(from: "2025-07-24T13:17:00.773708Z")!
-        )
+            updatedAt: ISO8601DateFormatter().date(from: "2025-07-24T13:17:00.773708Z")!,
+        ),
     )
-
 
     static let tasks = PaginatedTasks(
         data: [
