@@ -118,6 +118,25 @@ paths:
           description: Invalid registration data
         '409':
           description: User already exists
+  /api/v1/decks:
+    post:
+      tags:
+      - Deck
+      summary: Creates a new Deck using user defaults
+      operationId: create_deck
+      responses:
+        '201':
+          description: Deck created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreationId'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      security:
+      - api_key: []
   /api/v1/decks/:
     get:
       tags:
@@ -133,24 +152,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DeckSmall'
-        '401':
-          description: Unauthorized
-      security:
-      - api_key: []
-    post:
-      tags:
-      - Deck
-      summary: Creates a new Deck using user defaults
-      operationId: create_deck
-      responses:
-        '201':
-          description: Deck created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreationId'
-        '400':
-          description: Bad request
         '401':
           description: Unauthorized
       security:
@@ -355,7 +356,7 @@ paths:
           description: Unauthorized
       security:
       - api_key: []
-  /api/v1/lessons/:
+  /api/v1/lessons:
     get:
       tags:
       - Lesson
@@ -401,6 +402,7 @@ paths:
           description: Unauthorized
       security:
       - api_key: []
+  /api/v1/lessons/:
     post:
       tags:
       - Lesson
@@ -602,7 +604,7 @@ paths:
           description: File not found
       security:
       - api_key: []
-  /api/v1/tasks/:
+  /api/v1/tasks:
     get:
       tags:
       - Task
@@ -661,6 +663,7 @@ paths:
           description: Unauthorized
       security:
       - api_key: []
+  /api/v1/tasks/:
     post:
       tags:
       - Task

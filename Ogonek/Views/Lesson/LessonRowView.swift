@@ -21,15 +21,12 @@ struct LessonRowView: View {
                 Text("Created \(lesson.createdAt.formatted(.relative(presentation: .named)))")
                     .font(.caption)
                     .foregroundColor(.secondary)
-
-                Spacer()
-
-                // Status indicator or additional info could go here
-                Image(systemName: "book.fill")
-                    .font(.caption)
-                    .foregroundColor(.blue)
             }
         }
         .padding(.vertical, 4)
     }
+}
+
+#Preview {
+    LessonRowView(lesson: MockData.paginatedLessons.data[0])
 }

@@ -10,7 +10,8 @@ import SwiftUI
 // MARK: - Empty State View
 
 private struct TaskEmptyStateView: View {
-    let onRequestMore: () -> Void
+
+    @State private var isShowingAlert = false
 
     private let motivationalPhrases = [
         "Feed Me Tasks!",
@@ -46,22 +47,6 @@ private struct TaskEmptyStateView: View {
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
-
-            // Request more button
-            Button(action: onRequestMore) {
-                HStack(spacing: 8) {
-                    Image(systemName: "lightbulb.fill")
-                        .font(.body)
-                    Text(randomPhrase)
-                        .fontWeight(.medium)
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal, 20)
-                .padding(.vertical, 12)
-                .background(Color.brown) // Using brown as "cacao" equivalent
-                .cornerRadius(10)
-            }
-            .buttonStyle(.plain)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.systemGroupedBackground))
@@ -69,17 +54,16 @@ private struct TaskEmptyStateView: View {
 }
 
 // MARK: - Main Tasks View
-
 struct TaskGridView: View {
-    @State private var tasks: [TaskSmall] = []
     @State private var showCompleted: Bool = false
     @State private var isLoading: Bool = false
+    @State private var viewModel = TaskGridViewModel()
 
     private var filteredTasks: [TaskSmall] {
         if showCompleted {
-            tasks
+            viewModel.tasks
         } else {
-            tasks.filter { !$0.completed }
+            viewModel.tasks.filter { !$0.completed }
         }
     }
 
@@ -132,9 +116,7 @@ struct TaskGridView: View {
                     Spacer()
                 } else if filteredTasks.isEmpty, !showCompleted {
                     // Empty state for student role
-                    TaskEmptyStateView {
-                        requestMoreTasks()
-                    }
+                    TaskEmptyStateView()
                 } else if filteredTasks.isEmpty {
                     // No tasks at all
                     VStack(spacing: 16) {
@@ -159,7 +141,7 @@ struct TaskGridView: View {
                             GridItem(.flexible(), spacing: 16),
                         ], spacing: 16) {
                             ForEach(filteredTasks, id: \.id) { task in
-                                Text(task.title)
+                                TaskCardView(task: task)
                             }
                         }
                         .padding(.horizontal)
@@ -171,29 +153,12 @@ struct TaskGridView: View {
             .background(Color(.systemGroupedBackground))
             .navigationBarHidden(true)
         }
-        .onAppear {
-            loadTasks()
+        .task {
+            await viewModel.loadTasks()
         }
-    }
-
-    // MARK: - Methods
-
-    private func loadTasks() {
-        isLoading = true
-
-        // Simulate API call delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            tasks = MockData.tasks.data
-            isLoading = false
-        }
-    }
-
-    private func requestMoreTasks() {
-        // Implement API call to notify teacher
-        print("Requesting more tasks from teacher")
-
-        // Show success message or handle response
-        // This would integrate with your notification system
+        .refreshable {
+            await viewModel.refreshTasks()
+        } // TODO: ADD SEARCH FUNCTIONALITY
     }
 }
 

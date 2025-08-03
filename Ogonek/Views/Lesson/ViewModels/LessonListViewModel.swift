@@ -8,14 +8,14 @@ import Foundation
 
 @Observable
 class LessonListViewModel {
-    @MainActor var lessons: [LessonSmall] = []
-    @MainActor var isLoading = false
-    @MainActor var errorMessage: String?
+    var lessons: [LessonSmall] = []
+    var isLoading = false
+    var errorMessage: String?
 
     // Pagination properties
-    @MainActor var currentPage: Int32 = 1
-    @MainActor var hasMorePages = true
-    @MainActor var searchText = ""
+    var currentPage: Int32 = 1
+    var hasMorePages = true
+    var searchText = ""
 
     private let apiService = APIService.shared
 

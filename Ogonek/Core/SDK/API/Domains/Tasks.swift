@@ -73,6 +73,7 @@ extension OpenAPIClient {
 
             switch body {
             case let .json(task):
+                    print(task)
                 return task
             }
         case .notFound:
@@ -84,13 +85,16 @@ extension OpenAPIClient {
         }
     }
 
+
     func updateTask(_ input: Operations.UpdateTask.Input) async throws -> Operations.UpdateTask.Output {
         let response = try await client.updateTask(input)
 
         return response
     }
 
-    func toggleTask(_: Operations.ToggleTask.Input) async throws -> Operations.ToggleTask.Output {
-        notImplemented()
+    func toggleTask(id: String) async throws {
+        let input = Operations.ToggleTask.Input.Path(id: id)
+
+        _ = try await client.toggleTask(path: input)
     }
 }

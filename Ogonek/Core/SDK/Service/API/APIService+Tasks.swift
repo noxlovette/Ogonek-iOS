@@ -17,4 +17,8 @@ extension APIService {
     func fetchTask(id: String) async throws -> TaskWithFiles {
         try await openAPIClient.fetchTask(id: id)
     }
+
+    func toggleTaskCompletion(id: String) async throws {
+        try await openAPIClient.toggleTask(id: id)
+    }
 }

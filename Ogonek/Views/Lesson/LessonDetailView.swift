@@ -99,6 +99,6 @@ struct LessonDetailView: View {
 
 #Preview {
     NavigationStack {
-        LessonDetailView(lessonId: "preview-id")
+        LessonDetailView(lessonId: "mock")
     }
 }

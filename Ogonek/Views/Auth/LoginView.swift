@@ -63,7 +63,6 @@ struct LoginView: View {
         VStack(spacing: 16) {
             Image(systemName: "flame.fill")
                 .font(.system(size: 60))
-                .foregroundColor(.cocoaAccent)
                 .padding(.top, 60)
 
             VStack(spacing: 8) {
@@ -148,9 +147,7 @@ struct LoginView: View {
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .frame(height: 50)
-            .background(
-                viewModel.canSignIn ? Color.cocoaAccent : Color.gray.opacity(0.5),
-            )
+
             .cornerRadius(12)
         }
         .disabled(!viewModel.canSignIn || viewModel.isLoading)
@@ -172,7 +169,6 @@ struct LoginView: View {
                 Text("Sign Up")
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    .foregroundColor(.cocoaAccent)
             }
         }
         .padding(.top, 16)
@@ -186,7 +182,6 @@ struct CustomTextFieldStyle: TextFieldStyle {
         configuration
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
-            .background(Color.stoneLight)
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)

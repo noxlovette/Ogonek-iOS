@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import Observation
 
 @Observable
 class LessonDetailViewModel {
-    @MainActor var lesson: Lesson?
-    @MainActor var isLoading = false
-    @MainActor var errorMessage: String?
+    var lesson: Lesson?
+    var isLoading = false
+    var errorMessage: String?
 
     private let apiService = APIService.shared
 
@@ -22,7 +23,11 @@ class LessonDetailViewModel {
         errorMessage = nil
 
         do {
-            lesson = try await apiService.fetchLesson(id: id)
+            if id == "mock" {
+                lesson = MockData.lesson1
+            } else {
+                lesson = try await apiService.fetchLesson(id: id)
+            }
         } catch {
             errorMessage = "Failed to load lesson: \(error.localizedDescription)"
             print("Error loading lesson: \(error)")

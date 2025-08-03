@@ -8,18 +8,16 @@
 import Foundation
 
 @Observable
-class HomeViewModel {
-    // Dashboard data
-    @MainActor var dueTasks: [TaskSmall] = []
-    @MainActor var recentLessons: [LessonSmall] = []
-    @MainActor var recentDecks: [DeckSmall] = []
-    @MainActor var dueCardsCount: Int64 = 0
-    @MainActor var recentActivities: [ActivityLog] = []
+class DashboardViewModel {
+    var dueTasks: [TaskSmall] = []
+    var recentLessons: [LessonSmall] = []
+    var recentDecks: [DeckSmall] = []
+    var dueCardsCount: Int64 = 0
+    var recentActivities: [ActivityLog] = []
 
-    // Loading states
-    @MainActor var isLoading = false
-    @MainActor var isRefreshing = false
-    @MainActor var errorMessage: String?
+    var isLoading = false
+    var isRefreshing = false
+    var errorMessage: String?
 
     private let apiService = APIService.shared
 
@@ -32,7 +30,6 @@ class HomeViewModel {
 
         do {
             let dashboardData = try await apiService.fetchDashboard()
-            print(dashboardData)
             dueTasks = dashboardData.tasks.data
             recentLessons = dashboardData.lessons.data
             recentDecks = dashboardData.decks.data
@@ -42,13 +39,13 @@ class HomeViewModel {
 
             recentActivities = dashboardData.activity
         } catch {
+            errorMessage = error.localizedDescription
             logger.error("Error loading dashboard data: \(error)")
         }
 
         isLoading = false
     }
 
-    /// Refresh all dashboard data
     @MainActor
     func refreshDashboard() async {
         isRefreshing = true

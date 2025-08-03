@@ -19,24 +19,20 @@ struct TagsView: View {
                     Text(tag.trimmingCharacters(in: .whitespacesAndNewlines))
                         .font(.caption2)
                         .fontWeight(.medium)
-                        .foregroundColor(.cocoa700)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(
                             Capsule()
-                                .fill(Color.cocoa100),
                         )
                 }
 
                 if tags.count > 3 {
                     Text("+\(tags.count - 3)")
                         .font(.caption2)
-                        .foregroundColor(.stone500)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(
                             Capsule()
-                                .fill(Color.stone100),
                         )
                 }
             }

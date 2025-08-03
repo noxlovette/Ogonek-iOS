@@ -32,7 +32,7 @@ struct ContentView: View {
     private var authenticatedView: some View {
         NavigationView {
             TabView(selection: $selectedTab) {
-                HomeView()
+                DashboardView()
                     .tabItem {
                         Label("Home", systemImage: "house")
                     }

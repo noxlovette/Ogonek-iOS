@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct HomeView: View {
-    @State private var viewModel = HomeViewModel()
+struct DashboardView: View {
+    @State private var viewModel = DashboardViewModel()
 
     var body: some View {
         NavigationStack {
@@ -78,7 +78,6 @@ struct QuickActionsCard: View {
                 HStack {
                     Image(systemName: "brain.head.profile")
                         .font(.title2)
-                        .foregroundColor(.cocoaAccent)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Start Learning")
@@ -103,7 +102,6 @@ struct QuickActionsCard: View {
                         .foregroundColor(.secondary)
                 }
                 .padding()
-                .background(Color.stoneLight)
                 .cornerRadius(12)
             }
             .buttonStyle(PlainButtonStyle())
@@ -146,7 +144,6 @@ struct DueTasksSection: View {
                     } label: {
                         Text("View all tasks")
                             .font(.subheadline)
-                            .foregroundColor(.cocoaAccent)
                     }
                 }
             }
@@ -190,7 +187,6 @@ struct RecentLessonsSection: View {
                     } label: {
                         Text("View all lessons")
                             .font(.subheadline)
-                            .foregroundColor(.cocoaAccent)
                     }
                 }
             }
@@ -265,7 +261,6 @@ struct TaskRowView: View {
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 12)
-        .background(Color.stoneLight)
         .cornerRadius(8)
     }
 }
@@ -314,7 +309,6 @@ struct EmptyStateView: View {
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(Color.stoneLight)
         .cornerRadius(12)
     }
 }
@@ -366,17 +360,8 @@ struct SkeletonRow: View {
             .redacted(reason: .placeholder)
     }
 }
-
-// MARK: - Color Extensions
-
-extension Color {
-    static let stoneLight = Color(red: 0.95, green: 0.95, blue: 0.95)
-    static let stoneDark = Color(red: 0.2, green: 0.2, blue: 0.2)
-    static let cocoaAccent = Color(red: 0.8, green: 0.6, blue: 0.4)
-}
-
 // MARK: - Preview
 
 #Preview {
-    HomeView()
+    DashboardView()
 }

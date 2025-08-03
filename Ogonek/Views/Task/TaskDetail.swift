@@ -1,70 +1,75 @@
-import Combine
 import MarkdownUI
 import SwiftUI
 
-struct TaskFile: Codable, Identifiable {
-    let id: String
-    let name: String
-    let url: String
-    let size: Int64
-    let mimeType: String
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, url, size
-        case mimeType = "mime_type"
-    }
-}
-
-struct TaskDetailResponse {
-    let task: TaskWithFiles
-    let files: [TaskFile]
-    let rendered: String
-}
-
-// MARK: - Task Detail View
-
 struct TaskDetailView: View {
-    let task: TaskFull
-    let files: [File]
-
     @State private var showingDeleteAlert = false
     @State private var showingFileUpload: Bool = false
+    @State private var viewModel = TaskDetailViewModel()
+
+    let taskId: String
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color(.systemGroupedBackground)
-                    .ignoresSafeArea()
-
-                taskContentView(task: task)
+        Group {
+            if let taskWithFiles = viewModel.task {
+                taskContentView(task: taskWithFiles.task, files: taskWithFiles.files)
+            } else if viewModel.isLoading {
+                loadingView
+            } else if let errorMessage = viewModel.errorMessage {
+                errorView(message: errorMessage)
+            } else {
+                Text("Empty View")
             }
-            .navigationTitle("Task Details")
-            .navigationBarTitleDisplayMode(.large)
+        }
+        .navigationTitle("Task Details")
+        .navigationBarTitleDisplayMode(.large)
+        .task {
+            await viewModel.fetchTask(id: taskId)
         }
         .sheet(isPresented: $showingFileUpload) {
-            FileUploadView(task: task)
+            if let task = viewModel.task?.task {
+                FileUploadView(task: task)
+            }
+        }
+        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
+            Button("Retry") {
+                Task {
+                    await viewModel.fetchTask(id: taskId)
+                }
+            }
+            Button("Cancel", role: .cancel) {
+                viewModel.errorMessage = nil
+            }
+        } message: {
+            if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+            }
         }
     }
 
-    // MARK: - Content Views
+        // MARK: - Content Views
 
-    private func taskContentView(task: TaskFull) -> some View {
-        ScrollView {
-            LazyVStack(spacing: 20) {
-                // Header Card
-                taskHeaderCard(task: task)
+    private func taskContentView(task: TaskFull, files: [File]) -> some View {
+        ZStack {
+            Color(.systemGroupedBackground)
+                .ignoresSafeArea()
 
-                // Files and Content Section
-                HStack(alignment: .top, spacing: 16) {
-                    // Files Column (1/4 width)
-                    filesSection
-                        .frame(maxWidth: .infinity, alignment: .leading)
+            ScrollView {
+                LazyVStack(spacing: 20) {
+                        // Header Card
+                    taskHeaderCard(task: task)
 
-                    // Content Column (3/4 width)
-                    contentSection
-                        .frame(maxWidth: .infinity * 3, alignment: .leading)
+                        // Files and Content Section
+                    HStack(alignment: .top, spacing: 16) {
+                            // Files Column (1/4 width)
+                        filesSection(files: files)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                            // Content Column (3/4 width)
+                        contentSection(task: task)
+                            .frame(maxWidth: .infinity * 3, alignment: .leading)
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
             }
         }
     }
@@ -82,11 +87,11 @@ struct TaskDetailView: View {
             }
 
             HStack(spacing: 12) {
-                // Completion Toggle
+                    // Completion Toggle
                 Button(action: {
                     Task {
-                        // TODO:
-                        print("toggled completion")
+                            // TODO: Implement completion toggle in ViewModel
+                        await viewModel.toggleTaskCompletion()
                     }
                 }) {
                     HStack(spacing: 8) {
@@ -100,7 +105,7 @@ struct TaskDetailView: View {
                     .padding(.vertical, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(task.completed ? Color.green : Color.blue),
+                            .fill(task.completed ? Color.green : Color.blue)
                     )
                 }
                 .buttonStyle(.plain)
@@ -112,12 +117,12 @@ struct TaskDetailView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(.systemBackground))
-                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 2),
+                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 2)
         )
         .padding(.horizontal)
     }
 
-    private var filesSection: some View {
+    private func filesSection(files: [File]) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Attached Files")
@@ -147,7 +152,7 @@ struct TaskDetailView: View {
                     .padding(.vertical, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.blue),
+                            .fill(Color.blue)
                     )
                 }
                 .buttonStyle(.plain)
@@ -157,11 +162,11 @@ struct TaskDetailView: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.secondarySystemGroupedBackground)),
+                .fill(Color(.secondarySystemGroupedBackground))
         )
     }
 
-    private var contentSection: some View {
+    private func contentSection(task: TaskFull) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Description")
                 .font(.headline.weight(.semibold))
@@ -175,7 +180,7 @@ struct TaskDetailView: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.secondarySystemGroupedBackground)),
+                .fill(Color(.secondarySystemGroupedBackground))
         )
     }
 
@@ -189,7 +194,7 @@ struct TaskDetailView: View {
         }
     }
 
-    private var errorView: some View {
+    private func errorView(message: String) -> some View {
         VStack(spacing: 16) {
             Image(systemName: "exclamationmark.triangle")
                 .font(.system(size: 48))
@@ -198,12 +203,25 @@ struct TaskDetailView: View {
             Text("Failed to load task")
                 .font(.headline)
                 .foregroundColor(.primary)
+
+            Text(message)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+
+            Button("Retry") {
+                Task {
+                    await viewModel.fetchTask(id: taskId)
+                }
+            }
+            .buttonStyle(.borderedProminent)
         }
         .padding()
     }
 }
 
-// MARK: - Supporting Views
+    // MARK: - Supporting Views
 
 struct FileTaskCard: View {
     let file: File
@@ -224,7 +242,7 @@ struct FileTaskCard: View {
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color(.tertiarySystemGroupedBackground)),
+                .fill(Color(.tertiarySystemGroupedBackground))
         )
     }
 
@@ -248,10 +266,8 @@ struct FileUploadView: View {
     }
 }
 
-// MARK: - Preview
-
-struct TaskDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskDetailView(task: MockData.taskWithFiles.task, files: MockData.taskWithFiles.files)
+#Preview{
+    NavigationStack {
+        TaskDetailView(taskId: "etxAsCsyVpJF-_fpW5bDB" )
     }
 }
