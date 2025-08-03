@@ -16,7 +16,7 @@ extension APIService {
         try await openAPIClient.unsubscribeFromDeck()
     }
 
-    func fetchDueCards() async throws -> [Card] {
+    func fetchDueCards() async throws -> [CardProgress] {
         try await openAPIClient.fetchDueCards()
     }
 

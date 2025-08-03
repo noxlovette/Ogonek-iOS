@@ -52,7 +52,6 @@ struct TaskCardView: View {
                                 }
                                 .foregroundColor(dueDate < Date() && !task.completed ? .red : .secondary)
                             }
-
                         }
 
                         Spacer()

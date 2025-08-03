@@ -1,7 +1,7 @@
-    //  LessonListViewModel.swift
-    //  Ogonek
-    //
-    //
+//  TaskGridViewModel.swift
+//  Ogonek
+//
+//
 
 import Foundation
 import Observation
@@ -27,7 +27,7 @@ class TaskGridViewModel {
             let paginatedResponse = try await apiService.listTasks(
                 page: currentPage,
                 perPage: 20,
-                search: searchText.isEmpty ? nil : searchText
+                search: searchText.isEmpty ? nil : searchText,
             )
 
             if currentPage == 1 {

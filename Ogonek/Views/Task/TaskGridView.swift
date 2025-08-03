@@ -10,7 +10,6 @@ import SwiftUI
 // MARK: - Empty State View
 
 private struct TaskEmptyStateView: View {
-
     @State private var isShowingAlert = false
 
     private let motivationalPhrases = [
@@ -54,6 +53,7 @@ private struct TaskEmptyStateView: View {
 }
 
 // MARK: - Main Tasks View
+
 struct TaskGridView: View {
     @State private var showCompleted: Bool = false
     @State private var isLoading: Bool = false

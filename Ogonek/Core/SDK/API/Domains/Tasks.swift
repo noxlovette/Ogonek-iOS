@@ -73,7 +73,7 @@ extension OpenAPIClient {
 
             switch body {
             case let .json(task):
-                    print(task)
+                print(task)
                 return task
             }
         case .notFound:
@@ -84,7 +84,6 @@ extension OpenAPIClient {
             throw APIError.serverError(statusCode: statusCode)
         }
     }
-
 
     func updateTask(_ input: Operations.UpdateTask.Input) async throws -> Operations.UpdateTask.Output {
         let response = try await client.updateTask(input)

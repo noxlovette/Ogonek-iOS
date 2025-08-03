@@ -25,13 +25,19 @@ class LessonListViewModel {
         isLoading = true
         errorMessage = nil
 
+        var paginatedResponse: PaginatedLessons
+
         do {
-            let paginatedResponse = try await apiService.listLessons(
-                page: currentPage,
-                perPage: 20,
-                search: searchText.isEmpty ? nil : searchText,
-                assignee: nil,
-            )
+            if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+                paginatedResponse = MockData.paginatedLessons
+            } else {
+                paginatedResponse = try await apiService.listLessons(
+                    page: currentPage,
+                    perPage: 20,
+                    search: searchText.isEmpty ? nil : searchText,
+                    assignee: nil,
+                )
+            }
 
             if currentPage == 1 {
                 lessons = paginatedResponse.data

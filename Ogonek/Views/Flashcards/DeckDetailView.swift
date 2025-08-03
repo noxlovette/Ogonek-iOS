@@ -63,18 +63,17 @@ struct DeckDetailView: View {
                 Text(errorMessage)
             }
         }
-
     }
 
     private func deckContent(deckWithCards: DeckWithCards) -> some View {
         ScrollView {
             LazyVStack(spacing: 24) {
-                    // Header section
+                // Header section
                 headerSection(deck: deckWithCards.deck)
 
-                    // Main content
+                // Main content
                 HStack(alignment: .top, spacing: 24) {
-                        // Cards grid
+                    // Cards grid
                     cardsSection(cards: deckWithCards.cards)
                 }
                 .padding(.horizontal)
@@ -86,7 +85,7 @@ struct DeckDetailView: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 if UIDevice.current.userInterfaceIdiom != .pad {
                     Button {
-                            // Navigate to edit
+                        // Navigate to edit
                     } label: {
                         Image(systemName: "pencil")
                     }
@@ -169,7 +168,6 @@ struct DeckDetailView: View {
             .padding(.horizontal)
         }
     }
-
 
     private func cardsSection(cards: [Card]) -> some View {
         VStack(alignment: .leading, spacing: 16) {

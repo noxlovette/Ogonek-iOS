@@ -46,6 +46,7 @@ struct LessonListView: View {
     }
 
     // MARK: - Private Views
+
     private var lessonsList: some View {
         List {
             ForEach(viewModel.lessons) { lesson in

@@ -46,7 +46,7 @@ struct TaskDetailView: View {
         }
     }
 
-        // MARK: - Content Views
+    // MARK: - Content Views
 
     private func taskContentView(task: TaskFull, files: [File]) -> some View {
         ZStack {
@@ -55,16 +55,16 @@ struct TaskDetailView: View {
 
             ScrollView {
                 LazyVStack(spacing: 20) {
-                        // Header Card
+                    // Header Card
                     taskHeaderCard(task: task)
 
-                        // Files and Content Section
+                    // Files and Content Section
                     HStack(alignment: .top, spacing: 16) {
-                            // Files Column (1/4 width)
+                        // Files Column (1/4 width)
                         filesSection(files: files)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
-                            // Content Column (3/4 width)
+                        // Content Column (3/4 width)
                         contentSection(task: task)
                             .frame(maxWidth: .infinity * 3, alignment: .leading)
                     }
@@ -87,10 +87,10 @@ struct TaskDetailView: View {
             }
 
             HStack(spacing: 12) {
-                    // Completion Toggle
+                // Completion Toggle
                 Button(action: {
                     Task {
-                            // TODO: Implement completion toggle in ViewModel
+                        // TODO: Implement completion toggle in ViewModel
                         await viewModel.toggleTaskCompletion()
                     }
                 }) {
@@ -105,7 +105,7 @@ struct TaskDetailView: View {
                     .padding(.vertical, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(task.completed ? Color.green : Color.blue)
+                            .fill(task.completed ? Color.green : Color.blue),
                     )
                 }
                 .buttonStyle(.plain)
@@ -117,7 +117,7 @@ struct TaskDetailView: View {
         .background(
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(.systemBackground))
-                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 2)
+                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 2),
         )
         .padding(.horizontal)
     }
@@ -152,7 +152,7 @@ struct TaskDetailView: View {
                     .padding(.vertical, 12)
                     .background(
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.blue)
+                            .fill(Color.blue),
                     )
                 }
                 .buttonStyle(.plain)
@@ -162,7 +162,7 @@ struct TaskDetailView: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.secondarySystemGroupedBackground))
+                .fill(Color(.secondarySystemGroupedBackground)),
         )
     }
 
@@ -180,7 +180,7 @@ struct TaskDetailView: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.secondarySystemGroupedBackground))
+                .fill(Color(.secondarySystemGroupedBackground)),
         )
     }
 
@@ -221,7 +221,7 @@ struct TaskDetailView: View {
     }
 }
 
-    // MARK: - Supporting Views
+// MARK: - Supporting Views
 
 struct FileTaskCard: View {
     let file: File
@@ -242,7 +242,7 @@ struct FileTaskCard: View {
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color(.tertiarySystemGroupedBackground))
+                .fill(Color(.tertiarySystemGroupedBackground)),
         )
     }
 
@@ -266,8 +266,8 @@ struct FileUploadView: View {
     }
 }
 
-#Preview{
+#Preview {
     NavigationStack {
-        TaskDetailView(taskId: "mock" )
+        TaskDetailView(taskId: "mock")
     }
 }

@@ -147,7 +147,6 @@ struct LoginView: View {
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .frame(height: 50)
-
             .cornerRadius(12)
         }
         .disabled(!viewModel.canSignIn || viewModel.isLoading)

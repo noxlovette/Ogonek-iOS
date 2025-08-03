@@ -119,25 +119,6 @@ paths:
         '409':
           description: User already exists
   /api/v1/decks:
-    post:
-      tags:
-      - Deck
-      summary: Creates a new Deck using user defaults
-      operationId: create_deck
-      responses:
-        '201':
-          description: Deck created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreationId'
-        '400':
-          description: Bad request
-        '401':
-          description: Unauthorized
-      security:
-      - api_key: []
-  /api/v1/decks/:
     get:
       tags:
       - Deck
@@ -152,6 +133,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DeckSmall'
+        '401':
+          description: Unauthorized
+      security:
+      - api_key: []
+    post:
+      tags:
+      - Deck
+      summary: Creates a new Deck using user defaults
+      operationId: create_deck
+      responses:
+        '201':
+          description: Deck created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreationId'
+        '400':
+          description: Bad request
         '401':
           description: Unauthorized
       security:
@@ -249,14 +248,14 @@ paths:
           description: Deck not found
       security:
       - api_key: []
-  /api/v1/learn/:
+  /api/v1/learn:
     get:
       tags:
       - Learn
       summary: Returns the list of all cards due for review
       operationId: fetch_due_cards
       responses:
-        '204':
+        '200':
           description: Due cards fetched successfully
           content:
             application/json:
@@ -402,7 +401,6 @@ paths:
           description: Unauthorized
       security:
       - api_key: []
-  /api/v1/lessons/:
     post:
       tags:
       - Lesson
@@ -663,7 +661,6 @@ paths:
           description: Unauthorized
       security:
       - api_key: []
-  /api/v1/tasks/:
     post:
       tags:
       - Task
@@ -781,7 +778,7 @@ paths:
           description: Task not found
       security:
       - api_key: []
-  /api/v1/users/:
+  /api/v1/users:
     get:
       tags:
       - User

@@ -216,6 +216,126 @@ enum MockData {
         ]
     }
 
+    static let cardProgress = [
+        CardProgress(
+            back: "a memory from a long time ago",
+            cardId: "yPPHMaNa385TFg2nRVINz",
+            dueDate: ISO8601DateFormatter().date(from: "2025-07-26T08:22:37.624459Z"),
+            easeFactor: 2.5,
+            front: "distant memory",
+            id: "t-oebOC6El-HA3ieMfbgJ",
+            interval: 1,
+            lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:37.624457Z"),
+            mediaUrl: nil,
+            reviewCount: 1,
+            userId: "dev_teacher1_sDkwvkSa",
+        ),
+        CardProgress(
+            back: "to value and hold a memory dear",
+            cardId: "_smCQcx991eAkpvme4V5P",
+            dueDate: ISO8601DateFormatter().date(from: "2025-07-26T08:22:39.509595Z"),
+            easeFactor: 2.36,
+            front: "treasure the memory of",
+            id: "jEvsCyiGr5nkucHKb2due",
+            interval: 1,
+            lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:39.509593Z"),
+            mediaUrl: nil,
+            reviewCount: 1,
+            userId: "dev_teacher1_sDkwvkSa",
+        ),
+        CardProgress(
+            back: "a memory that is unclear or not detailed",
+            cardId: "FYtk1EFQU82YFNuvCpKJS",
+            dueDate: ISO8601DateFormatter().date(from: "2025-07-26T08:22:40.218829Z"),
+            easeFactor: 2.5,
+            front: "vague memory",
+            id: "lZ9CsDZVqbYE4q5f3ATPd",
+            interval: 1,
+            lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:40.218828Z"),
+            mediaUrl: nil,
+            reviewCount: 1,
+            userId: "dev_teacher1_sDkwvkSa",
+        ),
+        CardProgress(
+            back: "to help yourself or someone else remember something",
+            cardId: "vYCO5_QoGh_N5Gl-CW6yT",
+            dueDate: ISO8601DateFormatter().date(from: "2025-07-26T08:22:41.030269Z"),
+            easeFactor: 2.6,
+            front: "refresh your memory",
+            id: "XsBE7s9Q-Y9a_JBtlS-JN",
+            interval: 1,
+            lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:41.030268Z"),
+            mediaUrl: nil,
+            reviewCount: 1,
+            userId: "dev_teacher1_sDkwvkSa",
+        ),
+        CardProgress(
+            back: "to cause someone to remember something suddenly",
+            cardId: "gvhkT-ONf35maFfYrnL1F",
+            dueDate: ISO8601DateFormatter().date(from: "2025-07-26T08:22:42.279349Z"),
+            easeFactor: 2.36,
+            front: "trigger a memory",
+            id: "khgqKXKEmvzjGFtZfN0XR",
+            interval: 1,
+            lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:42.279347Z"),
+            mediaUrl: nil,
+            reviewCount: 1,
+            userId: "dev_teacher1_sDkwvkSa",
+        ),
+        CardProgress(
+            back: "to suddenly think of something",
+            cardId: "axZXs2_lnqWChbZsKaCCq",
+            dueDate: ISO8601DateFormatter().date(from: "2025-07-26T08:22:44.032433Z"),
+            easeFactor: 2.36,
+            front: "come to mind",
+            id: "uNoxn0dhZMHk7Rh1FSApo",
+            interval: 1,
+            lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:44.032432Z"),
+            mediaUrl: nil,
+            reviewCount: 1,
+            userId: "dev_teacher1_sDkwvkSa",
+        ),
+        CardProgress(
+            back: "to remember something in a not very clear or detailed way",
+            cardId: "uRWN22HuPFCSYrKciu6Dg",
+            dueDate: ISO8601DateFormatter().date(from: "2025-07-26T08:22:44.731937Z"),
+            easeFactor: 2.5,
+            front: "vaguely remember",
+            id: "vH5Rpxp0hDosB0ASFGXdq",
+            interval: 1,
+            lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:44.731936Z"),
+            mediaUrl: nil,
+            reviewCount: 1,
+            userId: "dev_teacher1_sDkwvkSa",
+        ),
+        CardProgress(
+            back: "a memory that causes emotional pain or distress",
+            cardId: "7wYXkSlqG7PTV61FwmGKh",
+            dueDate: ISO8601DateFormatter().date(from: "2025-07-26T08:22:47.659402Z"),
+            easeFactor: 2.28,
+            front: "painful memory",
+            id: "hs9tIR4iR_mWKz9KpjlVK",
+            interval: 1,
+            lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:47.659401Z"),
+            mediaUrl: nil,
+            reviewCount: 1,
+            userId: "dev_teacher1_sDkwvkSa",
+        ),
+        CardProgress(
+            back: "a memory that is very clear and detailed",
+            cardId: "R5_wf24AkmNmUN70aOq_q",
+            dueDate: ISO8601DateFormatter().date(from: "2025-07-26T08:22:47.659402Z"),
+            easeFactor: 1.6399999999999997,
+            front: "vivid memory",
+            id: "VzXhUroFFqj32YHZlLsth",
+            interval: 1,
+            lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:56.932583Z"),
+            mediaUrl: nil,
+            reviewCount: 1,
+            userId: "dev_teacher1_sDkwvkSa",
+        ),
+    ]
+
     // MARK: Task Data
 
     static let taskWithFiles = TaskWithFiles(
@@ -226,7 +346,7 @@ enum MockData {
                 name: "ownership_starter.rs",
                 ownerId: "dev_teacher1_sDkwvkSa",
                 s3Key: "tasks/KdqQcCb9jDz-AxQPBMJBo/ownership_starter.rs",
-                size: 2048
+                size: 2048,
             ),
             File(
                 id: "file_ownership_examples",
@@ -234,8 +354,8 @@ enum MockData {
                 name: "examples.md",
                 ownerId: "dev_teacher1_sDkwvkSa",
                 s3Key: "tasks/KdqQcCb9jDz-AxQPBMJBo/examples.md",
-                size: 1024
-            )
+                size: 1024,
+            ),
         ],
         task: TaskFull(
             assignee: "dev_teacher1_sDkwvkSa",
@@ -246,28 +366,28 @@ enum MockData {
             dueDate: nil,
             id: "Bzgbqk11luSf32OB48pQA",
             markdown: """
-                    # Complete Ownership Exercise
-                    
-                    ## Overview
-                    This exercise will help you understand Rust's ownership system, which is one of the most important concepts in the language.
-                    
-                    ## Tasks
-                    1. **Basic Ownership**: Write a function that takes ownership of a String and returns its length
-                    2. **Borrowing**: Create examples using `&` (immutable references) and `&mut` (mutable references)
-                    3. **Lifetimes**: Implement a function with explicit lifetime annotations
-                    
-                    ## Resources
-                    - [The Rust Book Chapter 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
-                    - [Rust by Example: Ownership](https://doc.rust-lang.org/rust-by-example/scope/move.html)
-                    
-                    ## Submission
-                    Upload your completed `.rs` file with all exercises implemented and commented.
-                    
-                    > **Note**: Make sure your code compiles without warnings!
-                    """,
+            # Complete Ownership Exercise
+
+            ## Overview
+            This exercise will help you understand Rust's ownership system, which is one of the most important concepts in the language.
+
+            ## Tasks
+            1. **Basic Ownership**: Write a function that takes ownership of a String and returns its length
+            2. **Borrowing**: Create examples using `&` (immutable references) and `&mut` (mutable references)
+            3. **Lifetimes**: Implement a function with explicit lifetime annotations
+
+            ## Resources
+            - [The Rust Book Chapter 4](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+            - [Rust by Example: Ownership](https://doc.rust-lang.org/rust-by-example/scope/move.html)
+
+            ## Submission
+            Upload your completed `.rs` file with all exercises implemented and commented.
+
+            > **Note**: Make sure your code compiles without warnings!
+            """,
             priority: 3,
             title: "Default Title",
-            updatedAt:  Date(timeIntervalSinceNow: -1000),
+            updatedAt: Date(timeIntervalSinceNow: -1000),
         ),
     )
 

@@ -1,4 +1,4 @@
-//  DeckListViewModel.swift
+//  DeckGridViewModel.swift
 //  Ogonek
 //
 //  Rewritten following Basic Car Maintenance pattern
@@ -35,5 +35,4 @@ class DeckGridViewModel {
     func refreshDecks() async {
         await loadDecks()
     }
-
 }

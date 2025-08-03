@@ -71,5 +71,4 @@ struct DeckGridView: View {
             }
         }
     }
-
 }

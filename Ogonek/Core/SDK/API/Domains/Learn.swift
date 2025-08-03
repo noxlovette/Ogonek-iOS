@@ -8,8 +8,22 @@
 import Foundation
 
 extension OpenAPIClient {
-    func fetchDueCards() async throws -> [Card] {
-        notImplemented()
+    func fetchDueCards() async throws -> [CardProgress] {
+        let response = try await client.fetchDueCards()
+
+        switch response {
+        case let .ok(okResponse):
+            switch okResponse.body {
+            case let .json(decks):
+                return decks
+            }
+
+        case .unauthorized:
+            throw APIError.unauthorized
+
+        case let .undocumented(statusCode: statusCode, _):
+            throw APIError.serverError(statusCode: statusCode)
+        }
     }
 
     func updateCardProgress() async throws {

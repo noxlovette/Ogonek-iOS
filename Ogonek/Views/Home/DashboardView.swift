@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  DashboardView.swift
 //  Ogonek
 //
 //  Rewritten following Basic Car Maintenance pattern
@@ -360,6 +360,7 @@ struct SkeletonRow: View {
             .redacted(reason: .placeholder)
     }
 }
+
 // MARK: - Preview
 
 #Preview {

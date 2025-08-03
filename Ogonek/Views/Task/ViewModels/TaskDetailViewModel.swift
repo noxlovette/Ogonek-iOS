@@ -1,5 +1,5 @@
 //
-//  LessonDetailViewModel.swift
+//  TaskDetailViewModel.swift
 //  Ogonek
 //
 //  Rewritten following Basic Car Maintenance pattern

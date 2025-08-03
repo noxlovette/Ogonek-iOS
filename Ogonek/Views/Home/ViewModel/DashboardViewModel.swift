@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  DashboardViewModel.swift
 //  Ogonek
 //
 //  Rewritten following Basic Car Maintenance pattern
@@ -23,12 +23,11 @@ class DashboardViewModel {
 
     /// Load all dashboard data
     @MainActor
-    func loadDashboardData(mock: Bool = true) async {
+    func loadDashboardData() async {
         isLoading = true
         errorMessage = nil
-
         do {
-            if mock {
+            if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
                 dueTasks = MockData.tasks.data
                 recentLessons = MockData.paginatedLessons.data
                 recentDecks = []
@@ -43,8 +42,8 @@ class DashboardViewModel {
                     dueCardsCount = dueCards
                 }
 
-            recentActivities = dashboardData.activity
-        }
+                recentActivities = dashboardData.activity
+            }
         } catch {
             errorMessage = error.localizedDescription
             logger.error("Error loading dashboard data: \(error)")
