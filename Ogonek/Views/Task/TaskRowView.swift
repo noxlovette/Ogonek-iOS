@@ -68,7 +68,6 @@ struct TaskRowView: View {
     }
 }
 
-
 #Preview {
     TaskRowView(task: MockData.tasks.data[0])
 }

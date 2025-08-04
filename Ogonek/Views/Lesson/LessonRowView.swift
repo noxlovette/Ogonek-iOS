@@ -1,11 +1,12 @@
-    //
-    //  LessonRowView.swift
-    //  Ogonek
-    //
-    //  Rewritten following Basic Car Maintenance pattern
-    //
+//
+//  LessonRowView.swift
+//  Ogonek
+//
+//  Rewritten following Basic Car Maintenance pattern
+//
 
 import SwiftUI
+
 struct LessonRowView: View {
     let lesson: LessonSmall
 
@@ -13,29 +14,21 @@ struct LessonRowView: View {
         NavigationLink {
             LessonDetailView(lessonId: lesson.id)
         } label: {
-            HStack {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(lesson.topic)
-                        .font(.headline)
-                        .lineLimit(2)
-                        .foregroundColor(.primary)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(lesson.topic)
+                    .font(.headline)
+                    .lineLimit(2)
+                    .foregroundColor(.primary)
 
-                    HStack(spacing: 4) {
-                        Image(systemName: "clock")
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
+                HStack(spacing: 4) {
+                    Image(systemName: "clock")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
 
-                        Text("Created \(lesson.createdAt.formatted(.relative(presentation: .named)))")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
+                    Text("Created \(lesson.createdAt.formatted(.relative(presentation: .named)))")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                 }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
             }
         }
     }

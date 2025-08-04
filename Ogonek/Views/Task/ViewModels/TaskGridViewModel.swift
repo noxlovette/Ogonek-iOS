@@ -7,7 +7,7 @@ import Foundation
 import Observation
 
 @Observable
-class TaskGridViewModel {
+class TaskListViewModel {
     var tasks: [TaskSmall] = []
     var isLoading = false
     var errorMessage: String?
@@ -24,11 +24,15 @@ class TaskGridViewModel {
         errorMessage = nil
 
         do {
-            let paginatedResponse = try await apiService.listTasks(
-                page: currentPage,
-                perPage: 20,
-                search: searchText.isEmpty ? nil : searchText,
-            )
+            var paginatedResponse: PaginatedTasks = if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+                MockData.tasks
+            } else {
+                try await apiService.listTasks(
+                    page: currentPage,
+                    perPage: 20,
+                    search: searchText.isEmpty ? nil : searchText,
+                )
+            }
 
             if currentPage == 1 {
                 tasks = paginatedResponse.data

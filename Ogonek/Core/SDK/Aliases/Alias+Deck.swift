@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias DeckWithCards = Components.Schemas.DeckWithCardsAndSubscription
+typealias DeckWithCards = Components.Schemas.DeckWithCards
 typealias Deck = Components.Schemas.DeckFull
 typealias DeckSmall = Components.Schemas.DeckSmall
 // typealias DeckPublic = Components.Schemas.DeckPublic

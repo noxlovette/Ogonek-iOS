@@ -181,7 +181,6 @@ enum MockData {
             name: "Advanced Rust Patterns",
             visibility: "assigned",
         ),
-        isSubscribed: true,
     )
 
     static let decks = {

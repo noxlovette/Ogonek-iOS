@@ -1,36 +1,36 @@
 //
-//  LessonListView.swift
+//  TaskListView.swift
 //  Ogonek
 //
-//  Rewritten following Basic Car Maintenance pattern
+//  Created by Danila Volkov on 12.07.2025.
 //
 
 import SwiftUI
 
-struct LessonListView: View {
-    @State private var viewModel = LessonListViewModel()
+struct TaskListView: View {
+    @State private var viewModel = TaskListViewModel()
     @State private var searchText = ""
 
     var body: some View {
         NavigationStack {
             Group {
-                if viewModel.lessons.isEmpty, !viewModel.isLoading {
+                if viewModel.tasks.isEmpty, !viewModel.isLoading {
                     EmptyView()
                 } else {
-                    lessonsList
+                    tasksList
                 }
             }
-            .navigationTitle("Lessons")
-            .searchable(text: $searchText, prompt: "Search lessons...")
+            .navigationTitle("Tasks")
+            .searchable(text: $searchText, prompt: "Search tasks...")
             .refreshable {
-                await viewModel.refreshLessons()
+                await viewModel.refreshTasks()
             }
             .task {
-                await viewModel.loadLessons()
+                await viewModel.loadTasks()
             }
             .onChange(of: searchText) { _, newValue in
                 Task {
-                    await viewModel.searchLessons(query: newValue)
+                    await viewModel.searchTasks(query: newValue)
                 }
             }
         }
@@ -45,15 +45,13 @@ struct LessonListView: View {
         }
     }
 
-    // MARK: - Private Views
-
-    private var lessonsList: some View {
+    private var tasksList: some View {
         List {
-            ForEach(viewModel.lessons) { lesson in
-                LessonRowView(lesson: lesson)
+            ForEach(viewModel.tasks) { task in
+                TaskRowView(task: task)
             }
 
-            if viewModel.isLoading, !viewModel.lessons.isEmpty {
+            if viewModel.isLoading, !viewModel.tasks.isEmpty {
                 HStack {
                     Spacer()
                     ProgressView()
@@ -63,9 +61,12 @@ struct LessonListView: View {
             }
         }
         .listStyle(.inset)
+        .navigationDestination(for: String.self) { taskId in
+            TaskDetailView(taskId: taskId)
+        }
         .overlay {
-            if viewModel.isLoading, viewModel.lessons.isEmpty {
-                ProgressView("Loading lessons...")
+            if viewModel.isLoading, viewModel.tasks.isEmpty {
+                ProgressView("Loading tasks...")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.clear)
             }
@@ -74,7 +75,5 @@ struct LessonListView: View {
 }
 
 #Preview {
-    NavigationStack {
-        LessonListView()
-    }
+    TaskListView()
 }

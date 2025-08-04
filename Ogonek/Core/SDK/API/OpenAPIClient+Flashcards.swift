@@ -31,7 +31,7 @@ extension OpenAPIClient {
         let response = try await client.createDeck()
 
         switch response {
-        case let .created(createdResponse):
+        case let .ok(createdResponse):
             let body = createdResponse.body
             switch body {
             case let .json(id):

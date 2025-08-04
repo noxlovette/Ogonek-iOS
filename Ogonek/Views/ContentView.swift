@@ -45,7 +45,7 @@ struct ContentView: View {
                     }
                     .tag(1)
 
-                TaskGridView()
+                TaskListView()
                     .tabItem {
                         Label("Tasks", systemImage: "checklist")
                     }
