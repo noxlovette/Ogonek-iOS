@@ -28,9 +28,9 @@ enum MockData {
                 assigneeName: "Charlie Student",
                 createdAt: ISO8601DateFormatter().date(from: "2025-07-25T08:26:31.980596Z") ?? Date(),
                 id: "etxAsCsyVpJF-_fpW5bDB",
-                seen: true,
-                title: "Default Title",
-                topic: "Default Topicfefefe",
+                seen: false,
+                title: "Unseen",
+                topic: "Hidden Operations",
             ),
             LessonSmall(
                 assigneeName: "Alice Teacher",
@@ -363,7 +363,7 @@ enum MockData {
             completed: false,
             createdAt: Date(timeIntervalSinceNow: -1000),
             createdBy: "dev_teacher1_sDkwvkSa",
-            dueDate: nil,
+            dueDate: Date(timeIntervalSinceNow: +5000),
             id: "Bzgbqk11luSf32OB48pQA",
             markdown: """
             # Complete Ownership Exercise
@@ -386,7 +386,7 @@ enum MockData {
             > **Note**: Make sure your code compiles without warnings!
             """,
             priority: 3,
-            title: "Default Title",
+            title: "Ownership Exercise",
             updatedAt: Date(timeIntervalSinceNow: -1000),
         ),
     )
@@ -396,7 +396,7 @@ enum MockData {
             TaskSmall(
                 assigneeName: "Charlie Student",
                 completed: false,
-                dueDate: ISO8601DateFormatter().date(from: "2025-07-25T08:27:14.462723Z"),
+                dueDate: Date(timeIntervalSinceNow: -1000),
                 id: "KdqQcCb9jDz-AxQPBMJBo",
                 priority: 1,
                 seen: true,
@@ -419,42 +419,6 @@ enum MockData {
                 priority: 1,
                 seen: true,
                 title: "Build Async Web Scraper",
-            ),
-            TaskSmall(
-                assigneeName: "Alice Teacher",
-                completed: false,
-                dueDate: nil,
-                id: "H5rYRaTVohG9u1AoBIo1y",
-                priority: 1,
-                seen: true,
-                title: "Default Title",
-            ),
-            TaskSmall(
-                assigneeName: "Alice Teacher",
-                completed: false,
-                dueDate: nil,
-                id: "Bzgbqk11luSf32OB48pQA",
-                priority: 3,
-                seen: true,
-                title: "Default Title",
-            ),
-            TaskSmall(
-                assigneeName: "Alice Teacher",
-                completed: false,
-                dueDate: nil,
-                id: "MwcjD6dZLJo0BpCDwqTrK",
-                priority: 1,
-                seen: true,
-                title: "Default Title",
-            ),
-            TaskSmall(
-                assigneeName: "Alice Teacher",
-                completed: false,
-                dueDate: nil,
-                id: "70f7EBo2fPAk13a2PT4-I",
-                priority: 1,
-                seen: true,
-                title: "New TaskSmall",
             ),
             TaskSmall(
                 assigneeName: "Alice Teacher",

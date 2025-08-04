@@ -27,6 +27,7 @@ struct ContentView: View {
             // Update token manager state based on stored tokens
             tokenManager.isAuthenticated = TokenStorage.hasValidTokens()
         }
+        .tint(.accentColour)
     }
 
     private var authenticatedView: some View {
@@ -56,17 +57,7 @@ struct ContentView: View {
                     }
                     .tag(3)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Menu {
-                        Button("Sign Out", role: .destructive) {
-                            tokenManager.logout()
-                        }
-                    } label: {
-                        Image(systemName: "person.circle")
-                    }
-                }
-            }
+            .tabViewStyle(.sidebarAdaptable)
         }
     }
 }

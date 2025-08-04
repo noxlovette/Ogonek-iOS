@@ -1,5 +1,5 @@
 //
-//  Auth.swift
+//  OpenAPIClient+Auth.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 30.07.2025.

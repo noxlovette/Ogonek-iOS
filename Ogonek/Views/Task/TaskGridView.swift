@@ -135,13 +135,13 @@ struct TaskGridView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
-                    // Task grid
+                    // Task list
                     ScrollView {
                         LazyVGrid(columns: [
                             GridItem(.flexible(), spacing: 16),
                         ], spacing: 16) {
                             ForEach(filteredTasks, id: \.id) { task in
-                                TaskCardView(task: task)
+                                TaskRowView(task: task)
                             }
                         }
                         .padding(.horizontal)
