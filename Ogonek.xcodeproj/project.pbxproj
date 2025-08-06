@@ -14,6 +14,7 @@
 		D53CD02C2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D53CD02D2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D5451D252E3A9D9600A810A2 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5451D242E3A9D9600A810A2 /* openapi.yaml */; };
+		D59519E22E43A58F00AFF7C2 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = D59519E12E43A58F00AFF7C2 /* ZipArchive */; };
 		D59C2FA02DC15848000610EE /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D59C2F9F2DC15848000610EE /* MarkdownUI */; };
 		D5E6128D2E3B85440050C3EC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = D5E6128C2E3B85440050C3EC /* KeychainAccess */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 				D5056C152E3A060900398086 /* OpenAPIRuntime in Frameworks */,
 				3FF9C9736A73404B91138ABF /* Sentry in Frameworks */,
 				D5E6128D2E3B85440050C3EC /* KeychainAccess in Frameworks */,
+				D59519E22E43A58F00AFF7C2 /* ZipArchive in Frameworks */,
 			);
 		};
 		D53ACB622DB18B9000CE4D45 /* Frameworks */ = {
@@ -157,6 +159,7 @@
 				D5056C142E3A060900398086 /* OpenAPIRuntime */,
 				D5056C172E3A062200398086 /* OpenAPIURLSession */,
 				D5E6128C2E3B85440050C3EC /* KeychainAccess */,
+				D59519E12E43A58F00AFF7C2 /* ZipArchive */,
 			);
 			productName = "Ogonek Swift";
 			productReference = D53ACB562DB18B8F00CE4D45 /* Ogonek.app */;
@@ -244,6 +247,7 @@
 				D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */,
 				D5E6128B2E3B85440050C3EC /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				D55BCD3E2E3B999E0021896D /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+				D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = D53ACB572DB18B8F00CE4D45 /* Products */;
@@ -680,6 +684,14 @@
 				minimumVersion = 0.59.1;
 			};
 		};
+		D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ZipArchive/ZipArchive";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.0;
+			};
+		};
 		D5A4B6482DC155A700520DD1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
@@ -718,6 +730,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
 			productName = OpenAPIURLSession;
+		};
+		D59519E12E43A58F00AFF7C2 /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
+			productName = ZipArchive;
 		};
 		D59C2F9F2DC15848000610EE /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

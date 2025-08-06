@@ -15,6 +15,7 @@ enum APIError: Error, LocalizedError {
     case serverError(statusCode: Int)
     case badRequest
     case unknownError
+    case invalidURL
 
     var errorDescription: String? {
         switch self {
@@ -32,6 +33,22 @@ enum APIError: Error, LocalizedError {
             "An unknown error occurred"
         case .notFound:
             "Resource not found"
+        case .invalidURL:
+            "Invalid URL"
+        }
+    }
+}
+
+enum DownloadError: LocalizedError {
+    case zipCreationFailed
+    case noPresignedURLs
+
+    var errorDescription: String? {
+        switch self {
+        case .zipCreationFailed:
+            "Failed to create ZIP archive"
+        case .noPresignedURLs:
+            "No files to download"
         }
     }
 }

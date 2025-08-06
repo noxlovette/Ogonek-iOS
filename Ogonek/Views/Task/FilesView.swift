@@ -1,9 +1,9 @@
-    //
-    //  FilesView.swift
-    //  Ogonek
-    //
-    //  Created by Danila Volkov on 06.08.2025.
-    //
+//
+//  FilesView.swift
+//  Ogonek
+//
+//  Created by Danila Volkov on 06.08.2025.
+//
 
 import SwiftUI
 
@@ -24,7 +24,7 @@ struct FilesView: View {
         }
     }
 
-        // MARK: - Views
+    // MARK: - Views
 
     private var filesList: some View {
         ScrollView {
@@ -64,11 +64,11 @@ struct FileRow: View {
 
     var body: some View {
         HStack(spacing: 16) {
-                // File icon
+            // File icon
             fileIcon
                 .frame(width: 40, height: 40)
 
-                // File details
+            // File details
             VStack(alignment: .leading, spacing: 4) {
                 Text(file.name)
                     .font(.headline)
@@ -85,7 +85,7 @@ struct FileRow: View {
                             .padding(.vertical, 2)
                             .background(
                                 RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color(.tertiarySystemFill))
+                                    .fill(Color(.tertiarySystemFill)),
                             )
                     }
 
@@ -99,7 +99,7 @@ struct FileRow: View {
 
             Spacer()
 
-                // Visual indicator that it's not clickable
+            // Visual indicator that it's not clickable
             Image(systemName: "eye")
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -108,11 +108,11 @@ struct FileRow: View {
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color(.systemBackground))
-                .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
+                .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1),
         )
     }
 
-        // MARK: - File Icon
+    // MARK: - File Icon
 
     private var fileIcon: some View {
         ZStack {
@@ -129,24 +129,24 @@ struct FileRow: View {
         guard let mimeType = file.mimeType else { return .gray }
 
         switch mimeType {
-            case let type where type.hasPrefix("image/"):
-                return .orange
-            case let type where type.hasPrefix("video/"):
-                return .purple
-            case let type where type.hasPrefix("audio/"):
-                return .pink
-            case let type where type.contains("pdf"):
-                return .red
-            case let type where type.contains("document") || type.contains("word"):
-                return .blue
-            case let type where type.contains("spreadsheet") || type.contains("excel"):
-                return .green
-            case let type where type.contains("presentation") || type.contains("powerpoint"):
-                return .indigo
-            case let type where type.contains("zip") || type.contains("archive"):
-                return .brown
-            default:
-                return .gray
+        case let type where type.hasPrefix("image/"):
+            return .orange
+        case let type where type.hasPrefix("video/"):
+            return .purple
+        case let type where type.hasPrefix("audio/"):
+            return .pink
+        case let type where type.contains("pdf"):
+            return .red
+        case let type where type.contains("document") || type.contains("word"):
+            return .blue
+        case let type where type.contains("spreadsheet") || type.contains("excel"):
+            return .green
+        case let type where type.contains("presentation") || type.contains("powerpoint"):
+            return .indigo
+        case let type where type.contains("zip") || type.contains("archive"):
+            return .brown
+        default:
+            return .gray
         }
     }
 
@@ -154,51 +154,51 @@ struct FileRow: View {
         guard let mimeType = file.mimeType else { return "doc" }
 
         switch mimeType {
-            case let type where type.hasPrefix("image/"):
-                return "photo"
-            case let type where type.hasPrefix("video/"):
-                return "video"
-            case let type where type.hasPrefix("audio/"):
-                return "music.note"
-            case let type where type.contains("pdf"):
-                return "doc.text"
-            case let type where type.contains("document") || type.contains("word"):
-                return "doc.text"
-            case let type where type.contains("spreadsheet") || type.contains("excel"):
-                return "tablecells"
-            case let type where type.contains("presentation") || type.contains("powerpoint"):
-                return "rectangle.on.rectangle"
-            case let type where type.contains("zip") || type.contains("archive"):
-                return "archivebox"
-            default:
-                return "doc"
+        case let type where type.hasPrefix("image/"):
+            return "photo"
+        case let type where type.hasPrefix("video/"):
+            return "video"
+        case let type where type.hasPrefix("audio/"):
+            return "music.note"
+        case let type where type.contains("pdf"):
+            return "doc.text"
+        case let type where type.contains("document") || type.contains("word"):
+            return "doc.text"
+        case let type where type.contains("spreadsheet") || type.contains("excel"):
+            return "tablecells"
+        case let type where type.contains("presentation") || type.contains("powerpoint"):
+            return "rectangle.on.rectangle"
+        case let type where type.contains("zip") || type.contains("archive"):
+            return "archivebox"
+        default:
+            return "doc"
         }
     }
 
-        // MARK: - Helper Functions
+    // MARK: - Helper Functions
 
     private func fileTypeLabel(from mimeType: String) -> String {
         switch mimeType {
-            case let type where type.hasPrefix("image/"):
-                return "Image"
-            case let type where type.hasPrefix("video/"):
-                return "Video"
-            case let type where type.hasPrefix("audio/"):
-                return "Audio"
-            case let type where type.contains("pdf"):
-                return "PDF"
-            case let type where type.contains("document") || type.contains("word"):
-                return "Document"
-            case let type where type.contains("spreadsheet") || type.contains("excel"):
-                return "Spreadsheet"
-            case let type where type.contains("presentation") || type.contains("powerpoint"):
-                return "Presentation"
-            case let type where type.contains("zip") || type.contains("archive"):
-                return "Archive"
-            case let type where type.hasPrefix("text/"):
-                return "Text"
-            default:
-                return "File"
+        case let type where type.hasPrefix("image/"):
+            "Image"
+        case let type where type.hasPrefix("video/"):
+            "Video"
+        case let type where type.hasPrefix("audio/"):
+            "Audio"
+        case let type where type.contains("pdf"):
+            "PDF"
+        case let type where type.contains("document") || type.contains("word"):
+            "Document"
+        case let type where type.contains("spreadsheet") || type.contains("excel"):
+            "Spreadsheet"
+        case let type where type.contains("presentation") || type.contains("powerpoint"):
+            "Presentation"
+        case let type where type.contains("zip") || type.contains("archive"):
+            "Archive"
+        case let type where type.hasPrefix("text/"):
+            "Text"
+        default:
+            "File"
         }
     }
 

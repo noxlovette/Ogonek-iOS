@@ -48,7 +48,7 @@ struct TaskListView: View {
     private var tasksList: some View {
         List {
             ForEach(viewModel.tasks) { task in
-                    TaskRowView(task: task)
+                TaskRowView(task: task)
             }
 
             if viewModel.isLoading, !viewModel.tasks.isEmpty {

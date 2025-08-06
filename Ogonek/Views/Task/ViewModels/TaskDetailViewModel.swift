@@ -49,4 +49,18 @@ class TaskDetailViewModel {
             print("Error toggling completion: \(error)")
         }
     }
+
+    func getPresignedURLs() async throws -> [URL] {
+        guard let files = taskWithFiles?.files else {
+            throw DownloadError.noPresignedURLs
+        }
+
+        if taskID == "mock" {
+            return files.map { file in
+                URL(string: "https://example.com/mock/\(file.name)")!
+            }
+        }
+
+        return try await apiService.getPresignedDownloadURLs(for: taskID)
+    }
 }
