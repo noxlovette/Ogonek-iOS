@@ -22,11 +22,11 @@ struct LessonListView: View {
             }
             .navigationTitle("Lessons")
             .searchable(text: $searchText, prompt: "Search lessons...")
-            .refreshable {
-                await viewModel.refreshLessons()
-            }
             .task {
                 await viewModel.loadLessons()
+            }
+            .refreshable {
+                await viewModel.refreshLessons()
             }
             .onChange(of: searchText) { _, newValue in
                 Task {

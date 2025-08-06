@@ -1,9 +1,9 @@
-//
-//  ContentView.swift
-//  Ogonek
-//
-//  Created by Danila Volkov on 28.06.2025.
-//
+    //
+    //  ContentView.swift
+    //  Ogonek
+    //
+    //  Created by Danila Volkov on 28.06.2025.
+    //
 
 import SwiftUI
 
@@ -11,23 +11,46 @@ struct ContentView: View {
     @EnvironmentObject var apiService: APIService
     @StateObject private var tokenManager = TokenManager.shared
     @State private var selectedTab = 0
+    @State private var authSetupCompleted = false
 
     var body: some View {
         Group {
-            if tokenManager.isAuthenticated {
+            if tokenManager.isAuthenticated && authSetupCompleted {
                 authenticatedView
-            } else {
+            } else if !tokenManager.isAuthenticated && authSetupCompleted {
                 LoginView()
+            } else {
+                    // Show loading while setting up authentication
+                VStack {
+                    ProgressView()
+                        .scaleEffect(1.2)
+                    Text("Loading...")
+                        .padding(.top, 16)
+                        .foregroundColor(.secondary)
+                }
             }
         }
-        .onAppear {
-            // Try to restore authentication on app launch
-            apiService.restoreAuthenticationIfAvailable()
-
-            // Update token manager state based on stored tokens
-            tokenManager.isAuthenticated = TokenStorage.hasValidTokens()
+        .task {
+            await setupAuthentication()
         }
         .tint(.accentColour)
+    }
+
+    @MainActor
+    private func setupAuthentication() async {
+            // Give the system a moment to settle
+        try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+
+            // Try to restore authentication on app launch
+        apiService.restoreAuthenticationIfAvailable()
+
+            // Update token manager state based on stored tokens
+        tokenManager.isAuthenticated = TokenStorage.hasValidTokens()
+
+            // Mark auth setup as completed
+        authSetupCompleted = true
+
+        print("🚀 Authentication setup completed. Authenticated: \(tokenManager.isAuthenticated)")
     }
 
     private var authenticatedView: some View {
