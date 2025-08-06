@@ -8,13 +8,12 @@ struct TaskRowView: View {
             TaskDetailView(taskID: task.id)
         } label: {
             HStack {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack {
                     Text(task.title)
                         .font(.headline)
                         .lineLimit(2)
                         .strikethrough(task.completed)
                         .foregroundColor(task.completed ? .secondary : .primary)
-
                     HStack {
                         if let dueDate = task.dueDate {
                             HStack(spacing: 4) {

@@ -13,15 +13,13 @@ struct DashboardView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+                VStack {
                     quickActionsCard
 
                     tasksSection
 
                     lessonsSection
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 20)
             }
             .navigationTitle("Dashboard")
             .navigationBarTitleDisplayMode(.large)
@@ -79,39 +77,17 @@ struct DashboardView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
             }
             .padding()
-            .background(.regularMaterial)
             .cornerRadius(12)
         }
         .buttonStyle(.plain)
     }
 
     private var tasksSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text("Tasks")
-                    .font(.title2.bold())
-
-                Spacer()
-
-                if !viewModel.dueTasks.isEmpty {
-                    Text("\(viewModel.dueTasks.count)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(.secondary.opacity(0.1))
-                        .cornerRadius(8)
-                }
-            }
-
+        VStack {
+            Text("Tasks")
+                .font(.title2.bold())
             if viewModel.dueTasks.isEmpty {
                 EmptyStateView(
                     icon: "checkmark.circle.fill",
@@ -123,9 +99,6 @@ struct DashboardView: View {
                 LazyVStack(spacing: 8) {
                     ForEach(viewModel.dueTasks) { task in
                         TaskRowView(task: task)
-                            .padding()
-                            .background(.regularMaterial)
-                            .cornerRadius(12)
                     }
                 }
             }
@@ -133,23 +106,9 @@ struct DashboardView: View {
     }
 
     private var lessonsSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text("Lessons")
-                    .font(.title2.bold())
-
-                Spacer()
-
-                if !viewModel.recentLessons.isEmpty {
-                    Text("\(viewModel.recentLessons.count)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(.secondary.opacity(0.1))
-                        .cornerRadius(8)
-                }
-            }
+        VStack {
+            Text("Lessons")
+                .font(.title2.bold())
 
             if viewModel.recentLessons.isEmpty {
                 EmptyStateView(
@@ -162,9 +121,6 @@ struct DashboardView: View {
                 LazyVStack(spacing: 8) {
                     ForEach(viewModel.recentLessons) { lesson in
                         LessonRowView(lesson: lesson)
-                            .padding()
-                            .background(.regularMaterial)
-                            .cornerRadius(12)
                     }
                 }
             }

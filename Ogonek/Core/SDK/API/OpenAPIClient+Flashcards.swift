@@ -1,15 +1,16 @@
 import Foundation
 
 extension OpenAPIClient {
-    func listDecks(_: Operations.ListDecks.Input) async throws -> Operations.ListDecks.Output {
-        notImplemented()
-    }
-
     func createDeck(_: Operations.CreateDeck.Input) async throws -> Operations.CreateDeck.Output {
         notImplemented()
     }
 
-    func listDecks() async throws -> PaginatedDecks {
+    func listDecks(_ page: Int32? = 1, _ perPage: Int32? = 20, _ search: String? = nil) async throws -> PaginatedDecks {
+        let input = Operations.ListDecks.Input(query: Operations.ListDecks.Input.Query(
+            page: page,
+            perPage: perPage,
+            search: search,
+        ))
         let response = try await client.listDecks()
 
         switch response {

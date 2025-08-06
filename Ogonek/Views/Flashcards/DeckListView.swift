@@ -1,5 +1,5 @@
 //
-//  DeckGridView.swift
+//  DeckListView.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 28.06.2025.
@@ -7,29 +7,26 @@
 
 import SwiftUI
 
-struct DeckGridView: View {
-    @State private var viewModel = DeckGridViewModel()
-
-    let columns = [
-        GridItem(.adaptive(minimum: 160)),
-    ]
+struct DeckListView: View {
+    @State private var viewModel = DeckListViewModel()
+    @State private var searchText = ""
 
     var body: some View {
         NavigationStack {
-            Group {
-                if viewModel.decks.isEmpty, !viewModel.isLoading {
-                    Text("No decks found")
-                } else {
-                    decksGrid
+            decksList
+                .navigationTitle("Decks")
+                .searchable(text: $searchText, prompt: "Search decks...")
+                .refreshable {
+                    await viewModel.loadDecks()
                 }
-            }
-            .navigationTitle("Decks")
-            .refreshable {
-                await viewModel.loadDecks()
-            }
-            .task {
-                await viewModel.loadDecks()
-            }
+                .task {
+                    await viewModel.loadDecks()
+                }
+                .onChange(of: searchText) { _, newValue in
+                    Task {
+                        await viewModel.searchDecks(query: newValue)
+                    }
+                }
 
         }.alert("Error", isPresented: .constant(!viewModel.errorMessage.isNil)) {
             Button("OK") {
@@ -42,12 +39,10 @@ struct DeckGridView: View {
         }
     }
 
-    private var decksGrid: some View {
+    private var decksList: some View {
         List {
             ForEach(viewModel.decks) { deck in
-                NavigationLink(value: deck.id) {
-                    DeckCardView(deck: deck)
-                }
+                DeckRowView(deck: deck)
             }
 
             if viewModel.isLoading, !viewModel.decks.isEmpty {
@@ -60,15 +55,16 @@ struct DeckGridView: View {
             }
         }
         .listStyle(.inset)
-        .navigationDestination(for: String.self) { deckId in
-            DeckDetailView(deckId: deckId)
-        }
         .overlay {
             if viewModel.isLoading, viewModel.decks.isEmpty {
-                ProgressView("Loading deckks...")
+                ProgressView("Loading decks...")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.clear)
             }
         }
     }
+}
+
+#Preview {
+    DeckListView()
 }

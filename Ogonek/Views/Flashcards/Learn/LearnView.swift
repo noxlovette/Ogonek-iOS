@@ -18,7 +18,6 @@ struct LearnView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Background gradient
                 LinearGradient(
                     colors: [Color(.systemGray6), Color(.systemBackground)],
                     startPoint: .top,

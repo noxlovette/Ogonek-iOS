@@ -2,7 +2,7 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 
-    /// Main API client that handles both authenticated and unauthenticated requests
+/// Main API client that handles both authenticated and unauthenticated requests
 public class OpenAPIClient {
     var client: Client
     private var authMiddleware: AuthenticationMiddleware?
@@ -11,7 +11,7 @@ public class OpenAPIClient {
     private let clientQueue = DispatchQueue(label: "openapi.client.queue", qos: .userInitiated)
     private var isSettingUpAuth = false
 
-        /// Initialize with no authentication (for login/signup)
+    /// Initialize with no authentication (for login/signup)
     init() {
         let apiKey = ProcessInfo.processInfo.environment["API_KEY"]
         apiKeyMiddleware = APIKeyMiddleware(apiKey: apiKey!)
@@ -27,8 +27,8 @@ public class OpenAPIClient {
         }
     }
 
-        /// Add authentication after successful login
-    func setAuthToken(_ token: String) {
+    /// Add authentication after successful login
+    func setAuthToken(_: String) {
         clientQueue.sync {
             guard !isSettingUpAuth else { return }
             isSettingUpAuth = true
@@ -37,7 +37,7 @@ public class OpenAPIClient {
 
             do {
                 let authMiddleware = AuthenticationMiddleware(tokenProvider: {
-                        // Always get the latest token from storage
+                    // Always get the latest token from storage
                     guard let currentToken = TokenStorage.getAccessToken() else {
                         throw TokenRefreshError.noRefreshToken
                     }
@@ -63,7 +63,7 @@ public class OpenAPIClient {
         }
     }
 
-        /// Remove authentication (for logout)
+    /// Remove authentication (for logout)
     func clearAuth() {
         clientQueue.sync {
             do {
@@ -81,10 +81,10 @@ public class OpenAPIClient {
         }
     }
 
-        /// Check if client is authenticated
+    /// Check if client is authenticated
     var isAuthenticated: Bool {
         clientQueue.sync {
-            return authMiddleware != nil && !isSettingUpAuth
+            authMiddleware != nil && !isSettingUpAuth
         }
     }
 }

@@ -1,9 +1,9 @@
-    //
-    //  ContentView.swift
-    //  Ogonek
-    //
-    //  Created by Danila Volkov on 28.06.2025.
-    //
+//
+//  ContentView.swift
+//  Ogonek
+//
+//  Created by Danila Volkov on 28.06.2025.
+//
 
 import SwiftUI
 
@@ -15,12 +15,12 @@ struct ContentView: View {
 
     var body: some View {
         Group {
-            if tokenManager.isAuthenticated && authSetupCompleted {
+            if tokenManager.isAuthenticated, authSetupCompleted {
                 authenticatedView
-            } else if !tokenManager.isAuthenticated && authSetupCompleted {
+            } else if !tokenManager.isAuthenticated, authSetupCompleted {
                 LoginView()
             } else {
-                    // Show loading while setting up authentication
+                // Show loading while setting up authentication
                 VStack {
                     ProgressView()
                         .scaleEffect(1.2)
@@ -38,16 +38,16 @@ struct ContentView: View {
 
     @MainActor
     private func setupAuthentication() async {
-            // Give the system a moment to settle
+        // Give the system a moment to settle
         try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
 
-            // Try to restore authentication on app launch
+        // Try to restore authentication on app launch
         apiService.restoreAuthenticationIfAvailable()
 
-            // Update token manager state based on stored tokens
+        // Update token manager state based on stored tokens
         tokenManager.isAuthenticated = TokenStorage.hasValidTokens()
 
-            // Mark auth setup as completed
+        // Mark auth setup as completed
         authSetupCompleted = true
 
         print("🚀 Authentication setup completed. Authenticated: \(tokenManager.isAuthenticated)")
@@ -74,7 +74,7 @@ struct ContentView: View {
                     }
                     .tag(2)
 
-                DeckGridView()
+                DeckListView()
                     .tabItem {
                         Label("Learn", systemImage: "graduationcap")
                     }

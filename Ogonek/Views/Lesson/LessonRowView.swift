@@ -14,13 +14,13 @@ struct LessonRowView: View {
         NavigationLink {
             LessonDetailView(lessonId: lesson.id)
         } label: {
-            VStack(alignment: .leading, spacing: 6) {
+            VStack {
                 Text(lesson.topic)
                     .font(.headline)
                     .lineLimit(2)
                     .foregroundColor(.primary)
 
-                HStack(spacing: 4) {
+                HStack {
                     Image(systemName: "clock")
                         .font(.caption2)
                         .foregroundColor(.secondary)
@@ -29,22 +29,13 @@ struct LessonRowView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
+
+                Spacer()
             }
         }
     }
 }
 
 #Preview("Lesson Row View") {
-    VStack {
         LessonRowView(lesson: MockData.paginatedLessons.data[0])
-            .padding()
-            .background(.regularMaterial)
-            .cornerRadius(12)
-
-        LessonRowView(lesson: MockData.paginatedLessons.data[1])
-            .padding()
-            .background(.regularMaterial)
-            .cornerRadius(12)
-    }
-    .padding()
 }
