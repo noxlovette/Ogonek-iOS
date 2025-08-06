@@ -48,7 +48,7 @@ struct TaskListView: View {
     private var tasksList: some View {
         List {
             ForEach(viewModel.tasks) { task in
-                TaskRowView(task: task)
+                    TaskRowView(task: task)
             }
 
             if viewModel.isLoading, !viewModel.tasks.isEmpty {
@@ -61,8 +61,8 @@ struct TaskListView: View {
             }
         }
         .listStyle(.inset)
-        .navigationDestination(for: String.self) { taskId in
-            TaskDetailView(taskId: taskId)
+        .navigationDestination(for: String.self) { taskID in // This receives the task ID
+            TaskDetailView(taskID: taskID)
         }
         .overlay {
             if viewModel.isLoading, viewModel.tasks.isEmpty {

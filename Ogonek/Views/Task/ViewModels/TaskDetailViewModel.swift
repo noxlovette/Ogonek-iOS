@@ -10,23 +10,27 @@ import Observation
 
 @Observable
 class TaskDetailViewModel {
-    var task: TaskWithFiles?
+    let taskID: String
+    var taskWithFiles: TaskWithFiles?
     var isLoading = false
     var errorMessage: String?
 
     private let apiService = APIService.shared
 
-    /// Fetch a specific task by ID
+    init(taskID: String = "mock") {
+        self.taskID = taskID
+    }
+
     @MainActor
-    func fetchTask(id: String) async {
+    func fetchTask() async {
         isLoading = true
         errorMessage = nil
 
         do {
-            if id == "mock" {
-                task = MockData.taskWithFiles
+            if taskID == "mock" {
+                taskWithFiles = MockData.taskWithFiles
             } else {
-                task = try await apiService.fetchTask(id: id)
+                taskWithFiles = try await apiService.fetchTask(id: taskID)
             }
         } catch {
             errorMessage = "Failed to load task: \(error.localizedDescription)"
@@ -38,10 +42,8 @@ class TaskDetailViewModel {
 
     @MainActor
     func toggleTaskCompletion() async {
-        guard let currentTask = task else { return }
-
         do {
-            try await apiService.toggleTaskCompletion(id: currentTask.task.id)
+            try await apiService.toggleTaskCompletion(id: taskID)
         } catch {
             errorMessage = "Failed to update task: \(error.localizedDescription)"
             print("Error toggling completion: \(error)")

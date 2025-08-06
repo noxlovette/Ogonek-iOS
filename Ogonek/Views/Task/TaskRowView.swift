@@ -5,7 +5,7 @@ struct TaskRowView: View {
 
     var body: some View {
         NavigationLink {
-            TaskDetailView(taskId: task.id)
+            TaskDetailView(taskID: task.id)
         } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
