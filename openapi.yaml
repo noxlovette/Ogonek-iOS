@@ -1369,12 +1369,16 @@ components:
       - name
       - visibility
       - createdBy
+      - cardCount
       - createdAt
       properties:
         assignee:
           type:
           - string
           - 'null'
+        cardCount:
+          type: integer
+          format: int64
         createdAt:
           type: string
           format: date-time
@@ -1414,11 +1418,15 @@ components:
       - id
       - name
       - visibility
+      - cardCount
       properties:
         assigneeName:
           type:
           - string
           - 'null'
+        cardCount:
+          type: integer
+          format: int64
         description:
           type:
           - string

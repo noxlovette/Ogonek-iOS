@@ -173,6 +173,7 @@ enum MockData {
         ],
         deck: Deck(
             assignee: "dev_student2_FFrb-e1V",
+            cardCount: 10,
             createdAt: ISO8601DateFormatter().date(from: "2025-07-18T08:27:14.543237Z") ?? Date(),
             createdBy: "dev_teacher1_sDkwvkSa",
             description: "Complex patterns and idioms in Rust programming",
@@ -186,7 +187,7 @@ enum MockData {
     static let decks = {
         [
             DeckSmall(
-                assigneeName: "Alice Teacher",
+                assigneeName: "Alice Teacher", cardCount: 4,
                 description: "Default Description",
                 id: "VlHCKLoYEmrO5BYJqWBAp",
                 isSubscribed: false,
@@ -196,6 +197,7 @@ enum MockData {
             ),
             DeckSmall(
                 assigneeName: "Diana Learner",
+                cardCount: 5,
                 description: "Complex patterns and idioms in Rust programming",
                 id: "0mNE0QOytmJAc0GsFJq6E",
                 isSubscribed: true,
@@ -205,6 +207,7 @@ enum MockData {
             ),
             DeckSmall(
                 assigneeName: "Charlie Student",
+                cardCount: 8,
                 description: "Essential Rust terms and concepts for beginners",
                 id: "j8JiEp5K5zwYVetixBFiU",
                 isSubscribed: false,
