@@ -31,12 +31,10 @@ struct TaskRowView: View {
 
                 statusBadge
             }
-            .padding(.vertical, 4)
         }
         .buttonStyle(.plain)
     }
 
-        // MARK: - Computed Properties
     private var isOverdue: Bool {
         guard let dueDate = task.dueDate else { return false }
         return dueDate < Date() && !task.completed
@@ -48,13 +46,13 @@ struct TaskRowView: View {
             StatusBadge(
                 icon: "checkmark.circle.fill",
                 text: "Completed",
-                color: .green
+                color: .green,
             )
         } else if isOverdue {
             StatusBadge(
                 icon: "exclamationmark.triangle.fill",
                 text: "Overdue",
-                color: .red
+                color: .red,
             )
         }
     }

@@ -1,4 +1,4 @@
-//  DeckGridViewModel.swift
+//  DeckListViewModel.swift
 //  Ogonek
 //
 //  Rewritten following Basic Car Maintenance pattern

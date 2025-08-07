@@ -10,28 +10,17 @@ import SwiftUI
 struct EmptyStateView: View {
     let icon: String
     let title: String
-    let subtitle: String
+    let description: String
 
     var body: some View {
-        VStack(spacing: 8) {
-            Image(systemName: icon)
-                .font(.title)
-                .foregroundColor(.secondary)
-
-            Text(title)
-                .font(.subheadline)
-                .fontWeight(.medium)
-
-            Text(subtitle)
-                .font(.caption)
-                .foregroundColor(.secondary)
-        }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .cornerRadius(12)
+        ContentUnavailableView(
+            title,
+            systemImage: icon,
+            description: Text(description),
+        )
     }
 }
 
 #Preview {
-    EmptyStateView(icon: "person.circle", title: "Hello", subtitle: "World")
+    EmptyStateView(icon: "person.circle", title: "Hello", description: "World")
 }

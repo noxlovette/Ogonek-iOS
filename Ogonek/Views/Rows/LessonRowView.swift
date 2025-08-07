@@ -12,7 +12,7 @@ struct LessonRowView: View {
 
     var body: some View {
         NavigationLink {
-            LessonDetailView(lessonId: lesson.id)
+            LessonDetailView(lessonID: lesson.id)
         } label: {
             HStack(alignment: .top, spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
@@ -30,15 +30,7 @@ struct LessonRowView: View {
                     }
                     .foregroundStyle(.secondary)
                 }
-
-                Spacer(minLength: 0)
-
-                    // Add lesson-specific status or metadata here if needed
-                Image(systemName: "chevron.right")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
             }
-            .padding(.vertical, 4)
         }
         .buttonStyle(.plain)
     }

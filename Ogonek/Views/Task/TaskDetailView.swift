@@ -4,27 +4,35 @@ import UniformTypeIdentifiers
 import ZipArchive
 
 struct TaskDetailView: View {
-    @State private var showingDeleteAlert = false
+    let taskID: String
     @State private var showingFileUpload: Bool = false
-    @State private var showingShareSheet = false
-    @State private var shareURL: URL?
     @State private var isDownloading = false
     @State private var downloadProgress: Double = 0.0
-    @State private var viewModel: TaskDetailViewModel
-
-    init(taskID: String = "mock") {
-        viewModel = .init(taskID: taskID)
-    }
+    @State private var shareURL: URL?
+    @State private var viewModel = TaskDetailViewModel()
+    @State private var showingShareSheet = false
 
     var body: some View {
         ScrollView {
-            VStack {
-                Markdown(viewModel.taskWithFiles?.task.markdown ?? "Loading...")
+            VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(viewModel.taskWithFiles.task.title)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+
+                    if let dueDate = viewModel.taskWithFiles.task.dueDate {
+                        Text("Due Date: \(dueDate, style: .date)")
+                    } else {
+                        Text("Due Date: None")
+                    }
+                }
+
+                Markdown(viewModel.taskWithFiles.task.markdown)
             }
             .padding()
         }
-        .navigationTitle(viewModel.taskWithFiles?.task.title ?? "Task Details")
-        .navigationBarTitleDisplayMode(.large)
+        .navigationTitle(viewModel.taskWithFiles.task.title)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup {
                 Button("Files", systemImage: "folder") {
@@ -35,14 +43,12 @@ struct TaskDetailView: View {
         .safeAreaInset(edge: .bottom) {
             bottomToolbar
         }
-        .task {
-            await viewModel.fetchTask()
-        }
         .overlay {
             if viewModel.isLoading {
-                ProgressView()
-            } else if viewModel.taskWithFiles == nil {
-                errorView(message: "Task not found")
+                ProgressView("Loading...")
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .clipShape(Capsule())
             }
         }
         .overlay {
@@ -51,17 +57,19 @@ struct TaskDetailView: View {
             }
         }
         .sheet(isPresented: $showingFileUpload) {
-            FilesView(files: viewModel.taskWithFiles?.files ?? [])
+            FilesView(files: viewModel.taskWithFiles.files)
         }
+
         .sheet(isPresented: $showingShareSheet) {
             if let shareURL {
                 ShareSheet(items: [shareURL])
             }
         }
+
         .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
             Button("Retry") {
                 Task {
-                    await viewModel.fetchTask()
+                    await viewModel.fetchTask(id: taskID)
                 }
             }
             Button("Cancel", role: .cancel) {
@@ -71,6 +79,9 @@ struct TaskDetailView: View {
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
             }
+        }
+        .task {
+            await viewModel.fetchTask(id: taskID)
         }
     }
 
@@ -91,20 +102,19 @@ struct TaskDetailView: View {
                 .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
-            .disabled(isDownloading || viewModel.taskWithFiles == nil)
+            .disabled(isDownloading)
 
             Button(action: markAsComplete) {
                 HStack(spacing: 8) {
-                    Image(systemName: viewModel.taskWithFiles?.task.completed == true ?
+                    Image(systemName: viewModel.taskWithFiles.task.completed == true ?
                         "checkmark.circle.fill" : "circle")
-                    Text(viewModel.taskWithFiles?.task.completed == true ?
+                    Text(viewModel.taskWithFiles.task.completed == true ?
                         "Completed" : "Complete")
                 }
                 .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
-            .tint(viewModel.taskWithFiles?.task.completed == true ? .green : .blue)
-            .disabled(viewModel.taskWithFiles == nil)
+            .tint(viewModel.taskWithFiles.task.completed == true ? .green : .blue)
         }
         .padding()
         .background(.regularMaterial, ignoresSafeAreaEdges: .bottom)
@@ -145,21 +155,21 @@ struct TaskDetailView: View {
 
     private func markAsComplete() {
         Task {
-            await viewModel.toggleTaskCompletion()
+            await viewModel.toggleTaskCompletion(id: taskID)
         }
     }
 
     @MainActor
     private func performDownload() async {
-        guard let taskWithFiles = viewModel.taskWithFiles else { return }
-
         isDownloading = true
         downloadProgress = 0.0
 
         do {
             // Step 1: Get presigned URLs (10% of progress)
             downloadProgress = 0.1
-            let presignedURLs = try await viewModel.getPresignedURLs()
+            let presignedURLs = try await viewModel.getPresignedURLs(
+                for: taskID,
+            )
 
             // Step 2: Download files (60% of progress)
             downloadProgress = 0.2
@@ -167,14 +177,14 @@ struct TaskDetailView: View {
             downloadProgress = 0.7
 
             // Step 3: Create markdown file (10% of progress)
-            let markdownData = taskWithFiles.task.markdown.data(using: .utf8) ?? Data()
+            let markdownData = viewModel.taskWithFiles.task.markdown.data(using: .utf8) ?? Data()
             downloadProgress = 0.8
 
             // Step 4: Create ZIP archive (20% of progress)
             let zipURL = try await createZipArchive(
                 files: downloadedFiles,
                 markdownContent: markdownData,
-                taskTitle: taskWithFiles.task.title,
+                taskTitle: viewModel.taskWithFiles.task.title,
             )
             downloadProgress = 1.0
 
@@ -248,36 +258,10 @@ struct TaskDetailView: View {
 
         return zipURL
     }
-
-    private func errorView(message: String) -> some View {
-        VStack(spacing: 16) {
-            Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 48))
-                .foregroundColor(.orange)
-
-            Text("Failed to load task")
-                .font(.headline)
-                .foregroundColor(.primary)
-
-            Text(message)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-
-            Button("Retry") {
-                Task {
-                    await viewModel.fetchTask()
-                }
-            }
-            .buttonStyle(.borderedProminent)
-        }
-        .padding()
-    }
 }
 
 #Preview {
     NavigationStack {
-        TaskDetailView()
+        TaskDetailView(taskID: "mock")
     }
 }

@@ -61,9 +61,6 @@ struct TaskListView: View {
             }
         }
         .listStyle(.inset)
-        .navigationDestination(for: String.self) { taskID in // This receives the task ID
-            TaskDetailView(taskID: taskID)
-        }
         .overlay {
             if viewModel.isLoading, viewModel.tasks.isEmpty {
                 ProgressView("Loading tasks...")

@@ -19,7 +19,7 @@ struct DashboardView: View {
                     tasksSection
 
                     lessonsSection
-                }
+                }.padding()
             }
             .navigationTitle("Dashboard")
             .navigationBarTitleDisplayMode(.large)
@@ -92,7 +92,7 @@ struct DashboardView: View {
                 EmptyStateView(
                     icon: "checkmark.circle.fill",
                     title: "All caught up!",
-                    subtitle: "No tasks due right now",
+                    description: "No tasks due right now",
                 )
                 .padding(.vertical, 20)
             } else {
@@ -114,7 +114,7 @@ struct DashboardView: View {
                 EmptyStateView(
                     icon: "book.fill",
                     title: "No recent lessons",
-                    subtitle: "Your recent lessons will appear here",
+                    description: "Your recent lessons will appear here",
                 )
                 .padding(.vertical, 20)
             } else {

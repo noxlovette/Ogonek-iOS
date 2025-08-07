@@ -10,28 +10,21 @@ import Observation
 
 @Observable
 class TaskDetailViewModel {
-    let taskID: String
-    var taskWithFiles: TaskWithFiles?
+    var taskWithFiles: TaskWithFiles = .placeholder
     var isLoading = false
     var errorMessage: String?
 
     private let apiService = APIService.shared
 
-    init(taskID: String = "mock") {
-        self.taskID = taskID
-    }
-
     @MainActor
-    func fetchTask() async {
+    func fetchTask(id: String) async {
         isLoading = true
         errorMessage = nil
 
         do {
-            if taskID == "mock" {
-                taskWithFiles = MockData.taskWithFiles
-            } else {
-                taskWithFiles = try await apiService.fetchTask(id: taskID)
-            }
+            taskWithFiles = id == "mock" ?
+                MockData.taskWithFiles
+                : try await apiService.fetchTask(id: id)
         } catch {
             errorMessage = "Failed to load task: \(error.localizedDescription)"
             print("Error loading task: \(error)")
@@ -41,26 +34,26 @@ class TaskDetailViewModel {
     }
 
     @MainActor
-    func toggleTaskCompletion() async {
+    func toggleTaskCompletion(id: String) async {
         do {
-            try await apiService.toggleTaskCompletion(id: taskID)
+            try await apiService.toggleTaskCompletion(id: id)
         } catch {
             errorMessage = "Failed to update task: \(error.localizedDescription)"
             print("Error toggling completion: \(error)")
         }
     }
 
-    func getPresignedURLs() async throws -> [URL] {
-        guard let files = taskWithFiles?.files else {
+    func getPresignedURLs(for id: String) async throws -> [URL] {
+        if taskWithFiles.files.isEmpty {
             throw DownloadError.noPresignedURLs
         }
 
-        if taskID == "mock" {
-            return files.map { file in
+        if id == "mock" {
+            return taskWithFiles.files.map { file in
                 URL(string: "https://example.com/mock/\(file.name)")!
             }
         }
 
-        return try await apiService.getPresignedDownloadURLs(for: taskID)
+        return try await apiService.getPresignedDownloadURLs(for: id)
     }
 }

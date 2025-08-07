@@ -15,14 +15,13 @@ struct DeckRowView: View {
                         .foregroundStyle(.primary)
                         .multilineTextAlignment(.leading)
 
-
-                         HStack(spacing: 4) {
-                             Image(systemName: "rectangle.stack")
-                                 .font(.caption2)
-                             Text("\(deck.cardCount) cards")
-                                 .font(.caption2)
-                         }
-                         .foregroundStyle(.secondary)
+                    HStack(spacing: 4) {
+                        Image(systemName: "rectangle.stack")
+                            .font(.caption2)
+                        Text("\(deck.cardCount) cards")
+                            .font(.caption2)
+                    }
+                    .foregroundStyle(.secondary)
                 }
 
                 Spacer(minLength: 0)
@@ -31,7 +30,6 @@ struct DeckRowView: View {
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
-            .padding(.vertical, 4)
         }
         .buttonStyle(.plain)
     }

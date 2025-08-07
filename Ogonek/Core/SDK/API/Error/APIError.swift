@@ -42,6 +42,7 @@ enum APIError: Error, LocalizedError {
 enum DownloadError: LocalizedError {
     case zipCreationFailed
     case noPresignedURLs
+    case markdownConversionFailed
 
     var errorDescription: String? {
         switch self {
@@ -49,6 +50,8 @@ enum DownloadError: LocalizedError {
             "Failed to create ZIP archive"
         case .noPresignedURLs:
             "No files to download"
+        case .markdownConversionFailed:
+            "Markdown conversion failed"
         }
     }
 }
