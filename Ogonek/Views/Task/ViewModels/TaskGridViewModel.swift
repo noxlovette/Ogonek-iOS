@@ -23,7 +23,7 @@ class TaskListViewModel {
         errorMessage = nil
 
         do {
-            let paginatedResponse: PaginatedTasks = if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            let paginatedResponse = if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
                 MockData.tasks
             } else {
                 try await apiService.listTasks(

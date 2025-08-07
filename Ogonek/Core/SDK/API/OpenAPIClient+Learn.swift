@@ -26,8 +26,25 @@ extension OpenAPIClient {
         }
     }
 
-    func updateCardProgress() async throws {
-        notImplemented()
+    func updateCardProgress(cardID: String, quality: Int32) async throws {
+        let path = Operations.UpdateCardProgress.Input.Path(id: cardID)
+
+        let input =
+            Operations.UpdateCardProgress.Input(
+                path: path,
+                body: .json(.init(quality: quality))
+            )
+
+        let response = try await client.updateCardProgress(input)
+
+        switch response {
+        case .noContent:
+            print("ok")
+        case .unauthorized:
+            throw APIError.unauthorized
+        case let .undocumented(statusCode: statusCode, _):
+            throw APIError.serverError(statusCode: statusCode)
+        }
     }
 
     func resetDeckProgress() async throws {

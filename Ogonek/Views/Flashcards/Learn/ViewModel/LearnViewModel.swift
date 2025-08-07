@@ -8,14 +8,14 @@
 import Foundation
 import Observation
 
-@MainActor
-class LearnViewModel: ObservableObject {
-    @Published var cards: [CardProgress] = []
-    @Published var currentIndex: Int = 0
-    @Published var isComplete: Bool = false
-    @Published var showAnswer: Bool = false
-    @Published var userInput: String = ""
-    @Published var isLoading: Bool = false
+@Observable
+class LearnViewModel {
+    var cards: [CardProgress] = []
+    var currentIndex: Int = 0
+    var isComplete: Bool = false
+    var showAnswer: Bool = false
+    var userInput: String = ""
+    var isLoading: Bool = false
 
     var currentCard: CardProgress? {
         guard currentIndex < cards.count else { return nil }
@@ -33,10 +33,9 @@ class LearnViewModel: ObservableObject {
     }
 
     let qualityButtons: [QualityButton] = [
-        QualityButton(key: 1, quality: 0, color: .red, label: "Again"),
-        QualityButton(key: 2, quality: 1, color: .orange, label: "Hard"),
-        QualityButton(key: 3, quality: 2, color: .blue, label: "Good"),
-        QualityButton(key: 4, quality: 3, color: .green, label: "Easy"),
+        QualityButton(key: 1, quality: 0, color: .red, label: "1066"),
+        QualityButton(key: 2, quality: 3, color: .yellow, label: "Good"),
+        QualityButton(key: 3, quality: 5, color: .green, label: "Easy")
     ]
 
     func loadCards() async {
@@ -54,13 +53,14 @@ class LearnViewModel: ObservableObject {
         isLoading = false
     }
 
-    func submitQuality(_: Int) async {
+    func submitQuality(_ quality: Int32) async {
         guard let card = currentCard else { return }
 
         isLoading = true
 
         do {
-            // await APIService.shared.updateCardProgress(cardId: card.id, quality: quality)
+            try await APIService.shared
+                .updateProgress(cardID: card.id, quality: quality)
             await nextCard()
         } catch {
             print("Failed to submit quality: \(error)")
@@ -76,7 +76,6 @@ class LearnViewModel: ObservableObject {
             currentIndex += 1
             showAnswer = false
         } else if currentIndex == cards.count - 1, cards.count > 1 {
-            // Reload cards and reset
             await loadCards()
             currentIndex = 0
             showAnswer = false

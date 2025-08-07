@@ -9,8 +9,20 @@ import Foundation
 
 extension APIService {
     /// Fetch Tasks with pagination
-    func listTasks(page: Int32? = nil, perPage: Int32? = nil, search: String? = nil, assignee: String? = nil, completed: Bool? = false) async throws -> PaginatedTasks {
-        try await openAPIClient.fetchTasks(page: page, perPage: perPage, search: search, assignee: assignee, completed: completed)
+    func listTasks(
+        page: Int32? = nil,
+        perPage: Int32? = nil,
+        search: String? = nil,
+        assignee: String? = nil,
+        completed: Bool? = false,
+    ) async throws -> PaginatedTasks {
+        try await openAPIClient.fetchTasks(
+            page: page,
+            perPage: perPage,
+            search: search,
+            assignee: assignee,
+            completed: completed,
+        )
     }
 
     /// Fetch a specific task by ID

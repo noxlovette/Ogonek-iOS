@@ -11,7 +11,7 @@ extension OpenAPIClient {
             perPage: perPage,
             search: search,
         ))
-        let response = try await client.listDecks()
+        let response = try await client.listDecks(input)
 
         switch response {
         case let .ok(okResponse):

@@ -4,27 +4,18 @@ import SwiftUI
 struct QualityButton: Identifiable {
     let id = UUID()
     let key: Int
-    let quality: Int
+    let quality: Int32
     let color: Color
     let label: String
 }
 
-// MARK: - Main View
-
 struct LearnView: View {
-    @StateObject private var viewModel = LearnViewModel()
+    @State private var viewModel = LearnViewModel()
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
             ZStack {
-                LinearGradient(
-                    colors: [Color(.systemGray6), Color(.systemBackground)],
-                    startPoint: .top,
-                    endPoint: .bottom,
-                )
-                .ignoresSafeArea()
-
                 if viewModel.isComplete || viewModel.cards.isEmpty {
                     completionView
                 } else if let currentCard = viewModel.currentCard {
@@ -50,7 +41,7 @@ struct LearnView: View {
             // Success icon
             ZStack {
                 Circle()
-                    .fill(Color.brown.opacity(0.1))
+                    .fill(Color.accentColour.opacity(0.1))
                     .frame(width: 80, height: 80)
 
                 Image(systemName: "checkmark.circle.fill")
@@ -70,17 +61,20 @@ struct LearnView: View {
                     .padding(.horizontal, 32)
             }
 
-            Button(action: { dismiss() }) {
-                HStack {
-                    Image(systemName: "house.fill")
-                    Text("Words Page")
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal, 24)
-                .padding(.vertical, 12)
-                .background(Color.brown)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-            }
+            Button(
+                action: { dismiss() },
+                label: {
+                    HStack {
+                        Image(systemName: "house.fill")
+                        Text("Words Page")
+                    }
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 12)
+                    .background(Color.accentColour)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                },
+            )
 
             Spacer()
         }
@@ -137,7 +131,7 @@ struct LearnView: View {
                     .frame(height: 8)
 
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.brown)
+                    .fill(Color.accentColour)
                     .frame(width: geometry.size.width * viewModel.progress, height: 8)
                     .animation(.easeInOut(duration: 0.3), value: viewModel.progress)
             }
@@ -230,17 +224,11 @@ struct LearnView: View {
                 Button(action: viewModel.showAnswerPressed) {
                     HStack {
                         Text("Show Answer")
-                        Text(viewModel.showCloze ? "↵" : "Space")
-                            .font(.caption)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color(.systemGray4))
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
                     }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .background(Color.brown)
+                    .background(Color.accentColour)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             } else {
@@ -254,29 +242,25 @@ struct LearnView: View {
     private var qualityButtonsView: some View {
         HStack(spacing: 12) {
             ForEach(viewModel.qualityButtons) { button in
-                Button(action: {
-                    Task {
-                        await viewModel.submitQuality(button.quality)
-                    }
-                }) {
-                    VStack(spacing: 8) {
-                        Text(button.label)
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-
-                        Text("\(button.key)")
-                            .font(.caption)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color(.systemGray5))
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(button.color.gradient)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                }
+                Button(
+                    action: {
+                        Task {
+                            await viewModel.submitQuality(button.quality)
+                        }
+                    },
+                    label: {
+                        VStack(spacing: 8) {
+                            Text(button.label)
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                        }
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(button.color)
+                        .clipShape(Capsule())
+                    },
+                )
                 .disabled(viewModel.isLoading)
             }
         }

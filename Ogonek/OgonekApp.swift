@@ -12,8 +12,10 @@ struct Ogonek: App {
     init() {
         // MARK: Set up Sentry
 
+        let dsn = "https://f6266ebea7566596d2e3ea95739037dc@o4507272574468096.ingest.de.sentry.io/4509665650737232"
+
         SentrySDK.start { options in
-            options.dsn = "https://f6266ebea7566596d2e3ea95739037dc@o4507272574468096.ingest.de.sentry.io/4509665650737232"
+            options.dsn = dsn
             options.debug = true // Enabled debug when first installing is always helpful
             // Adds IP for users.
             // For more information, visit: https://docs.sentry.io/platforms/apple/data-management/data-collected/

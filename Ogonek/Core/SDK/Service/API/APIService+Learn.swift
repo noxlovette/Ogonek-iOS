@@ -20,7 +20,7 @@ extension APIService {
         try await openAPIClient.fetchDueCards()
     }
 
-    func updateProgress() async throws {
-        try await openAPIClient.updateCardProgress()
+    func updateProgress(cardID: String, quality: Int32) async throws {
+        try await openAPIClient.updateCardProgress(cardID: cardID, quality: quality)
     }
 }

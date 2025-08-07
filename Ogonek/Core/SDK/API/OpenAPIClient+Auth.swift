@@ -62,13 +62,5 @@ extension OpenAPIClient {
         case let .undocumented(statusCode: statusCode, _):
             throw APIError.serverError(statusCode: statusCode)
         }
-
-        func bindStudentToTeacher(_: Operations.BindStudentToTeacher.Input) async throws -> Operations.BindStudentToTeacher.Output {
-            notImplemented()
-        }
-
-        func generateInviteLink(_: Operations.GenerateInviteLink.Input) async throws -> Operations.GenerateInviteLink.Output {
-            notImplemented()
-        }
     }
 }

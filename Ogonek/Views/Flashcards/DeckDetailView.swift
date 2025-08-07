@@ -30,7 +30,7 @@ struct DeckDetailView: View {
 
     private let columns = [
         GridItem(.flexible()),
-        GridItem(.flexible()),
+        GridItem(.flexible())
     ]
 
     var body: some View {
@@ -68,12 +68,7 @@ struct DeckDetailView: View {
     private func deckContent(deckWithCards: DeckWithCards) -> some View {
         ScrollView {
             LazyVStack(spacing: 24) {
-                // Header section
-                headerSection(deck: deckWithCards.deck)
-
-                // Main content
                 HStack(alignment: .top, spacing: 24) {
-                    // Cards grid
                     cardsSection(cards: deckWithCards.cards)
                 }
                 .padding(.horizontal)
@@ -100,72 +95,6 @@ struct DeckDetailView: View {
         }
         .sheet(isPresented: $showingShareSheet) {
             ShareSheet(items: ["Check out this deck: \(deckWithCards.deck.name)"])
-        }
-    }
-
-    private func headerSection(deck: Deck) -> some View {
-        VStack(spacing: 16) {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(deck.name)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
-                }
-
-                Spacer()
-            }
-            .padding(.horizontal)
-
-            // Action buttons
-            HStack(spacing: 12) {
-                // Share button
-                Button {
-                    showingShareSheet.toggle()
-                } label: {
-                    HStack {
-                        Image(systemName: "square.and.arrow.up")
-                        Text("Share Deck")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(Color(.systemGray6))
-                    .foregroundColor(.primary)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                }
-
-                // Edit button (if owner)
-                Button {
-                    // Navigate to edit
-                } label: {
-                    HStack {
-                        Image(systemName: "pencil")
-                        Text("Edit")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(Color(.systemGray6))
-                    .foregroundColor(.primary)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                }
-
-                // Subscribe button
-                Button {
-                    isSubscribed.toggle()
-                    // Handle subscription API call
-                } label: {
-                    HStack {
-                        Image(systemName: isSubscribed ? "person.badge.minus" : "person.badge.plus")
-                        Text(isSubscribed ? "Unsubscribe" : "Subscribe")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(Color.brown)
-                    .foregroundColor(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                }
-            }
-            .padding(.horizontal)
         }
     }
 

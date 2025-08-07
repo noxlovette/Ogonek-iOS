@@ -81,8 +81,7 @@ struct LoginView: View {
     // MARK: - Login Form
 
     private var loginForm: some View {
-        VStack(spacing: 16) {
-            // Username Field
+        Form {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Username")
                     .font(.subheadline)
@@ -90,7 +89,6 @@ struct LoginView: View {
                     .foregroundColor(.primary)
 
                 TextField("Enter your username", text: $viewModel.username)
-                    .textFieldStyle(CustomTextFieldStyle())
                     .focused($focusedField, equals: .username)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
@@ -108,7 +106,6 @@ struct LoginView: View {
                     .foregroundColor(.primary)
 
                 SecureField("Enter your password", text: $viewModel.password)
-                    .textFieldStyle(CustomTextFieldStyle())
                     .focused($focusedField, equals: .password)
                     .submitLabel(.go)
                     .onSubmit {
@@ -171,21 +168,6 @@ struct LoginView: View {
             }
         }
         .padding(.top, 16)
-    }
-}
-
-// MARK: - Custom Text Field Style
-
-struct CustomTextFieldStyle: TextFieldStyle {
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .cornerRadius(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray.opacity(0.3), lineWidth: 1),
-            )
     }
 }
 

@@ -25,8 +25,7 @@ class DeckListViewModel {
 
         do {
             if
-                ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-            {
+                ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
                 decks = MockData.decks()
             } else {
                 decks = try await apiService.listDecks(

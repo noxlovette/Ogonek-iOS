@@ -352,6 +352,12 @@ paths:
         required: true
         schema:
           type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReviewPayload'
+        required: true
       responses:
         '204':
           description: Card progress updated successfully
@@ -1814,6 +1820,14 @@ components:
       properties:
         accessToken:
           $ref: '#/components/schemas/TokenWithExpiry'
+    ReviewPayload:
+      type: object
+      required:
+      - quality
+      properties:
+        quality:
+          type: integer
+          format: int32
     SignUpPayload:
       type: object
       required:

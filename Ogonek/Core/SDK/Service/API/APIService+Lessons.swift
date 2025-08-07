@@ -9,7 +9,12 @@ import Foundation
 
 extension APIService {
     /// Fetch lessons with pagination
-    func listLessons(page: Int32? = nil, perPage: Int32? = nil, search: String? = nil, assignee: String? = nil) async throws -> PaginatedLessons {
+    func listLessons(
+        page: Int32? = nil,
+        perPage: Int32? = nil,
+        search: String? = nil,
+        assignee: String? = nil,
+    ) async throws -> PaginatedLessons {
         try await openAPIClient.fetchLessons(page: page, perPage: perPage, search: search, assignee: assignee)
     }
 

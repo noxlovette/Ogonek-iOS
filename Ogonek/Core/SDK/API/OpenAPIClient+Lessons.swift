@@ -1,7 +1,12 @@
 import Foundation
 
 extension OpenAPIClient {
-    func fetchLessons(page: Int32? = nil, perPage: Int32? = nil, search: String? = nil, assignee: String? = nil) async throws -> PaginatedLessons {
+    func fetchLessons(
+        page: Int32? = nil,
+        perPage: Int32? = nil,
+        search: String? = nil,
+        assignee: String? = nil,
+    ) async throws -> PaginatedLessons {
         let input = Operations.ListLessons.Input(
             query: Operations.ListLessons.Input.Query(
                 page: page,

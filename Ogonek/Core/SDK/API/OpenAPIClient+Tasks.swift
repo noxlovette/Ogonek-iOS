@@ -1,7 +1,13 @@
 import Foundation
 
 extension OpenAPIClient {
-    func fetchTasks(page: Int32? = nil, perPage: Int32? = nil, search: String? = nil, assignee: String? = nil, completed _: Bool? = false) async throws -> PaginatedTasks {
+    func fetchTasks(
+        page: Int32? = nil,
+        perPage: Int32? = nil,
+        search: String? = nil,
+        assignee: String? = nil,
+        completed _: Bool? = false,
+    ) async throws -> PaginatedTasks {
         let input = Operations.ListTasks.Input(
             query: Operations.ListTasks.Input.Query(
                 page: page,
