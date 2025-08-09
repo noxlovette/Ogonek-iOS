@@ -51,11 +51,11 @@ extension OpenAPIClient {
         notImplemented()
     }
 
-    func subscribeToDeck() async throws {
-        notImplemented()
-    }
-
-    func unsubscribeFromDeck() async throws {
-        notImplemented()
+    func toggleDeckSubscription(id: String, subscribed: Bool) async throws {
+        if !subscribed {
+            _ = try await client.subscribeToDeck(path: .init(id: id))
+        } else {
+            _ = try await client.unsubscribeFromDeck(path: .init(id: id))
+        }
     }
 }

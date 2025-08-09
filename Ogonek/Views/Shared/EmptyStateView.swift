@@ -13,11 +13,28 @@ struct EmptyStateView: View {
     let description: String
 
     var body: some View {
-        ContentUnavailableView(
-            title,
-            systemImage: icon,
-            description: Text(description),
-        )
+        VStack(spacing: 16) {
+            Image(systemName: icon)
+                .font(.system(size: 48))
+                .foregroundStyle(.tertiary)
+                .symbolRenderingMode(.hierarchical)
+                .scaleEffect(1.0)
+                .animation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true), value: UUID())
+
+            VStack(spacing: 8) {
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.primary)
+
+                Text(description)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 24)
     }
 }
 

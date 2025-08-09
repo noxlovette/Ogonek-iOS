@@ -23,12 +23,6 @@ struct DeckRowView: View {
                     }
                     .foregroundStyle(.secondary)
                 }
-
-                Spacer(minLength: 0)
-
-                Image(systemName: "chevron.right")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
             }
         }
         .buttonStyle(.plain)

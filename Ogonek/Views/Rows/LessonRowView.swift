@@ -30,6 +30,7 @@ struct LessonRowView: View {
                     }
                     .foregroundStyle(.secondary)
                 }
+                Spacer()
             }
         }
         .buttonStyle(.plain)

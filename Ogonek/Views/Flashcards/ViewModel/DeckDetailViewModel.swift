@@ -10,7 +10,7 @@ import Observation
 
 @Observable
 class DeckDetailViewModel {
-    var deck: DeckWithCards?
+    var deck: DeckWithCards = .placeholder
     var isLoading = false
     var errorMessage: String?
 
@@ -33,5 +33,18 @@ class DeckDetailViewModel {
         }
 
         isLoading = false
+    }
+
+    @MainActor
+    func toggleSubscription() async {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            try await apiService.toggleDeckSubscription(id: deck.deck.id, subscribed: deck.deck.isSubscribed ?? false)
+        } catch {
+            errorMessage = "Failed to toggle subscription: \(error.localizedDescription)"
+            print("Error toggling subscription: \(error)")
+        }
     }
 }

@@ -9,7 +9,6 @@ import Foundation
 
 extension APIService {
     /// Fetch flashcards
-
     func listDecks(page: Int32 = 1, perPage: Int32 = 20, search: String? = nil) async throws -> [DeckSmall] {
         try await openAPIClient.listDecks(page, perPage, search)
     }
@@ -17,5 +16,11 @@ extension APIService {
     /// Fetch a specific task by ID
     func fetchDeck(id: String) async throws -> DeckWithCards {
         try await openAPIClient.fetchDeck(id: id)
+    }
+
+    /// Subscribe
+    func toggleDeckSubscription(id: String, subscribed: Bool) async throws {
+        try await openAPIClient
+            .toggleDeckSubscription(id: id, subscribed: subscribed)
     }
 }

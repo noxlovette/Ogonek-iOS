@@ -1,10 +1,3 @@
-//
-//  DashboardView.swift
-//  Ogonek
-//
-//  Rewritten following Basic Car Maintenance pattern
-//
-
 import SwiftUI
 
 struct DashboardView: View {
@@ -12,14 +5,51 @@ struct DashboardView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack {
-                    quickActionsCard
+            List {
+                Section("Tasks") {
+                    if viewModel.dueTasks.isEmpty {
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(.green)
+                            VStack(alignment: .leading) {
+                                Text("All caught up!")
+                                    .font(.headline)
+                                Text("No tasks due right now")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .listRowSeparator(.hidden)
+                    } else {
+                        ForEach(viewModel.dueTasks) { task in
+                            TaskRowView(task: task)
+                        }
+                    }
+                }
 
-                    tasksSection
-
-                    lessonsSection
-                }.padding()
+                Section("Lessons") {
+                    if viewModel.recentLessons.isEmpty {
+                        HStack {
+                            Image(systemName: "book.fill")
+                                .foregroundStyle(.blue)
+                            VStack(alignment: .leading) {
+                                Text("No recent lessons")
+                                    .font(.headline)
+                                Text("Your recent lessons will appear here")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .listRowSeparator(.hidden)
+                    } else {
+                        ForEach(viewModel.recentLessons) { lesson in
+                            LessonRowView(lesson: lesson)
+                        }
+                    }
+                }
+            }
+            .safeAreaInset(edge: .bottom) {
+                bottomToolbar
             }
             .navigationTitle("Dashboard")
             .navigationBarTitleDisplayMode(.large)
@@ -53,78 +83,23 @@ struct DashboardView: View {
         }
     }
 
-    private var quickActionsCard: some View {
-        NavigationLink {
-            LearnView()
-        } label: {
-            HStack {
-                Image(systemName: "brain.head.profile")
-                    .font(.title2)
-                    .foregroundColor(.blue)
+    // MARK: - Bottom Toolbar
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Start Learning")
-                        .font(.headline)
-                        .foregroundColor(.primary)
-
-                    if viewModel.dueCardsCount > 0 {
-                        Text("\(viewModel.dueCardsCount) cards due")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    } else {
-                        Text("Review your cards")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
+    private var bottomToolbar: some View {
+        HStack {
+            NavigationLink {
+                LearnView()
+            } label: {
+                HStack {
+                    Image(systemName: "brain.head.profile")
+                    Text("Learn")
                 }
+                .frame(maxWidth: .infinity)
             }
-            .padding()
-            .cornerRadius(12)
+            .buttonStyle(.borderedProminent)
         }
-        .buttonStyle(.plain)
-    }
-
-    private var tasksSection: some View {
-        VStack {
-            Text("Tasks")
-                .font(.title2.bold())
-            if viewModel.dueTasks.isEmpty {
-                EmptyStateView(
-                    icon: "checkmark.circle.fill",
-                    title: "All caught up!",
-                    description: "No tasks due right now",
-                )
-                .padding(.vertical, 20)
-            } else {
-                LazyVStack(spacing: 8) {
-                    ForEach(viewModel.dueTasks) { task in
-                        TaskRowView(task: task)
-                    }
-                }
-            }
-        }
-    }
-
-    private var lessonsSection: some View {
-        VStack {
-            Text("Lessons")
-                .font(.title2.bold())
-
-            if viewModel.recentLessons.isEmpty {
-                EmptyStateView(
-                    icon: "book.fill",
-                    title: "No recent lessons",
-                    description: "Your recent lessons will appear here",
-                )
-                .padding(.vertical, 20)
-            } else {
-                LazyVStack(spacing: 8) {
-                    ForEach(viewModel.recentLessons) { lesson in
-                        LessonRowView(lesson: lesson)
-                    }
-                }
-            }
-        }
+        .padding()
+        .background(.regularMaterial, ignoresSafeAreaEdges: .bottom)
     }
 }
 

@@ -50,7 +50,7 @@ public class OpenAPIClient {
                     middlewares: [
                         apiKeyMiddleware,
                         authMiddleware,
-                        tokenRefreshMiddleware
+                        tokenRefreshMiddleware,
                     ],
                 )
                 self.authMiddleware = authMiddleware

@@ -41,7 +41,34 @@ struct TaskDetailView: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            bottomToolbar
+            BottomToolbar {
+                Button(action: downloadTask) {
+                    HStack(spacing: 8) {
+                        if isDownloading {
+                            ProgressView()
+                                .scaleEffect(0.8)
+                        } else {
+                            Image(systemName: "arrow.down.circle.fill")
+                        }
+                        Text("Download")
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(isDownloading)
+
+                Button(action: markAsComplete) {
+                    HStack(spacing: 8) {
+                        Image(systemName: viewModel.taskWithFiles.task.completed == true ?
+                            "checkmark.circle.fill" : "circle")
+                        Text(viewModel.taskWithFiles.task.completed == true ?
+                            "Completed" : "Complete")
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(viewModel.taskWithFiles.task.completed == true ? .green : .blue)
+            }
         }
         .overlay {
             if viewModel.isLoading {
@@ -83,41 +110,6 @@ struct TaskDetailView: View {
         .task {
             await viewModel.fetchTask(id: taskID)
         }
-    }
-
-    // MARK: - Bottom Toolbar
-
-    private var bottomToolbar: some View {
-        HStack(spacing: 16) {
-            Button(action: downloadTask) {
-                HStack(spacing: 8) {
-                    if isDownloading {
-                        ProgressView()
-                            .scaleEffect(0.8)
-                    } else {
-                        Image(systemName: "arrow.down.circle.fill")
-                    }
-                    Text("Download")
-                }
-                .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .disabled(isDownloading)
-
-            Button(action: markAsComplete) {
-                HStack(spacing: 8) {
-                    Image(systemName: viewModel.taskWithFiles.task.completed == true ?
-                        "checkmark.circle.fill" : "circle")
-                    Text(viewModel.taskWithFiles.task.completed == true ?
-                        "Completed" : "Complete")
-                }
-                .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(viewModel.taskWithFiles.task.completed == true ? .green : .blue)
-        }
-        .padding()
-        .background(.regularMaterial, ignoresSafeAreaEdges: .bottom)
     }
 
     // MARK: - Download Overlay
@@ -210,7 +202,8 @@ struct TaskDetailView: View {
                     if let suggestedFilename = response.suggestedFilename {
                         filename = suggestedFilename
                     } else if let lastComponent = url.pathComponents.last,
-                              !lastComponent.isEmpty, lastComponent != "/" {
+                              !lastComponent.isEmpty, lastComponent != "/"
+                    {
                         filename = lastComponent
                     }
 

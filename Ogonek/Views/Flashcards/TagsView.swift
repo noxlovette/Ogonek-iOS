@@ -19,24 +19,19 @@ struct TagsView: View {
                     Text(tag.trimmingCharacters(in: .whitespacesAndNewlines))
                         .font(.caption2)
                         .fontWeight(.medium)
+                        .foregroundStyle(.white)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(
-                            Capsule(),
-                        )
-                }
-
-                if tags.count > 3 {
-                    Text("+\(tags.count - 3)")
-                        .font(.caption2)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(
-                            Capsule(),
-                        )
+                            .blue
+                        ).clipShape(Capsule())
                 }
             }
             .padding(.horizontal, 1)
         }
     }
+}
+
+#Preview {
+    TagsView(tags: ["hello", "world"])
 }

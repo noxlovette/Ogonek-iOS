@@ -35,7 +35,7 @@ class LearnViewModel {
     let qualityButtons: [QualityButton] = [
         QualityButton(key: 1, quality: 0, color: .red, label: "1066"),
         QualityButton(key: 2, quality: 3, color: .yellow, label: "Good"),
-        QualityButton(key: 3, quality: 5, color: .green, label: "Easy")
+        QualityButton(key: 3, quality: 5, color: .green, label: "Easy"),
     ]
 
     func loadCards() async {
