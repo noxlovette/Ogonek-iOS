@@ -135,8 +135,8 @@ extension MockData {
                 description: "Default Description",
                 id: "VlHCKLoYEmrO5BYJqWBAp",
                 isSubscribed: false,
-                name: "Default Deck",
-                seen: true,
+                name: "Unseen Deck",
+                seen: false,
                 visibility: "private",
             ),
             DeckSmall(

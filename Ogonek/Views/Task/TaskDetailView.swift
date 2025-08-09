@@ -6,69 +6,22 @@ import ZipArchive
 struct TaskDetailView: View {
     let taskID: String
     @State private var showingFileUpload: Bool = false
-    @State private var isDownloading = false
+    @State var isDownloading = false
     @State private var downloadProgress: Double = 0.0
     @State private var shareURL: URL?
-    @State private var viewModel = TaskDetailViewModel()
+    @State var viewModel = TaskDetailViewModel()
     @State private var showingShareSheet = false
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.taskWithFiles.task.title)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-
-                    if let dueDate = viewModel.taskWithFiles.task.dueDate {
-                        Text("Due Date: \(dueDate, style: .date)")
-                    } else {
-                        Text("Due Date: None")
-                    }
-                }
-
+            VStack(alignment: .leading) {
                 Markdown(viewModel.taskWithFiles.task.markdown)
             }
             .padding()
         }
         .navigationTitle(viewModel.taskWithFiles.task.title)
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItemGroup {
-                Button("Files", systemImage: "folder") {
-                    showingFileUpload = true
-                }
-            }
-        }
-        .safeAreaInset(edge: .bottom) {
-            BottomToolbar {
-                Button(action: downloadTask) {
-                    HStack(spacing: 8) {
-                        if isDownloading {
-                            ProgressView()
-                                .scaleEffect(0.8)
-                        } else {
-                            Image(systemName: "arrow.down.circle.fill")
-                        }
-                        Text("Download")
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(isDownloading)
-
-                Button(action: markAsComplete) {
-                    HStack(spacing: 8) {
-                        Image(systemName: viewModel.taskWithFiles.task.completed == true ?
-                            "checkmark.circle.fill" : "circle")
-                        Text(viewModel.taskWithFiles.task.completed == true ?
-                            "Completed" : "Complete")
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(viewModel.taskWithFiles.task.completed == true ? .green : .blue)
-            }
+            toolbarContent()
         }
         .overlay {
             if viewModel.isLoading {
@@ -111,9 +64,9 @@ struct TaskDetailView: View {
             await viewModel.fetchTask(id: taskID)
         }
     }
+}
 
-    // MARK: - Download Overlay
-
+extension TaskDetailView {
     private var downloadOverlay: some View {
         ZStack {
             Color.black.opacity(0.3)
@@ -139,15 +92,16 @@ struct TaskDetailView: View {
 
     // MARK: - Actions
 
-    private func downloadTask() {
+    func downloadTask() {
         Task {
             await performDownload()
         }
     }
 
-    private func markAsComplete() {
+    func markAsComplete() {
         Task {
             await viewModel.toggleTaskCompletion(id: taskID)
+            await viewModel.fetchTask(id: taskID)
         }
     }
 
@@ -157,22 +111,18 @@ struct TaskDetailView: View {
         downloadProgress = 0.0
 
         do {
-            // Step 1: Get presigned URLs (10% of progress)
             downloadProgress = 0.1
             let presignedURLs = try await viewModel.getPresignedURLs(
                 for: taskID,
             )
 
-            // Step 2: Download files (60% of progress)
             downloadProgress = 0.2
             let downloadedFiles = try await downloadFiles(urls: presignedURLs)
             downloadProgress = 0.7
 
-            // Step 3: Create markdown file (10% of progress)
             let markdownData = viewModel.taskWithFiles.task.markdown.data(using: .utf8) ?? Data()
             downloadProgress = 0.8
 
-            // Step 4: Create ZIP archive (20% of progress)
             let zipURL = try await createZipArchive(
                 files: downloadedFiles,
                 markdownContent: markdownData,
@@ -180,7 +130,6 @@ struct TaskDetailView: View {
             )
             downloadProgress = 1.0
 
-            // Step 5: Present share sheet
             shareURL = zipURL
             showingShareSheet = true
 
@@ -227,14 +176,11 @@ struct TaskDetailView: View {
         let tempDirectory = FileManager.default.temporaryDirectory
         let zipURL = tempDirectory.appendingPathComponent("\(taskTitle).zip")
 
-        // Remove existing file if it exists
         try? FileManager.default.removeItem(at: zipURL)
 
-        // Write markdown file to temp directory
         let markdownURL = tempDirectory.appendingPathComponent("\(taskTitle).md")
         try markdownContent.write(to: markdownURL)
 
-        // Write all other files to temp directory and collect their paths
         var filePaths: [String] = [markdownURL.path]
 
         for file in files {
@@ -243,7 +189,6 @@ struct TaskDetailView: View {
             filePaths.append(fileURL.path)
         }
 
-        // Create ZIP archive with all files at once
         guard SSZipArchive.createZipFile(atPath: zipURL.path, withFilesAtPaths: filePaths) else {
             throw DownloadError.zipCreationFailed
         }

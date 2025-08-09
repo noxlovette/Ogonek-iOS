@@ -10,40 +10,21 @@ struct LessonDetailView: View {
     let lessonID: String
 
     @State private var viewModel = LessonDetailViewModel()
-    @State private var isDownloading = false
+    @State var isDownloading = false
     @State private var downloadProgress = 0.0
     @State private var showingShareSheet = false
     @State private var shareURL = URL(string: "")
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                // Header
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.lesson.topic)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-
-                    Text("Created \(viewModel.lesson.createdAt.formatted(.relative(presentation: .named)))")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                .padding(.horizontal, 16)
-                .padding(.top, 8)
-
-                Divider()
-                    .padding(.vertical, 16)
-
-                VStack(alignment: .leading, spacing: 16) {
-                    Markdown(viewModel.lesson.markdown)
-                }
-                .padding()
+            VStack(alignment: .leading, spacing: 16) {
+                Markdown(viewModel.lesson.markdown)
             }
+            .padding()
         }
         .navigationTitle(viewModel.lesson.topic)
-        .navigationBarTitleDisplayMode(.inline)
-        .safeAreaInset(edge: .bottom) {
-            bottomToolbar
+        .toolbar {
+            toolbarContent()
         }
         .sheet(isPresented: $showingShareSheet) {
             if let shareURL {
@@ -81,62 +62,9 @@ struct LessonDetailView: View {
             await viewModel.fetchLesson(id: lessonID)
         }
     }
+}
 
-    // MARK: - Private Views
-
-    private func lessonContent(lesson: Lesson) -> some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                // Header section
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(lesson.topic)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
-
-                    HStack {
-                        Text("Created \(lesson.createdAt.formatted(.relative(presentation: .named)))")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .padding(.horizontal, 16)
-                .padding(.top, 8)
-
-                Divider()
-                    .padding(.vertical, 16)
-
-                // Content section
-                VStack(alignment: .leading, spacing: 16) {
-                    Markdown(lesson.markdown)
-                }
-                .padding(.horizontal, 16)
-            }
-        }
-        .navigationTitle(lesson.topic)
-    }
-
-    private var bottomToolbar: some View {
-        HStack(spacing: 16) {
-            Button(action: downloadLesson) {
-                HStack(spacing: 8) {
-                    if isDownloading {
-                        ProgressView()
-                            .scaleEffect(0.8)
-                    } else {
-                        Image(systemName: "arrow.down.circle.fill")
-                    }
-                    Text("Download")
-                }
-                .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .disabled(isDownloading)
-        }
-        .padding()
-        .background(.regularMaterial, ignoresSafeAreaEdges: .bottom)
-    }
-
+extension LessonDetailView {
     private var downloadOverlay: some View {
         ZStack {
             Color.black.opacity(0.3)
@@ -160,15 +88,11 @@ struct LessonDetailView: View {
         }
     }
 
-    // MARK: Actions
-
-    private func downloadLesson() {
+    func downloadLesson() {
         Task {
             await performDownload()
         }
     }
-
-    // MARK: Export
 
     @MainActor
     private func performDownload() async {
@@ -198,7 +122,6 @@ struct LessonDetailView: View {
         isDownloading = false
     }
 
-    // Helper function to create markdown file
     private func createMarkdownFile(
         markdownContent: String,
         lessonTitle: String,

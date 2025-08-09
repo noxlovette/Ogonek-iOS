@@ -13,13 +13,12 @@ struct TaskListView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if viewModel.tasks.isEmpty, !viewModel.isLoading {
-                    EmptyView()
-                } else {
-                    tasksList
+            List {
+                ForEach(viewModel.tasks) { task in
+                    TaskRowView(task: task)
                 }
             }
+            .listStyle(.inset)
             .navigationTitle("Tasks")
             .searchable(text: $searchText, prompt: "Search tasks...")
             .refreshable {
@@ -33,8 +32,19 @@ struct TaskListView: View {
                     await viewModel.searchTasks(query: newValue)
                 }
             }
+            .overlay {
+                if viewModel.isLoading && viewModel.tasks.isEmpty {
+                    ProgressView("Loading tasks...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.clear)
+                }
+            }
+            .toolbar {
+                toolbarContent()
+            }
         }
-        .alert("Error", isPresented: .constant(!viewModel.errorMessage.isNil)) {
+
+        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
             Button("OK") {
                 viewModel.errorMessage = nil
             }
@@ -45,28 +55,15 @@ struct TaskListView: View {
         }
     }
 
-    private var tasksList: some View {
-        List {
-            ForEach(viewModel.tasks) { task in
-                TaskRowView(task: task)
-            }
-
-            if viewModel.isLoading, !viewModel.tasks.isEmpty {
-                HStack {
-                    Spacer()
-                    ProgressView()
-                        .padding()
-                    Spacer()
-                }
-            }
+    func requestMoreTasks() {
+        Task {
+            await viewModel.requestMoreTasks()
         }
-        .listStyle(.inset)
-        .overlay {
-            if viewModel.isLoading, viewModel.tasks.isEmpty {
-                ProgressView("Loading tasks...")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.clear)
-            }
+    }
+
+    func refreshTasks() {
+        Task {
+            await viewModel.refreshTasks()
         }
     }
 }

@@ -13,13 +13,12 @@ struct LessonListView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if viewModel.lessons.isEmpty, !viewModel.isLoading {
-                    EmptyView()
-                } else {
-                    lessonsList
+            List {
+                ForEach(viewModel.lessons) { lesson in
+                    LessonRowView(lesson: lesson)
                 }
             }
+            .listStyle(.inset)
             .navigationTitle("Lessons")
             .searchable(text: $searchText, prompt: "Search lessons...")
             .task {
@@ -31,6 +30,16 @@ struct LessonListView: View {
             .onChange(of: searchText) { _, newValue in
                 Task {
                     await viewModel.searchLessons(query: newValue)
+                }
+            }
+            .toolbar {
+                toolbarContent()
+            }
+            .overlay {
+                if viewModel.isLoading, viewModel.lessons.isEmpty {
+                    ProgressView("Loading lessons...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.clear)
                 }
             }
         }
@@ -45,30 +54,9 @@ struct LessonListView: View {
         }
     }
 
-    // MARK: - Private Views
-
-    private var lessonsList: some View {
-        List {
-            ForEach(viewModel.lessons) { lesson in
-                LessonRowView(lesson: lesson)
-            }
-
-            if viewModel.isLoading, !viewModel.lessons.isEmpty {
-                HStack {
-                    Spacer()
-                    ProgressView()
-                        .padding()
-                    Spacer()
-                }
-            }
-        }
-        .listStyle(.inset)
-        .overlay {
-            if viewModel.isLoading, viewModel.lessons.isEmpty {
-                ProgressView("Loading lessons...")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.clear)
-            }
+    func refreshLessons() {
+        Task {
+            await viewModel.refreshLessons()
         }
     }
 }

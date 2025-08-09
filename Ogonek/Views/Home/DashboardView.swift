@@ -48,11 +48,10 @@ struct DashboardView: View {
                     }
                 }
             }
-            .safeAreaInset(edge: .bottom) {
-                bottomToolbar
-            }
             .navigationTitle("Dashboard")
-            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                toolbarContent()
+            }
             .refreshable {
                 await viewModel.refreshDashboard()
             }
@@ -83,23 +82,10 @@ struct DashboardView: View {
         }
     }
 
-    // MARK: - Bottom Toolbar
-
-    private var bottomToolbar: some View {
-        HStack {
-            NavigationLink {
-                LearnView()
-            } label: {
-                HStack {
-                    Image(systemName: "brain.head.profile")
-                    Text("Learn")
-                }
-                .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
+    func refreshDashboard() {
+        Task {
+            await viewModel.refreshDashboard()
         }
-        .padding()
-        .background(.regularMaterial, ignoresSafeAreaEdges: .bottom)
     }
 }
 

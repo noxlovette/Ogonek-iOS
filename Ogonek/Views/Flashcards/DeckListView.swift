@@ -13,20 +13,44 @@ struct DeckListView: View {
 
     var body: some View {
         NavigationStack {
-            decksList
-                .navigationTitle("Decks")
-                .searchable(text: $searchText, prompt: "Search decks...")
-                .refreshable {
-                    await viewModel.loadDecks()
+            List {
+                ForEach(viewModel.decks) { deck in
+                    DeckRowView(deck: deck)
                 }
-                .task {
-                    await viewModel.loadDecks()
-                }
-                .onChange(of: searchText) { _, newValue in
-                    Task {
-                        await viewModel.searchDecks(query: newValue)
+
+                if viewModel.isLoading, !viewModel.decks.isEmpty {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                            .padding()
+                        Spacer()
                     }
                 }
+            }
+            .listStyle(.inset)
+            .overlay {
+                if viewModel.isLoading, viewModel.decks.isEmpty {
+                    ProgressView("Loading decks...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.clear)
+                }
+            }
+            .navigationTitle("Decks")
+            .searchable(text: $searchText, prompt: "Search decks...")
+            .refreshable {
+                await viewModel.loadDecks()
+            }
+            .toolbar {
+                toolbarContent()
+            }
+            .task {
+                await viewModel.loadDecks()
+            }
+            .onChange(of: searchText) { _, newValue in
+                Task {
+                    await viewModel.searchDecks(query: newValue)
+                }
+            }
 
         }.alert("Error", isPresented: .constant(!viewModel.errorMessage.isNil)) {
             Button("OK") {
@@ -39,28 +63,9 @@ struct DeckListView: View {
         }
     }
 
-    private var decksList: some View {
-        List {
-            ForEach(viewModel.decks) { deck in
-                DeckRowView(deck: deck)
-            }
-
-            if viewModel.isLoading, !viewModel.decks.isEmpty {
-                HStack {
-                    Spacer()
-                    ProgressView()
-                        .padding()
-                    Spacer()
-                }
-            }
-        }
-        .listStyle(.inset)
-        .overlay {
-            if viewModel.isLoading, viewModel.decks.isEmpty {
-                ProgressView("Loading decks...")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.clear)
-            }
+    func refreshDecks() {
+        Task {
+            await viewModel.refreshDecks()
         }
     }
 }

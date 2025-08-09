@@ -5,9 +5,8 @@ import SwiftUI
 struct DeckDetailView: View {
     let deckId: String
 
-    @State private var viewModel = DeckDetailViewModel()
+    @State var viewModel = DeckDetailViewModel()
     @State private var flippedCards: Set<String> = []
-    @State private var isSubscribed: Bool = false
 
     private let columns = [
         GridItem(.flexible()),
@@ -27,34 +26,30 @@ struct DeckDetailView: View {
             }
             .padding()
         }
-
         .navigationTitle(viewModel.deck.deck.name)
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .principal) {
-                HStack(spacing: 6) {
-                    TagsView(
-                        tags: viewModel.deck.deck.description?
-                            .components(separatedBy: ";") ?? []
-                    )
-                }
+            toolbarContent()
+        }
+        .overlay {
+            if viewModel.isLoading {
+                ProgressView("Loading...")
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .clipShape(Capsule())
             }
         }
-        .safeAreaInset(edge: .bottom) {
-            BottomToolbar {
-                Button(action: subscribe) {
-                    HStack(spacing: 8) {
-                        if viewModel.deck.deck.isSubscribed ?? false {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
-                        } else {
-                            Image(systemName: "checkmark.circle.empty").foregroundStyle(.secondary)
-                        }
-                        Text("Subscribe")
-                    }
-                    .frame(maxWidth: .infinity)
+        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
+            Button("Retry") {
+                Task {
+                    await viewModel.fetchDeck(id: deckId)
                 }
-                .buttonStyle(.borderedProminent)
+            }
+            Button("Cancel", role: .cancel) {
+                viewModel.errorMessage = nil
+            }
+        } message: {
+            if let message = viewModel.errorMessage {
+                Text(message)
             }
         }
         .task {
@@ -72,9 +67,10 @@ struct DeckDetailView: View {
         }
     }
 
-    private func subscribe() {
+    func subscribe() {
         Task {
             await viewModel.toggleSubscription()
+            await viewModel.fetchDeck(id: deckId)
         }
     }
 }
