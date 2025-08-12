@@ -11,26 +11,8 @@ import Observation
 @Observable
 class LearnViewModel {
     var cards: [CardProgress] = []
-    var currentIndex: Int = 0
     var isComplete: Bool = false
-    var showAnswer: Bool = false
-    var userInput: String = ""
     var isLoading: Bool = false
-
-    var currentCard: CardProgress? {
-        guard currentIndex < cards.count else { return nil }
-        return cards[currentIndex]
-    }
-
-    var showCloze: Bool {
-        guard let card = currentCard else { return false }
-        return card.front.split(separator: " ").count < 4
-    }
-
-    var progress: Double {
-        guard !cards.isEmpty else { return 0 }
-        return Double(currentIndex + 1) / Double(cards.count)
-    }
 
     let qualityButtons: [QualityButton] = [
         QualityButton(key: 1, quality: 0, color: .red, label: "1066"),
@@ -53,38 +35,20 @@ class LearnViewModel {
         isLoading = false
     }
 
-    func submitQuality(_ quality: Int32) async {
-        guard let card = currentCard else { return }
-
+    func submitQuality(_ quality: Int32, for cardID: String) async -> Bool {
         isLoading = true
+        defer { isLoading = false }
 
         do {
-            try await APIService.shared
-                .updateProgress(cardID: card.id, quality: quality)
-            await nextCard()
+            try await APIService.shared.updateProgress(cardID: cardID, quality: quality)
+            return true
         } catch {
             print("Failed to submit quality: \(error)")
-        }
-
-        isLoading = false
-    }
-
-    func nextCard() async {
-        userInput = ""
-
-        if currentIndex < cards.count - 1 {
-            currentIndex += 1
-            showAnswer = false
-        } else if currentIndex == cards.count - 1, cards.count > 1 {
-            await loadCards()
-            currentIndex = 0
-            showAnswer = false
-        } else {
-            isComplete = true
+            return false
         }
     }
 
-    func showAnswerPressed() {
-        showAnswer = true
+    func refreshCards() async {
+        await loadCards()
     }
 }

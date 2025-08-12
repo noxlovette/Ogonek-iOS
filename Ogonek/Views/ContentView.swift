@@ -33,7 +33,7 @@ struct ContentView: View {
         .task {
             await setupAuthentication()
         }
-        .tint(.accentColour)
+        .tint(.accentColor)
     }
 
     @MainActor

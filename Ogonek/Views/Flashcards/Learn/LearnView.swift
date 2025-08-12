@@ -1,6 +1,5 @@
 import SwiftUI
 
-/// The button that the user clicks
 struct QualityButton: Identifiable {
     let id = UUID()
     let key: Int
@@ -11,6 +10,10 @@ struct QualityButton: Identifiable {
 
 struct LearnView: View {
     @State private var viewModel = LearnViewModel()
+    @State private var viewState: LearnViewState
+    init(viewState: LearnViewState = LearnViewState()) {
+        self._viewState = State(initialValue: viewState)
+    }
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -18,42 +21,80 @@ struct LearnView: View {
             ZStack {
                 if viewModel.isComplete || viewModel.cards.isEmpty {
                     completionView
-                } else if let currentCard = viewModel.currentCard {
+                } else if let currentCard = viewState.currentCard {
                     cardView(card: currentCard)
-                } else {
-                    loadingView
                 }
             }
             .navigationTitle("Learn")
             .navigationBarTitleDisplayMode(.inline)
             .task {
-                await viewModel.loadCards()
+                await loadData()
+            }
+            .onChange(of: viewModel.cards) { _, newCards in
+                updateViewState(with: newCards)
             }
         }
     }
 
-    // MARK: - Completion View
+        // MARK: - Actions
+
+    private func loadData() async {
+        await viewModel.loadCards()
+        updateViewState(with: viewModel.cards)
+    }
+
+    private func updateViewState(with cards: [CardProgress]) {
+        viewState.cards = cards
+        viewState.isComplete = viewModel.isComplete
+    }
+
+    private func showAnswer() {
+        viewState.showAnswer = true
+    }
+
+    private func submitQuality(_ quality: Int32) async {
+        guard let card = viewState.currentCard else { return }
+
+        let success = await viewModel.submitQuality(quality, for: card.id)
+        if success {
+            nextCard()
+        }
+    }
+
+    private func nextCard() {
+        viewState.userInput = ""
+
+        if viewState.currentIndex < viewState.cards.count - 1 {
+            viewState.currentIndex += 1
+            viewState.showAnswer = false
+        } else if viewState.currentIndex == viewState.cards.count - 1, viewState.cards.count > 1 {
+            Task {
+                await viewModel.refreshCards()
+                viewState.currentIndex = 0
+                viewState.showAnswer = false
+            }
+        } else {
+            viewState.isComplete = true
+        }
+    }
+
+        // MARK: - Completion View
 
     private var completionView: some View {
         VStack(spacing: 24) {
             Spacer()
 
-            // Success icon
             ZStack {
                 Circle()
-                    .fill(Color.accentColour.opacity(0.1))
+                    .fill(Color.accentColor)
                     .frame(width: 80, height: 80)
 
                 Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 40))
-                    .foregroundColor(.brown)
+                    .foregroundColor(.white)
             }
 
             VStack(spacing: 12) {
-                Text("All caught up!")
-                    .font(.title2)
-                    .fontWeight(.bold)
-
                 Text("You've reviewed all your due cards. Come back later for new cards to review.")
                     .font(.body)
                     .foregroundColor(.secondary)
@@ -66,96 +107,59 @@ struct LearnView: View {
                 label: {
                     HStack {
                         Image(systemName: "house.fill")
-                        Text("Words Page")
+                        Text("To Dashboard")
                     }
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(Color.accentColour)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                },
+                    .padding()
+                }
             )
 
             Spacer()
         }
-        .transition(.opacity.combined(with: .scale))
     }
 
-    // MARK: - Card View
+        // MARK: - Card View
 
     private func cardView(card: CardProgress) -> some View {
-        VStack(spacing: 24) {
-            // Header with progress
-            headerView
-
-            // Progress bar
+        VStack {
             progressBar
-
-            // Card content
+            Spacer()
             cardContent(card: card)
                 .transition(.asymmetric(
                     insertion: .move(edge: .trailing).combined(with: .opacity),
-                    removal: .move(edge: .leading).combined(with: .opacity),
+                    removal: .move(edge: .leading).combined(with: .opacity)
                 ))
-        }
-        .padding(.horizontal, 20)
-        .animation(.easeInOut(duration: 0.3), value: viewModel.currentIndex)
-    }
-
-    // MARK: - Header View
-
-    private var headerView: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Card \(viewModel.currentIndex + 1) of \(viewModel.cards.count)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-
             Spacer()
-
-            Text("\(Int(viewModel.progress * 100))% Complete")
-                .font(.caption)
-                .fontWeight(.medium)
-                .foregroundColor(.brown)
+            actionButtons
         }
+        .padding()
     }
-
-    // MARK: - Progress Bar
 
     private var progressBar: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color(.systemGray5))
-                    .frame(height: 8)
+        VStack(spacing: 8) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Card \(viewState.currentIndex + 1) of \(viewState.cards.count)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
 
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.accentColour)
-                    .frame(width: geometry.size.width * viewModel.progress, height: 8)
-                    .animation(.easeInOut(duration: 0.3), value: viewModel.progress)
+                Spacer()
+
+                Text("\(Int(viewState.progress * 100))% Complete")
+                    .font(.caption)
+                    .fontWeight(.medium)
             }
+
+            ProgressView(value: viewState.progress)
         }
-        .frame(height: 8)
     }
 
-    // MARK: - Card Content
+        // MARK: - Card Content
 
     private func cardContent(card: CardProgress) -> some View {
         VStack(spacing: 16) {
-            // Main card
-            VStack(spacing: 0) {
-                // Front side
                 VStack(alignment: .leading, spacing: 16) {
-                    HStack {
-                        Text("Front")
-                            .font(.caption)
-                            .fontWeight(.medium)
-                            .foregroundColor(.secondary)
-                        Spacer()
-                    }
-
-                    if viewModel.showCloze {
+                    if viewState.showCloze {
                         clozeInput(front: card.front)
                     } else {
                         Text(card.front)
@@ -167,11 +171,10 @@ struct LearnView: View {
                 .padding(20)
                 .frame(maxWidth: .infinity, minHeight: 120, alignment: .topLeading)
 
-                if viewModel.showAnswer {
+                if viewState.showAnswer {
                     Divider()
                         .padding(.horizontal, 20)
 
-                    // Back side
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
                             Text("Back")
@@ -190,17 +193,11 @@ struct LearnView: View {
                     .frame(maxWidth: .infinity, minHeight: 80, alignment: .topLeading)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
-            }
-            .background(Color(.systemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
 
-            // Action buttons
-            actionButtons
         }
     }
 
-    // MARK: - Cloze Input
+        // MARK: - Cloze Input
 
     private func clozeInput(front: String) -> some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -208,28 +205,22 @@ struct LearnView: View {
                 .font(.title3)
                 .multilineTextAlignment(.leading)
 
-            TextField("Type your answer...", text: $viewModel.userInput)
-                .textFieldStyle(.roundedBorder)
+            TextField("Type your answer...", text: $viewState.userInput)
                 .onSubmit {
-                    viewModel.showAnswerPressed()
+                    showAnswer()
                 }
         }
     }
 
-    // MARK: - Action Buttons
+        // MARK: - Action Buttons
 
     private var actionButtons: some View {
         Group {
-            if !viewModel.showAnswer {
-                Button(action: viewModel.showAnswerPressed) {
+            if !viewState.showAnswer {
+                Button(action: showAnswer) {
                     HStack {
                         Text("Show Answer")
                     }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(Color.accentColour)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             } else {
                 qualityButtonsView
@@ -237,7 +228,7 @@ struct LearnView: View {
         }
     }
 
-    // MARK: - Quality Buttons
+        // MARK: - Quality Buttons
 
     private var qualityButtonsView: some View {
         HStack(spacing: 12) {
@@ -245,7 +236,7 @@ struct LearnView: View {
                 Button(
                     action: {
                         Task {
-                            await viewModel.submitQuality(button.quality)
+                            await submitQuality(button.quality)
                         }
                     },
                     label: {
@@ -259,28 +250,28 @@ struct LearnView: View {
                         .padding(.vertical, 16)
                         .background(button.color)
                         .clipShape(Capsule())
-                    },
+                    }
                 )
-                .disabled(viewModel.isLoading)
             }
         }
     }
-
-    // MARK: - Loading View
-
-    private var loadingView: some View {
-        VStack(spacing: 16) {
-            ProgressView()
-                .scaleEffect(1.2)
-            Text("Loading cards...")
-                .font(.body)
-                .foregroundColor(.secondary)
-        }
-    }
 }
 
-// MARK: - Preview
-
-#Preview {
-    LearnView()
+#Preview("Answer Revealed") {
+    LearnView(viewState: LearnViewState(
+        showAnswer: true,
+        cards: MockData.cardProgress,
+    ))
 }
+
+#Preview("Card Showing") {
+    LearnView(viewState: LearnViewState(
+        cards: MockData.cardProgress
+    ))
+}
+
+#Preview("Empty State") {
+    LearnView(viewState: LearnViewState(
+    ))
+}
+

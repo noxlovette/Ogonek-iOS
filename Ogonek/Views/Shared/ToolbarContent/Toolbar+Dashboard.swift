@@ -24,7 +24,7 @@ extension DashboardView {
             } label: {
                 ZStack {
                     Circle()
-                        .fill(Color.accentColour)
+                        .fill(Color.accentColor)
                         .frame(width: 60, height: 60)
 
                     Image(systemName: "brain.head.profile")

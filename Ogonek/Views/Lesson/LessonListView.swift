@@ -35,6 +35,8 @@ struct LessonListView: View {
             .toolbar {
                 toolbarContent()
             }
+
+            // TODO: ADD EMPTY VIEW!
             .overlay {
                 if viewModel.isLoading, viewModel.lessons.isEmpty {
                     ProgressView("Loading lessons...")
