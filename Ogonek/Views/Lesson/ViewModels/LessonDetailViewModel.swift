@@ -10,7 +10,7 @@ import Observation
 
 @Observable
 class LessonDetailViewModel {
-    var lesson: Lesson = .placeholder
+    var lesson: Lesson?
     var isLoading = false
     var errorMessage: String?
 

@@ -274,4 +274,3 @@ struct LearnView: View {
     LearnView(viewState: LearnViewState(
     ))
 }
-

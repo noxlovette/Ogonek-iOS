@@ -16,14 +16,20 @@ struct LessonDetailView: View {
     @State private var shareURL = URL(string: "")
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Markdown(viewModel.lesson.markdown)
+        VStack {
+            if let lesson = viewModel.lesson {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        Markdown(lesson.markdown)
+                    }
+                    .padding()
+                }
+                .navigationTitle(lesson.topic)
+
+            } else {
+                ProgressView()
             }
-            .padding()
-        }
-        .navigationTitle(viewModel.lesson.topic)
-        .toolbar {
+        }.toolbar {
             toolbarContent()
         }
         .sheet(isPresented: $showingShareSheet) {
@@ -99,19 +105,21 @@ extension LessonDetailView {
         isDownloading = true
         downloadProgress = 0.0
 
-        do {
-            // Step 1: Extract markdown from lesson data (50% of progress)
-            downloadProgress = 0.5
-            let markdownContent = viewModel.lesson.markdown
+        guard let lessonToDownload = viewModel.lesson else {
+            isDownloading = false
+            return
+        }
 
-            // Step 2: Create markdown file (50% of progress)
+        do {
+            downloadProgress = 0.5
+            let markdownContent = lessonToDownload.markdown
+
             let markdownURL = try await createMarkdownFile(
                 markdownContent: markdownContent,
-                lessonTitle: viewModel.lesson.topic,
+                lessonTitle: lessonToDownload.topic,
             )
             downloadProgress = 1.0
 
-            // Step 3: Present share sheet
             shareURL = markdownURL
             showingShareSheet = true
 
@@ -131,10 +139,8 @@ extension LessonDetailView {
             .replacingOccurrences(of: "/", with: "-")
         let markdownURL = tempDirectory.appendingPathComponent("\(sanitizedTitle).md")
 
-        // Remove existing file if it exists
         try? FileManager.default.removeItem(at: markdownURL)
 
-        // Convert string to data and write to file
         guard let markdownData = markdownContent.data(using: .utf8) else {
             throw DownloadError.markdownConversionFailed
         }

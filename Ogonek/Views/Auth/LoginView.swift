@@ -17,22 +17,16 @@ struct LoginView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 24) {
-                // Header
+            VStack{
                 headerSection
 
-                // Login Form
                 loginForm
 
-                // Login Button
                 loginButton
 
-                // Sign Up Navigation
-                signUpSection
-
-                Spacer()
+                // signUpSection TODO: add when done
             }
-            .padding(.horizontal, 20)
+            .padding()
             .navigationBarHidden(true)
             .alert("Error", isPresented: .constant(!viewModel.errorMessage.isNil)) {
                 Button("OK", role: .cancel) {
@@ -45,19 +39,12 @@ struct LoginView: View {
             }
             .overlay {
                 if viewModel.isLoading {
-                    Color.black.opacity(0.3)
-                        .ignoresSafeArea()
-
                     ProgressView("Signing in...")
                         .padding()
-                        .background(Color(.systemBackground))
-                        .cornerRadius(10)
                 }
             }
         }
     }
-
-    // MARK: - Header Section
 
     private var headerSection: some View {
         VStack(spacing: 16) {
@@ -78,17 +65,9 @@ struct LoginView: View {
         }
     }
 
-    // MARK: - Login Form
-
     private var loginForm: some View {
-        Form {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Username")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundColor(.primary)
-
-                TextField("Enter your username", text: $viewModel.username)
+        VStack {
+                TextField("Username", text: $viewModel.username)
                     .focused($focusedField, equals: .username)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
@@ -96,30 +75,22 @@ struct LoginView: View {
                     .onSubmit {
                         focusedField = .password
                     }
-            }
 
-            // Password Field
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Password")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .foregroundColor(.primary)
-
-                SecureField("Enter your password", text: $viewModel.password)
+                SecureField("Password", text: $viewModel.password)
                     .focused($focusedField, equals: .password)
                     .submitLabel(.go)
                     .onSubmit {
                         Task {
                             await viewModel.signIn()
                         }
-                    }
+
             }
         }
-        .padding(.top, 20)
+        .textFieldStyle(.roundedBorder)
+        .padding()
     }
 
     // MARK: - Login Button
-
     private var loginButton: some View {
         Button {
             Task {
@@ -129,8 +100,6 @@ struct LoginView: View {
             HStack {
                 if viewModel.isLoading {
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                        .scaleEffect(0.8)
                 } else {
                     Image(systemName: "arrow.right")
                         .font(.title3)
@@ -141,17 +110,12 @@ struct LoginView: View {
                     .font(.headline)
                     .fontWeight(.semibold)
             }
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .frame(height: 50)
-            .cornerRadius(12)
         }
         .disabled(!viewModel.canSignIn || viewModel.isLoading)
         .animation(.easeInOut(duration: 0.2), value: viewModel.canSignIn)
     }
 
     // MARK: - Sign Up Section
-
     private var signUpSection: some View {
         HStack {
             Text("Don't have an account?")
@@ -159,7 +123,6 @@ struct LoginView: View {
                 .foregroundColor(.secondary)
 
             NavigationLink {
-                // Navigate to sign up view
                 SignUpView()
             } label: {
                 Text("Sign Up")
@@ -167,12 +130,11 @@ struct LoginView: View {
                     .fontWeight(.semibold)
             }
         }
-        .padding(.top, 16)
+        .padding()
     }
 }
 
 // MARK: - Preview
-
 #Preview {
     LoginView()
 }

@@ -35,13 +35,15 @@ struct LessonListView: View {
             .toolbar {
                 toolbarContent()
             }
-
-            // TODO: ADD EMPTY VIEW!
             .overlay {
                 if viewModel.isLoading, viewModel.lessons.isEmpty {
                     ProgressView("Loading lessons...")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.clear)
+                } else if viewModel.lessons.isEmpty {
+                    EmptyStateView(icon: "magnifyingglass", title: "No lessons", description: "Wait for your teacher to add some")
+                } else if viewModel.lessons.isEmpty, searchText != "" {
+                    EmptyStateView(icon: "magnifyingglass", title: "No lessons found", description: "Try a different search")
                 }
             }
         }

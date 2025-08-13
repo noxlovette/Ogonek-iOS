@@ -6,36 +6,82 @@
 //
 
 import Foundation
+import KeychainAccess
 
-/// Handles only token storage
+    /// Handles secure token storage using Keychain Services
 class TokenStorage {
+    private static let keychain = Keychain(service: "noxlovette.Ogonek-Swift")
+        .synchronizable(false) // Don't sync to iCloud for security
+        .accessibility(.whenUnlockedThisDeviceOnly) // Only accessible when device is unlocked
+
     private static let accessTokenKey = "access_token"
     private static let refreshTokenKey = "refresh_token"
 
     static func store(token: String, refreshToken: String) {
-        UserDefaults.standard.set(token, forKey: accessTokenKey)
-        UserDefaults.standard.set(refreshToken, forKey: refreshTokenKey)
+        do {
+            try keychain.set(token, key: accessTokenKey)
+            try keychain.set(refreshToken, key: refreshTokenKey)
+            print("✅ Tokens stored securely in keychain")
+        } catch {
+            print("❌ Failed to store tokens in keychain: \(error)")
+        }
     }
 
     static func refresh(token: String) {
-        UserDefaults.standard.set(token, forKey: accessTokenKey)
+        do {
+            try keychain.set(token, key: accessTokenKey)
+            print("✅ Access token refreshed in keychain")
+        } catch {
+            print("❌ Failed to refresh token in keychain: \(error)")
+        }
     }
 
     static func getAccessToken() -> String? {
-        UserDefaults.standard.string(forKey: accessTokenKey)
+        do {
+            return try keychain.get(accessTokenKey)
+        } catch {
+            print("❌ Failed to retrieve access token from keychain: \(error)")
+            return nil
+        }
     }
 
     static func getRefreshToken() -> String? {
-        UserDefaults.standard.string(forKey: refreshTokenKey)
+        do {
+            return try keychain.get(refreshTokenKey)
+        } catch {
+            print("❌ Failed to retrieve refresh token from keychain: \(error)")
+            return nil
+        }
     }
 
     static func clearTokens() {
-        UserDefaults.standard.removeObject(forKey: accessTokenKey)
-        UserDefaults.standard.removeObject(forKey: refreshTokenKey)
+        do {
+            try keychain.remove(accessTokenKey)
+            try keychain.remove(refreshTokenKey)
+            print("✅ Tokens cleared from keychain")
+        } catch {
+            print("❌ Failed to clear tokens from keychain: \(error)")
+        }
     }
 
     static func hasValidTokens() -> Bool {
-        getAccessToken() != nil
+        return getAccessToken() != nil
+    }
+
+        // Optional: Method to check if keychain is accessible
+    static func isKeychainAccessible() -> Bool {
+        do {
+                // Try to set and retrieve a test value
+            let testKey = "keychain_test"
+            let testValue = "test"
+            try keychain.set(testValue, key: testKey)
+            let retrieved = try keychain.get(testKey)
+            try keychain.remove(testKey)
+            return retrieved == testValue
+        } catch {
+            print("❌ Keychain not accessible: \(error)")
+            return false
+        }
     }
 }
 

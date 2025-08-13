@@ -6,21 +6,16 @@ import OpenAPIURLSession
 public class OpenAPIClient {
     var client: Client
     private var authMiddleware: AuthenticationMiddleware?
-    private var apiKeyMiddleware: APIKeyMiddleware
     private var tokenRefreshMiddleware: TokenRefreshMiddleware?
     private let clientQueue = DispatchQueue(label: "openapi.client.queue", qos: .userInitiated)
     private var isSettingUpAuth = false
 
     /// Initialize with no authentication (for login/signup)
     init() {
-        let apiKey = ProcessInfo.processInfo.environment["API_KEY"]
-        apiKeyMiddleware = APIKeyMiddleware(apiKey: apiKey!)
-
         do {
             client = try Client(
                 serverURL: Servers.Server2.url(),
                 transport: URLSessionTransport(),
-                middlewares: [apiKeyMiddleware],
             )
         } catch {
             fatalError("Failed to initialize OpenAPI client: \(error)")
@@ -37,7 +32,6 @@ public class OpenAPIClient {
 
             do {
                 let authMiddleware = AuthenticationMiddleware(tokenProvider: {
-                    // Always get the latest token from storage
                     guard let currentToken = TokenStorage.getAccessToken() else {
                         throw TokenRefreshError.noRefreshToken
                     }
@@ -48,7 +42,6 @@ public class OpenAPIClient {
                     serverURL: Servers.Server2.url(),
                     transport: URLSessionTransport(),
                     middlewares: [
-                        apiKeyMiddleware,
                         authMiddleware,
                         tokenRefreshMiddleware,
                     ],
@@ -63,14 +56,12 @@ public class OpenAPIClient {
         }
     }
 
-    /// Remove authentication (for logout)
     func clearAuth() {
         clientQueue.sync {
             do {
                 client = try Client(
-                    serverURL: Servers.Server1.url(),
+                    serverURL: EnvironmentConfig.serverURL(),
                     transport: URLSessionTransport(),
-                    middlewares: [apiKeyMiddleware],
                 )
                 authMiddleware = nil
                 tokenRefreshMiddleware = nil
@@ -81,10 +72,44 @@ public class OpenAPIClient {
         }
     }
 
-    /// Check if client is authenticated
     var isAuthenticated: Bool {
         clientQueue.sync {
             authMiddleware != nil && !isSettingUpAuth
+        }
+    }
+}
+
+
+enum AppEnvironment: String {
+    case production
+    case staging
+    case development
+}
+
+
+struct EnvironmentConfig {
+    static func currentEnvironment() -> AppEnvironment {
+        if let envValue = ProcessInfo.processInfo.environment["APP_ENV"],
+           let env = AppEnvironment(rawValue: envValue.lowercased()) {
+            return env
+        }
+
+        if let plistValue = Bundle.main.object(forInfoDictionaryKey: "AppEnvironment") as? String,
+           let env = AppEnvironment(rawValue: plistValue.lowercased()) {
+            return env
+        }
+
+        return .production
+    }
+
+    static func serverURL() throws -> URL {
+        switch currentEnvironment() {
+            case .production:
+                return try Servers.Server1.url()
+            case .staging:
+                return try Servers.Server2.url()
+            case .development:
+                return try Servers.Server3.url()
         }
     }
 }
