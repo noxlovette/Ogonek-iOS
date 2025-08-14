@@ -33,7 +33,7 @@ struct DeckListView: View {
                     ProgressView("Loading decks...")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.clear)
-                }  else if viewModel.decks.isEmpty {
+                } else if viewModel.decks.isEmpty {
                     EmptyStateView(icon: "magnifyingglass", title: "No decks", description: "Create some in the web version")
                 } else if viewModel.decks.isEmpty, searchText != "" {
                     EmptyStateView(icon: "magnifyingglass", title: "No decks found", description: "Try a different search")

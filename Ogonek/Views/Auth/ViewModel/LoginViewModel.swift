@@ -11,7 +11,6 @@ import Foundation
 class LoginViewModel {
     @MainActor var username: String = ""
     @MainActor var password: String = ""
-
     @MainActor var isLoading = false
     @MainActor var errorMessage: String?
 
@@ -21,12 +20,16 @@ class LoginViewModel {
             !isLoading
     }
 
+    @MainActor var hasError: Bool {
+        get { errorMessage != nil }
+        set { if !newValue { errorMessage = nil } }
+    }
+
     private let apiService = APIService.shared
 
     @MainActor
     func signIn() async {
         guard canSignIn else { return }
-
         isLoading = true
         errorMessage = nil
 
@@ -34,7 +37,6 @@ class LoginViewModel {
 
         do {
             try await apiService.signIn(username: trimmedUsername, password: password)
-
             TokenManager.shared.isAuthenticated = true
             print("Login successful")
         } catch {
@@ -59,7 +61,6 @@ class LoginViewModel {
         errorMessage = nil
     }
 
-    /// Reset error state
     @MainActor
     func clearError() {
         errorMessage = nil

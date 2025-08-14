@@ -17,33 +17,34 @@ struct LoginView: View {
 
     var body: some View {
         NavigationStack {
-            VStack{
+            VStack {
                 headerSection
-
                 loginForm
-
                 loginButton
-
-                // signUpSection TODO: add when done
+                // signUpSection TODO
             }
             .padding()
             .navigationBarHidden(true)
-            .alert("Error", isPresented: .constant(!viewModel.errorMessage.isNil)) {
+            .alert("Error", isPresented: $viewModel.hasError) {
                 Button("OK", role: .cancel) {
-                    viewModel.errorMessage = nil
+                    viewModel.clearError()
                 }
             } message: {
-                if let errorMessage = viewModel.errorMessage {
-                    Text(errorMessage)
-                }
+                Text(viewModel.errorMessage ?? "")
             }
+
             .overlay {
                 if viewModel.isLoading {
-                    ProgressView("Signing in...")
-                        .padding()
-                }
+                        ProgressView("Signing in...")
+                            .padding()
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+                    }
             }
         }
+    }
+
+    private func signIn() {
+        Task { await viewModel.signIn() }
     }
 
     private var headerSection: some View {
@@ -56,7 +57,6 @@ struct LoginView: View {
                 Text("Welcome to")
                     .font(.title2)
                     .foregroundColor(.secondary)
-
                 Text("Ogonek")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -67,36 +67,24 @@ struct LoginView: View {
 
     private var loginForm: some View {
         VStack {
-                TextField("Username", text: $viewModel.username)
-                    .focused($focusedField, equals: .username)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .submitLabel(.next)
-                    .onSubmit {
-                        focusedField = .password
-                    }
+            TextField("Username", text: $viewModel.username)
+                .focused($focusedField, equals: .username)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .submitLabel(.next)
+                .onSubmit { focusedField = .password }
 
-                SecureField("Password", text: $viewModel.password)
-                    .focused($focusedField, equals: .password)
-                    .submitLabel(.go)
-                    .onSubmit {
-                        Task {
-                            await viewModel.signIn()
-                        }
-
-            }
+            SecureField("Password", text: $viewModel.password)
+                .focused($focusedField, equals: .password)
+                .submitLabel(.go)
+                .onSubmit { signIn() }
         }
         .textFieldStyle(.roundedBorder)
         .padding()
     }
 
-    // MARK: - Login Button
     private var loginButton: some View {
-        Button {
-            Task {
-                await viewModel.signIn()
-            }
-        } label: {
+        Button(action: signIn) {
             HStack {
                 if viewModel.isLoading {
                     ProgressView()
@@ -105,7 +93,6 @@ struct LoginView: View {
                         .font(.title3)
                         .fontWeight(.medium)
                 }
-
                 Text(viewModel.isLoading ? "Signing In..." : "Sign In")
                     .font(.headline)
                     .fontWeight(.semibold)
@@ -114,27 +101,10 @@ struct LoginView: View {
         .disabled(!viewModel.canSignIn || viewModel.isLoading)
         .animation(.easeInOut(duration: 0.2), value: viewModel.canSignIn)
     }
-
-    // MARK: - Sign Up Section
-    private var signUpSection: some View {
-        HStack {
-            Text("Don't have an account?")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-
-            NavigationLink {
-                SignUpView()
-            } label: {
-                Text("Sign Up")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-            }
-        }
-        .padding()
-    }
 }
 
 // MARK: - Preview
+
 #Preview {
     LoginView()
 }

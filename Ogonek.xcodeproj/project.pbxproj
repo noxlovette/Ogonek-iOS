@@ -45,6 +45,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D5902B4E2E4D222900966BDF /* Exceptions for "Ogonek" folder in "Ogonek" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D53ACB552DB18B8F00CE4D45 /* Ogonek */;
+		};
 		D5A4B61E2DC0DE2300520DD1 /* Exceptions for "Ogonek" folder in "OgonekTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -58,6 +65,7 @@
 		D53ACB582DB18B8F00CE4D45 /* Ogonek */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				D5902B4E2E4D222900966BDF /* Exceptions for "Ogonek" folder in "Ogonek" target */,
 				D5A4B61E2DC0DE2300520DD1 /* Exceptions for "Ogonek" folder in "OgonekTests" target */,
 			);
 			path = Ogonek;
@@ -321,6 +329,8 @@
 				"",
 				"",
 				"",
+				"",
+				"",
 			);
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -492,6 +502,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ogonek/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -504,7 +515,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = noxlovette.Ogonek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -524,6 +535,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ogonek/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -536,7 +548,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-Swift";
+				PRODUCT_BUNDLE_IDENTIFIER = noxlovette.Ogonek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

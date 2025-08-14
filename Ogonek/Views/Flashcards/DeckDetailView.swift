@@ -5,7 +5,7 @@ import SwiftUI
 struct DeckDetailView: View {
     let deckId: String
 
-    @State var viewModel = DeckDetailViewModel()
+    @StateObject var viewModel = DeckDetailViewModel()
     @State private var flippedCards: Set<String> = []
 
     private let columns = [
@@ -14,31 +14,34 @@ struct DeckDetailView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 16) {
-                ForEach(viewModel.deck.cards) { card in
-                    WordCard(
-                        card: card,
-                        flippedCards: $flippedCards,
-                        onTap: toggleCard
-                    )
+        VStack {
+            if let deck = viewModel.deck {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        ForEach(deck.cards) { card in
+                            WordCard(
+                                card: card,
+                                flippedCards: $flippedCards,
+                                onTap: toggleCard
+                            )
+                        }
+                    }
+                    .padding()
                 }
+            } else {
+                loadingOverlay
             }
-            .padding()
         }
-        .navigationTitle(viewModel.deck.deck.name)
+        .navigationTitle(viewModel.deck?.deck.name ?? "Loading...")
         .toolbar {
             toolbarContent()
         }
         .overlay {
             if viewModel.isLoading {
-                ProgressView("Loading...")
-                    .padding()
-                    .background(.ultraThinMaterial)
-                    .clipShape(Capsule())
+                loadingOverlay
             }
         }
-        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
+        .alert("Error", isPresented: $viewModel.hasError) {
             Button("Retry") {
                 Task {
                     await viewModel.fetchDeck(id: deckId)
@@ -55,6 +58,15 @@ struct DeckDetailView: View {
         .task {
             await viewModel.fetchDeck(id: deckId)
         }
+    }
+}
+
+extension DeckDetailView {
+    private var loadingOverlay: some View {
+        ProgressView("Loading deck...")
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(Capsule())
     }
 
     private func toggleCard(_ cardId: String) {

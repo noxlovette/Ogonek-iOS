@@ -9,26 +9,28 @@ struct TaskDetailView: View {
     @State var isDownloading = false
     @State private var downloadProgress: Double = 0.0
     @State private var shareURL: URL?
-    @State var viewModel = TaskDetailViewModel()
+    @StateObject var viewModel = TaskDetailViewModel()
     @State private var showingShareSheet = false
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                Markdown(viewModel.taskWithFiles.task.markdown)
+        VStack {
+            if let task = viewModel.taskWithFiles {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        Markdown(task.task.markdown)
+                    }
+                }
+            } else {
+                loadingOverlay
             }
-            .padding()
         }
-        .navigationTitle(viewModel.taskWithFiles.task.title)
+        .navigationTitle(viewModel.taskWithFiles?.task.title ?? "Loading…")
         .toolbar {
             toolbarContent()
         }
         .overlay {
             if viewModel.isLoading {
-                ProgressView("Loading...")
-                    .padding()
-                    .background(.ultraThinMaterial)
-                    .clipShape(Capsule())
+                loadingOverlay
             }
         }
         .overlay {
@@ -36,29 +38,19 @@ struct TaskDetailView: View {
                 downloadOverlay
             }
         }
-        .sheet(isPresented: $showingFileUpload) {
-            FilesView(files: viewModel.taskWithFiles.files)
-        }
-
         .sheet(isPresented: $showingShareSheet) {
             if let shareURL {
                 ShareSheet(items: [shareURL])
             }
         }
-
-        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
-            Button("Retry") {
-                Task {
-                    await viewModel.fetchTask(id: taskID)
-                }
-            }
-            Button("Cancel", role: .cancel) {
-                viewModel.errorMessage = nil
-            }
+        .alert("Error", isPresented: Binding(
+            get: { viewModel.errorMessage != nil },
+            set: { if !$0 { viewModel.errorMessage = nil } }
+        )) {
+            Button("Retry") { Task { await viewModel.fetchTask(id: taskID) } }
+            Button("Cancel", role: .cancel) {}
         } message: {
-            if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
-            }
+            Text(viewModel.errorMessage ?? "")
         }
         .task {
             await viewModel.fetchTask(id: taskID)
@@ -67,11 +59,15 @@ struct TaskDetailView: View {
 }
 
 extension TaskDetailView {
+    private var loadingOverlay: some View {
+        ProgressView("Loading…")
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(Capsule())
+    }
+
     private var downloadOverlay: some View {
         ZStack {
-            Color.black.opacity(0.3)
-                .ignoresSafeArea()
-
             VStack(spacing: 16) {
                 ProgressView(value: downloadProgress, total: 1.0)
                     .progressViewStyle(LinearProgressViewStyle())
@@ -84,9 +80,6 @@ extension TaskDetailView {
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
-            .padding(24)
-            .background(.regularMaterial)
-            .cornerRadius(12)
         }
     }
 
@@ -107,32 +100,34 @@ extension TaskDetailView {
 
     @MainActor
     private func performDownload() async {
+        guard let taskWithFiles = viewModel.taskWithFiles else {
+            viewModel.errorMessage = "Task data not available yet."
+            return
+        }
+
         isDownloading = true
         downloadProgress = 0.0
 
         do {
             downloadProgress = 0.1
-            let presignedURLs = try await viewModel.getPresignedURLs(
-                for: taskID,
-            )
+            let presignedURLs = try await viewModel.getPresignedURLs(for: taskID)
 
             downloadProgress = 0.2
             let downloadedFiles = try await downloadFiles(urls: presignedURLs)
             downloadProgress = 0.7
 
-            let markdownData = viewModel.taskWithFiles.task.markdown.data(using: .utf8) ?? Data()
+            let markdownData = taskWithFiles.task.markdown.data(using: .utf8) ?? Data()
             downloadProgress = 0.8
 
             let zipURL = try await createZipArchive(
                 files: downloadedFiles,
                 markdownContent: markdownData,
-                taskTitle: viewModel.taskWithFiles.task.title,
+                taskTitle: taskWithFiles.task.title
             )
             downloadProgress = 1.0
 
             shareURL = zipURL
             showingShareSheet = true
-
         } catch {
             viewModel.errorMessage = "Download failed: \(error.localizedDescription)"
         }

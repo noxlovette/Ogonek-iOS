@@ -87,6 +87,11 @@ struct DashboardView: View {
             await viewModel.refreshDashboard()
         }
     }
+
+    func logout() {
+        // Clear authentication using TokenManager
+        TokenManager.shared.logout()
+    }
 }
 
 #Preview {

@@ -9,8 +9,8 @@ import Foundation
 import Observation
 
 @Observable
-class TaskDetailViewModel {
-    var taskWithFiles: TaskWithFiles = .placeholder
+class TaskDetailViewModel: ObservableObject {
+    var taskWithFiles: TaskWithFiles?
     var isLoading = false
     var errorMessage: String?
 
@@ -44,14 +44,8 @@ class TaskDetailViewModel {
     }
 
     func getPresignedURLs(for id: String) async throws -> [URL] {
-        if taskWithFiles.files.isEmpty {
+        if (taskWithFiles?.files.isEmpty) != nil {
             throw DownloadError.noPresignedURLs
-        }
-
-        if id == "mock" {
-            return taskWithFiles.files.map { file in
-                URL(string: "https://example.com/mock/\(file.name)")!
-            }
         }
 
         return try await apiService.getPresignedDownloadURLs(for: id)

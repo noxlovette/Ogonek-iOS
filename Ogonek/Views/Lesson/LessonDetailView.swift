@@ -9,7 +9,7 @@ import SwiftUI
 struct LessonDetailView: View {
     let lessonID: String
 
-    @State private var viewModel = LessonDetailViewModel()
+    @StateObject private var viewModel = LessonDetailViewModel()
     @State var isDownloading = false
     @State private var downloadProgress = 0.0
     @State private var showingShareSheet = false
@@ -22,14 +22,14 @@ struct LessonDetailView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Markdown(lesson.markdown)
                     }
-                    .padding()
                 }
-                .navigationTitle(lesson.topic)
 
             } else {
-                ProgressView()
+                loadingOverlay
             }
-        }.toolbar {
+        }
+        .navigationTitle(viewModel.lesson?.topic ?? "Loading...")
+        .toolbar {
             toolbarContent()
         }
         .sheet(isPresented: $showingShareSheet) {
@@ -39,10 +39,7 @@ struct LessonDetailView: View {
         }
         .overlay {
             if viewModel.isLoading {
-                ProgressView("Loading...")
-                    .padding()
-                    .background(.ultraThinMaterial)
-                    .clipShape(Capsule())
+                loadingOverlay
             }
         }
         .overlay {
@@ -50,7 +47,7 @@ struct LessonDetailView: View {
                 downloadOverlay
             }
         }
-        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
+        .alert("Error", isPresented: $viewModel.hasError) {
             Button("Retry") {
                 Task {
                     await viewModel.fetchLesson(id: lessonID)
@@ -71,6 +68,13 @@ struct LessonDetailView: View {
 }
 
 extension LessonDetailView {
+    private var loadingOverlay: some View {
+        ProgressView("Loading...")
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(Capsule())
+    }
+
     private var downloadOverlay: some View {
         ZStack {
             Color.black.opacity(0.3)

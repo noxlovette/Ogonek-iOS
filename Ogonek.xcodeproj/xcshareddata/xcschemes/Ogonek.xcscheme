@@ -76,8 +76,8 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = "API_KEY"
-            value = "oCvJe2zibUf6RC/l68hLslG3JBaRvGtCCoBfFSre+wY"
+            key = "APP_ENV"
+            value = "production"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

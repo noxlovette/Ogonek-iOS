@@ -14,7 +14,7 @@ public class OpenAPIClient {
     init() {
         do {
             client = try Client(
-                serverURL: Servers.Server2.url(),
+                serverURL: EnvironmentConfig.serverURL(),
                 transport: URLSessionTransport(),
             )
         } catch {
@@ -39,7 +39,7 @@ public class OpenAPIClient {
                 })
                 let tokenRefreshMiddleware = TokenRefreshMiddleware()
                 client = try Client(
-                    serverURL: Servers.Server2.url(),
+                    serverURL: EnvironmentConfig.serverURL(),
                     transport: URLSessionTransport(),
                     middlewares: [
                         authMiddleware,
@@ -79,23 +79,23 @@ public class OpenAPIClient {
     }
 }
 
-
 enum AppEnvironment: String {
     case production
     case staging
     case development
 }
 
-
-struct EnvironmentConfig {
+enum EnvironmentConfig {
     static func currentEnvironment() -> AppEnvironment {
         if let envValue = ProcessInfo.processInfo.environment["APP_ENV"],
-           let env = AppEnvironment(rawValue: envValue.lowercased()) {
+           let env = AppEnvironment(rawValue: envValue.lowercased())
+        {
             return env
         }
 
         if let plistValue = Bundle.main.object(forInfoDictionaryKey: "AppEnvironment") as? String,
-           let env = AppEnvironment(rawValue: plistValue.lowercased()) {
+           let env = AppEnvironment(rawValue: plistValue.lowercased())
+        {
             return env
         }
 
@@ -104,12 +104,12 @@ struct EnvironmentConfig {
 
     static func serverURL() throws -> URL {
         switch currentEnvironment() {
-            case .production:
-                return try Servers.Server1.url()
-            case .staging:
-                return try Servers.Server2.url()
-            case .development:
-                return try Servers.Server3.url()
+        case .production:
+            return try Servers.Server1.url()
+        case .staging:
+            return try Servers.Server2.url()
+        case .development:
+            return try Servers.Server3.url()
         }
     }
 }

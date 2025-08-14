@@ -10,6 +10,14 @@ import SwiftUI
 extension DashboardView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            Button {
+                logout()
+            } label: {
+                Image(systemName: "rectangle.portrait.and.arrow.right")
+            }
+        }
+
         ToolbarItem {
             RefreshButton {
                 refreshDashboard()

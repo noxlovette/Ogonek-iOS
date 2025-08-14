@@ -12,8 +12,9 @@ struct LearnView: View {
     @State private var viewModel = LearnViewModel()
     @State private var viewState: LearnViewState
     init(viewState: LearnViewState = LearnViewState()) {
-        self._viewState = State(initialValue: viewState)
+        _viewState = State(initialValue: viewState)
     }
+
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -36,7 +37,7 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Actions
+    // MARK: - Actions
 
     private func loadData() async {
         await viewModel.loadCards()
@@ -78,7 +79,7 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Completion View
+    // MARK: - Completion View
 
     private var completionView: some View {
         VStack(spacing: 24) {
@@ -117,7 +118,7 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Card View
+    // MARK: - Card View
 
     private func cardView(card: CardProgress) -> some View {
         VStack {
@@ -154,50 +155,49 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Card Content
+    // MARK: - Card Content
 
     private func cardContent(card: CardProgress) -> some View {
         VStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 16) {
+                if viewState.showCloze {
+                    clozeInput(front: card.front)
+                } else {
+                    Text(card.front)
+                        .font(.title3)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            .padding(20)
+            .frame(maxWidth: .infinity, minHeight: 120, alignment: .topLeading)
+
+            if viewState.showAnswer {
+                Divider()
+                    .padding(.horizontal, 20)
+
                 VStack(alignment: .leading, spacing: 16) {
-                    if viewState.showCloze {
-                        clozeInput(front: card.front)
-                    } else {
-                        Text(card.front)
-                            .font(.title3)
-                            .multilineTextAlignment(.leading)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    HStack {
+                        Text("Back")
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .foregroundColor(.secondary)
+                        Spacer()
                     }
+
+                    Text(card.back)
+                        .font(.title3)
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding(20)
-                .frame(maxWidth: .infinity, minHeight: 120, alignment: .topLeading)
-
-                if viewState.showAnswer {
-                    Divider()
-                        .padding(.horizontal, 20)
-
-                    VStack(alignment: .leading, spacing: 16) {
-                        HStack {
-                            Text("Back")
-                                .font(.caption)
-                                .fontWeight(.medium)
-                                .foregroundColor(.secondary)
-                            Spacer()
-                        }
-
-                        Text(card.back)
-                            .font(.title3)
-                            .multilineTextAlignment(.leading)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .padding(20)
-                    .frame(maxWidth: .infinity, minHeight: 80, alignment: .topLeading)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-
+                .frame(maxWidth: .infinity, minHeight: 80, alignment: .topLeading)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
         }
     }
 
-        // MARK: - Cloze Input
+    // MARK: - Cloze Input
 
     private func clozeInput(front: String) -> some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -212,7 +212,7 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Action Buttons
+    // MARK: - Action Buttons
 
     private var actionButtons: some View {
         Group {
@@ -228,7 +228,7 @@ struct LearnView: View {
         }
     }
 
-        // MARK: - Quality Buttons
+    // MARK: - Quality Buttons
 
     private var qualityButtonsView: some View {
         HStack(spacing: 12) {

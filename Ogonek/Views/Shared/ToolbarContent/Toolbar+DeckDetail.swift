@@ -12,7 +12,7 @@ extension DeckDetailView {
     func toolbarContent() -> some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
             Button(
-                (viewModel.deck.deck.isSubscribed ?? false) ? "Unsubscribe" : "Subscribe",
+                (viewModel.deck?.deck.isSubscribed ?? false) ? "Unsubscribe" : "Subscribe",
                 action: subscribe
             )
         }

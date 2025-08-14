@@ -9,12 +9,17 @@ import Foundation
 import Observation
 
 @Observable
-class LessonDetailViewModel {
+class LessonDetailViewModel: ObservableObject {
     var lesson: Lesson?
     var isLoading = false
     var errorMessage: String?
 
     private let apiService = APIService.shared
+
+    @MainActor var hasError: Bool {
+        get { errorMessage != nil }
+        set { if !newValue { errorMessage = nil } }
+    }
 
     @MainActor
     func fetchLesson(id: String) async {
