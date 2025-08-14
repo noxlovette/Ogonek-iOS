@@ -1,21 +1,15 @@
-//  TaskGridViewModel.swift
+//  TaskListViewModel.swift
 //  Ogonek
 //
 
 import Foundation
-import Observation
 
-@Observable
-class TaskListViewModel {
+class TaskListViewModel: BaseViewModel {
     var tasks: [TaskSmall] = []
-    var isLoading = false
-    var errorMessage: String?
 
     var currentPage: Int32 = 1
     var hasMorePages = true
     var searchText = ""
-
-    private let apiService = APIService.shared
 
     @MainActor
     func loadTasks() async {

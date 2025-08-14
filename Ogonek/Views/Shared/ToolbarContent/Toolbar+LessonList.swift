@@ -14,6 +14,8 @@ extension LessonListView {
             RefreshButton {
                 refreshLessons()
             }
+            .accessibilityLabel("Refresh lessons")
+            .accessibilityHint("Updates lesson list with latest data")
         }
     }
 }

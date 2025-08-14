@@ -61,24 +61,32 @@ struct ContentView: View {
                         Label("Home", systemImage: "house")
                     }
                     .tag(0)
+                    .accessibilityLabel("Home tab")
+                    .accessibilityHint("Shows your dashboard with tasks and lessons")
 
                 LessonListView()
                     .tabItem {
                         Label("Lessons", systemImage: "book.pages")
                     }
                     .tag(1)
+                    .accessibilityLabel("Lessons tab")
+                    .accessibilityHint("Shows your lessons")
 
                 TaskListView()
                     .tabItem {
                         Label("Tasks", systemImage: "checklist")
                     }
                     .tag(2)
+                    .accessibilityLabel("Tasks tab")
+                    .accessibilityHint("Shows your tasks")
 
                 DeckListView()
                     .tabItem {
-                        Label("Learn", systemImage: "graduationcap")
+                        Label("Decks", systemImage: "list.dash.header.rectangle")
                     }
                     .tag(3)
+                    .accessibilityLabel("Deck tab")
+                    .accessibilityHint("Shows your flashcards")
             }
             .tabViewStyle(.sidebarAdaptable)
         }

@@ -14,6 +14,8 @@ extension DeckListView {
             RefreshButton {
                 refreshDecks()
             }
+            .accessibilityLabel("Refresh decks")
+            .accessibilityHint("Updates deck list with latest data")
         }
     }
 }

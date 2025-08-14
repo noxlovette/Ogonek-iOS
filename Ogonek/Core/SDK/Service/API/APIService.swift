@@ -40,9 +40,3 @@ public extension APIService {
     static let onceRequestUserMaxCount = 100
     static let onceRequestDomainBlocksMaxCount = 100
 }
-
-// MARK: Dependency Injections
-
-protocol APIServiceProtocol {
-    func signIn(username: String, password: String) async throws
-}

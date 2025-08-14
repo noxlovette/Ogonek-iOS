@@ -8,28 +8,22 @@
 import Foundation
 import Observation
 
-@Observable
-class DeckDetailViewModel: ObservableObject {
+class DeckDetailViewModel: BaseViewModel {
     var deck: DeckWithCards?
-    var isLoading = false
-    var errorMessage: String?
-
-    private let apiService = APIService.shared
 
     @MainActor
     func fetchDeck(id: String) async {
         isLoading = true
         errorMessage = nil
 
-        do {
-            if id == "mock" {
-                deck = MockData.deck
-            } else {
+        if id == "mock" {
+            deck = MockData.deck
+        } else {
+            do {
                 deck = try await apiService.fetchDeck(id: id)
+            } catch {
+                handleError(error)
             }
-        } catch {
-            errorMessage = "Failed to load Deck: \(error.localizedDescription)"
-            print("Error loading Deck: \(error)")
         }
 
         isLoading = false
@@ -47,13 +41,7 @@ class DeckDetailViewModel: ObservableObject {
         do {
             try await apiService.toggleDeckSubscription(id: deckOk.deck.id, subscribed: deckOk.deck.isSubscribed ?? false)
         } catch {
-            errorMessage = "Failed to toggle subscription: \(error.localizedDescription)"
-            print("Error toggling subscription: \(error)")
+            handleError(error)
         }
-    }
-
-    @MainActor var hasError: Bool {
-        get { errorMessage != nil }
-        set { if !newValue { errorMessage = nil } }
     }
 }

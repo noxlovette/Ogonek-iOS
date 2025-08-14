@@ -14,6 +14,8 @@ extension TaskListView {
             RefreshButton {
                 refreshTasks()
             }
+            .accessibilityLabel("Refresh tasks")
+            .accessibilityHint("Updates task list with latest data")
         }
 
         ToolbarItem {

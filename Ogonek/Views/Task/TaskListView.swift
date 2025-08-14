@@ -21,6 +21,8 @@ struct TaskListView: View {
             .listStyle(.inset)
             .navigationTitle("Tasks")
             .searchable(text: $searchText, prompt: "Search tasks...")
+            .accessibilityLabel("Search tasks")
+            .accessibilityHint("Type to filter task list")
             .refreshable {
                 await viewModel.refreshTasks()
             }

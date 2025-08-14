@@ -21,6 +21,8 @@ struct LessonListView: View {
             .listStyle(.inset)
             .navigationTitle("Lessons")
             .searchable(text: $searchText, prompt: "Search lessons...")
+            .accessibilityLabel("Search lessons")
+            .accessibilityHint("Type to filter lesson list")
             .task {
                 await viewModel.loadLessons()
             }

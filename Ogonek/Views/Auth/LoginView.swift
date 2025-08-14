@@ -39,7 +39,8 @@ struct LoginView: View {
                         .padding()
                         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
                 }
-            }
+            }.accessibilityElement(children: .contain)
+            .accessibilityLabel("Login Screen")
         }
     }
 
@@ -52,6 +53,7 @@ struct LoginView: View {
             Image(systemName: "flame.fill")
                 .font(.system(size: 60))
                 .padding(.top, 60)
+                .accessibilityHidden(true)
 
             VStack(spacing: 8) {
                 Text("Welcome to")
@@ -62,7 +64,9 @@ struct LoginView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
             }
-        }
+        }.accessibilityElement(children: .combine)
+            .accessibilityLabel("Welcome to Ogonek")
+            .accessibilityAddTraits(.isHeader)
     }
 
     private var loginForm: some View {
@@ -100,6 +104,10 @@ struct LoginView: View {
         }
         .disabled(!viewModel.canSignIn || viewModel.isLoading)
         .animation(.easeInOut(duration: 0.2), value: viewModel.canSignIn)
+        .accessibilityLabel(viewModel.isLoading ? "Signing in, please wait" : "Sign in")
+        .accessibilityHint(viewModel.canSignIn ? "Double tap to sign in with entered credentials" : "Enter username and password first")
+        .accessibilityAddTraits(viewModel.isLoading ? [.updatesFrequently] : [])
+        .accessibilityValue(viewModel.isLoading ? "In progress" : (viewModel.canSignIn ? "Available" : "Disabled"))
     }
 }
 

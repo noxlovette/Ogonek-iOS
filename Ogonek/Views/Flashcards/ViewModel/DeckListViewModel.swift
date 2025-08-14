@@ -1,22 +1,11 @@
-//  DeckListViewModel.swift
-//  Ogonek
-//
-//  Rewritten following Basic Car Maintenance pattern
-//
-
 import Foundation
 
-@Observable
-class DeckListViewModel {
+class DeckListViewModel: BaseViewModel {
     var decks: [DeckSmall] = []
-    var isLoading = false
-    var errorMessage: String?
 
     var currentPage: Int32 = 1
     var hasMorePages = true
     var searchText = ""
-
-    private let apiService = APIService.shared
 
     @MainActor
     func loadDecks() async {
@@ -51,7 +40,6 @@ class DeckListViewModel {
         await loadDecks()
     }
 
-    /// Refresh Decks (reset to first page)
     @MainActor
     func refreshDecks() async {
         currentPage = 1

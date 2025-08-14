@@ -171,6 +171,8 @@ struct LearnView: View {
             }
             .padding(20)
             .frame(maxWidth: .infinity, minHeight: 120, alignment: .topLeading)
+            .accessibilityLabel("Question: \(card.front)")
+            .accessibilityAddTraits(.isStaticText)
 
             if viewState.showAnswer {
                 Divider()
@@ -193,6 +195,8 @@ struct LearnView: View {
                 .padding(20)
                 .frame(maxWidth: .infinity, minHeight: 80, alignment: .topLeading)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
+                .accessibilityLabel("Answer: \(card.back)")
+                .accessibilityAddTraits(.isStaticText)
             }
         }
     }
@@ -252,6 +256,9 @@ struct LearnView: View {
                         .clipShape(Capsule())
                     }
                 )
+                .accessibilityLabel("Rate difficulty as \(button.label)")
+                    .accessibilityHint("This affects when you'll see this card again")
+                    .accessibilityAddTraits(.isButton)
             }
         }
     }

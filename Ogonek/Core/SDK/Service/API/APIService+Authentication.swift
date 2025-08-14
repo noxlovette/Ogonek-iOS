@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension APIService: APIServiceProtocol {
+extension APIService  {
     func signIn(username: String, password: String) async throws {
         try await openAPIClient.signIn(username: username, pass: password)
     }

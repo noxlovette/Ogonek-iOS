@@ -1,20 +1,8 @@
-//
-//  TaskDetailViewModel.swift
-//  Ogonek
-//
-//  Rewritten following Basic Car Maintenance pattern
-//
-
 import Foundation
 import Observation
 
-@Observable
-class TaskDetailViewModel: ObservableObject {
+class TaskDetailViewModel: BaseViewModel {
     var taskWithFiles: TaskWithFiles?
-    var isLoading = false
-    var errorMessage: String?
-
-    private let apiService = APIService.shared
 
     @MainActor
     func fetchTask(id: String) async {
@@ -26,8 +14,7 @@ class TaskDetailViewModel: ObservableObject {
                 MockData.taskWithFiles
                 : try await apiService.fetchTask(id: id)
         } catch {
-            errorMessage = "Failed to load task: \(error.localizedDescription)"
-            print("Error loading task: \(error)")
+            handleError(error)
         }
 
         isLoading = false

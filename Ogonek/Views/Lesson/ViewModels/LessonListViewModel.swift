@@ -1,25 +1,17 @@
 //  LessonListViewModel.swift
 //  Ogonek
 //
-//  Rewritten following Basic Car Maintenance pattern
 //
 
 import Foundation
 
-@Observable
-class LessonListViewModel {
+class LessonListViewModel: BaseViewModel {
     var lessons: [LessonSmall] = []
-    var isLoading = false
-    var errorMessage: String?
 
-    // Pagination properties
     var currentPage: Int32 = 1
     var hasMorePages = true
     var searchText = ""
 
-    private let apiService = APIService.shared
-
-    /// Load lessons from the API
     @MainActor
     func loadLessons() async {
         isLoading = true
@@ -55,7 +47,6 @@ class LessonListViewModel {
         isLoading = false
     }
 
-    /// Refresh lessons (reset to first page)
     @MainActor
     func refreshLessons() async {
         currentPage = 1
@@ -63,7 +54,6 @@ class LessonListViewModel {
         await loadLessons()
     }
 
-    /// Load more lessons (pagination)
     @MainActor
     func loadMoreLessons() async {
         guard hasMorePages, !isLoading else { return }
@@ -71,7 +61,6 @@ class LessonListViewModel {
         await loadLessons()
     }
 
-    /// Search for lessons
     @MainActor
     func searchLessons(query: String) async {
         searchText = query

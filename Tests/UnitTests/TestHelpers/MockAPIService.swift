@@ -7,7 +7,7 @@
 import Foundation
 @testable import Ogonek
 
-class MockAPIService: APIServiceProtocol {
+class MockAPIService {
     var shouldSucceed = true
     var errorToThrow: Error = APIError.unauthorized
     var signInWasCalled = false
@@ -19,7 +19,6 @@ class MockAPIService: APIServiceProtocol {
         lastUsername = username
         lastPassword = password
 
-        // Small delay to simulate network
         try await Task.sleep(nanoseconds: 10_000_000) // 0.01 seconds
 
         if shouldSucceed {

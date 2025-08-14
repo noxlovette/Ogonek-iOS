@@ -41,6 +41,8 @@ struct DeckListView: View {
             }
             .navigationTitle("Decks")
             .searchable(text: $searchText, prompt: "Search decks...")
+            .accessibilityLabel("Search flashcards")
+            .accessibilityHint("Type to filter flashard list")
             .refreshable {
                 await viewModel.loadDecks()
             }
