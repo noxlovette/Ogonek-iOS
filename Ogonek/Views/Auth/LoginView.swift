@@ -35,10 +35,10 @@ struct LoginView: View {
 
             .overlay {
                 if viewModel.isLoading {
-                        ProgressView("Signing in...")
-                            .padding()
-                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
-                    }
+                    ProgressView("Signing in...")
+                        .padding()
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+                }
             }
         }
     }

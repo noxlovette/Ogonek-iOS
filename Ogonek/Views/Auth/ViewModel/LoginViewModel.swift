@@ -16,8 +16,8 @@ class LoginViewModel: ObservableObject {
 
     @MainActor var canSignIn: Bool {
         !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        !password.isEmpty &&
-        !isLoading
+            !password.isEmpty &&
+            !isLoading
     }
 
     @MainActor var hasError: Bool {
@@ -27,12 +27,12 @@ class LoginViewModel: ObservableObject {
 
     private let apiService: APIServiceProtocol
 
-        // Default initializer uses the shared APIService
+    // Default initializer uses the shared APIService
     init() {
-        self.apiService = APIService.shared
+        apiService = APIService.shared
     }
 
-        // Dependency injection initializer for testing
+    // Dependency injection initializer for testing
     init(apiService: APIServiceProtocol) {
         self.apiService = apiService
     }
@@ -51,12 +51,12 @@ class LoginViewModel: ObservableObject {
             print("Login successful")
         } catch {
             switch error {
-                case APIError.unauthorized:
-                    errorMessage = "Invalid username or password"
-                case let APIError.serverError(statusCode):
-                    errorMessage = "Server error (\(statusCode)). Please try again."
-                default:
-                    errorMessage = "Login failed. Please check your connection and try again."
+            case APIError.unauthorized:
+                errorMessage = "Invalid username or password"
+            case let APIError.serverError(statusCode):
+                errorMessage = "Server error (\(statusCode)). Please try again."
+            default:
+                errorMessage = "Login failed. Please check your connection and try again."
             }
             print("Login error: \(error)")
         }

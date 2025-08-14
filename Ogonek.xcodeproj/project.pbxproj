@@ -14,10 +14,10 @@
 		D53CD02C2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D53CD02D2E24E56000A56DAB /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		D5451D252E3A9D9600A810A2 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5451D242E3A9D9600A810A2 /* openapi.yaml */; };
+		D54BD2CE2E4E22F700C87437 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = D54BD2CD2E4E22F700C87437 /* ZipArchive */; };
+		D54BD2D02E4E22FC00C87437 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = D54BD2CF2E4E22FC00C87437 /* ZipArchive */; };
 		D59519E22E43A58F00AFF7C2 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = D59519E12E43A58F00AFF7C2 /* ZipArchive */; };
 		D59C2FA02DC15848000610EE /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D59C2F9F2DC15848000610EE /* MarkdownUI */; };
-		D5BBAFAF2E4E139200DA24E3 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = D5BBAFAE2E4E139200DA24E3 /* ZipArchive */; };
-		D5BBAFB72E4E13D300DA24E3 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = D5BBAFB62E4E13D300DA24E3 /* ZipArchive */; };
 		D5E6128D2E3B85440050C3EC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = D5E6128C2E3B85440050C3EC /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
@@ -47,13 +47,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		D54BD2B32E4E1F7600C87437 /* Exceptions for "Ogonek" folder in "OgonekUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Core/SDK/Service/API/APIService.swift,
-			);
-			target = D53ACB6E2DB18B9000CE4D45 /* OgonekUITests */;
-		};
 		D5902B4E2E4D222900966BDF /* Exceptions for "Ogonek" folder in "Ogonek" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -71,30 +64,28 @@
 		D5BBAFDD2E4E190100DA24E3 /* Exceptions for "Tests" folder in "Ogonek" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				TestHelpers/MockAPIService.swift,
-				TestHelpers/TestConfiguration.swift,
-				UITests/LoginViewTests.swift,
+				UITests/LoginUITests.swift,
 				UITests/OgonekUITests.swift,
 				UITests/OgonekUITestsLaunchTests.swift,
 				UnitTests/LoginViewModelTests.swift,
+				UnitTests/TestHelpers/MockAPIService.swift,
+				UnitTests/TestHelpers/TestConfiguration.swift,
 			);
 			target = D53ACB552DB18B8F00CE4D45 /* Ogonek */;
 		};
 		D5BBAFDE2E4E190100DA24E3 /* Exceptions for "Tests" folder in "OgonekTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				TestHelpers/MockAPIService.swift,
-				TestHelpers/TestConfiguration.swift,
 				UnitTests/LoginViewModelTests.swift,
+				UnitTests/TestHelpers/MockAPIService.swift,
+				UnitTests/TestHelpers/TestConfiguration.swift,
 			);
 			target = D53ACB642DB18B9000CE4D45 /* OgonekTests */;
 		};
 		D5BBAFDF2E4E190100DA24E3 /* Exceptions for "Tests" folder in "OgonekUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				TestHelpers/MockAPIService.swift,
-				TestHelpers/TestConfiguration.swift,
-				UITests/LoginViewTests.swift,
+				UITests/LoginUITests.swift,
 				UITests/OgonekUITests.swift,
 				UITests/OgonekUITestsLaunchTests.swift,
 			);
@@ -108,7 +99,6 @@
 			exceptions = (
 				D5902B4E2E4D222900966BDF /* Exceptions for "Ogonek" folder in "Ogonek" target */,
 				D5A4B61E2DC0DE2300520DD1 /* Exceptions for "Ogonek" folder in "OgonekTests" target */,
-				D54BD2B32E4E1F7600C87437 /* Exceptions for "Ogonek" folder in "OgonekUITests" target */,
 			);
 			path = Ogonek;
 			sourceTree = "<group>";
@@ -141,14 +131,14 @@
 			isa = PBXFrameworksBuildPhase;
 			files = (
 				D53CD02C2E24E56000A56DAB /* (null) in Frameworks */,
-				D5BBAFAF2E4E139200DA24E3 /* ZipArchive in Frameworks */,
+				D54BD2D02E4E22FC00C87437 /* ZipArchive in Frameworks */,
 			);
 		};
 		D53ACB6C2DB18B9000CE4D45 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
 				D53CD02D2E24E56000A56DAB /* (null) in Frameworks */,
-				D5BBAFB72E4E13D300DA24E3 /* ZipArchive in Frameworks */,
+				D54BD2CE2E4E22F700C87437 /* ZipArchive in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -232,7 +222,7 @@
 			);
 			name = OgonekTests;
 			packageProductDependencies = (
-				D5BBAFAE2E4E139200DA24E3 /* ZipArchive */,
+				D54BD2CF2E4E22FC00C87437 /* ZipArchive */,
 			);
 			productName = "Ogonek SwiftTests";
 			productReference = D53ACB652DB18B9000CE4D45 /* OgonekTests.xctest */;
@@ -253,7 +243,7 @@
 			);
 			name = OgonekUITests;
 			packageProductDependencies = (
-				D5BBAFB62E4E13D300DA24E3 /* ZipArchive */,
+				D54BD2CD2E4E22F700C87437 /* ZipArchive */,
 			);
 			productName = "Ogonek SwiftUITests";
 			productReference = D53ACB6F2DB18B9000CE4D45 /* OgonekUITests.xctest */;
@@ -797,6 +787,16 @@
 			package = D5056C162E3A062200398086 /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
 			productName = OpenAPIURLSession;
 		};
+		D54BD2CD2E4E22F700C87437 /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
+			productName = ZipArchive;
+		};
+		D54BD2CF2E4E22FC00C87437 /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
+			productName = ZipArchive;
+		};
 		D59519E12E43A58F00AFF7C2 /* ZipArchive */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
@@ -806,16 +806,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D5A4B6482DC155A700520DD1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
-		};
-		D5BBAFAE2E4E139200DA24E3 /* ZipArchive */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
-			productName = ZipArchive;
-		};
-		D5BBAFB62E4E13D300DA24E3 /* ZipArchive */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
-			productName = ZipArchive;
 		};
 		D5E6128C2E3B85440050C3EC /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

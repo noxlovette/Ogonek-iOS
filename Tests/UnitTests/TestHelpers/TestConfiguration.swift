@@ -1,18 +1,19 @@
-    //
-    //  TestConfiguration.swift
-    //  Ogonek
-    //
-    //  Created on 14.08.2025.
-    //  Target Membership: Main App + OgonekTests + OgonekUITests
+//
+//  TestConfiguration.swift
+//  Ogonek
+//
+//  Created on 14.08.2025.
+//  Target Membership: Main App + OgonekTests + OgonekUITests
 
 import Foundation
 @testable import Ogonek
 
-    // MARK: - Test Configuration
-struct TestConfiguration {
+// MARK: - Test Configuration
+
+enum TestConfiguration {
     static var isRunningTests: Bool {
         ProcessInfo.processInfo.arguments.contains("--testing") ||
-        ProcessInfo.processInfo.environment["TESTING_MODE"] == "1"
+            ProcessInfo.processInfo.environment["TESTING_MODE"] == "1"
     }
 
     static var shouldMockLoginSuccess: Bool {
@@ -32,25 +33,27 @@ struct TestConfiguration {
     }
 }
 
-    // MARK: - Test Data
-struct TestData {
-        // Test credentials
+// MARK: - Test Data
+
+enum TestData {
+    // Test credentials
     static let validUsername = "testuser"
     static let validPassword = "testpassword"
     static let invalidUsername = "invaliduser"
     static let invalidPassword = "invalidpassword"
 
-        // Expected error messages (should match your LoginViewModel)
+    // Expected error messages (should match your LoginViewModel)
     static let unauthorizedErrorMessage = "Invalid username or password"
     static let serverErrorMessage = "Server error (500). Please try again."
     static let networkErrorMessage = "Login failed. Please check your connection and try again."
 }
 
-    // MARK: - Basic Test Helpers
-struct TestHelpers {
+// MARK: - Basic Test Helpers
+
+enum TestHelpers {
     @MainActor
     static func setupCleanTestState() {
         TokenManager.shared.logout()
-            // Add any other cleanup needed
+        // Add any other cleanup needed
     }
 }

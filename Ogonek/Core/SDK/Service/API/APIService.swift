@@ -27,22 +27,22 @@ public final class APIService: ObservableObject {
     }
 
     // MARK: - OpenAPI Client Access
+
     public var client: OpenAPIClient {
         openAPIClient
     }
 }
 
 // MARK: - Extensions for Constants
+
 public extension APIService {
     static let onceRequestStatusMaxCount = 100
     static let onceRequestUserMaxCount = 100
     static let onceRequestDomainBlocksMaxCount = 100
 }
 
-    // MARK: Dependency Injections
+// MARK: Dependency Injections
+
 protocol APIServiceProtocol {
     func signIn(username: String, password: String) async throws
-}
-
-extension APIService: APIServiceProtocol {
 }

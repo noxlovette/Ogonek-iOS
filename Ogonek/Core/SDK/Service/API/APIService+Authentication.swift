@@ -7,23 +7,25 @@
 
 import Foundation
 
+extension APIService: APIServiceProtocol {
+    func signIn(username: String, password: String) async throws {
+        try await openAPIClient.signIn(username: username, pass: password)
+    }
+}
+
 public extension APIService {
-    /// Set authentication token (usually after successful login)
     func setAuthToken(_ token: String) {
         openAPIClient.setAuthToken(token)
     }
 
-    /// Clear authentication (for logout)
     func clearAuth() {
         openAPIClient.clearAuth()
     }
 
-    /// Check if the service is authenticated
     var isAuthenticated: Bool {
         openAPIClient.isAuthenticated
     }
 
-    /// Restore authentication from stored tokens on app launch
     func restoreAuthenticationIfAvailable() {
         if let storedToken = TokenStorage.getAccessToken() {
             print("restoring access token")
@@ -31,14 +33,6 @@ public extension APIService {
         }
     }
 
-    // MARK: - Convenience Methods (delegate to OpenAPIClient)
-
-    /// Sign in user
-    func signIn(username: String, password: String) async throws {
-        try await openAPIClient.signIn(username: username, pass: password)
-    }
-
-    /// Logout user
     func logout() {
         openAPIClient.logout()
     }
