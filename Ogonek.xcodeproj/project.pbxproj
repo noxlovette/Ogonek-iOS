@@ -16,6 +16,8 @@
 		D5451D252E3A9D9600A810A2 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = D5451D242E3A9D9600A810A2 /* openapi.yaml */; };
 		D59519E22E43A58F00AFF7C2 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = D59519E12E43A58F00AFF7C2 /* ZipArchive */; };
 		D59C2FA02DC15848000610EE /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D59C2F9F2DC15848000610EE /* MarkdownUI */; };
+		D5BBAFAF2E4E139200DA24E3 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = D5BBAFAE2E4E139200DA24E3 /* ZipArchive */; };
+		D5BBAFB72E4E13D300DA24E3 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = D5BBAFB62E4E13D300DA24E3 /* ZipArchive */; };
 		D5E6128D2E3B85440050C3EC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = D5E6128C2E3B85440050C3EC /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,20 @@
 			);
 			target = D53ACB642DB18B9000CE4D45 /* OgonekTests */;
 		};
+		D5BBAFA12E4E122900DA24E3 /* Exceptions for "OgonekTests" folder in "OgonekTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginViewModelTests.swift,
+			);
+			target = D53ACB642DB18B9000CE4D45 /* OgonekTests */;
+		};
+		D5BBAFA22E4E122900DA24E3 /* Exceptions for "OgonekTests" folder in "OgonekUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginViewModelTests.swift,
+			);
+			target = D53ACB6E2DB18B9000CE4D45 /* OgonekUITests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -73,6 +89,10 @@
 		};
 		D53ACB682DB18B9000CE4D45 /* OgonekTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D5BBAFA12E4E122900DA24E3 /* Exceptions for "OgonekTests" folder in "OgonekTests" target */,
+				D5BBAFA22E4E122900DA24E3 /* Exceptions for "OgonekTests" folder in "OgonekUITests" target */,
+			);
 			path = OgonekTests;
 			sourceTree = "<group>";
 		};
@@ -99,12 +119,14 @@
 			isa = PBXFrameworksBuildPhase;
 			files = (
 				D53CD02C2E24E56000A56DAB /* (null) in Frameworks */,
+				D5BBAFAF2E4E139200DA24E3 /* ZipArchive in Frameworks */,
 			);
 		};
 		D53ACB6C2DB18B9000CE4D45 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
 				D53CD02D2E24E56000A56DAB /* (null) in Frameworks */,
+				D5BBAFB72E4E13D300DA24E3 /* ZipArchive in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -190,6 +212,9 @@
 				D53ACB682DB18B9000CE4D45 /* OgonekTests */,
 			);
 			name = OgonekTests;
+			packageProductDependencies = (
+				D5BBAFAE2E4E139200DA24E3 /* ZipArchive */,
+			);
 			productName = "Ogonek SwiftTests";
 			productReference = D53ACB652DB18B9000CE4D45 /* OgonekTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -211,6 +236,9 @@
 				D53ACB722DB18B9000CE4D45 /* OgonekUITests */,
 			);
 			name = OgonekUITests;
+			packageProductDependencies = (
+				D5BBAFB62E4E13D300DA24E3 /* ZipArchive */,
+			);
 			productName = "Ogonek SwiftUITests";
 			productReference = D53ACB6F2DB18B9000CE4D45 /* OgonekUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -309,6 +337,7 @@
 				"else",
 				"echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"",
 				"fi",
+				"",
 				"",
 				"",
 				"",
@@ -509,7 +538,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,7 +571,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -562,10 +591,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-SwiftTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -580,10 +610,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-SwiftTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -597,9 +628,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-SwiftUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -613,9 +646,11 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-SwiftUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "noxlovette.Ogonek-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -758,6 +793,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D5A4B6482DC155A700520DD1 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
+		};
+		D5BBAFAE2E4E139200DA24E3 /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
+			productName = ZipArchive;
+		};
+		D5BBAFB62E4E13D300DA24E3 /* ZipArchive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D59519E02E43A58F00AFF7C2 /* XCRemoteSwiftPackageReference "ZipArchive" */;
+			productName = ZipArchive;
 		};
 		D5E6128C2E3B85440050C3EC /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;

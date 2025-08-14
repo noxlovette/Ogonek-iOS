@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var viewModel = LoginViewModel()
+    @StateObject private var viewModel = LoginViewModel()
     @FocusState private var focusedField: Field?
 
     enum Field: Hashable {
