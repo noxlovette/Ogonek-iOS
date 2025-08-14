@@ -87,7 +87,7 @@ class TokenStorage {
 
 /// Token manager that integrates with OpenAPI Service
 @MainActor
-final class TokenManager: ObservableObject {
+public final class TokenManager: ObservableObject {
     static let shared = TokenManager()
 
     init() {

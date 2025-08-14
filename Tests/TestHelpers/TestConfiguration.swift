@@ -6,9 +6,9 @@
     //  Target Membership: Main App + OgonekTests + OgonekUITests
 
 import Foundation
+@testable import Ogonek
 
     // MARK: - Test Configuration
-
 struct TestConfiguration {
     static var isRunningTests: Bool {
         ProcessInfo.processInfo.arguments.contains("--testing") ||
@@ -33,7 +33,6 @@ struct TestConfiguration {
 }
 
     // MARK: - Test Data
-
 struct TestData {
         // Test credentials
     static let validUsername = "testuser"
@@ -48,21 +47,10 @@ struct TestData {
 }
 
     // MARK: - Basic Test Helpers
-
 struct TestHelpers {
     @MainActor
     static func setupCleanTestState() {
         TokenManager.shared.logout()
             // Add any other cleanup needed
     }
-
-        // Simple helper to create a mock API service
-    static func createMockAPIService(shouldSucceed: Bool = true) -> MockAPIService {
-        let mock = MockAPIService()
-        if !shouldSucceed {
-            mock.shouldThrowError = APIError.unauthorized
-        }
-        return mock
-    }
 }
-

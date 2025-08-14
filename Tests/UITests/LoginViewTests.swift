@@ -1,9 +1,9 @@
-//
-//  LoginViewTests.swift
-//  OgonekUITests
-//
-//  Created by Danila Volkov on 14.08.2025.
-//
+    //
+    //  LoginViewTests.swift
+    //  OgonekUITests
+    //
+    //  Created by Danila Volkov on 14.08.2025.
+    //
 
 import XCTest
 
@@ -38,7 +38,6 @@ final class LoginViewUITests: XCTestCase {
 
         // MARK: - UI Elements Tests
 
-    @MainActor
     func testLoginViewElementsExist() throws {
             // Test header elements
         XCTAssertTrue(app.images["flame.fill"].exists, "Flame icon should be visible")
@@ -51,7 +50,6 @@ final class LoginViewUITests: XCTestCase {
         XCTAssertTrue(app.buttons["Sign In"].exists, "Sign In button should be visible")
     }
 
-    @MainActor
     func testInitialSignInButtonState() throws {
         let signInButton = app.buttons["Sign In"]
         XCTAssertTrue(signInButton.exists)
@@ -60,7 +58,6 @@ final class LoginViewUITests: XCTestCase {
 
         // MARK: - Form Interaction Tests
 
-    @MainActor
     func testUsernameFieldInteraction() throws {
         let usernameField = app.textFields["Username"]
 
@@ -70,7 +67,6 @@ final class LoginViewUITests: XCTestCase {
         XCTAssertEqual(usernameField.value as? String, "testuser")
     }
 
-    @MainActor
     func testPasswordFieldInteraction() throws {
         let passwordField = app.secureTextFields["Password"]
 
@@ -81,7 +77,6 @@ final class LoginViewUITests: XCTestCase {
         XCTAssertTrue(passwordField.exists)
     }
 
-    @MainActor
     func testSignInButtonEnabledWithValidInput() throws {
         fillLoginForm(username: "testuser", password: "testpassword")
 
@@ -97,7 +92,6 @@ final class LoginViewUITests: XCTestCase {
         XCTAssertTrue(signInButton.isEnabled, "Sign In button should be enabled with valid input")
     }
 
-    @MainActor
     func testSignInButtonDisabledWithEmptyUsername() throws {
         let passwordField = app.secureTextFields["Password"]
         passwordField.tap()
@@ -111,7 +105,6 @@ final class LoginViewUITests: XCTestCase {
         XCTAssertFalse(signInButton.isEnabled, "Sign In button should be disabled with empty username")
     }
 
-    @MainActor
     func testSignInButtonDisabledWithEmptyPassword() throws {
         let usernameField = app.textFields["Username"]
         usernameField.tap()
@@ -127,15 +120,15 @@ final class LoginViewUITests: XCTestCase {
 
         // MARK: - Authentication Flow Tests
 
-    @MainActor
     func testSuccessfulLogin() throws {
             // Configure app for successful login mock
         app.terminate()
         app.launchEnvironment["MOCK_LOGIN_SUCCESS"] = "true"
+        app.launchArguments = ["--testing"]
         app.launch()
         navigateToLoginIfNeeded()
 
-        fillLoginForm(username: "validuser", password: "validpassword")
+        fillLoginForm(username: TestData.validUsername, password: TestData.validPassword)
 
         let signInButton = app.buttons["Sign In"]
         signInButton.tap()
@@ -145,11 +138,11 @@ final class LoginViewUITests: XCTestCase {
         XCTAssertTrue(dashboardTitle.waitForExistence(timeout: 5.0), "Should navigate to dashboard after successful login")
     }
 
-    @MainActor
     func testFailedLoginShowsAlert() throws {
             // Configure app for failed login mock
         app.terminate()
         app.launchEnvironment["MOCK_LOGIN_FAILURE"] = "true"
+        app.launchArguments = ["--testing"]
         app.launch()
         navigateToLoginIfNeeded()
 
@@ -172,11 +165,11 @@ final class LoginViewUITests: XCTestCase {
         XCTAssertTrue(app.textFields["Username"].exists, "Should remain on login screen after failed login")
     }
 
-    @MainActor
     func testLoadingStateDisablesButton() throws {
             // Configure app for slow login response
         app.terminate()
         app.launchEnvironment["MOCK_LOGIN_SLOW"] = "true"
+        app.launchArguments = ["--testing"]
         app.launch()
         navigateToLoginIfNeeded()
 
@@ -199,7 +192,6 @@ final class LoginViewUITests: XCTestCase {
 
         // MARK: - Accessibility Tests
 
-    @MainActor
     func testAccessibilityLabels() throws {
         let usernameField = app.textFields["Username"]
         let passwordField = app.secureTextFields["Password"]
@@ -210,7 +202,6 @@ final class LoginViewUITests: XCTestCase {
         XCTAssertEqual(signInButton.label, "Sign In", "Sign In button should have proper accessibility label")
     }
 
-    @MainActor
     func testVoiceOverNavigation() throws {
             // Enable VoiceOver for testing
             // Note: This requires additional setup in your test scheme
@@ -227,11 +218,11 @@ final class LoginViewUITests: XCTestCase {
 
         // MARK: - Error Handling Tests
 
-    @MainActor
     func testNetworkErrorHandling() throws {
             // Configure app for network error
         app.terminate()
         app.launchEnvironment["MOCK_NETWORK_ERROR"] = "true"
+        app.launchArguments = ["--testing"]
         app.launch()
         navigateToLoginIfNeeded()
 
@@ -266,7 +257,6 @@ final class LoginViewUITests: XCTestCase {
 
 extension LoginViewUITests {
 
-    @MainActor
     func testLoginViewLaunchPerformance() throws {
             // Measure login view presentation time
         measure(metrics: [XCTApplicationLaunchMetric()]) {
@@ -275,7 +265,6 @@ extension LoginViewUITests {
         }
     }
 
-    @MainActor
     func testLoginFormInteractionPerformance() throws {
             // Measure form interaction responsiveness
         let options = XCTMeasureOptions()

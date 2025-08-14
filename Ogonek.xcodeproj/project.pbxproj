@@ -47,6 +47,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D54BD2B32E4E1F7600C87437 /* Exceptions for "Ogonek" folder in "OgonekUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Core/SDK/Service/API/APIService.swift,
+			);
+			target = D53ACB6E2DB18B9000CE4D45 /* OgonekUITests */;
+		};
 		D5902B4E2E4D222900966BDF /* Exceptions for "Ogonek" folder in "Ogonek" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -64,6 +71,8 @@
 		D5BBAFDD2E4E190100DA24E3 /* Exceptions for "Tests" folder in "Ogonek" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				TestHelpers/MockAPIService.swift,
+				TestHelpers/TestConfiguration.swift,
 				UITests/LoginViewTests.swift,
 				UITests/OgonekUITests.swift,
 				UITests/OgonekUITestsLaunchTests.swift,
@@ -74,6 +83,7 @@
 		D5BBAFDE2E4E190100DA24E3 /* Exceptions for "Tests" folder in "OgonekTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				TestHelpers/MockAPIService.swift,
 				TestHelpers/TestConfiguration.swift,
 				UnitTests/LoginViewModelTests.swift,
 			);
@@ -82,6 +92,7 @@
 		D5BBAFDF2E4E190100DA24E3 /* Exceptions for "Tests" folder in "OgonekUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				TestHelpers/MockAPIService.swift,
 				TestHelpers/TestConfiguration.swift,
 				UITests/LoginViewTests.swift,
 				UITests/OgonekUITests.swift,
@@ -97,6 +108,7 @@
 			exceptions = (
 				D5902B4E2E4D222900966BDF /* Exceptions for "Ogonek" folder in "Ogonek" target */,
 				D5A4B61E2DC0DE2300520DD1 /* Exceptions for "Ogonek" folder in "OgonekTests" target */,
+				D54BD2B32E4E1F7600C87437 /* Exceptions for "Ogonek" folder in "OgonekUITests" target */,
 			);
 			path = Ogonek;
 			sourceTree = "<group>";
@@ -255,7 +267,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 1630;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					D53ACB552DB18B8F00CE4D45 = {
 						CreatedOnToolsVersion = 16.3;
@@ -364,6 +376,7 @@
 				"",
 				"",
 				"",
+				"",
 			);
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -439,6 +452,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -502,6 +516,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -531,7 +546,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -564,7 +578,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -595,7 +608,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
@@ -614,7 +626,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
@@ -632,7 +643,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
@@ -650,7 +660,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2L2F7WTWVN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;

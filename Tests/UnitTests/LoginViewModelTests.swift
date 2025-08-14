@@ -10,6 +10,23 @@ import Testing
 import ZipArchive
 @testable import Ogonek
 
+extension LoginViewModel {
+    static func makeForTesting(
+        mockSuccess: Bool = true,
+        shouldDelay: Bool = false,
+        errorToThrow: Error? = nil
+    ) -> LoginViewModel {
+        let mockService = MockAPIService()
+        mockService.shouldDelay = shouldDelay
+
+        if !mockSuccess {
+            mockService.shouldThrowError = errorToThrow ?? APIError.unauthorized
+        }
+
+        return LoginViewModel(apiService: mockService)
+    }
+}
+
 @MainActor
 struct LoginViewModelTests {
 
@@ -235,32 +252,3 @@ struct LoginViewModelTests {
         #expect(!viewModel.isLoading)
     }
 }
-
-    // MARK: - Mock API Service
-
-class MockAPIService: APIServiceProtocol {
-    var signInCalled = false
-    var lastSignInUsername: String?
-    var lastSignInPassword: String?
-    var shouldThrowError: Error?
-    var shouldDelay = false
-
-    @MainActor
-    func signIn(username: String, password: String) async throws {
-        signInCalled = true
-        lastSignInUsername = username
-        lastSignInPassword = password
-
-        if shouldDelay {
-            try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-        }
-
-        if let error = shouldThrowError {
-            throw error
-        }
-
-            // Simulate successful login by setting TokenManager
-        TokenManager.shared.isAuthenticated = true
-    }
-}
-

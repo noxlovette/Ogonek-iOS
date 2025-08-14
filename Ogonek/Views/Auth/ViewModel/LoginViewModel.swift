@@ -76,23 +76,3 @@ class LoginViewModel: ObservableObject {
         errorMessage = nil
     }
 }
-
-    // MARK: - Test Configuration Support
-#if DEBUG
-extension LoginViewModel {
-    static func makeForTesting(
-        mockSuccess: Bool = true,
-        shouldDelay: Bool = false,
-        errorToThrow: Error? = nil
-    ) -> LoginViewModel {
-        let mockService = MockAPIService()
-        mockService.shouldDelay = shouldDelay
-
-        if !mockSuccess {
-            mockService.shouldThrowError = errorToThrow ?? APIError.unauthorized
-        }
-
-        return LoginViewModel(apiService: mockService)
-    }
-}
-#endif
