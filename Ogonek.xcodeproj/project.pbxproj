@@ -61,17 +61,31 @@
 			);
 			target = D53ACB642DB18B9000CE4D45 /* OgonekTests */;
 		};
-		D5BBAFA12E4E122900DA24E3 /* Exceptions for "OgonekTests" folder in "OgonekTests" target */ = {
+		D5BBAFDD2E4E190100DA24E3 /* Exceptions for "Tests" folder in "Ogonek" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				LoginViewModelTests.swift,
+				UITests/LoginViewTests.swift,
+				UITests/OgonekUITests.swift,
+				UITests/OgonekUITestsLaunchTests.swift,
+				UnitTests/LoginViewModelTests.swift,
+			);
+			target = D53ACB552DB18B8F00CE4D45 /* Ogonek */;
+		};
+		D5BBAFDE2E4E190100DA24E3 /* Exceptions for "Tests" folder in "OgonekTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TestHelpers/TestConfiguration.swift,
+				UnitTests/LoginViewModelTests.swift,
 			);
 			target = D53ACB642DB18B9000CE4D45 /* OgonekTests */;
 		};
-		D5BBAFA22E4E122900DA24E3 /* Exceptions for "OgonekTests" folder in "OgonekUITests" target */ = {
+		D5BBAFDF2E4E190100DA24E3 /* Exceptions for "Tests" folder in "OgonekUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				LoginViewModelTests.swift,
+				TestHelpers/TestConfiguration.swift,
+				UITests/LoginViewTests.swift,
+				UITests/OgonekUITests.swift,
+				UITests/OgonekUITestsLaunchTests.swift,
 			);
 			target = D53ACB6E2DB18B9000CE4D45 /* OgonekUITests */;
 		};
@@ -87,18 +101,14 @@
 			path = Ogonek;
 			sourceTree = "<group>";
 		};
-		D53ACB682DB18B9000CE4D45 /* OgonekTests */ = {
+		D5BBAFD02E4E18FB00DA24E3 /* Tests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				D5BBAFA12E4E122900DA24E3 /* Exceptions for "OgonekTests" folder in "OgonekTests" target */,
-				D5BBAFA22E4E122900DA24E3 /* Exceptions for "OgonekTests" folder in "OgonekUITests" target */,
+				D5BBAFDD2E4E190100DA24E3 /* Exceptions for "Tests" folder in "Ogonek" target */,
+				D5BBAFDE2E4E190100DA24E3 /* Exceptions for "Tests" folder in "OgonekTests" target */,
+				D5BBAFDF2E4E190100DA24E3 /* Exceptions for "Tests" folder in "OgonekUITests" target */,
 			);
-			path = OgonekTests;
-			sourceTree = "<group>";
-		};
-		D53ACB722DB18B9000CE4D45 /* OgonekUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OgonekUITests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -136,12 +146,11 @@
 			isa = PBXGroup;
 			children = (
 				D53ACB582DB18B8F00CE4D45 /* Ogonek */,
-				D53ACB682DB18B9000CE4D45 /* OgonekTests */,
-				D53ACB722DB18B9000CE4D45 /* OgonekUITests */,
 				D59C2F9E2DC15848000610EE /* Frameworks */,
 				D53ACB572DB18B8F00CE4D45 /* Products */,
 				D5056BD62E3A048700398086 /* openapi-generator-config.yaml */,
 				D5451D242E3A9D9600A810A2 /* openapi.yaml */,
+				D5BBAFD02E4E18FB00DA24E3 /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,6 +190,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				D53ACB582DB18B8F00CE4D45 /* Ogonek */,
+				D5BBAFD02E4E18FB00DA24E3 /* Tests */,
 			);
 			name = Ogonek;
 			packageProductDependencies = (
@@ -208,9 +218,6 @@
 			dependencies = (
 				D53ACB672DB18B9000CE4D45 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				D53ACB682DB18B9000CE4D45 /* OgonekTests */,
-			);
 			name = OgonekTests;
 			packageProductDependencies = (
 				D5BBAFAE2E4E139200DA24E3 /* ZipArchive */,
@@ -231,9 +238,6 @@
 			);
 			dependencies = (
 				D53ACB712DB18B9000CE4D45 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				D53ACB722DB18B9000CE4D45 /* OgonekUITests */,
 			);
 			name = OgonekUITests;
 			packageProductDependencies = (
@@ -637,7 +641,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Ogonek Swift";
+				TEST_TARGET_NAME = Ogonek;
 			};
 			name = Debug;
 		};
@@ -655,7 +659,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Ogonek Swift";
+				TEST_TARGET_NAME = Ogonek;
 			};
 			name = Release;
 		};

@@ -77,36 +77,6 @@ class LoginViewModel: ObservableObject {
     }
 }
 
-    // MARK: - Mock API Service for Testing
-#if DEBUG
-class MockAPIService: APIServiceProtocol {
-    var signInCalled = false
-    var lastSignInUsername: String?
-    var lastSignInPassword: String?
-    var shouldThrowError: Error?
-    var shouldDelay = false
-
-    func signIn(username: String, password: String) async throws {
-        signInCalled = true
-        lastSignInUsername = username
-        lastSignInPassword = password
-
-        if shouldDelay {
-            try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
-        }
-
-        if let error = shouldThrowError {
-            throw error
-        }
-
-            // Simulate successful login by setting TokenManager
-        await MainActor.run {
-            TokenManager.shared.isAuthenticated = true
-        }
-    }
-}
-#endif
-
     // MARK: - Test Configuration Support
 #if DEBUG
 extension LoginViewModel {

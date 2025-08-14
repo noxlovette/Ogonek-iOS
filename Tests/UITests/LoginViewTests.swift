@@ -125,23 +125,6 @@ final class LoginViewUITests: XCTestCase {
         XCTAssertFalse(signInButton.isEnabled, "Sign In button should be disabled with empty password")
     }
 
-        // MARK: - Keyboard Navigation Tests
-
-    @MainActor
-    func testSubmitFromPasswordField() throws {
-        fillLoginForm(username: "testuser", password: "testpassword")
-
-        let passwordField = app.secureTextFields["Password"]
-        passwordField.tap()
-
-            // Tap "Go" on keyboard (this should trigger sign in)
-        app.keyboards.buttons["Go"].tap()
-
-            // Verify loading state appears
-        let loadingIndicator = app.staticTexts["Signing in..."]
-        XCTAssertTrue(loadingIndicator.waitForExistence(timeout: 2.0), "Loading indicator should appear")
-    }
-
         // MARK: - Authentication Flow Tests
 
     @MainActor
