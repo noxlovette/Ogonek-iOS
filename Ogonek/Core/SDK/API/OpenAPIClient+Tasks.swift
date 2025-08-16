@@ -36,8 +36,6 @@ extension OpenAPIClient {
         }
     }
 
-  
-
     func deleteTask(id: String) async throws {
         let input = Operations.DeleteTask.Input.Path(
             id: id,

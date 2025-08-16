@@ -159,6 +159,7 @@ struct LearnView: View {
 
     private func cardContent(card: CardProgress) -> some View {
         VStack(spacing: 16) {
+            // Front
             VStack(alignment: .leading, spacing: 16) {
                 if viewState.showCloze {
                     clozeInput(front: card.front)
@@ -167,6 +168,23 @@ struct LearnView: View {
                         .font(.title3)
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
+                if let mediaUrl = card.mediaUrl,
+                   let encoded = mediaUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                   let url = URL(string: encoded)
+                {
+                    AsyncImage(url: url) { image in
+                        image.resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxHeight: 180)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                    } placeholder: {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(.systemGray6))
+                            .frame(maxHeight: 180)
+                            .overlay(ProgressView())
+                    }
                 }
             }
             .padding(20)
@@ -178,15 +196,7 @@ struct LearnView: View {
                 Divider()
                     .padding(.horizontal, 20)
 
-                VStack(alignment: .leading, spacing: 16) {
-                    HStack {
-                        Text("Back")
-                            .font(.caption)
-                            .fontWeight(.medium)
-                            .foregroundColor(.secondary)
-                        Spacer()
-                    }
-
+                VStack(alignment: .leading) {
                     Text(card.back)
                         .font(.title3)
                         .multilineTextAlignment(.leading)
@@ -257,8 +267,8 @@ struct LearnView: View {
                     }
                 )
                 .accessibilityLabel("Rate difficulty as \(button.label)")
-                    .accessibilityHint("This affects when you'll see this card again")
-                    .accessibilityAddTraits(.isButton)
+                .accessibilityHint("This affects when you'll see this card again")
+                .accessibilityAddTraits(.isButton)
             }
         }
     }

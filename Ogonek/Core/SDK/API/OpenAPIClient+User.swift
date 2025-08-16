@@ -51,6 +51,4 @@ extension OpenAPIClient {
     func listStudents(_: Operations.ListStudents.Input) async throws -> Operations.ListStudents.Output {
         notImplemented()
     }
-
-   
 }

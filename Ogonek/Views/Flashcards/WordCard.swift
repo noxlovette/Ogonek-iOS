@@ -41,9 +41,11 @@ struct WordCard: View {
                             .lineLimit(4)
                     }
 
-                    // Media image if available
-                    if let mediaUrl = card.mediaUrl, isFlipped {
-                        AsyncImage(url: URL(string: mediaUrl)) { image in
+                    if let mediaUrl = card.mediaUrl,
+                       let encoded = mediaUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                       let url = URL(string: encoded), isFlipped
+                    {
+                        AsyncImage(url: url) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -53,9 +55,7 @@ struct WordCard: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color(.systemGray6))
                                 .frame(maxHeight: 120)
-                                .overlay(
-                                    ProgressView(),
-                                )
+                                .overlay(ProgressView())
                         }
                     }
 

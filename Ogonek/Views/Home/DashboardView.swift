@@ -87,9 +87,11 @@ struct DashboardView: View {
                 }
                 .refreshable {
                     await viewModel.refreshDashboard()
+                    await appState.fetchBadges()
                 }
                 .task {
                     await viewModel.loadDashboardData()
+                    await appState.fetchBadges()
                 }
                 .alert("Error", isPresented: .constant(!viewModel.errorMessage.isNil)) {
                     Button("Retry") {
@@ -112,7 +114,6 @@ struct DashboardView: View {
                             .background(Color.clear)
                     }
                 }
-
         }
     }
 

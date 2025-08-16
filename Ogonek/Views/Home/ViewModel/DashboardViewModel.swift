@@ -7,20 +7,14 @@
 
 import Foundation
 
-@Observable
-class DashboardViewModel {
+class DashboardViewModel: BaseViewModel {
     var dueTasks: [TaskSmall] = []
     var recentLessons: [LessonSmall] = []
     var dueCardsCount: Int64 = 0
     var recentActivities: [ActivityLog] = []
 
-    var isLoading = false
     var isRefreshing = false
-    var errorMessage: String?
 
-    private let apiService = APIService.shared
-
-    /// Load all dashboard data
     @MainActor
     func loadDashboardData() async {
         isLoading = true
@@ -38,8 +32,7 @@ class DashboardViewModel {
                 recentActivities = dashboardData.activity
             }
         } catch {
-            errorMessage = error.localizedDescription
-            logger.error("Error loading dashboard data: \(error)")
+            handleError(error)
         }
 
         isLoading = false

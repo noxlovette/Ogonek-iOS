@@ -1,5 +1,5 @@
 //
-//  APIService+Flashcards.swift
+//  APIService+State.swift
 //  Ogonek
 //
 //  Created by Danila Volkov on 31.07.2025.
@@ -17,9 +17,7 @@ extension APIService {
         return try await openAPIClient.fetchDashboard()
     }
 
-
     func fetchContext() async throws -> AppContext {
         return try await openAPIClient.fetchContext()
     }
-
 }

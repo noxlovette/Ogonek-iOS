@@ -18,7 +18,7 @@ struct TaskDetailView: View {
                 ScrollView {
                     VStack(alignment: .leading) {
                         Markdown(task.task.markdown)
-                    }
+                    }.padding()
                 }
             } else {
                 loadingOverlay

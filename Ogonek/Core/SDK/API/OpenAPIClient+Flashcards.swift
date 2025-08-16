@@ -28,7 +28,6 @@ extension OpenAPIClient {
         }
     }
 
-
     func deleteDeck(id: String) async throws {
         let input = Operations.DeleteDeck.Input.Path(
             id: id,

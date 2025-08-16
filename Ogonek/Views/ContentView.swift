@@ -42,9 +42,7 @@ struct ContentView: View {
         apiService.restoreAuthenticationIfAvailable()
         tokenManager.isAuthenticated = TokenStorage.hasValidTokens()
         authSetupCompleted = true
-
     }
-
 }
 
 #Preview {

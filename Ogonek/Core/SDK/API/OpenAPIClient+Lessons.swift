@@ -34,7 +34,6 @@ extension OpenAPIClient {
         }
     }
 
-   
     func deleteLesson(id: String) async throws {
         let input = Operations.DeleteLesson.Input.Path(
             id: id,

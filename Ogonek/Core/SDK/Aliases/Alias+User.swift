@@ -6,9 +6,9 @@
 //
 
 import Foundation
+
 typealias Profile = Components.Schemas.Profile
 typealias Dashboard = Components.Schemas.DashboardData
-
 
 typealias User = Components.Schemas.User
 extension User {

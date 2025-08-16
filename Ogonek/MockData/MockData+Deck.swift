@@ -16,7 +16,7 @@ extension MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "distant memory",
                 id: "yPPHMaNa385TFg2nRVINz",
-                mediaUrl: nil,
+                mediaUrl: "https://docs-assets.developer.apple.com/published/e4e79f1275f29c97f978794931fcae53/media-3262152%402x.png",
             ),
             Card(
                 back: "a memory that stays with you for a long time",
@@ -24,13 +24,13 @@ extension MockData {
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
                 front: "lasting memory",
                 id: "8E58QbmXUcIqQgSIBrThL",
-                mediaUrl: nil,
+                mediaUrl: "https://static.wikia.nocookie.net/hello_world/images/3/3e/414a8ef0-f3bb-11e9-bdfc-d4aea2070a0f.jpg/revision/latest/thumbnail/width/360/height/360?cb=20200515011426",
             ),
             Card(
                 back: "a memory that causes emotional pain or distress",
                 createdAt: ISO8601DateFormatter().date(from: "2025-07-18T08:36:49.127396Z") ?? Date(),
                 deckId: "0mNE0QOytmJAc0GsFJq6E",
-                front: "painful memory",
+                front: "painful memory is a really long long long sentence that the student will meow",
                 id: "7wYXkSlqG7PTV61FwmGKh",
                 mediaUrl: nil,
             ),
@@ -161,7 +161,6 @@ extension MockData {
         perPage: 50,
     )
 
-
     static let cardProgress = [
         CardProgress(
             back: "a memory from a long time ago",
@@ -172,7 +171,7 @@ extension MockData {
             id: "t-oebOC6El-HA3ieMfbgJ",
             interval: 1,
             lastReviewed: ISO8601DateFormatter().date(from: "2025-07-25T08:22:37.624457Z"),
-            mediaUrl: nil,
+            mediaUrl: "https://static.wikia.nocookie.net/hello_world/images/3/3e/414a8ef0-f3bb-11e9-bdfc-d4aea2070a0f.jpg/revision/latest/thumbnail/width/360/height/360?cb=20200515011426",
             reviewCount: 1,
             userId: "dev_teacher1_sDkwvkSa",
         ),

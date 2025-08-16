@@ -7,6 +7,4 @@
 
 import Foundation
 
-extension APIService {
-
-}
+extension APIService {}
