@@ -10,9 +10,9 @@ import KeychainAccess
 
 /// Handles secure token storage using Keychain Services
 class TokenStorage {
-    private static let keychain = Keychain(service: "noxlovette.Ogonek-Swift")
-        .synchronizable(false) // Don't sync to iCloud for security
-        .accessibility(.whenUnlockedThisDeviceOnly) // Only accessible when device is unlocked
+    private static let keychain = Keychain(service: "noxlovette.Ogonek")
+        .synchronizable(false)
+        .accessibility(.whenUnlockedThisDeviceOnly)
 
     private static let accessTokenKey = "access_token"
     private static let refreshTokenKey = "refresh_token"
@@ -71,7 +71,6 @@ class TokenStorage {
     // Optional: Method to check if keychain is accessible
     static func isKeychainAccessible() -> Bool {
         do {
-            // Try to set and retrieve a test value
             let testKey = "keychain_test"
             let testValue = "test"
             try keychain.set(testValue, key: testKey)

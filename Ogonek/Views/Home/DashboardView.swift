@@ -107,6 +107,7 @@ struct DashboardView: View {
                         Text(errorMessage)
                     }
                 }
+
                 .overlay {
                     if viewModel.isLoading, viewModel.dueTasks.isEmpty {
                         ProgressView("Loading dashboard...")
@@ -114,6 +115,7 @@ struct DashboardView: View {
                             .background(Color.clear)
                     }
                 }
+
         }
     }
 

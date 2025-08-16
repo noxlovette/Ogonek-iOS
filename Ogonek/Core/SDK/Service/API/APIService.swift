@@ -40,3 +40,9 @@ public extension APIService {
     static let onceRequestUserMaxCount = 100
     static let onceRequestDomainBlocksMaxCount = 100
 }
+
+extension APIService {
+    func registerDevice(_ token: String) async throws {
+         try await openAPIClient.registerDevice(token)
+    }
+}

@@ -7,7 +7,7 @@ info:
     email: danila.volkov@noxlovette.com
   license:
     name: ''
-  version: 1.7.0
+  version: 1.7.1
 servers:
 - url: https://api.ogonek.app
   description: Production server

@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct Ogonek: App {
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+
     init() {
         // MARK: Set up Sentry
 
@@ -38,3 +42,4 @@ struct Ogonek: App {
         }
     }
 }
+

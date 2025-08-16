@@ -87,29 +87,17 @@ enum AppEnvironment: String {
 
 enum EnvironmentConfig {
     static func currentEnvironment() -> AppEnvironment {
-        if let envValue = ProcessInfo.processInfo.environment["APP_ENV"],
-           let env = AppEnvironment(rawValue: envValue.lowercased())
-        {
-            return env
-        }
-
-        if let plistValue = Bundle.main.object(forInfoDictionaryKey: "AppEnvironment") as? String,
-           let env = AppEnvironment(rawValue: plistValue.lowercased())
-        {
-            return env
-        }
-
-        return .production
+        return .staging
     }
 
     static func serverURL() throws -> URL {
         switch currentEnvironment() {
-        case .production:
-            return try Servers.Server1.url()
-        case .staging:
-            return try Servers.Server2.url()
-        case .development:
-            return try Servers.Server3.url()
+            case .production:
+                return try Servers.Server1.url()
+            case .staging:
+                return try Servers.Server2.url()
+            case .development:
+                return try Servers.Server3.url()
         }
     }
 }

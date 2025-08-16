@@ -10,12 +10,16 @@ import SwiftUI
 extension DashboardView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
+
         ToolbarItem(placement: .topBarLeading) {
-            Button {
-                logout()
+            NavigationLink {
+                SettingsView()
             } label: {
-                Image(systemName: "rectangle.portrait.and.arrow.right")
+                Image(systemName: "person.crop.circle")
+                    .foregroundStyle(.primary)
             }
+            .accessibilityLabel("Settings")
+            .accessibilityHint("Access app settings and account options")
         }
 
         ToolbarItem {
