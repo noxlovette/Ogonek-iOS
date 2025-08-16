@@ -21,7 +21,7 @@ struct LessonDetailView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         Markdown(lesson.markdown)
-                    }
+                    }.padding()
                 }
 
             } else {

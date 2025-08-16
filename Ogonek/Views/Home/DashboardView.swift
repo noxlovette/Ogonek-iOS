@@ -57,15 +57,28 @@ struct DashboardView: View {
                         NavigationLink {
                             LearnView()
                         } label: {
-                            Image(systemName: "brain.head.profile")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white)
-                                .frame(width: 60, height: 60)
-                                .background(Circle().fill(Color.secondaryColour))
-                                .shadow(radius: 4)
+                            ZStack {
+                                Image(systemName: "brain.head.profile")
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.white)
+                                    .frame(width: 60, height: 60)
+                                    .background(Circle().fill(Color.secondaryColour))
+                                    .shadow(radius: 4)
+
+                                if let dueCards = appState.badges?.dueCards, dueCards > 0 {
+                                    Text("\(dueCards)")
+                                        .font(.caption2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .frame(minWidth: 20, minHeight: 20)
+                                        .background(Circle().fill(.red))
+                                        .offset(x: 20, y: -20)
+                                }
+                            }
                         }
                         .padding()
-                        .badge(Int(appState.badges?.dueCards ?? 0))
+                        .accessibilityLabel("Learn flashcards")
+                        .accessibilityHint("Review \(appState.badges?.dueCards ?? 0) due cards")
                     }
                 }
             }.navigationTitle("Dashboard")

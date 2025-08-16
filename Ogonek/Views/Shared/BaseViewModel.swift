@@ -7,9 +7,10 @@
 
 import Foundation
 
+@Observable
 class BaseViewModel: ObservableObject {
-    @Published var errorMessage: String?
-    @Published var isLoading: Bool = false
+    var errorMessage: String?
+    var isLoading: Bool = false
 
     let apiService: APIService
 
