@@ -16,7 +16,6 @@ typealias TaskSmall = Components.Schemas.TaskSmall
 extension TaskSmall: Identifiable {}
 
 typealias PaginatedTasks = Components.Schemas.PaginatedTasks
-typealias BadgeWrapperTasks = Components.Schemas.BadgeWrapperTasks
 
 extension File: Identifiable {}
 

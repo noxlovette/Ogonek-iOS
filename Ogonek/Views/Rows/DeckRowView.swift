@@ -10,7 +10,7 @@ struct DeckRowView: View {
             HStack(alignment: .top, spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack(alignment: .top, spacing: 8) {
-                        Text(deck.name)
+                        Text(deck.title)
                             .font(.headline)
                             .lineLimit(2)
                             .foregroundStyle(.primary)
@@ -48,7 +48,7 @@ struct DeckRowView: View {
 }
 
 #Preview {
-    DeckRowView(deck: MockData.decks()[0])
-    DeckRowView(deck: MockData.decks()[1])
-    DeckRowView(deck: MockData.decks()[2])
+    DeckRowView(deck: MockData.decks.data[0])
+    DeckRowView(deck: MockData.decks.data[1])
+    DeckRowView(deck: MockData.decks.data[2])
 }

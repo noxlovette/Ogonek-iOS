@@ -62,6 +62,5 @@ extension MockData {
         ],
         page: 1,
         perPage: 50,
-        total: 4,
     )
 }

@@ -14,15 +14,17 @@ class DeckListViewModel: BaseViewModel {
 
         do {
             if
-                ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+                isPreview
             {
-                decks = MockData.decks()
+                decks = MockData.decks.data
             } else {
-                decks = try await apiService.listDecks(
+                let paginatedDecks = try await apiService.listDecks(
                     page: currentPage,
                     perPage: 20,
                     search: searchText,
                 )
+
+                decks = paginatedDecks.data
             }
         } catch {
             errorMessage = "Failed to load Decks: \(error.localizedDescription)"

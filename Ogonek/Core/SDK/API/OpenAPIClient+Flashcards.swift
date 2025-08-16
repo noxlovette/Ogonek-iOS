@@ -28,27 +28,6 @@ extension OpenAPIClient {
         }
     }
 
-    func createDeck() async throws -> CreationID {
-        let response = try await client.createDeck()
-
-        switch response {
-        case let .ok(createdResponse):
-            let body = createdResponse.body
-            switch body {
-            case let .json(id):
-                return id
-            }
-
-        case .badRequest:
-            throw APIError.serverError(statusCode: 400)
-
-        case .unauthorized:
-            throw APIError.unauthorized
-
-        case let .undocumented(statusCode: statusCode, _):
-            throw APIError.serverError(statusCode: statusCode)
-        }
-    }
 
     func deleteDeck(id: String) async throws {
         let input = Operations.DeleteDeck.Input.Path(

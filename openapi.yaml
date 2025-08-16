@@ -7,7 +7,7 @@ info:
     email: danila.volkov@noxlovette.com
   license:
     name: ''
-  version: 1.6.2
+  version: 1.7.0
 servers:
 - url: https://api.ogonek.app
   description: Production server
@@ -59,8 +59,6 @@ paths:
           description: Invalid invite token
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/auth/refresh:
     post:
       tags:
@@ -161,13 +159,9 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/DeckSmall'
+                $ref: '#/components/schemas/PaginatedDecks'
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
     post:
       tags:
       - Deck
@@ -177,15 +171,13 @@ paths:
         '200':
           description: Deck created successfully
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/CreationId'
+                type: string
         '400':
           description: Bad request
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/decks/public:
     get:
       tags:
@@ -203,8 +195,6 @@ paths:
                   $ref: '#/components/schemas/DeckPublic'
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/decks/{id}:
     get:
       tags:
@@ -229,8 +219,6 @@ paths:
           description: Unauthorized
         '404':
           description: Deck not found
-      security:
-      - api_key: []
     delete:
       tags:
       - Deck
@@ -250,8 +238,6 @@ paths:
           description: Unauthorized
         '404':
           description: Deck not found
-      security:
-      - api_key: []
     patch:
       tags:
       - Deck
@@ -277,8 +263,6 @@ paths:
           description: Unauthorized
         '404':
           description: Deck not found
-      security:
-      - api_key: []
   /api/v1/learn:
     get:
       tags:
@@ -296,8 +280,6 @@ paths:
                   $ref: '#/components/schemas/CardProgressWithFields'
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/learn/subscribe/{id}:
     post:
       tags:
@@ -318,8 +300,6 @@ paths:
           description: Unauthorized
         '404':
           description: Deck not found
-      security:
-      - api_key: []
     delete:
       tags:
       - Learn
@@ -339,8 +319,6 @@ paths:
           description: Unauthorized
         '404':
           description: Deck not found
-      security:
-      - api_key: []
   /api/v1/learn/{id}:
     put:
       tags:
@@ -365,8 +343,6 @@ paths:
           description: Card progress updated successfully
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
     delete:
       tags:
       - Learn
@@ -390,8 +366,6 @@ paths:
                   $ref: '#/components/schemas/CardProgressWithFields'
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/lessons:
     get:
       tags:
@@ -436,8 +410,6 @@ paths:
                 $ref: '#/components/schemas/PaginatedLessons'
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
     post:
       tags:
       - Lesson
@@ -447,15 +419,13 @@ paths:
         '201':
           description: Lesson created successfully
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/CreationId'
+                type: string
         '400':
           description: Bad request
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/lessons/{id}:
     get:
       tags:
@@ -480,8 +450,6 @@ paths:
           description: Unauthorized
         '404':
           description: Lesson not found
-      security:
-      - api_key: []
     delete:
       tags:
       - Lesson
@@ -501,8 +469,6 @@ paths:
           description: Unauthorized
         '404':
           description: Lesson not found
-      security:
-      - api_key: []
     patch:
       tags:
       - Lesson
@@ -528,8 +494,32 @@ paths:
           description: Unauthorized
         '404':
           description: Lesson not found
-      security:
-      - api_key: []
+  /api/v1/notifications/register:
+    post:
+      tags:
+      - notifications
+      operationId: register_device_token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceTokenPayload'
+        required: true
+      responses:
+        '204':
+          description: Device Token Registered Successfully
+        '401':
+          description: Unauthorized
+  /api/v1/notifications/request:
+    post:
+      tags:
+      - notifications
+      operationId: request_hw
+      responses:
+        '204':
+          description: Homework requested
+        '401':
+          description: Unauthorized
   /api/v1/s3/abort:
     post:
       tags:
@@ -549,8 +539,6 @@ paths:
           description: Bad request
         '404':
           description: File not found
-      security:
-      - api_key: []
   /api/v1/s3/complete:
     post:
       tags:
@@ -570,8 +558,6 @@ paths:
           description: Bad request
         '404':
           description: File not found
-      security:
-      - api_key: []
   /api/v1/s3/init:
     post:
       tags:
@@ -595,8 +581,6 @@ paths:
           description: Bad request
         '404':
           description: Parent folder not found
-      security:
-      - api_key: []
   /api/v1/s3/presigned/batch/{file_id}:
     post:
       tags:
@@ -621,8 +605,6 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/s3/presigned/{encoded_key}:
     get:
       tags:
@@ -648,8 +630,6 @@ paths:
           description: Unauthorized
         '404':
           description: File not found
-      security:
-      - api_key: []
   /api/v1/s3/{id}:
     delete:
       tags:
@@ -670,8 +650,50 @@ paths:
           description: Unauthorized
         '404':
           description: File not found
-      security:
-      - api_key: []
+  /api/v1/state/badges:
+    get:
+      tags:
+      - State
+      summary: This data gives info about notification badges
+      operationId: fetch_badges
+      responses:
+        '200':
+          description: Badge data retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationBadges'
+        '401':
+          description: Unauthorized
+  /api/v1/state/context:
+    get:
+      tags:
+      - State
+      operationId: fetch_context
+      responses:
+        '200':
+          description: Context data retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppContext'
+        '401':
+          description: Unauthorized
+  /api/v1/state/dashboard:
+    get:
+      tags:
+      - State
+      summary: This data populates the dashboard/home view
+      operationId: fetch_dashboard
+      responses:
+        '200':
+          description: Dashboard data retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardData'
+        '401':
+          description: Unauthorized
   /api/v1/tasks:
     get:
       tags:
@@ -729,8 +751,6 @@ paths:
                 $ref: '#/components/schemas/PaginatedTasks'
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
     post:
       tags:
       - Task
@@ -740,15 +760,13 @@ paths:
         '201':
           description: Task created successfully
           content:
-            application/json:
+            text/plain:
               schema:
-                $ref: '#/components/schemas/CreationId'
+                type: string
         '400':
           description: Bad request
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/tasks/{id}:
     get:
       tags:
@@ -773,8 +791,6 @@ paths:
           description: Unauthorized
         '404':
           description: Task not found
-      security:
-      - api_key: []
     put:
       tags:
       - Task
@@ -798,8 +814,6 @@ paths:
           description: Unauthorized
         '404':
           description: Task not found
-      security:
-      - api_key: []
     delete:
       tags:
       - Task
@@ -819,8 +833,6 @@ paths:
           description: Unauthorized
         '404':
           description: Task not found
-      security:
-      - api_key: []
     patch:
       tags:
       - Task
@@ -846,8 +858,6 @@ paths:
           description: Unauthorized
         '404':
           description: Task not found
-      security:
-      - api_key: []
   /api/v1/users:
     get:
       tags:
@@ -863,8 +873,6 @@ paths:
                 $ref: '#/components/schemas/User'
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
     delete:
       tags:
       - User
@@ -875,8 +883,6 @@ paths:
           description: User deleted successfully
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
     patch:
       tags:
       - User
@@ -895,28 +901,6 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
-  /api/v1/users/dashboard:
-    get:
-      tags:
-      - User
-      summary: |-
-        This data populates the sidebar with badges,
-        the dashboard view with data,
-        and the stores for profile and user
-      operationId: fetch_dashboard
-      responses:
-        '200':
-          description: Dashboard data retrieved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DashboardData'
-        '401':
-          description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/users/inviter:
     get:
       tags:
@@ -941,13 +925,11 @@ paths:
           description: Invalid invite token
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/users/profile:
     get:
       tags:
       - User
-      summary: Fetch the profile, WITHOUT teacher data even if that's a student requesing
+      summary: Fetch the profile
       operationId: fetch_profile
       responses:
         '200':
@@ -955,11 +937,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProfileWithTS'
+                $ref: '#/components/schemas/Profile'
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
     patch:
       tags:
       - User
@@ -978,8 +958,6 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/users/student:
     get:
       tags:
@@ -996,8 +974,6 @@ paths:
                   $ref: '#/components/schemas/Student'
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
   /api/v1/users/student/{id}:
     get:
       tags:
@@ -1021,8 +997,6 @@ paths:
           description: Unauthorized
         '404':
           description: Student not found
-      security:
-      - api_key: []
     post:
       tags:
       - User
@@ -1039,8 +1013,6 @@ paths:
           description: Student relationship created
         '401':
           description: Unauthorized
-      security:
-      - api_key: []
     delete:
       tags:
       - User
@@ -1059,8 +1031,6 @@ paths:
           description: Unauthorized
         '404':
           description: Student not found
-      security:
-      - api_key: []
     patch:
       tags:
       - User
@@ -1085,8 +1055,6 @@ paths:
           description: Unauthorized
         '404':
           description: Student not found
-      security:
-      - api_key: []
 components:
   schemas:
     AbortMultipartRequest:
@@ -1120,6 +1088,28 @@ components:
           type: string
         modelType:
           type: string
+    AppContext:
+      type: object
+      required:
+      - user
+      - profile
+      - students
+      - preferences
+      properties:
+        callUrl:
+          type:
+          - string
+          - 'null'
+        preferences:
+          $ref: '#/components/schemas/UserPreferences'
+        profile:
+          $ref: '#/components/schemas/Profile'
+        students:
+          type: array
+          items:
+            $ref: '#/components/schemas/Student'
+        user:
+          $ref: '#/components/schemas/User'
     AuthPayload:
       type: object
       required:
@@ -1130,45 +1120,6 @@ components:
           type: string
         username:
           type: string
-    BadgeWrapperDecks:
-      type: object
-      required:
-      - data
-      - count
-      properties:
-        count:
-          type: integer
-          format: int64
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeckSmall'
-    BadgeWrapperLessons:
-      type: object
-      required:
-      - data
-      - count
-      properties:
-        count:
-          type: integer
-          format: int64
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/LessonSmall'
-    BadgeWrapperTasks:
-      type: object
-      required:
-      - data
-      - count
-      properties:
-        count:
-          type: integer
-          format: int64
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskSmall'
     BatchPresignedUrlResponse:
       type: object
       required:
@@ -1326,55 +1277,38 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TaskSmall'
-    CreationId:
-      type: object
-      description: Simply contains one string, the created ID
-      required:
-      - id
-      properties:
-        id:
-          type: string
     DashboardData:
       type: object
-      description: A big response that powers the dashboard view
       required:
-      - students
-      - lessons
       - tasks
+      - lessons
       - decks
-      - user
-      - profile
       - activity
-      - learn
-      - preferences
+      - learnData
       properties:
         activity:
           type: array
           items:
             $ref: '#/components/schemas/ActivityLog'
         decks:
-          $ref: '#/components/schemas/BadgeWrapperDecks'
-        learn:
-          $ref: '#/components/schemas/LearnDataDashboard'
-        lessons:
-          $ref: '#/components/schemas/BadgeWrapperLessons'
-        preferences:
-          $ref: '#/components/schemas/UserPreferences'
-        profile:
-          $ref: '#/components/schemas/ProfileWithTS'
-        students:
           type: array
           items:
-            $ref: '#/components/schemas/Student'
+            $ref: '#/components/schemas/DeckSmall'
+        learnData:
+          $ref: '#/components/schemas/SimpleStats'
+        lessons:
+          type: array
+          items:
+            $ref: '#/components/schemas/LessonSmall'
         tasks:
-          $ref: '#/components/schemas/BadgeWrapperTasks'
-        user:
-          $ref: '#/components/schemas/User'
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskSmall'
     DeckFull:
       type: object
       required:
       - id
-      - name
+      - title
       - visibility
       - createdBy
       - cardCount
@@ -1402,7 +1336,7 @@ components:
           type:
           - boolean
           - 'null'
-        name:
+        title:
           type: string
         visibility:
           type: string
@@ -1410,7 +1344,7 @@ components:
       type: object
       required:
       - id
-      - name
+      - title
       properties:
         description:
           type:
@@ -1418,13 +1352,13 @@ components:
           - 'null'
         id:
           type: string
-        name:
+        title:
           type: string
     DeckSmall:
       type: object
       required:
       - id
-      - name
+      - title
       - visibility
       - cardCount
       properties:
@@ -1445,12 +1379,12 @@ components:
           type:
           - boolean
           - 'null'
-        name:
-          type: string
         seen:
           type:
           - boolean
           - 'null'
+        title:
+          type: string
         visibility:
           type: string
     DeckUpdate:
@@ -1464,7 +1398,7 @@ components:
           type:
           - string
           - 'null'
-        name:
+        title:
           type:
           - string
           - 'null'
@@ -1496,6 +1430,16 @@ components:
             $ref: '#/components/schemas/CardUpsert'
         deck:
           $ref: '#/components/schemas/DeckUpdate'
+    DeviceTokenPayload:
+      type: object
+      required:
+      - token
+      - platform
+      properties:
+        platform:
+          type: string
+        token:
+          type: string
     FileSmall:
       type: object
       required:
@@ -1572,18 +1516,6 @@ components:
       properties:
         invite:
           type: string
-    LearnDataDashboard:
-      type: object
-      required:
-      - stats
-      properties:
-        dueCards:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        stats:
-          $ref: '#/components/schemas/SimpleStats'
     LessonFull:
       type: object
       description: Grown-up lesson
@@ -1688,11 +1620,48 @@ components:
           type: string
         uploadId:
           type: string
+    NotificationBadges:
+      type: object
+      required:
+      - unseenTasks
+      - unseenLessons
+      - unseenDecks
+      properties:
+        dueCards:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        unseenDecks:
+          type: integer
+          format: int64
+        unseenLessons:
+          type: integer
+          format: int64
+        unseenTasks:
+          type: integer
+          format: int64
+    PaginatedDecks:
+      type: object
+      required:
+      - data
+      - page
+      - per_page
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeckSmall'
+        page:
+          type: integer
+          format: int64
+        per_page:
+          type: integer
+          format: int64
     PaginatedLessons:
       type: object
       required:
       - data
-      - total
       - page
       - per_page
       properties:
@@ -1706,14 +1675,10 @@ components:
         per_page:
           type: integer
           format: int64
-        total:
-          type: integer
-          format: int64
     PaginatedTasks:
       type: object
       required:
       - data
-      - total
       - page
       - per_page
       properties:
@@ -1727,9 +1692,28 @@ components:
         per_page:
           type: integer
           format: int64
-        total:
-          type: integer
+    PaginationParams:
+      type: object
+      description: Pagination
+      properties:
+        assignee:
+          type:
+          - string
+          - 'null'
+        page:
+          type:
+          - integer
+          - 'null'
           format: int64
+        per_page:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        search:
+          type:
+          - string
+          - 'null'
     PartUploadUrl:
       type: object
       required:
@@ -1794,20 +1778,6 @@ components:
           type:
           - string
           - 'null'
-    ProfileWithTS:
-      type: object
-      description: |-
-        This is sent along with dashboard data to
-        include teacher video url and stuff if the user is a student
-      required:
-      - profile
-      properties:
-        profile:
-          $ref: '#/components/schemas/Profile'
-        teacherData:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/TeacherData'
     RefreshTokenPayload:
       type: object
       required:
@@ -1927,36 +1897,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    TaskPaginationParams:
-      type: object
-      properties:
-        assignee:
-          type:
-          - string
-          - 'null'
-        completed:
-          type:
-          - boolean
-          - 'null'
-        page:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        per_page:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        priority:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        search:
-          type:
-          - string
-          - 'null'
     TaskSmall:
       type: object
       required:
@@ -2027,18 +1967,6 @@ components:
             $ref: '#/components/schemas/FileSmall'
         task:
           $ref: '#/components/schemas/TaskFull'
-    TeacherData:
-      type: object
-      description: Video Call URL and the teacher's TelegramID
-      properties:
-        teacherTelegramId:
-          type:
-          - string
-          - 'null'
-        teacherVideoCallUrl:
-          type:
-          - string
-          - 'null'
     TokenPair:
       type: object
       required:
@@ -2149,19 +2077,10 @@ components:
           type:
           - string
           - 'null'
-        role:
-          type:
-          - string
-          - 'null'
         username:
           type:
           - string
           - 'null'
-  securitySchemes:
-    api_key:
-      type: apiKey
-      in: header
-      name: X-API-Key
 tags:
 - name: Lesson
   description: Lesson API
@@ -2175,3 +2094,5 @@ tags:
   description: Auth API
 - name: Learn
   description: Learn API
+- name: State
+  description: State API

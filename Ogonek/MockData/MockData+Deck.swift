@@ -123,20 +123,19 @@ extension MockData {
             description: "Complex patterns and idioms in Rust programming",
             id: "0mNE0QOytmJAc0GsFJq6E",
             isSubscribed: true,
-            name: "Advanced Rust Patterns",
+            title: "Advanced Rust Patterns",
             visibility: "assigned",
         ),
     )
 
-    static let decks = {
-        [
+    static let decks = PaginatedDecks(
+        data: [
             DeckSmall(
                 assigneeName: "Alice Teacher", cardCount: 4,
                 description: "Default Description",
                 id: "VlHCKLoYEmrO5BYJqWBAp",
                 isSubscribed: false,
-                name: "Unseen Deck",
-                seen: false,
+                seen: false, title: "Unseen Deck",
                 visibility: "private",
             ),
             DeckSmall(
@@ -145,8 +144,7 @@ extension MockData {
                 description: "Complex patterns and idioms in Rust programming",
                 id: "0mNE0QOytmJAc0GsFJq6E",
                 isSubscribed: true,
-                name: "Advanced Rust Patterns",
-                seen: true,
+                seen: true, title: "Advanced Rust Patterns",
                 visibility: "assigned",
             ),
             DeckSmall(
@@ -155,12 +153,14 @@ extension MockData {
                 description: "Essential Rust terms and concepts for beginners",
                 id: "j8JiEp5K5zwYVetixBFiU",
                 isSubscribed: false,
-                name: "Rust Vocabulary",
-                seen: true,
+                seen: true, title: "Rust Vocabulary",
                 visibility: "private",
             ),
-        ]
-    }
+        ],
+        page: 1,
+        perPage: 50,
+    )
+
 
     static let cardProgress = [
         CardProgress(

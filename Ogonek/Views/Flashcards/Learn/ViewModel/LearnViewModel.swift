@@ -23,7 +23,7 @@ class LearnViewModel {
     func loadCards() async {
         isLoading = true
         do {
-            if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            if isPreview {
                 cards = MockData.cardProgress
             } else {
                 cards = try await APIService.shared.fetchDueCards()

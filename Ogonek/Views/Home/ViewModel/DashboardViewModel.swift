@@ -11,7 +11,6 @@ import Foundation
 class DashboardViewModel {
     var dueTasks: [TaskSmall] = []
     var recentLessons: [LessonSmall] = []
-    var recentDecks: [DeckSmall] = []
     var dueCardsCount: Int64 = 0
     var recentActivities: [ActivityLog] = []
 
@@ -27,21 +26,15 @@ class DashboardViewModel {
         isLoading = true
         errorMessage = nil
         do {
-            if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            if isPreview {
                 dueTasks = MockData.tasks.data
                 recentLessons = MockData.paginatedLessons.data
-                recentDecks = []
                 dueCardsCount = 0
                 recentActivities = []
             } else {
                 let dashboardData = try await apiService.fetchDashboard()
-                dueTasks = dashboardData.tasks.data
-                recentLessons = dashboardData.lessons.data
-                recentDecks = dashboardData.decks.data
-                if let dueCards = dashboardData.learn.dueCards {
-                    dueCardsCount = dueCards
-                }
-
+                dueTasks = dashboardData.tasks
+                recentLessons = dashboardData.lessons
                 recentActivities = dashboardData.activity
             }
         } catch {

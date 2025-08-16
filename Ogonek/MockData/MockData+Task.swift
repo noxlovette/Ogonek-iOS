@@ -103,6 +103,5 @@ extension MockData {
         ],
         page: 1,
         perPage: 20,
-        total: 9,
     )
 }

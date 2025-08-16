@@ -9,7 +9,7 @@ import Foundation
 
 extension APIService {
     /// Fetch flashcards
-    func listDecks(page: Int32 = 1, perPage: Int32 = 20, search: String? = nil) async throws -> [DeckSmall] {
+    func listDecks(page: Int32 = 1, perPage: Int32 = 20, search: String? = nil) async throws -> PaginatedDecks {
         try await openAPIClient.listDecks(page, perPage, search)
     }
 

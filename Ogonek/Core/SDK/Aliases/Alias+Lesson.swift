@@ -10,6 +10,7 @@ import Foundation
 typealias Lesson = Components.Schemas.LessonFull
 typealias LessonSmall = Components.Schemas.LessonSmall
 
+typealias PaginatedLessons = Components.Schemas.PaginatedLessons
 extension Lesson: Identifiable {}
 extension LessonSmall: Identifiable {}
 

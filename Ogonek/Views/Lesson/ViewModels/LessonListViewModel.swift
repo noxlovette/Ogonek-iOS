@@ -20,7 +20,7 @@ class LessonListViewModel: BaseViewModel {
         var paginatedResponse: PaginatedLessons
 
         do {
-            if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            if isPreview {
                 paginatedResponse = MockData.paginatedLessons
             } else {
                 paginatedResponse = try await apiService.listLessons(

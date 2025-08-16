@@ -14,6 +14,7 @@ typealias DeckSmall = Components.Schemas.DeckSmall
 typealias Card = Components.Schemas.Card
 extension Card: Identifiable {}
 
+typealias PaginatedDecks = Components.Schemas.PaginatedDecks
 extension DeckSmall: Identifiable {}
 
 extension DeckWithCards {
@@ -132,7 +133,7 @@ extension DeckWithCards {
             description: "freedom; Scotland",
             id: "0mNE0QOytmJAc0GsFJq6E",
             isSubscribed: true,
-            name: "Advanced Rust Patterns",
+            title: "Advanced Rust Patterns",
             visibility: "assigned",
         ),
     )

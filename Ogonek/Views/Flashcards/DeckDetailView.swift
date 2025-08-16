@@ -32,7 +32,7 @@ struct DeckDetailView: View {
                 loadingOverlay
             }
         }
-        .navigationTitle(viewModel.deck?.deck.name ?? "Loading...")
+        .navigationTitle(viewModel.deck?.deck.title ?? "Loading...")
         .toolbar {
             toolbarContent()
         }

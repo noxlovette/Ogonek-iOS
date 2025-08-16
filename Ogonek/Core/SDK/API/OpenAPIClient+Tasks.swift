@@ -36,27 +36,7 @@ extension OpenAPIClient {
         }
     }
 
-    func createTask() async throws -> CreationID {
-        let response = try await client.createTask()
-
-        switch response {
-        case let .created(createdResponse):
-            let body = createdResponse.body
-            switch body {
-            case let .json(id):
-                return id
-            }
-
-        case .badRequest:
-            throw APIError.serverError(statusCode: 400)
-
-        case .unauthorized:
-            throw APIError.unauthorized
-
-        case let .undocumented(statusCode: statusCode, _):
-            throw APIError.serverError(statusCode: statusCode)
-        }
-    }
+  
 
     func deleteTask(id: String) async throws {
         let input = Operations.DeleteTask.Input.Path(
