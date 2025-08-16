@@ -1,5 +1,7 @@
 .sentryclirc
-
+.DS_Store
 *.xcuserstate
 xcuserdata/
 *.xcodeproj/
+*.mobileprovision
+*.p8
