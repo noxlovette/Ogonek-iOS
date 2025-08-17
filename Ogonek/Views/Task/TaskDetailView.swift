@@ -9,7 +9,7 @@ struct TaskDetailView: View {
     @State var isDownloading = false
     @State private var downloadProgress: Double = 0.0
     @State private var shareURL: URL?
-    @StateObject var viewModel = TaskDetailViewModel()
+    @State var viewModel = TaskDetailViewModel()
     @State private var showingShareSheet = false
 
     var body: some View {

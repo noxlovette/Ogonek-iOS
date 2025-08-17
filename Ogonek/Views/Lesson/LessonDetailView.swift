@@ -9,7 +9,7 @@ import SwiftUI
 struct LessonDetailView: View {
     let lessonID: String
 
-    @StateObject private var viewModel = LessonDetailViewModel()
+    @State private var viewModel = LessonDetailViewModel()
     @State var isDownloading = false
     @State private var downloadProgress = 0.0
     @State private var showingShareSheet = false

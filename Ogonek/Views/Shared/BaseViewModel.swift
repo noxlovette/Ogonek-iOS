@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class BaseViewModel: ObservableObject {
+class BaseViewModel {
     var errorMessage: String?
     var isLoading: Bool = false
 

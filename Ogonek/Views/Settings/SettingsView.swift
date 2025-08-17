@@ -54,10 +54,8 @@ struct SettingsView: View {
         .alert("Stay Updated", isPresented: $viewModel.showNotificationExplanation) {
             Button("Enable Notifications") {
                 Task {
-                    let granted = await pushTokenStore.requestNotificationPermission()
-                    if granted {
-                        await pushTokenStore.registerWithBackend()
-                    }
+                        // Just request permission - backend registration happens in AppDelegate
+                    await pushTokenStore.requestNotificationPermission()
                 }
             }
             Button("Not Now", role: .cancel) { }

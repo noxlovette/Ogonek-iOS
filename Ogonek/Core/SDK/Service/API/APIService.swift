@@ -8,7 +8,8 @@
 import Combine
 import Foundation
 
-public final class APIService: ObservableObject {
+@Observable
+public final class APIService {
     @MainActor
     var disposeBag = Set<AnyCancellable>()
 

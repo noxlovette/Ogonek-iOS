@@ -87,7 +87,14 @@ enum AppEnvironment: String {
 
 enum EnvironmentConfig {
     static func currentEnvironment() -> AppEnvironment {
+        #if STAGING
         return .staging
+        #elseif DEBUG
+        return .development
+        #else
+        return .production
+        #endif
+
     }
 
     static func serverURL() throws -> URL {

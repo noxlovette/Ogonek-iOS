@@ -263,6 +263,136 @@ paths:
           description: Unauthorized
         '404':
           description: Deck not found
+  /api/v1/files/abort:
+    post:
+      tags:
+      - Task
+      summary: Cancel multipart upload
+      operationId: abort_multipart_upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AbortMultipartRequest'
+        required: true
+      responses:
+        '200':
+          description: Upload aborted successfully
+        '400':
+          description: Bad request
+        '404':
+          description: File not found
+  /api/v1/files/complete:
+    post:
+      tags:
+      - Task
+      summary: Complete a part of the upload
+      operationId: complete_multipart_upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompleteMultipartRequest'
+        required: true
+      responses:
+        '201':
+          description: Upload completed successfully
+        '400':
+          description: Bad request
+        '404':
+          description: File not found
+  /api/v1/files/init:
+    post:
+      tags:
+      - Task
+      summary: Multipart upload init endpoint
+      operationId: init_multipart_upload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitUploadRequest'
+        required: true
+      responses:
+        '200':
+          description: Multipart upload initialized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultipartUploadInit'
+        '400':
+          description: Bad request
+        '404':
+          description: Parent folder not found
+  /api/v1/files/presigned/batch/{file_id}:
+    post:
+      tags:
+      - Task
+      summary: Fetches all the files associated with a task and returns their presigned URLs
+      operationId: fetch_presigned_urls_batch
+      parameters:
+      - name: file_id
+        in: path
+        description: The DB id of the task the files belong to
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Presigned URLs generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchPresignedUrlResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /api/v1/files/presigned/{encoded_key}:
+    get:
+      tags:
+      - Task
+      operationId: fetch_presigned_url
+      parameters:
+      - name: encoded_key
+        in: path
+        description: Base64 encoded file key
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Presigned URL generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PresignedUrlResponse'
+        '400':
+          description: Bad request - Invalid encoding or key
+        '401':
+          description: Unauthorized
+        '404':
+          description: File not found
+  /api/v1/files/{id}:
+    delete:
+      tags:
+      - Task
+      summary: Deletes file
+      operationId: delete_file
+      parameters:
+      - name: id
+        in: path
+        description: File ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: File deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: File not found
   /api/v1/learn:
     get:
       tags:
@@ -520,136 +650,6 @@ paths:
           description: Homework requested
         '401':
           description: Unauthorized
-  /api/v1/s3/abort:
-    post:
-      tags:
-      - Task
-      summary: Cancel multipart upload
-      operationId: abort_multipart_upload
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AbortMultipartRequest'
-        required: true
-      responses:
-        '200':
-          description: Upload aborted successfully
-        '400':
-          description: Bad request
-        '404':
-          description: File not found
-  /api/v1/s3/complete:
-    post:
-      tags:
-      - Task
-      summary: Complete a part of the upload
-      operationId: complete_multipart_upload
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CompleteMultipartRequest'
-        required: true
-      responses:
-        '201':
-          description: Upload completed successfully
-        '400':
-          description: Bad request
-        '404':
-          description: File not found
-  /api/v1/s3/init:
-    post:
-      tags:
-      - Task
-      summary: Multipart upload init endpoint
-      operationId: init_multipart_upload
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InitUploadRequest'
-        required: true
-      responses:
-        '200':
-          description: Multipart upload initialized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MultipartUploadInit'
-        '400':
-          description: Bad request
-        '404':
-          description: Parent folder not found
-  /api/v1/s3/presigned/batch/{file_id}:
-    post:
-      tags:
-      - Task
-      summary: Fetches all the files associated with a task and returns their presigned URLs
-      operationId: fetch_presigned_urls_batch
-      parameters:
-      - name: file_id
-        in: path
-        description: The DB id of the task the files belong to
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Presigned URLs generated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BatchPresignedUrlResponse'
-        '400':
-          description: Bad request
-        '401':
-          description: Unauthorized
-  /api/v1/s3/presigned/{encoded_key}:
-    get:
-      tags:
-      - Task
-      operationId: fetch_presigned_url
-      parameters:
-      - name: encoded_key
-        in: path
-        description: Base64 encoded file key
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Presigned URL generated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PresignedUrlResponse'
-        '400':
-          description: Bad request - Invalid encoding or key
-        '401':
-          description: Unauthorized
-        '404':
-          description: File not found
-  /api/v1/s3/{id}:
-    delete:
-      tags:
-      - Task
-      summary: Deletes file
-      operationId: delete_file
-      parameters:
-      - name: id
-        in: path
-        description: File ID
-        required: true
-        schema:
-          type: string
-      responses:
-        '204':
-          description: File deleted successfully
-        '401':
-          description: Unauthorized
-        '404':
-          description: File not found
   /api/v1/state/badges:
     get:
       tags:

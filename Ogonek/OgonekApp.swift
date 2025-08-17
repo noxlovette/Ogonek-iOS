@@ -38,7 +38,7 @@ struct Ogonek: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(APIService.shared)
+            ContentView().environment(APIService.shared)
         }
     }
 }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct DashboardView: View {
     @State private var viewModel = DashboardViewModel()
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) private var appState
 
     var body: some View {
         NavigationStack {
@@ -131,5 +131,5 @@ struct DashboardView: View {
 }
 
 #Preview {
-    DashboardView().environmentObject(AppState())
+    DashboardView().environment(AppState())
 }

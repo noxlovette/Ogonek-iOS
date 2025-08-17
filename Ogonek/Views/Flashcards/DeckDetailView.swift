@@ -5,7 +5,7 @@ import SwiftUI
 struct DeckDetailView: View {
     let deckId: String
 
-    @StateObject var viewModel = DeckDetailViewModel()
+    @State var viewModel = DeckDetailViewModel()
     @State private var flippedCards: Set<String> = []
 
     private let columns = [

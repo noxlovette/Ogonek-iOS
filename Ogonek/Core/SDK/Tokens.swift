@@ -9,6 +9,7 @@ import Foundation
 import KeychainAccess
 
 /// Handles secure token storage using Keychain Services
+@Observable
 class TokenStorage {
     private static let keychain = Keychain(service: "noxlovette.Ogonek")
         .synchronizable(false)
@@ -86,7 +87,8 @@ class TokenStorage {
 
 /// Token manager that integrates with OpenAPI Service
 @MainActor
-public final class TokenManager: ObservableObject {
+@Observable
+public final class TokenManager {
     static let shared = TokenManager()
 
     init() {
@@ -94,8 +96,8 @@ public final class TokenManager: ObservableObject {
         apiService = .shared
     }
 
-    @Published var isAuthenticated = false
-    @Published var currentUser: User?
+    var isAuthenticated = false
+    var currentUser: User?
 
     private var refreshInProgress = false
     private let refreshQueue = DispatchQueue(label: "tokenRefresh", qos: .userInitiated)

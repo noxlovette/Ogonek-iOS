@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @EnvironmentObject var appState: AppState
+    @Environment(AppState.self) private var appState
     @State private var selectedTab = 0
 
     var body: some View {
@@ -50,7 +50,7 @@ struct MainTabView: View {
                     .accessibilityHint("Shows your flashcards")
             }
             .tabViewStyle(.sidebarAdaptable)
-            .environmentObject(appState)
+            .environment(appState)
         }
         .task {
             await loadAppData()
@@ -64,5 +64,5 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView().environmentObject(AppState())
+    MainTabView().environment(AppState())
 }

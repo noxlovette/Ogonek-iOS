@@ -7,15 +7,27 @@ struct TaskRowView: View {
         NavigationLink {
             TaskDetailView(taskID: task.id)
         } label: {
-            HStack(alignment: .top, spacing: 16) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(task.title)
-                        .font(.headline)
-                        .lineLimit(2)
-                        .strikethrough(task.completed)
-                        .foregroundStyle(task.completed ? .secondary : .primary)
-                        .multilineTextAlignment(.leading)
+            HStack(alignment: .top, spacing: 12) {
+                VStack(alignment: .leading, spacing: 6) {
+                        // Title and unread indicator
+                    HStack(alignment: .top, spacing: 8) {
+                        Text(task.title)
+                            .font(.headline)
+                            .lineLimit(2)
+                            .strikethrough(task.completed)
+                            .foregroundStyle(task.completed ? .secondary : .primary)
+                            .multilineTextAlignment(.leading)
 
+                        Spacer()
+
+                        if !(task.seen ?? false) {
+                            Circle()
+                                .fill(.red)
+                                .frame(width: 8, height: 8)
+                        }
+                    }
+
+                        // Due date (if exists)
                     if let dueDate = task.dueDate {
                         HStack(spacing: 4) {
                             Image(systemName: "calendar")
@@ -27,10 +39,13 @@ struct TaskRowView: View {
                     }
                 }
 
-                Spacer(minLength: 0)
-
-                statusBadge
+                    // Status badge
+                if task.completed || isOverdue {
+                    statusBadge
+                }
             }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 16)
         }
         .buttonStyle(.plain)
     }
@@ -46,18 +61,24 @@ struct TaskRowView: View {
             StatusBadge(
                 icon: "checkmark.circle.fill",
                 text: "Completed",
-                color: .green,
+                color: .green
             )
         } else if isOverdue {
             StatusBadge(
                 icon: "exclamationmark.triangle.fill",
                 text: "Overdue",
-                color: .red,
+                color: .red
             )
         }
     }
 }
 
 #Preview {
-    TaskRowView(task: MockData.tasks.data[0])
+    VStack(spacing: 0) {
+        TaskRowView(task: MockData.tasks.data[0])
+        Divider()
+        TaskRowView(task: MockData.tasks.data[1])
+        Divider()
+        TaskRowView(task: MockData.tasks.data[2])
+    }
 }

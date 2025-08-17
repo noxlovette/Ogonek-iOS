@@ -17,8 +17,18 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("APNs Token: \(token)")
 
-            // Store the token for later use
         PushTokenStore.shared.token = token
+
+        Task {
+            await PushTokenStore.shared.registerWithBackend()
+        }
+    }
+
+    func application(
+        _ application: UIApplication,
+        didFailToRegisterForRemoteNotificationsWithError error: Error
+    ) {
+        print("Failed to register for remote notifications: \(error)")
     }
 }
 
