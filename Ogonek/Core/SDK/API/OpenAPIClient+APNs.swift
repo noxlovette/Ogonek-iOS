@@ -16,13 +16,12 @@ extension OpenAPIClient {
         let response = try await client.registerDeviceToken(input)
 
         switch response {
-            case .noContent:
-                print("ok")
-            case .unauthorized:
-                throw APIError.unauthorized
-            case let .undocumented(statusCode: statusCode, _):
-                throw APIError.serverError(statusCode: statusCode)
+        case .noContent:
+            print("ok")
+        case .unauthorized:
+            throw APIError.unauthorized
+        case let .undocumented(statusCode: statusCode, _):
+            throw APIError.serverError(statusCode: statusCode)
         }
     }
-
 }

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(APIService.self) var apiService: APIService
+    @State private var apiService: APIService = .shared
+    @State private var appState: AppState = .init()
     @State private var tokenManager = TokenManager.shared
-    @State private var appState = AppState()
     @State private var authSetupCompleted = false
 
     var body: some View {
@@ -47,5 +47,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environment(APIService.shared)
 }

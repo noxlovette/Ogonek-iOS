@@ -1,9 +1,9 @@
-    //
-    //  SettingsViewModel.swift
-    //  Ogonek
-    //
-    //  Created by Danila Volkov on 16.08.2025.
-    //
+//
+//  SettingsViewModel.swift
+//  Ogonek
+//
+//  Created by Danila Volkov on 16.08.2025.
+//
 
 import Foundation
 

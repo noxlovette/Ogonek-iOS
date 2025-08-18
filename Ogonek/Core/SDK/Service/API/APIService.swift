@@ -44,6 +44,6 @@ public extension APIService {
 
 extension APIService {
     func registerDevice(_ token: String) async throws {
-         try await openAPIClient.registerDevice(token)
+        try await openAPIClient.registerDevice(token)
     }
 }

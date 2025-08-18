@@ -7,18 +7,23 @@
 
 import Foundation
 
+@Observable
 class AppState: BaseViewModel {
-    var badges: NotificationBadges?
+    static let shared = AppState()
+
+    var badges = NotificationBadges()
     var context: AppContext?
 
     @MainActor
-    func fetchBadges(force _: Bool = false) async {
+    func fetchBadges() async {
         do {
             if isPreview {
                 badges = MockData.badges
+                print(badges)
                 return
             }
             badges = try await apiService.fetchBadges()
+            print(badges)
         } catch {
             handleError(error)
         }

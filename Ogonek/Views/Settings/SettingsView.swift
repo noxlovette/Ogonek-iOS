@@ -1,9 +1,9 @@
-    //
-    //  SettingsView.swift
-    //  Ogonek
-    //
-    //  Created by Danila Volkov on 16.08.2025.
-    //
+//
+//  SettingsView.swift
+//  Ogonek
+//
+//  Created by Danila Volkov on 16.08.2025.
+//
 
 import SwiftUI
 
@@ -54,11 +54,11 @@ struct SettingsView: View {
         .alert("Stay Updated", isPresented: $viewModel.showNotificationExplanation) {
             Button("Enable Notifications") {
                 Task {
-                        // Just request permission - backend registration happens in AppDelegate
+                    // Just request permission - backend registration happens in AppDelegate
                     await pushTokenStore.requestNotificationPermission()
                 }
             }
-            Button("Not Now", role: .cancel) { }
+            Button("Not Now", role: .cancel) {}
         } message: {
             Text("Get notified when your teacher responds to homework requests and when new assignments are available.")
         }

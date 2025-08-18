@@ -1,6 +1,6 @@
 import SwiftUI
 
-    /// A reusable row layout with a title, optional unread dot, subtitle, and trailing content.
+/// A reusable row layout with a title, optional unread dot, subtitle, and trailing content.
 struct BaseRowView<Destination: View, Trailing: View, Subtitle: View>: View {
     let destination: Destination
     let title: String
@@ -28,10 +28,10 @@ struct BaseRowView<Destination: View, Trailing: View, Subtitle: View>: View {
         } label: {
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 6) {
-                        // Title + unread dot
+                    // Title + unread dot
                     HStack(alignment: .top, spacing: 8) {
                         Text(title)
-                            .font(.subheadline)
+                            .font(.headline)
                             .lineLimit(2)
                             .foregroundStyle(.primary)
                             .multilineTextAlignment(.leading)

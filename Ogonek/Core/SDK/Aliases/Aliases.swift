@@ -15,3 +15,11 @@ typealias RefreshTokenPayload = Components.Schemas.RefreshTokenPayload
 typealias DashboardData = Components.Schemas.DashboardData
 typealias NotificationBadges = Components.Schemas.NotificationBadges
 typealias AppContext = Components.Schemas.AppContext
+
+extension NotificationBadges {
+    init() {
+        unseenDecks = 0
+        unseenTasks = 0
+        unseenLessons = 0
+    }
+}

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct DashboardView: View {
     @State private var viewModel = DashboardViewModel()
-    @Environment(AppState.self) private var appState
+    @State private var appState = AppState.shared
 
     var body: some View {
         NavigationStack {
@@ -63,9 +63,8 @@ struct DashboardView: View {
                                     .foregroundColor(.white)
                                     .frame(width: 60, height: 60)
                                     .background(Circle().fill(Color.secondaryColour))
-                                    .shadow(radius: 4)
 
-                                if let dueCards = appState.badges?.dueCards, dueCards > 0 {
+                                if let dueCards = appState.badges.dueCards, dueCards > 0 {
                                     Text("\(dueCards)")
                                         .font(.caption2)
                                         .fontWeight(.bold)
@@ -78,7 +77,7 @@ struct DashboardView: View {
                         }
                         .padding()
                         .accessibilityLabel("Learn flashcards")
-                        .accessibilityHint("Review \(appState.badges?.dueCards ?? 0) due cards")
+                        .accessibilityHint("Review \(appState.badges.dueCards ?? 0) due cards")
                     }
                 }
             }.navigationTitle("Dashboard")
@@ -115,7 +114,6 @@ struct DashboardView: View {
                             .background(Color.clear)
                     }
                 }
-
         }
     }
 
@@ -131,5 +129,5 @@ struct DashboardView: View {
 }
 
 #Preview {
-    DashboardView().environment(AppState())
+    DashboardView()
 }

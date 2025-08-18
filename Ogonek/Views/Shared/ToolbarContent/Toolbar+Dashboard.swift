@@ -10,7 +10,6 @@ import SwiftUI
 extension DashboardView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
-
         ToolbarItem(placement: .topBarLeading) {
             NavigationLink {
                 SettingsView()

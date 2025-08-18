@@ -88,23 +88,22 @@ enum AppEnvironment: String {
 enum EnvironmentConfig {
     static func currentEnvironment() -> AppEnvironment {
         #if STAGING
-        return .staging
+            return .staging
         #elseif DEBUG
-        return .development
+            return .development
         #else
-        return .production
+            return .production
         #endif
-
     }
 
     static func serverURL() throws -> URL {
         switch currentEnvironment() {
-            case .production:
-                return try Servers.Server1.url()
-            case .staging:
-                return try Servers.Server2.url()
-            case .development:
-                return try Servers.Server3.url()
+        case .production:
+            return try Servers.Server1.url()
+        case .staging:
+            return try Servers.Server2.url()
+        case .development:
+            return try Servers.Server3.url()
         }
     }
 }
