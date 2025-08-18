@@ -25,21 +25,21 @@ struct LessonDetailView: View {
                 }
 
             } else {
-                loadingOverlay
+                LoadingOverlay()
             }
         }
         .navigationTitle(viewModel.lesson?.topic ?? "Loading...")
+        .overlay {
+            if viewModel.isLoading {
+                LoadingOverlay()
+            }
+        }
         .toolbar {
             toolbarContent()
         }
         .sheet(isPresented: $showingShareSheet) {
             if let shareURL {
                 ShareSheet(items: [shareURL])
-            }
-        }
-        .overlay {
-            if viewModel.isLoading {
-                loadingOverlay
             }
         }
         .overlay {
@@ -68,13 +68,6 @@ struct LessonDetailView: View {
 }
 
 extension LessonDetailView {
-    private var loadingOverlay: some View {
-        ProgressView("Loading...")
-            .padding()
-            .background(.ultraThinMaterial)
-            .clipShape(Capsule())
-    }
-
     private var downloadOverlay: some View {
         ZStack {
             Color.black.opacity(0.3)

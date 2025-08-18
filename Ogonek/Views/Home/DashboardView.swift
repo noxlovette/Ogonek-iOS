@@ -120,6 +120,7 @@ struct DashboardView: View {
     func refreshDashboard() {
         Task {
             await viewModel.refreshDashboard()
+            await appState.fetchBadges()
         }
     }
 

@@ -13,6 +13,7 @@ class TaskDetailViewModel: BaseViewModel {
             taskWithFiles = id == "mock" ?
                 MockData.taskWithFiles
                 : try await apiService.fetchTask(id: id)
+
         } catch {
             handleError(error)
         }
@@ -25,16 +26,17 @@ class TaskDetailViewModel: BaseViewModel {
         do {
             try await apiService.toggleTaskCompletion(id: id)
         } catch {
-            errorMessage = "Failed to update task: \(error.localizedDescription)"
-            print("Error toggling completion: \(error)")
+            handleError(error)
         }
     }
 
-    func getPresignedURLs(for id: String) async throws -> [URL] {
-        if (taskWithFiles?.files.isEmpty) != nil {
-            throw DownloadError.noPresignedURLs
+    @MainActor
+    func getPresignedURLs(for id: String) async -> [URL] {
+        do {
+            return try await apiService.getPresignedDownloadURLs(for: id)
+        } catch {
+            handleError(error)
+            return []
         }
-
-        return try await apiService.getPresignedDownloadURLs(for: id)
     }
 }

@@ -14,14 +14,10 @@ struct TaskDetailView: View {
 
     var body: some View {
         VStack {
-            if let task = viewModel.taskWithFiles {
-                ScrollView {
-                    VStack(alignment: .leading) {
-                        Markdown(task.task.markdown)
-                    }.padding()
-                }
-            } else {
-                loadingOverlay
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Markdown(viewModel.taskWithFiles?.task.markdown ?? "Loading")
+                }.padding()
             }
         }
         .navigationTitle(viewModel.taskWithFiles?.task.title ?? "Loading…")
@@ -30,7 +26,7 @@ struct TaskDetailView: View {
         }
         .overlay {
             if viewModel.isLoading {
-                loadingOverlay
+                LoadingOverlay()
             }
         }
         .overlay {
@@ -47,8 +43,8 @@ struct TaskDetailView: View {
             get: { viewModel.errorMessage != nil },
             set: { if !$0 { viewModel.errorMessage = nil } }
         )) {
-            Button("Retry") { Task { await viewModel.fetchTask(id: taskID) } }
             Button("Cancel", role: .cancel) {}
+            Button("Retry") { Task { await viewModel.fetchTask(id: taskID) } }
         } message: {
             Text(viewModel.errorMessage ?? "")
         }
@@ -59,28 +55,23 @@ struct TaskDetailView: View {
 }
 
 extension TaskDetailView {
-    private var loadingOverlay: some View {
-        ProgressView("Loading…")
-            .padding()
-            .background(.ultraThinMaterial)
-            .clipShape(Capsule())
-    }
-
     private var downloadOverlay: some View {
-        ZStack {
-            VStack(spacing: 16) {
-                ProgressView(value: downloadProgress, total: 1.0)
-                    .progressViewStyle(LinearProgressViewStyle())
-                    .frame(width: 200)
-
-                Text("Preparing download...")
+        VStack(spacing: 12) {
+            ProgressView(value: downloadProgress, total: 1.0) {
+                Text("Downloading task...")
                     .font(.headline)
-
-                Text("\(Int(downloadProgress * 100))%")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.primary)
             }
+            .frame(width: 220)
+
+            Text("\(Int(downloadProgress * 100))%")
+                .font(.subheadline)
+                .bold()
+                .foregroundColor(.secondary)
         }
+        .padding()
+        .background(.ultraThinMaterial)
+        .cornerRadius(16)
     }
 
     // MARK: - Actions
@@ -110,7 +101,7 @@ extension TaskDetailView {
 
         do {
             downloadProgress = 0.1
-            let presignedURLs = try await viewModel.getPresignedURLs(for: taskID)
+            let presignedURLs = await viewModel.getPresignedURLs(for: taskID)
 
             downloadProgress = 0.2
             let downloadedFiles = try await downloadFiles(urls: presignedURLs)

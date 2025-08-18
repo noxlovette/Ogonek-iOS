@@ -1,7 +1,5 @@
 import SwiftUI
 
-// MARK: - Simplified Deck Detail View
-
 struct DeckDetailView: View {
     let deckId: String
 
@@ -28,7 +26,7 @@ struct DeckDetailView: View {
                     .padding()
                 }
             } else {
-                loadingOverlay
+                LoadingOverlay()
             }
         }
         .navigationTitle(viewModel.deck?.deck.title ?? "Loading...")
@@ -37,7 +35,7 @@ struct DeckDetailView: View {
         }
         .overlay {
             if viewModel.isLoading {
-                loadingOverlay
+                LoadingOverlay()
             }
         }
         .alert("Error", isPresented: $viewModel.hasError) {
@@ -61,13 +59,6 @@ struct DeckDetailView: View {
 }
 
 extension DeckDetailView {
-    private var loadingOverlay: some View {
-        ProgressView("Loading deck...")
-            .padding()
-            .background(.ultraThinMaterial)
-            .clipShape(Capsule())
-    }
-
     private func toggleCard(_ cardId: String) {
         withAnimation(.easeInOut(duration: 0.3)) {
             if flippedCards.contains(cardId) {
@@ -85,8 +76,6 @@ extension DeckDetailView {
         }
     }
 }
-
-// MARK: - Preview
 
 struct DeckDetailView_Previews: PreviewProvider {
     static var previews: some View {
