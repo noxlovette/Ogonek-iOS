@@ -5,6 +5,7 @@
 
 import Foundation
 
+@Observable
 class LessonListViewModel: BaseViewModel {
     var lessons: [LessonSmall] = []
 

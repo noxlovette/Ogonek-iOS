@@ -50,7 +50,7 @@ struct MainTabView: View {
                     .accessibilityHint("Shows your flashcards")
             }
             .tabViewStyle(.sidebarAdaptable)
-            .onChange(of: selectedTab ) { 
+            .onChange(of: selectedTab) {
                 let generator = UIImpactFeedbackGenerator(style: .light) // .medium or .soft also work
                 generator.impactOccurred()
             }

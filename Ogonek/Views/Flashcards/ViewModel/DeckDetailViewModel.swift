@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import Observation
 
+@Observable
 class DeckDetailViewModel: BaseViewModel {
     var deck: DeckWithCards?
 

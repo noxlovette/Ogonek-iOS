@@ -28,7 +28,6 @@ struct LearnView: View {
         QualityButton(key: 3, quality: 5, color: .accent, label: "Easy"),
     ]
 
-
     var body: some View {
         NavigationStack {
             ZStack {
@@ -258,7 +257,7 @@ struct LearnView: View {
 
     private var qualityButtonsView: some View {
         HStack(spacing: 12) {
-            ForEach(viewModel.qualityButtons) { button in
+            ForEach(qualityButtons) { button in
                 Button(
                     action: {
                         Task {

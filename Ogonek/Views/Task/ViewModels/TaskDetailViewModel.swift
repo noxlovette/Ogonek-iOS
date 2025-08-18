@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 
+@Observable
 class TaskDetailViewModel: BaseViewModel {
     var taskWithFiles: TaskWithFiles?
 

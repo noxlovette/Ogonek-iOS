@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var viewModel = LoginViewModel()
+    @Bindable private var viewModel = LoginViewModel()
     @FocusState private var focusedField: Field?
 
     enum Field: Hashable {
@@ -17,14 +17,43 @@ struct LoginView: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
+            Form {
                 headerSection
-                loginForm
-                loginButton
-                // signUpSection TODO
+
+                Section {
+                    TextField("Username", text: $viewModel.username)
+                        .focused($focusedField, equals: .username)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .submitLabel(.next)
+                        .onSubmit { focusedField = .password }
+
+                    SecureField("Password", text: $viewModel.password)
+                        .focused($focusedField, equals: .password)
+                        .submitLabel(.go)
+                        .onSubmit { signIn() }
+                }
+
+                Section {
+                    Button(action: signIn) {
+                        HStack {
+                            if viewModel.isLoading {
+                                ProgressView()
+                            } else {
+                                Image(systemName: "arrow.right")
+                                    .font(.title3)
+                                    .fontWeight(.medium)
+                            }
+                            Text(viewModel.isLoading ? "Signing In..." : "Sign In")
+                                .fontWeight(.semibold)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                    .disabled(viewModel.password.isEmpty || viewModel.username.isEmpty)
+                }
             }
-            .padding()
-            .navigationBarHidden(true)
+            .navigationTitle("Login")
+            .navigationBarTitleDisplayMode(.inline)
             .alert("Error", isPresented: $viewModel.hasError) {
                 Button("OK", role: .cancel) {
                     viewModel.clearError()
@@ -32,14 +61,14 @@ struct LoginView: View {
             } message: {
                 Text(viewModel.errorMessage ?? "")
             }
-
             .overlay {
                 if viewModel.isLoading {
                     ProgressView("Signing in...")
                         .padding()
                         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
                 }
-            }.accessibilityElement(children: .contain)
+            }
+            .accessibilityElement(children: .contain)
             .accessibilityLabel("Login Screen")
         }
     }
@@ -49,65 +78,28 @@ struct LoginView: View {
     }
 
     private var headerSection: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "flame.fill")
-                .font(.system(size: 60))
-                .padding(.top, 60)
-                .accessibilityHidden(true)
+        Section {
+            VStack(spacing: 12) {
+                Image(systemName: "flame.fill")
+                    .font(.system(size: 60))
+                    .padding(.top, 20)
+                    .frame(maxWidth: .infinity)
+                    .accessibilityHidden(true)
 
-            VStack(spacing: 8) {
-                Text("Welcome to")
-                    .font(.title2)
-                    .foregroundColor(.secondary)
-                Text("Ogonek")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.primary)
-            }
-        }.accessibilityElement(children: .combine)
-            .accessibilityLabel("Welcome to Ogonek")
-            .accessibilityAddTraits(.isHeader)
-    }
-
-    private var loginForm: some View {
-        VStack {
-            TextField("Username", text: $viewModel.username)
-                .focused($focusedField, equals: .username)
-                .textInputAutocapitalization(.never)
-                .autocorrectionDisabled()
-                .submitLabel(.next)
-                .onSubmit { focusedField = .password }
-
-            SecureField("Password", text: $viewModel.password)
-                .focused($focusedField, equals: .password)
-                .submitLabel(.go)
-                .onSubmit { signIn() }
-        }
-        .textFieldStyle(.roundedBorder)
-        .padding()
-    }
-
-    private var loginButton: some View {
-        Button(action: signIn) {
-            HStack {
-                if viewModel.isLoading {
-                    ProgressView()
-                } else {
-                    Image(systemName: "arrow.right")
-                        .font(.title3)
-                        .fontWeight(.medium)
+                VStack(spacing: 4) {
+                    Text("Welcome to")
+                        .font(.title2)
+                        .foregroundColor(.secondary)
+                    Text("Ogonek")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
                 }
-                Text(viewModel.isLoading ? "Signing In..." : "Sign In")
-                    .font(.headline)
-                    .fontWeight(.semibold)
+                .frame(maxWidth: .infinity)
             }
+            .listRowBackground(Color.clear)
+            .listRowSeparator(.hidden)
         }
-        .disabled(!viewModel.canSignIn || viewModel.isLoading)
-        .animation(.easeInOut(duration: 0.2), value: viewModel.canSignIn)
-        .accessibilityLabel(viewModel.isLoading ? "Signing in, please wait" : "Sign in")
-        .accessibilityHint(viewModel.canSignIn ? "Double tap to sign in with entered credentials" : "Enter username and password first")
-        .accessibilityAddTraits(viewModel.isLoading ? [.updatesFrequently] : [])
-        .accessibilityValue(viewModel.isLoading ? "In progress" : (viewModel.canSignIn ? "Available" : "Disabled"))
     }
 }
 

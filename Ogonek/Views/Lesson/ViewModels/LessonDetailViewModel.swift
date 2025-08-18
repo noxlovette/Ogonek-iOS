@@ -8,6 +8,7 @@
 import Foundation
 import Observation
 
+@Observable
 class LessonDetailViewModel: BaseViewModel {
     var lesson: Lesson?
 

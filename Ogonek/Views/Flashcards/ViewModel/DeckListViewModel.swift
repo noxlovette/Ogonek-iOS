@@ -1,5 +1,6 @@
 import Foundation
 
+@Observable
 class DeckListViewModel: BaseViewModel {
     var decks: [DeckSmall] = []
 

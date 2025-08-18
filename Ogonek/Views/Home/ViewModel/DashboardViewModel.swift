@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 class DashboardViewModel: BaseViewModel {
     var dueTasks: [TaskSmall] = []
     var recentLessons: [LessonSmall] = []

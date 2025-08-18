@@ -7,19 +7,13 @@
 
 import Foundation
 
+@Observable
 class LoginViewModel: BaseViewModel {
-    @MainActor var username: String = ""
-    @MainActor var password: String = ""
-
-    @MainActor var canSignIn: Bool {
-        !username.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-            !password.isEmpty &&
-            !isLoading
-    }
+    var username: String = ""
+    var password: String = ""
 
     @MainActor
     func signIn() async {
-        guard canSignIn else { return }
         isLoading = true
         errorMessage = nil
 
