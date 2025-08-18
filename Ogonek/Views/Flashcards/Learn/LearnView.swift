@@ -17,6 +17,18 @@ struct LearnView: View {
 
     @Environment(\.dismiss) private var dismiss
 
+    let qualityButtons: [QualityButton] = [
+        QualityButton(
+            key: 1,
+            quality: 0,
+            color: .secondaryColour,
+            label: "1066"
+        ),
+        QualityButton(key: 2, quality: 3, color: .secondary, label: "Good"),
+        QualityButton(key: 3, quality: 5, color: .accent, label: "Easy"),
+    ]
+
+
     var body: some View {
         NavigationStack {
             ZStack {

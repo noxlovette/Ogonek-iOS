@@ -14,17 +14,6 @@ class LearnViewModel {
     var isComplete: Bool = false
     var isLoading: Bool = false
 
-    let qualityButtons: [QualityButton] = [
-        QualityButton(
-            key: 1,
-            quality: 0,
-            color: .secondaryColour,
-            label: "1066"
-        ),
-        QualityButton(key: 2, quality: 3, color: .secondary, label: "Good"),
-        QualityButton(key: 3, quality: 5, color: .accent, label: "Easy"),
-    ]
-
     func loadCards() async {
         isLoading = true
         do {
