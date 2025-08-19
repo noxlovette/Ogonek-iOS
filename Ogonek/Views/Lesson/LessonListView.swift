@@ -43,9 +43,15 @@ struct LessonListView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.clear)
                 } else if viewModel.lessons.isEmpty {
-                    EmptyStateView(icon: "magnifyingglass", title: "No lessons", description: "Wait for your teacher to add some")
+                    EmptyStateView(
+                        icon: "magnifyingglass",
+                        title: "No lessons",
+                        description: "Wait for your teacher to add some")
                 } else if viewModel.lessons.isEmpty, searchText != "" {
-                    EmptyStateView(icon: "magnifyingglass", title: "No lessons found", description: "Try a different search")
+                    EmptyStateView(
+                        icon: "magnifyingglass",
+                        title: "No lessons found",
+                        description: "Try a different search")
                 }
             }
         }

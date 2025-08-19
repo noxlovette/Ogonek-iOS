@@ -43,8 +43,7 @@ struct WordCard: View {
 
                     if let mediaUrl = card.mediaUrl,
                        let encoded = mediaUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                       let url = URL(string: encoded), isFlipped
-                    {
+                       let url = URL(string: encoded), isFlipped {
                         AsyncImage(url: url) { image in
                             image
                                 .resizable()

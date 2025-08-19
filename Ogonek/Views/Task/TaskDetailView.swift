@@ -137,8 +137,7 @@ extension TaskDetailView {
                     if let suggestedFilename = response.suggestedFilename {
                         filename = suggestedFilename
                     } else if let lastComponent = url.pathComponents.last,
-                              !lastComponent.isEmpty, lastComponent != "/"
-                    {
+                              !lastComponent.isEmpty, lastComponent != "/" {
                         filename = lastComponent
                     }
 

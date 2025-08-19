@@ -39,7 +39,10 @@ class DeckDetailViewModel: BaseViewModel {
         errorMessage = nil
 
         do {
-            try await apiService.toggleDeckSubscription(id: deckOk.deck.id, subscribed: deckOk.deck.isSubscribed ?? false)
+            try await apiService.toggleDeckSubscription(
+                id: deckOk.deck.id,
+                subscribed: deckOk.deck.isSubscribed ?? false
+            )
         } catch {
             handleError(error)
         }

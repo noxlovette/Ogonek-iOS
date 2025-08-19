@@ -40,9 +40,15 @@ struct TaskListView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.clear)
                 } else if viewModel.tasks.isEmpty {
-                    EmptyStateView(icon: "magnifyingglass", title: "No tasks", description: "Click the bell button to ask for more")
+                    EmptyStateView(
+                        icon: "magnifyingglass",
+                        title: "No tasks",
+                        description: "Click the bell button to ask for more")
                 } else if viewModel.tasks.isEmpty, searchText != "" {
-                    EmptyStateView(icon: "magnifyingglass", title: "No tasks found", description: "Try a different search")
+                    EmptyStateView(
+                        icon: "magnifyingglass",
+                        title: "No tasks found",
+                        description: "Try a different search")
                 }
             }
             .toolbar {

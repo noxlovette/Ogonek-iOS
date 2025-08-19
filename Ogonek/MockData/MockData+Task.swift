@@ -25,7 +25,7 @@ extension MockData {
                 ownerId: "dev_teacher1_sDkwvkSa",
                 s3Key: "tasks/KdqQcCb9jDz-AxQPBMJBo/examples.md",
                 size: 1024,
-            ),
+            )
         ],
         task: TaskFull(
             assignee: "dev_teacher1_sDkwvkSa",
@@ -99,7 +99,7 @@ extension MockData {
                 priority: 1,
                 seen: false,
                 title: "Testing File Deletion",
-            ),
+            )
         ],
         page: 1,
         perPage: 20,

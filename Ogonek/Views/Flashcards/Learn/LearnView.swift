@@ -25,7 +25,7 @@ struct LearnView: View {
             label: "1066"
         ),
         QualityButton(key: 2, quality: 3, color: .secondary, label: "Good"),
-        QualityButton(key: 3, quality: 5, color: .accent, label: "Easy"),
+        QualityButton(key: 3, quality: 5, color: .accent, label: "Easy")
     ]
 
     var body: some View {
@@ -183,8 +183,7 @@ struct LearnView: View {
 
                 if let mediaUrl = card.mediaUrl,
                    let encoded = mediaUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                   let url = URL(string: encoded)
-                {
+                   let url = URL(string: encoded) {
                     AsyncImage(url: url) { image in
                         image.resizable()
                             .aspectRatio(contentMode: .fit)

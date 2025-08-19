@@ -43,7 +43,7 @@ public class OpenAPIClient {
                     transport: URLSessionTransport(),
                     middlewares: [
                         authMiddleware,
-                        tokenRefreshMiddleware,
+                        tokenRefreshMiddleware
                     ],
                 )
                 self.authMiddleware = authMiddleware

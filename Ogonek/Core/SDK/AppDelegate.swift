@@ -35,7 +35,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 class PushTokenStore: ObservableObject {
     static let shared = PushTokenStore()
 
-    @Published var token: String? = nil
+    @Published var token: String?
     @Published var isAuthorized: Bool = false
 
     private init() {}
