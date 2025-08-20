@@ -11,6 +11,7 @@ struct QualityButton: Identifiable {
 struct LearnView: View {
     @State private var viewModel = LearnViewModel()
     @State private var viewState: LearnViewState
+    @FocusState private var clozeFocused: Bool
     init(viewState: LearnViewState = LearnViewState()) {
         _viewState = State(initialValue: viewState)
     }
@@ -230,9 +231,16 @@ struct LearnView: View {
                 .multilineTextAlignment(.leading)
 
             TextField("Type your answer...", text: $viewState.userInput)
+                .focused($clozeFocused)
                 .onSubmit {
                     showAnswer()
                 }
+        }.toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button("Hide Keyboard") {
+                    clozeFocused = false
+                }
+            }
         }
     }
 

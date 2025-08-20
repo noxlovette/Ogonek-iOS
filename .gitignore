@@ -5,3 +5,4 @@ xcuserdata/
 *.xcodeproj/
 *.mobileprovision
 *.p8
+openapi.yaml
