@@ -46,12 +46,14 @@ struct LessonListView: View {
                     EmptyStateView(
                         icon: "magnifyingglass",
                         title: "No lessons",
-                        description: "Wait for your teacher to add some")
+                        description: "Wait for your teacher to add some"
+                    )
                 } else if viewModel.lessons.isEmpty, searchText != "" {
                     EmptyStateView(
                         icon: "magnifyingglass",
                         title: "No lessons found",
-                        description: "Try a different search")
+                        description: "Try a different search"
+                    )
                 }
             }
         }

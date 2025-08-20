@@ -37,12 +37,14 @@ struct DeckListView: View {
                     EmptyStateView(
                         icon: "magnifyingglass",
                         title: "No decks",
-                        description: "Create some in the web version")
+                        description: "Create some in the web version"
+                    )
                 } else if viewModel.decks.isEmpty, searchText != "" {
                     EmptyStateView(
                         icon: "magnifyingglass",
                         title: "No decks found",
-                        description: "Try a different search")
+                        description: "Try a different search"
+                    )
                 }
             }
             .navigationTitle("Decks")

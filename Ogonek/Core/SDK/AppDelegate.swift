@@ -2,7 +2,10 @@ import Foundation
 import SwiftUI
 import UserNotifications
 
+@Observable
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    var selectedTab: Int = 0
+
     func application(
         _: UIApplication,
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
@@ -17,9 +20,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     ) {
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("APNs Token: \(token)")
-
         PushTokenStore.shared.token = token
-
         Task {
             await PushTokenStore.shared.registerWithBackend()
         }
@@ -32,75 +33,70 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         print("Failed to register for remote notifications: \(error)")
     }
 
-        // MARK: - Badge Management
+    // MARK: - Badge Management
 
-        /// Update the app icon badge count (iOS 17+ compatible)
     func updateAppIconBadge(count: Int) {
         Task { @MainActor in
             do {
                 try await UNUserNotificationCenter.current().setBadgeCount(count)
-                print("📱 App icon badge updated to: \(count)")
+                print("📱 Badge: \(count)")
             } catch {
-                print("❌ Failed to set badge count: \(error)")
+                print("❌ Badge failed")
             }
         }
     }
 
-        /// Clear the app icon badge
-    func clearAppIconBadge() {
-        updateAppIconBadge(count: 0)
-    }
+    // MARK: - Notification Handling
 
-        // MARK: - Notification Handling
-
-        /// Handle notification tap when app is in background/closed
     func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
+        _: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
         let userInfo = response.notification.request.content.userInfo
 
-            // Handle the notification tap
-        handleNotificationTap(userInfo: userInfo)
+        // Extract type from your payload structure
+        guard let customData = userInfo["data"] as? [String: Any],
+              let type = customData["type"] as? String
+        else {
+            completionHandler()
+            return
+        }
+
+        DispatchQueue.main.async {
+            switch type {
+            case "task_created", "task_updated", "task_response":
+                AppState.shared.selectedTab = 2 // Tasks
+            case "lesson_created":
+                AppState.shared.selectedTab = 1 // Lessons
+            case "deck_created":
+                AppState.shared.selectedTab = 3 // Decks
+            case "cards_due":
+                AppState.shared.selectedTab = 0 // Home
+            default:
+                AppState.shared.selectedTab = 0
+            }
+            print("🎯 Opened tab: \(AppState.shared.selectedTab)")
+        }
 
         completionHandler()
     }
 
-        /// Handle notification when app is in foreground
     func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
+        _: UNUserNotificationCenter,
+        willPresent _: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
-            // Show notification even when app is in foreground
         completionHandler([.banner, .sound, .badge])
     }
-
-        /// Handle notification tap routing
-    private func handleNotificationTap(userInfo: [AnyHashable: Any]) {
-        guard let notificationType = userInfo["type"] as? String else { return }
-
-            // Post notification for the app to handle routing
-        NotificationCenter.default.post(
-            name: NotificationName.notificationTapped,
-            object: nil,
-            userInfo: ["type": notificationType, "data": userInfo]
-        )
-    }
 }
 
-    // MARK: - Notification Names
-struct NotificationName {
-    static let notificationTapped = Notification.Name("notificationTapped")
-    static let badgeCountChanged = Notification.Name("badgeCountChanged")
-}
-
-class PushTokenStore: ObservableObject {
+@Observable
+class PushTokenStore {
     static let shared = PushTokenStore()
 
-    @Published var token: String?
-    @Published var isAuthorized: Bool = false
+    var token: String?
+    var isAuthorized: Bool = false
 
     private init() {}
 

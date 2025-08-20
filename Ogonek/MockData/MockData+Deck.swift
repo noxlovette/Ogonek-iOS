@@ -17,9 +17,9 @@ extension MockData {
                 front: "distant memory",
                 id: "yPPHMaNa385TFg2nRVINz",
                 mediaUrl: """
-        https://docs-assets.developer.apple.com/published/\
-        e4e79f1275f29c97f978794931fcae53/media-3262152%402x.png
-        """
+                https://docs-assets.developer.apple.com/published/\
+                e4e79f1275f29c97f978794931fcae53/media-3262152%402x.png
+                """
             ),
             Card(
                 back: "a memory that stays with you for a long time",
@@ -28,10 +28,10 @@ extension MockData {
                 front: "lasting memory",
                 id: "8E58QbmXUcIqQgSIBrThL",
                 mediaUrl: """
-        https://static.wikia.nocookie.net/hello_world/images/3/3e/\
-        414a8ef0-f3bb-11e9-bdfc-d4aea2070a0f.jpg/revision/latest/\
-        thumbnail/width/360/height/360?cb=20200515011426
-        """
+                https://static.wikia.nocookie.net/hello_world/images/3/3e/\
+                414a8ef0-f3bb-11e9-bdfc-d4aea2070a0f.jpg/revision/latest/\
+                thumbnail/width/360/height/360?cb=20200515011426
+                """
             ),
 
             Card(

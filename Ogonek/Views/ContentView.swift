@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var apiService: APIService = .shared
-    @State private var appState: AppState = .init()
+    @Environment(APIService.self) private var apiService
+    @Environment(AppState.self) private var appState
     @State private var tokenManager = TokenManager.shared
     @State private var authSetupCompleted = false
 
@@ -17,7 +17,6 @@ struct ContentView: View {
         Group {
             if tokenManager.isAuthenticated, authSetupCompleted {
                 MainTabView()
-                    .environment(appState)
             } else if !tokenManager.isAuthenticated, authSetupCompleted {
                 LoginView()
             } else {

@@ -7,15 +7,14 @@ class AppState: BaseViewModel {
 
     var badges = NotificationBadges()
     var context: AppContext?
+    var selectedTab: Int = 0
 
-        // Track total unread count for app icon badge
     var totalUnreadCount: Int {
-        let dueCards = badges.dueCards ?? 0
         let unseenDecks = badges.unseenDecks
         let unseenLessons = badges.unseenLessons
         let unseenTasks = badges.unseenTasks
 
-        return Int(dueCards + unseenDecks + unseenLessons + unseenTasks)
+        return Int(unseenDecks + unseenLessons + unseenTasks)
     }
 
     @MainActor
@@ -29,7 +28,7 @@ class AppState: BaseViewModel {
             badges = try await apiService.fetchBadges()
             print(badges)
 
-                // Update app icon badge when badges change
+            // Update app icon badge when badges change
             updateAppIconBadge()
 
         } catch {
@@ -46,7 +45,6 @@ class AppState: BaseViewModel {
         }
     }
 
-        /// Update the app icon badge count (iOS 17+ compatible)
     @MainActor
     func updateAppIconBadge() {
         let count = totalUnreadCount
@@ -60,7 +58,6 @@ class AppState: BaseViewModel {
         }
     }
 
-        /// Clear app icon badge (call when user views content)
     @MainActor
     func clearAppIconBadge() {
         Task {
@@ -73,18 +70,17 @@ class AppState: BaseViewModel {
         }
     }
 
-        /// Mark specific items as seen and update badge
     @MainActor
     func markItemsAsSeen(type: NotificationItemType, count: Int = 1) {
         switch type {
-            case .tasks:
-                badges.unseenTasks = max(0, badges.unseenTasks - Int64(count))
-            case .lessons:
-                badges.unseenLessons = max(0, badges.unseenLessons - Int64(count))
-            case .decks:
-                badges.unseenDecks = max(0, badges.unseenDecks - Int64(count))
-            case .dueCards:
-                badges.dueCards = max(0, (badges.dueCards ?? 0) - Int64(count))
+        case .tasks:
+            badges.unseenTasks = max(0, badges.unseenTasks - Int64(count))
+        case .lessons:
+            badges.unseenLessons = max(0, badges.unseenLessons - Int64(count))
+        case .decks:
+            badges.unseenDecks = max(0, badges.unseenDecks - Int64(count))
+        case .dueCards:
+            badges.dueCards = max(0, (badges.dueCards ?? 0) - Int64(count))
         }
 
         updateAppIconBadge()
