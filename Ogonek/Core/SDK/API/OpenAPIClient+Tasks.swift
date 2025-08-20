@@ -75,6 +75,10 @@ extension OpenAPIClient {
         return response
     }
 
+    func requestMoreTasks() async throws {
+        _ = try await client.requestHw()
+    }
+
     func toggleTask(id: String) async throws {
         let input = Operations.ToggleTask.Input.Path(id: id)
 

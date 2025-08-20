@@ -24,10 +24,11 @@ struct TaskListView: View {
             .accessibilityLabel("Search tasks")
             .accessibilityHint("Type to filter task list")
             .refreshable {
-                await viewModel.refreshTasks()
+                refreshTasks()
             }
             .task {
                 await viewModel.loadTasks()
+                await AppState.shared.fetchBadges()
             }
             .onChange(of: searchText) { _, newValue in
                 Task {
@@ -78,6 +79,7 @@ struct TaskListView: View {
     func refreshTasks() {
         Task {
             await viewModel.refreshTasks()
+            await AppState.shared.fetchBadges()
         }
     }
 }

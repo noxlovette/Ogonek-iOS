@@ -7,17 +7,15 @@
 
 import SwiftUI
 
-struct RefreshButton: View {
+struct CompleteButton: View {
     var action: () -> Void = {}
+    var condition: Bool = false
+    var recto: String
+    var verso: String
 
     var body: some View {
         Button(action: action) {
-            Label("Refresh", systemImage: "arrow.clockwise")
+            Label(condition ? recto : verso, systemImage: condition ? "checkmark.circle.fill" : "circle")
         }
-        .tint(.accent)
     }
-}
-
-#Preview(traits: .sizeThatFitsLayout) {
-    RefreshButton()
 }

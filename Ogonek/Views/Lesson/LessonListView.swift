@@ -25,6 +25,7 @@ struct LessonListView: View {
             .accessibilityHint("Type to filter lesson list")
             .task {
                 await viewModel.loadLessons()
+                await AppState.shared.fetchBadges()
             }
             .refreshable {
                 await viewModel.refreshLessons()
@@ -71,6 +72,7 @@ struct LessonListView: View {
     func refreshLessons() {
         Task {
             await viewModel.refreshLessons()
+            await AppState.shared.fetchBadges()
         }
     }
 }

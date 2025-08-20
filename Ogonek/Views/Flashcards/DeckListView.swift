@@ -53,6 +53,7 @@ struct DeckListView: View {
             .accessibilityHint("Type to filter flashard list")
             .refreshable {
                 await viewModel.loadDecks()
+                await AppState.shared.fetchBadges()
             }
             .toolbar {
                 toolbarContent()
@@ -80,6 +81,7 @@ struct DeckListView: View {
     func refreshDecks() {
         Task {
             await viewModel.refreshDecks()
+            await AppState.shared.fetchBadges()
         }
     }
 }

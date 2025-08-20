@@ -10,7 +10,7 @@ import SwiftUI
 extension DeckListView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
-        ToolbarItem {
+        ToolbarItem(placement: .topBarTrailing) {
             RefreshButton {
                 refreshDecks()
             }

@@ -14,14 +14,14 @@ extension DashboardView {
             NavigationLink {
                 SettingsView()
             } label: {
-                Image(systemName: "person.crop.circle")
+                Label("Settings", systemImage: "person.crop.circle")
                     .foregroundStyle(.primary)
             }
             .accessibilityLabel("Settings")
             .accessibilityHint("Access app settings and account options")
         }
 
-        ToolbarItem {
+        ToolbarItem(placement: .topBarTrailing) {
             RefreshButton {
                 refreshDashboard()
             }

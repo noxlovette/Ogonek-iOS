@@ -30,6 +30,10 @@ extension APIService {
         try await openAPIClient.fetchTask(id: id)
     }
 
+    func requestMoreTasks() async throws {
+        try await openAPIClient.requestMoreTasks()
+    }
+
     func toggleTaskCompletion(id: String) async throws {
         try await openAPIClient.toggleTask(id: id)
     }

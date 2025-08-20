@@ -10,7 +10,7 @@ import SwiftUI
 extension LessonListView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
-        ToolbarItem {
+        ToolbarItem(placement: .topBarTrailing) {
             RefreshButton {
                 refreshLessons()
             }

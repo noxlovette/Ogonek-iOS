@@ -10,8 +10,8 @@ import SwiftUI
 extension LessonDetailView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
-        ToolbarItem(placement: .bottomBar) {
-            Button("Download", action: downloadLesson)
+        ToolbarItem(placement: .topBarTrailing) {
+            DownloadButton(action: downloadLesson)
         }
     }
 }

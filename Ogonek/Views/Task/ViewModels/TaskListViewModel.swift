@@ -67,6 +67,10 @@ class TaskListViewModel: BaseViewModel {
 
     @MainActor
     func requestMoreTasks() async {
-        print("notify teacher")
+        do {
+            try await apiService.requestMoreTasks()
+        } catch {
+            handleError(error)
+        }
     }
 }

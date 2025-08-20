@@ -11,18 +11,28 @@ extension TaskDetailView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
         if let taskWithFiles = viewModel.taskWithFiles {
-            ToolbarItem {
+            ToolbarItem(placement: .bottomBar) {
                 if let dueDate = taskWithFiles.task.dueDate {
-                    Text("Due: \(dueDate, style: .date)")
+                    Label {
+                        Text("Due: \(dueDate, style: .date)")
+                    } icon: {
+                        Image(systemName: "calendar.badge.clock")
+                            .foregroundStyle(.orange)
+                    }
+                    .font(.caption)
                 }
             }
 
-            ToolbarItemGroup(placement: .bottomBar) {
-                Button("Download", action: downloadTask)
-                Spacer()
-
-                Button(taskWithFiles.task.completed == true ?
-                    "Completed" : "Complete", action: markAsComplete)
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                DownloadButton(action: downloadTask)
+                CompleteButton(
+                    action: markAsComplete,
+                    condition: taskWithFiles.task.completed,
+                    recto: "Completed",
+                    verso: "Complete"
+                )
+                .tint(taskWithFiles.task.completed
+                    == true ? .green : .accent)
             }
         }
     }

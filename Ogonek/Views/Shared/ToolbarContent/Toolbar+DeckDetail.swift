@@ -10,11 +10,18 @@ import SwiftUI
 extension DeckDetailView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
-        ToolbarItem(placement: .bottomBar) {
-            Button(
-                (viewModel.deck?.deck.isSubscribed ?? false) ? "Unsubscribe" : "Subscribe",
-                action: subscribe
+        ToolbarItem(placement: .topBarTrailing) {
+            let isSubscribed =
+                viewModel.deck?.deck.isSubscribed ?? false
+
+            CompleteButton(
+                action: subscribe,
+                condition: isSubscribed,
+                recto: "Unsubscribe",
+                verso: "Subscribe"
             )
+            .tint(isSubscribed
+                == true ? .green : .accent)
         }
     }
 }

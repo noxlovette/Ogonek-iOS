@@ -10,20 +10,16 @@ import SwiftUI
 extension TaskListView {
     @ToolbarContentBuilder
     func toolbarContent() -> some ToolbarContent {
-        ToolbarItem {
+        ToolbarItemGroup(placement: .topBarTrailing) {
             RefreshButton {
                 refreshTasks()
             }
             .accessibilityLabel("Refresh tasks")
             .accessibilityHint("Updates task list with latest data")
-        }
 
-        ToolbarItem {
-            Button(
-                "Notify teacher",
-                systemImage: "bell",
-                action: requestMoreTasks
-            )
+            Button(action: requestMoreTasks) {
+                Label("Homework Request", systemImage: "bell.badge")
+            }
         }
     }
 }
