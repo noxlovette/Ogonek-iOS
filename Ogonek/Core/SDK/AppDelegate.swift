@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UserNotifications
 
 class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     func application(
@@ -30,6 +31,69 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     ) {
         print("Failed to register for remote notifications: \(error)")
     }
+
+        // MARK: - Badge Management
+
+        /// Update the app icon badge count (iOS 17+ compatible)
+    func updateAppIconBadge(count: Int) {
+        Task { @MainActor in
+            do {
+                try await UNUserNotificationCenter.current().setBadgeCount(count)
+                print("📱 App icon badge updated to: \(count)")
+            } catch {
+                print("❌ Failed to set badge count: \(error)")
+            }
+        }
+    }
+
+        /// Clear the app icon badge
+    func clearAppIconBadge() {
+        updateAppIconBadge(count: 0)
+    }
+
+        // MARK: - Notification Handling
+
+        /// Handle notification tap when app is in background/closed
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        let userInfo = response.notification.request.content.userInfo
+
+            // Handle the notification tap
+        handleNotificationTap(userInfo: userInfo)
+
+        completionHandler()
+    }
+
+        /// Handle notification when app is in foreground
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+            // Show notification even when app is in foreground
+        completionHandler([.banner, .sound, .badge])
+    }
+
+        /// Handle notification tap routing
+    private func handleNotificationTap(userInfo: [AnyHashable: Any]) {
+        guard let notificationType = userInfo["type"] as? String else { return }
+
+            // Post notification for the app to handle routing
+        NotificationCenter.default.post(
+            name: NotificationName.notificationTapped,
+            object: nil,
+            userInfo: ["type": notificationType, "data": userInfo]
+        )
+    }
+}
+
+    // MARK: - Notification Names
+struct NotificationName {
+    static let notificationTapped = Notification.Name("notificationTapped")
+    static let badgeCountChanged = Notification.Name("badgeCountChanged")
 }
 
 class PushTokenStore: ObservableObject {
