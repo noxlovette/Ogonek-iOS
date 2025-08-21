@@ -49,6 +49,7 @@ struct MainTabView: View {
             .accessibilityHint("Shows your flashcards")
         }
         .tabViewStyle(.sidebarAdaptable)
+        .sensoryFeedback(.selection, trigger: appState.selectedTab)
     }
 }
 

@@ -17,10 +17,8 @@ struct SettingsView: View {
                 Section("Notifications") {
                     Button {
                         if pushTokenStore.isAuthorized {
-                            // If already authorized, open Settings app
                             openAppSettings()
                         } else {
-                            // If not authorized, request permission
                             viewModel.requestNotificationPermission()
                         }
                     } label: {

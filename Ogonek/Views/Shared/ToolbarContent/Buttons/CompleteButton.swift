@@ -17,5 +17,6 @@ struct CompleteButton: View {
         Button(action: action) {
             Label(condition ? recto : verso, systemImage: condition ? "checkmark.circle.fill" : "circle")
         }
+        .sensoryFeedback(.success, trigger: condition)
     }
 }
