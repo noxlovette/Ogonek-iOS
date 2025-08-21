@@ -20,6 +20,7 @@ extension TaskListView {
             Button(action: requestMoreTasks) {
                 Label("Homework Request", systemImage: "bell.badge")
             }
+            .tint(.accent)
         }
     }
 }

@@ -15,8 +15,8 @@ extension DashboardView {
                 SettingsView()
             } label: {
                 Label("Settings", systemImage: "person.crop.circle")
-                    .foregroundStyle(.primary)
             }
+            .tint(.accent)
             .accessibilityLabel("Settings")
             .accessibilityHint("Access app settings and account options")
         }

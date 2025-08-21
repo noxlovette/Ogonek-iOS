@@ -335,7 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = (
-				"# This script is responsible for uploading debug symbols and source context for Sentry.",
 				"if which sentry-cli >/dev/null; then",
 				"  export SENTRY_ORG=danila-volkov",
 				"  export SENTRY_PROJECT=ogonek",
@@ -346,6 +345,7 @@
 				"else",
 				"  echo \"warning: sentry-cli not installed, download from https://github.com/getsentry/sentry-cli/releases\"",
 				"fi",
+				"",
 				"",
 			);
 			showEnvVarsInLog = 0;
@@ -520,7 +520,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ogonek/Ogonek.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -540,9 +540,6 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = noxlovette.Ogonek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SENTRY_AUTH_TOKEN = "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";
-				SENTRY_ORG = "danila-volkov";
-				SENTRY_PROJECT = ogonek;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -560,7 +557,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ogonek/Ogonek.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -580,9 +577,6 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = noxlovette.Ogonek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SENTRY_AUTH_TOKEN = "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";
-				SENTRY_ORG = "danila-volkov";
-				SENTRY_PROJECT = ogonek;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -731,7 +725,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Ogonek/Ogonek.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -751,9 +745,6 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = noxlovette.Ogonek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SENTRY_AUTH_TOKEN = "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";
-				SENTRY_ORG = "danila-volkov";
-				SENTRY_PROJECT = ogonek;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

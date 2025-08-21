@@ -7,6 +7,7 @@ struct DownloadButton: View {
         Button(action: action) {
             Label("Download", systemImage: "arrow.down")
         }
+        .tint(.accent)
     }
 }
 

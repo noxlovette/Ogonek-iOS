@@ -13,13 +13,8 @@ extension TaskDetailView {
         if let taskWithFiles = viewModel.taskWithFiles {
             ToolbarItem(placement: .bottomBar) {
                 if let dueDate = taskWithFiles.task.dueDate {
-                    Label {
-                        Text("Due: \(dueDate, style: .date)")
-                    } icon: {
-                        Image(systemName: "calendar.badge.clock")
-                            .foregroundStyle(.orange)
-                    }
-                    .font(.caption)
+                    Text("Due: \(dueDate, style: .date)")
+                        .font(.caption)
                 }
             }
 
