@@ -43,25 +43,3 @@ class AudioManager {
         audioPlayer?.isPlaying ?? false
     }
 }
-
-extension AudioManager {
-    func playCorrectAnswer() {
-        playSound(named: "correct_answer")
-    }
-
-    func playWrongAnswer() {
-        playSound(named: "wrong_answer")
-    }
-
-    func playCardFlip() {
-        playSound(named: "card_flip")
-    }
-
-    func playLessonComplete() {
-        playSound(named: "lesson_complete")
-    }
-
-    func playPronunciation(for word: String) {
-        playSound(named: "pronunciation_\(word)")
-    }
-}

@@ -6,7 +6,7 @@ class AppState: BaseViewModel {
     static let shared = AppState()
 
     var badges = NotificationBadges()
-    var context: AppContext?
+    var context = AppContext()
     var selectedTab: Int = 0
 
     var totalUnreadCount: Int {

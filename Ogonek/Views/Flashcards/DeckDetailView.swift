@@ -7,7 +7,7 @@ struct DeckDetailView: View {
     @State private var flippedCards: Set<String> = []
 
     private let columns = [
-        GridItem(.flexible())
+        GridItem(.flexible()),
     ]
 
     var body: some View {

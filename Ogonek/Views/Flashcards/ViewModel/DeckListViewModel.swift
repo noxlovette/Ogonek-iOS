@@ -15,7 +15,8 @@ class DeckListViewModel: BaseViewModel {
 
         do {
             if
-                isPreview {
+                isPreview
+            {
                 decks = MockData.decks.data
             } else {
                 let paginatedDecks = try await apiService.listDecks(

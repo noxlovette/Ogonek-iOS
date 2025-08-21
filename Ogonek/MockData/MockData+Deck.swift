@@ -121,7 +121,7 @@ extension MockData {
                 front: "vaguely remember",
                 id: "uRWN22HuPFCSYrKciu6Dg",
                 mediaUrl: nil,
-            )
+            ),
         ],
         deck: Deck(
             assignee: "dev_student2_FFrb-e1V",
@@ -163,7 +163,7 @@ extension MockData {
                 isSubscribed: false,
                 seen: true, title: "Rust Vocabulary",
                 visibility: "private",
-            )
+            ),
         ],
         page: 1,
         perPage: 50,
@@ -285,6 +285,6 @@ extension MockData {
             mediaUrl: nil,
             reviewCount: 1,
             userId: "dev_teacher1_sDkwvkSa",
-        )
+        ),
     ]
 }

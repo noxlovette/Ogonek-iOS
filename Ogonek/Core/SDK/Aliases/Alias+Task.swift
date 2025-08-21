@@ -37,7 +37,7 @@ extension TaskWithFiles {
                 ownerId: "dev_teacher1_sDkwvkSa",
                 s3Key: "tasks/KdqQcCb9jDz-AxQPBMJBo/examples.md",
                 size: 1024,
-            )
+            ),
         ],
         task: TaskFull(
             assignee: "dev_teacher1_sDkwvkSa",

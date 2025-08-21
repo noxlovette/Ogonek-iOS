@@ -27,11 +27,6 @@ public extension APIService {
     }
 
     func restoreAuthenticationIfAvailable() {
-        guard !isAuthenticated else {
-            print("🔄 Authentication already restored")
-            return
-        }
-
         if let storedToken = TokenStorage.getAccessToken() {
             print("restoring access token")
             setAuthToken(storedToken)

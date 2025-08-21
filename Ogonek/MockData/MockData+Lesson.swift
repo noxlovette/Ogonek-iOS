@@ -58,7 +58,7 @@ extension MockData {
                 seen: true,
                 title: "Rust Basics",
                 topic: "Ownership and Borrowing",
-            )
+            ),
         ],
         page: 1,
         perPage: 50,

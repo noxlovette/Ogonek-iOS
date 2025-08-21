@@ -19,4 +19,9 @@ class SettingsViewModel: BaseViewModel {
     func requestNotificationPermission() {
         showNotificationExplanation = true
     }
+
+    func updateAccount(username _: String?, email _: String?, password _: String?) {
+        print("haha")
+
+    }
 }

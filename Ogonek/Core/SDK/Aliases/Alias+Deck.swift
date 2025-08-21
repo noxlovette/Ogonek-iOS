@@ -123,7 +123,7 @@ extension DeckWithCards {
                 front: "vaguely remember",
                 id: "uRWN22HuPFCSYrKciu6Dg",
                 mediaUrl: nil,
-            )
+            ),
         ],
         deck: Deck(
             assignee: "dev_student2_FFrb-e1V",

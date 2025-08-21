@@ -28,14 +28,13 @@ struct ContentView: View {
             }
         }
         .task {
-                await setupAuthentication()
+            await setupAuthentication()
         }
         .tint(.accentColor)
     }
 
     @MainActor
     private func setupAuthentication() async {
-
         try? await Task.sleep(nanoseconds: 100_000_000)
 
         if !apiService.isAuthenticated {
@@ -45,7 +44,7 @@ struct ContentView: View {
         tokenManager.isAuthenticated = TokenStorage.hasValidTokens()
 
         authSetupCompleted = true
-
+        print("✅ Authentication setup completed")
     }
 }
 
