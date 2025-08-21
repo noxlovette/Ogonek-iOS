@@ -11,7 +11,6 @@ struct ContentView: View {
     @Environment(AppState.self) private var appState
     @State private var tokenManager = TokenManager.shared
     @State private var authSetupCompleted = false
-    @State private var hasPerformedInitialSetup = false
     var body: some View {
         Group {
             if tokenManager.isAuthenticated, authSetupCompleted {
@@ -29,17 +28,13 @@ struct ContentView: View {
             }
         }
         .task {
-            if !hasPerformedInitialSetup {
                 await setupAuthentication()
-                hasPerformedInitialSetup = true
-            }
         }
         .tint(.accentColor)
     }
 
     @MainActor
     private func setupAuthentication() async {
-        print("🚀 Setting up authentication...")
 
         try? await Task.sleep(nanoseconds: 100_000_000)
 
@@ -48,9 +43,9 @@ struct ContentView: View {
         }
 
         tokenManager.isAuthenticated = TokenStorage.hasValidTokens()
+
         authSetupCompleted = true
 
-        print("✅ Authentication setup completed")
     }
 }
 

@@ -16,8 +16,7 @@ public final class APIService {
     let openAPIClient: OpenAPIClient
 
     static let shared: APIService = {
-        let instance = APIService()
-        return instance
+        APIService()
     }()
 
     private init() {

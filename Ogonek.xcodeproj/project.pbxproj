@@ -347,6 +347,7 @@
 				"fi",
 				"",
 				"",
+				"",
 			);
 			showEnvVarsInLog = 0;
 		};
