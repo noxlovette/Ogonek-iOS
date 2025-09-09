@@ -12,7 +12,6 @@ extension MockData {
         assignee: "Bc3JW7pm1Zh450ty95fAI",
         assigneeName: "Performance review",
         createdAt: Date(timeIntervalSinceNow: -1000),
-        createdBy: "Svatko 22.12.2024",
         id: "lesson1",
         markdown: """
         # Performance
@@ -22,7 +21,7 @@ extension MockData {
         """,
         title: "1234567890",
         topic: "Weak",
-        updatedAt: Date(),
+        updatedAt: Date()
     )
 
     static let paginatedLessons = PaginatedLessons(
@@ -33,7 +32,7 @@ extension MockData {
                 id: "etxAsCsyVpJF-_fpW5bDB",
                 seen: false,
                 title: "Unseen",
-                topic: "Hidden Operations",
+                topic: "Hidden Operations"
             ),
             LessonSmall(
                 assigneeName: "Alice Teacher",
@@ -41,7 +40,7 @@ extension MockData {
                 id: "b5wVIcYGFmgow6blH_T0j",
                 seen: true,
                 title: "Default Title",
-                topic: "Default Topic",
+                topic: "Default Topic"
             ),
             LessonSmall(
                 assigneeName: "Alice Teacher",
@@ -49,7 +48,7 @@ extension MockData {
                 id: "TOtmT_eHWsHYXnpDlaqUI",
                 seen: true,
                 title: "Changed",
-                topic: "Default Topic",
+                topic: "Default Topic"
             ),
             LessonSmall(
                 assigneeName: "Charlie Student",
@@ -57,10 +56,10 @@ extension MockData {
                 id: "vWSUUOKC4sxE8xKYjHngj",
                 seen: true,
                 title: "Rust Basics",
-                topic: "Ownership and Borrowing",
+                topic: "Ownership and Borrowing"
             )
         ],
         page: 1,
-        perPage: 50,
+        perPage: 50
     )
 }

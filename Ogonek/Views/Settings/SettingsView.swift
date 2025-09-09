@@ -14,7 +14,10 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("Notifications") {
+                Section(
+                    header: Text("Notifications"),
+                    footer: Text("Turn on by clicking on the line. Turn off in the device settings.")
+                ) {
                     Button {
                         if pushTokenStore.isAuthorized {
                             openAppSettings()

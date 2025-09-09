@@ -21,13 +21,10 @@ struct Ogonek: App {
             options.attachViewHierarchy = true
         }
 
-        AudioManager.shared.playSound(named: "Zippo")
-
         setupInitialAuthentication()
     }
 
     private func setupInitialAuthentication() {
-        print("🚀 App launch: Setting up initial authentication...")
         APIService.shared.restoreAuthenticationIfAvailable()
     }
 

@@ -32,7 +32,7 @@ struct LearnView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                if viewModel.isComplete || viewModel.cards.isEmpty {
+                if (viewModel.isComplete || viewModel.cards.isEmpty) && !viewModel.isLoading {
                     completionView
                 } else if let currentCard = viewState.currentCard {
                     cardView(card: currentCard)
@@ -40,6 +40,11 @@ struct LearnView: View {
             }
             .navigationTitle("Learn")
             .navigationBarTitleDisplayMode(.inline)
+            .overlay {
+                if viewModel.isLoading {
+                    LoadingOverlay()
+                }
+            }
             .task {
                 await loadData()
             }
