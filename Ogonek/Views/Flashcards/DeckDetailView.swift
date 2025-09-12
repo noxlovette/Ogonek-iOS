@@ -6,16 +6,13 @@ struct DeckDetailView: View {
     @State var viewModel = DeckDetailViewModel()
     @State private var flippedCards: Set<String> = []
 
-    private let columns = [
-        GridItem(.flexible())
-    ]
 
     var body: some View {
         VStack {
             if let deck = viewModel.deck {
                 ScrollView {
-                    LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(deck.cards) { card in
+                    VStack(spacing: 16) {
+                        ForEach(deck.cards, id: \.id) { card in
                             WordCard(
                                 card: card,
                                 flippedCards: $flippedCards,

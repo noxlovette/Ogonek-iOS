@@ -81,5 +81,6 @@ struct WordCard: View {
         }
         .buttonStyle(PlainButtonStyle())
         .animation(.easeInOut(duration: 0.3), value: isFlipped)
+        .id(card.id)
     }
 }

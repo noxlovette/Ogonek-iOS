@@ -6,3 +6,4 @@ xcuserdata/
 *.mobileprovision
 *.p8
 openapi.yaml
+.claude
