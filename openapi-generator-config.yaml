@@ -2,3 +2,6 @@ generate:
   - types
   - client
 namingStrategy: idiomatic
+additionalFileComments:
+  - "swift-format-ignore-file"
+  - "swiftlint:disable all"

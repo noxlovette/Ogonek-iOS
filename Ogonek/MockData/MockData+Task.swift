@@ -63,6 +63,7 @@ extension MockData {
     )
 
     static let tasks = PaginatedTasks(
+        count: 100,
         data: [
             TaskSmall(
                 assigneeName: "Charlie Student",
@@ -103,5 +104,6 @@ extension MockData {
         ],
         page: 1,
         perPage: 20,
+        totalPages: 2,
     )
 }

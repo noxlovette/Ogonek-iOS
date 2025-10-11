@@ -7,7 +7,6 @@
 
 import Foundation
 
-typealias ActivityLog = Components.Schemas.ActivityLog
 typealias AuthPayload = Components.Schemas.AuthPayload
 typealias TokenPair = Components.Schemas.TokenPair
 typealias RefreshTokenPayload = Components.Schemas.RefreshTokenPayload

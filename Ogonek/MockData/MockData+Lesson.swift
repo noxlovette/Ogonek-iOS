@@ -25,6 +25,7 @@ extension MockData {
     )
 
     static let paginatedLessons = PaginatedLessons(
+        count: 100,
         data: [
             LessonSmall(
                 assigneeName: "Charlie Student",
@@ -60,6 +61,8 @@ extension MockData {
             )
         ],
         page: 1,
-        perPage: 50
+        perPage: 50,
+        totalPages: 2
+        
     )
 }

@@ -110,6 +110,7 @@ extension MockData {
     )
 
     static let decks = PaginatedDecks(
+        count: 100,
         data: [
             DeckSmall(
                 assigneeName: "Alice Teacher",
@@ -143,7 +144,8 @@ extension MockData {
             )
         ],
         page: 1,
-        perPage: 50
+        perPage: 50,
+        totalPages: 2
     )
 
     static let cardProgress = [

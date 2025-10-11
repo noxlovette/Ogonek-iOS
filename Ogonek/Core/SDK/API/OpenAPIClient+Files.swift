@@ -39,7 +39,7 @@ extension OpenAPIClient {
     /// Batch get presigned download URLs
     func getPresignedDownloadURLs(fileID: String) async throws -> PresignedURLResponse {
         let input = Operations.FetchPresignedUrlsBatch.Input.Path(
-            fileId: fileID,
+            taskId: fileID,
         )
 
         let response = try await client.fetchPresignedUrlsBatch(path: input)
